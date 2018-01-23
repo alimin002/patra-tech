@@ -57,11 +57,7 @@
 							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="								
 								Update
 							: activate to sort column ascending">
-								<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
 								Telephone Number
-							</th>
-							<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending">
-								Suplier Name
 							</th>
 							<th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label=""></th>
 						</tr>
@@ -76,31 +72,17 @@
 									<span class="lbl"></span>
 								</label>
 							</td>
-							<td class=" ">{{$values["raw_name"]}}</td>
-							<td class=" ">{{$values["unit"]}}</td>
-							<td class="hidden-480 ">{{$values["unit_price"]}}</td>
-							<td class=" ">
-								@if ($values["stock"] == "")
-									<p>
-										Please go to <a href="{{url('stock_raw_material')}}"><b>menu stock</b></a>&nbsp;to assign number of stock for this raw material! 
-									</p>
-								@elseif ($values["stock"] == 0)
-									<p style="color:red">
-										{{$values["stock"]}}&nbsp;{{$values["unit"]}}
-									</p>
-								@else
-									{{$values["stock"]}}&nbsp;{{$values["unit"]}}
-								@endif
-								
-							</td>
-							<td class="hidden-480 ">{{$values["unit_price"]}}	</td>
+							<td class=" ">{{$values["name"]}}</td>
+							<td class=" ">{{$values["gender"]}}</td>
+							<td class="hidden-480 ">{{$values["addres"]}}</td>
+							<td class=" ">{{$values["addres"]}}</td>
 							<td class=" ">
 								<div class="hidden-sm hidden-xs action-buttons">
-									<a class="green" href="#" onclick="edit('{{$values['app_raw_material_id']}}')">
+									<a class="green" href="#" onclick="edit('{{$values['app_suplier_id']}}')">
 										<i class="ace-icon fa fa-pencil bigger-130"></i>
 									</a>
 
-									<a class="red" href="#" onclick="deleteData('{{$values['app_raw_material_id']}}')">
+									<a class="red" href="#" onclick="deleteData('{{$values['app_suplier_id']}}')">
 										<i class="ace-icon fa fa-trash-o bigger-130"></i>
 									</a>
 								</div>
@@ -113,7 +95,7 @@
 
 										<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 											<li>
-												<a href="#" onclick="edit('{{$values['app_raw_material_id']}}')" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
+												<a href="#" onclick="edit('{{$values['app_suplier_id']}}')" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
 													<span class="green" >
 														<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 													</span>
@@ -121,7 +103,7 @@
 											</li>
 
 											<li>
-												<a href="#" onclick="deleteData('{{$values['app_raw_material_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete" onclick="deleteData('{{$values['app_raw_material_id']}}')">
+												<a href="#" onclick="deleteData('{{$values['app_suplier_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete" onclick="deleteData('{{$values['app_raw_material_id']}}')">
 													<span class="red">
 														<i class="ace-icon fa fa-trash-o bigger-120"></i>
 													</span>
