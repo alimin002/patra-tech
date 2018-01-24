@@ -1,166 +1,200 @@
 @extends('main')
 @section('title', 'Purchase Detail')
 @section('content')
-		<div class="row wrapper border-bottom white-bg page-heading">
-			<div class="col-lg-10">
-					<h2>Purchase Detail</h2>
-					<ol class="breadcrumb">
-							<li>
-									<a href="{{url('')}}">Home</a>
-							</li>
-							<li>
-									<a href="{{url('purchase')}}">Purchase</a>
-							</li>
-							<li class="active">
-									<strong>Purchase Detail</strong>
-							</li>
-					</ol>
+		<div class="page-content">
+			<div class="col-sm-12">
+					<h3 class="header smaller lighter blue">@yield("title")</h3>
+					@if(session()->has('message'))							
+					<div class="alert alert-block alert-success">
+						<button type="button" class="close" data-dismiss="alert">
+							<i class="ace-icon fa fa-times"></i>
+						</button>
+						<i class="ace-icon fa fa-check green"></i>
+						{{session()->get('message')}}
+					</div>
+				@endif
+					<div class="form-group">
+							<?php $app_purchase_id=$data_header["app_purchase_id"];?>
+							<button class="btn btn-default buttons-html5 pull-right" onclick="editHeader('{{$app_purchase_id}}')">
+								<i class="fa fa-edit"></i>&nbsp;Edit Purchase
+							</button>
+					</div>
 			</div>
-			<div class="col-lg-2">
-
+			<div class="col-sm-4">
+					<div class="form-group">
+							<label class="control-label" for="purchase_number">Purchase Number</label>
+							<input type="text" value="{{$data_header['purchase_number']}}" readonly id="purchase_number" name="purchase_number"  placeholder="" class="form-control">
+					</div>
 			</div>
-	</div>
-	<div class="wrapper wrapper-content animated fadeInRight ecommerce">
-		<div class="ibox-content m-b-sm border-bottom">
-			@if(session()->has('message'))							
-				<div class="alert alert-info">
-					{{session()->get('message')}}
+			<div class="col-sm-4">
+					<div class="form-group">
+							<label class="control-label" for="suplier_name">Suplier Name</label>
+							<input type="text" readonly value="{{$data_header['suplier_name']}}" id="suplier_name" name="suplier_name" value="" placeholder="" class="form-control">
+					</div>
+			</div>
+			<div class="col-sm-4">
+					<div class="form-group">
+							<label class="control-label" for="purchase_date">Purchase Date</label>
+							<input type="text" readonly value="{{$data_header['purchase_date']}}" id="purchase_date" name="purchase_date"  placeholder="" class="form-control">
+					</div>
+			</div>
+			<div class="col-sm-12">
+					<div class="form-group">
+							<label class="control-label" for="purchase_date">Description</label>
+							<textarea disabled id="description" name="description"  placeholder="" class="form-control">{{$data_header['description']}}</textarea>
+					</div>
+			</div>
+			<input type="hidden" readonly value="{{$data_header['app_purchase_id']}}" id="app_purchase_id" name="app_purchase_id"  placeholder="" class="form-control"/>
+			<div class="col-sm-12">
+				<div class="dataTables_filter" id="sample-table-2_filter">
+					<button class="btn btn-default" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus">&nbsp;Add Item Purchase</i></button>
 				</div>
-			@endif
-				<div class="row">
-						<div class="col-sm-12">
-								<div class="form-group">
-										<?php $app_purchase_id=$data_header["app_purchase_id"];?>
-										<button class="btn btn-default buttons-html5 pull-right" onclick="editHeader('{{$app_purchase_id}}')">
-											<i class="fa fa-edit"></i>&nbsp;Edit Purchase
+			</div>	
+		<div class="col-xs-12">
+			<h3 class="header smaller lighter blue">Purchase Item</h3>
+			<div class="table-header">
+				Results for "@yield('title')"
+			</div>
+			<div>
+				<div id="sample-table-2_wrapper" class="dataTables_wrapper form-inline" role="grid">
+					<div class="row">
+						<div class="col-xs-6">
+							<div id="sample-table-2_length" class="dataTables_length">
+								<label>Display <select size="1" name="sample-table-2_length" aria-controls="sample-table-2"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> records</label>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="dataTables_filter" id="sample-table-2_filter">
+								<form action="{{url('raw_material')}}" method="post">
+									{{ csrf_field() }}
+								<label>Search: <input placeholder="type keyword" name="keyword" type="text" aria-controls="sample-table-2"></label>
+								</form>
+							</div>
+						</div>
+					</div>
+					<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
+					<thead>
+						<tr role="row">
+							<th class="center sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="">
+								<label class="position-relative">
+									<input type="checkbox" class="ace">
+									<span class="lbl"></span>
+								</label>
+							</th>
+							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">
+								Raw Material name
+							</th>
+							<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending">
+								Unit Price
+							</th>
+							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="								
+								Update
+							: activate to sort column ascending">
+								<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+								QTY
+							</th>
+							<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending">
+								Sub Total
+							</th>
+							<th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label=""></th>
+						</tr>
+					</thead>			
+				<tbody role="alert" aria-live="polite" aria-relevant="all" id="tbody_purchase">
+				<?php $row_style=1; $data=array();?>
+				@foreach($data as $key => $values)
+				<tr @if($row_style % 2 ==0) class="odd" @else class="even"  @endif>
+							<td class="center  sorting_1">
+								<label class="position-relative">
+									<input type="checkbox" class="ace">
+									<span class="lbl"></span>
+								</label>
+							</td>
+							<td class=" ">{{$values["raw_name"]}}</td>
+							<td class=" ">{{$values["unit"]}}</td>
+							<td class="hidden-480 ">{{$values["unit_price"]}}</td>
+							<td class=" ">
+								@if ($values["stock"] == "")
+									<p>
+										Please go to <a href="{{url('stock_raw_material')}}"><b>menu stock</b></a>&nbsp;to assign number of stock for this raw material! 
+									</p>
+								@elseif ($values["stock"] == 0)
+									<p style="color:red">
+										{{$values["stock"]}}&nbsp;{{$values["unit"]}}
+									</p>
+								@else
+									{{$values["stock"]}}&nbsp;{{$values["unit"]}}
+								@endif
+								
+							</td>
+							<td class="hidden-480 ">{{$values["unit_price"]}}	</td>
+							<td class=" ">
+								<div class="hidden-sm hidden-xs action-buttons">
+									<a class="green" href="#" onclick="edit('{{$values['app_raw_material_id']}}')">
+										<i class="ace-icon fa fa-pencil bigger-130"></i>
+									</a>
+
+									<a class="red" href="#" onclick="deleteData('{{$values['app_raw_material_id']}}')">
+										<i class="ace-icon fa fa-trash-o bigger-130"></i>
+									</a>
+								</div>
+
+								<div class="hidden-md hidden-lg">
+									<div class="inline position-relative">
+										<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+											<i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
 										</button>
-								</div>
-						</div>
-						<div class="col-sm-4">
-								<div class="form-group">
-										<label class="control-label" for="purchase_number">Purchase Number</label>
-										<input type="text" value="{{$data_header['purchase_number']}}" readonly id="purchase_number" name="purchase_number"  placeholder="" class="form-control">
-								</div>
-						</div>
-						<div class="col-sm-4">
-								<div class="form-group">
-										<label class="control-label" for="suplier_name">Suplier Name</label>
-										<input type="text" readonly value="{{$data_header['suplier_name']}}" id="suplier_name" name="suplier_name" value="" placeholder="" class="form-control">
-								</div>
-						</div>
-						<div class="col-sm-4">
-								<div class="form-group">
-										<label class="control-label" for="purchase_date">Purchase Date</label>
-										<input type="text" readonly value="{{$data_header['purchase_date']}}" id="purchase_date" name="purchase_date"  placeholder="" class="form-control">
-								</div>
-						</div>
-						<div class="col-sm-12">
-								<div class="form-group">
-										<label class="control-label" for="purchase_date">Description</label>
-										<textarea disabled id="description" name="description"  placeholder="" class="form-control">{{$data_header['description']}}</textarea>
-								</div>
-						</div>
-						<input type="hidden" readonly value="{{$data_header['app_purchase_id']}}" id="app_purchase_id" name="app_purchase_id"  placeholder="" class="form-control"/>
-				</div>                
-		</div>
 
-		<div class="row">
-				<div class="col-lg-12">
-						<div class="ibox">
-								<div class="ibox-content">									
-									<div class="html5buttons">
-										<div class="dt-buttons btn-group">
-											<a class="btn btn-default buttons-html5" onClick="doPurchaseRawMaterial()">
-												<i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;<span>Save Purchase </span>
-											</a>
-										</div>
-										<div class="dt-buttons btn-group">
-											<a class="btn btn-default buttons-html5" data-toggle="modal" data-target="#modal-add">
-												<i class="fa fa-plus"></i>&nbsp;<span>Add Purchase Item </span>
-											</a>
-										</div>
+										<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+											<li>
+												<a href="#" onclick="edit('{{$values['app_raw_material_id']}}')" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
+													<span class="green" >
+														<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+													</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" onclick="deleteData('{{$values['app_raw_material_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete" onclick="deleteData('{{$values['app_raw_material_id']}}')">
+													<span class="red">
+														<i class="ace-icon fa fa-trash-o bigger-120"></i>
+													</span>
+												</a>
+											</li>
+										</ul>
 									</div>
-									<div id="DataTables_Table_0_filter" class="dataTables_filter">
-										<label>											
-											<form action="{{url('stock_raw_material')}}" method="post">
-											 {{ csrf_field() }}
-												Search: <input style="width:300px;" name="keyword" type="search" class="form-control input-sm" placeholder="type keyword and press enter" aria-controls="DataTables_Table_0">
-											</form>
-										</label>
-									</div>
-									<div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">
-										<span class="pull-left">Total Data {{ $data_detail->total() }}</span>
-										<span class="pull-right">Page {{ $data_detail->currentPage() }} Of {{ $data_detail->lastPage() }}</span>
-									</div>
-										<table class="footable table table-stripped toggle-arrow-tiny default footable-loaded" data-page-size="15">
-												<thead>
-												<tr>
-														<th class="footable-visible footable-first-column footable-sortable">
-															Raw Material Name
-															<span class="footable-sort-indicator"></span>
-														</th>
-														<th data-hide="phone" class="footable-visible footable-sortable">
-															Price
-															<span class="footable-sort-indicator"></span>
-														</th>
-														<th data-hide="phone" class="footable-visible footable-sortable">
-															Qty
-															<span class="footable-sort-indicator"></span>
-														</th> 
-														<th data-hide="phone" class="footable-visible footable-sortable">
-															Sub Total
-															<span class="footable-sort-indicator"></span>
-														</th>  																		
-														<th class="text-right footable-visible footable-last-column footable-sortable">
-															Action
-															<span class="footable-sort-indicator"></span>
-														</th>
-
-												</tr>
-												</thead>
-												<tbody id="tbody_purchase">
-													@foreach($data_detail as $key=>$values)
-													<tr class="footable-even" style="">
-															<td class="footable-visible footable-first-column"><span class="footable-toggle"></span>
-																{{$values["raw_material_name"]}}
-															</td>
-															<td class="footable-visible">
-																{{$values["unit_price"]}}
-															</td>
-															<td class="footable-visible">
-																{{$values["qty"]}}
-															</td>
-															<td class="footable-visible">
-																{{$values["sub_total"]}}
-															</td>
-															<?php $app_purchase_detail_id = $values["app_purchase_detail_id"]; ?>
-															<td class="text-right footable-visible footable-last-column">
-																<button class="btn btn-primary">
-																	<i class="fa fa-edit" onclick="edit('{{$app_purchase_detail_id}}')"></i>
-																</button>
-																<button class="btn btn-primary" onclick="deleteData('{{$app_purchase_detail_id}}')">
-																	<i class="fa fa-trash"></i>
-																</button>
-															</td>
-													</tr>
-													@endforeach
-												</tbody>												
-										</table>
-										<div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-											{{$data_detail->appends(array("purchase_id"=>$data_header['app_purchase_id']))->links()}}
-										</div>
 								</div>
+							</td>
+						</tr>
+						<?php $row_style ++; ?>
+						@endforeach
+						</tbody>
+						</table>
+						<div class="row">
+						<div class="col-xs-6">
+							<button class="btn btn-white btn-primary" onclick="doPurchaseRawMaterial()"><i class="fa fa-floppy-o" aria-hidden="true">&nbsp;Save Item Purchase</i></button>
+							<div class="dataTables_info" id="sample-table-2_info"><!--Showing 1 to 10 of 23 entries--></div>
 						</div>
-				</div>
+						<div class="col-xs-6">
+						<div class="dataTables_paginate paging_bootstrap">
+							<ul class="pagination">
+							{{--{{$data->links()}}--}}
+							</ul>
+						</div>
+						</div>
+						</div>
+					</div>
+			</div>
 		</div>
-		<div class="row" style="">
-			<form name="frm-purchase-item" id="frm-purchase-item" action="{{url('purchase_detail/save')}}" method="post">
-				{{ csrf_field() }}
-				<textarea class="col-md-12" name="data_purchase_item" id="data_purchase_item">{{$json_purchase}}</textarea>
-				<input readonly type="text" value="{{$data_header['app_purchase_id']}}" name="app_purchase_idx" id="app_purchase_idx" required="" class="form-control"/>
-			</form>
+		<div class="col-sm-12">
+			<div class="form-group">
+					<form name="frm-purchase-item" id="frm-purchase-item" action="{{url('purchase_detail/save')}}" method="post">
+						{{ csrf_field() }}
+						<textarea class="col-md-12" name="data_purchase_item" id="data_purchase_item">{{$json_purchase}}</textarea>
+						<textarea class="col-md-12" name="data_purchase_item_new" id="data_purchase_item_new" style="margin-top:60px;"></textarea>
+						<input readonly type="text" value="{{$data_header['app_purchase_id']}}" name="app_purchase_idx" id="app_purchase_idx" required="" class="form-control"/>
+					</form>
+			</div>
 		</div>
- </div>
+	</div>
 @include('AppPurchaseDetail::create') 
 @include('AppPurchaseDetail::edit_header')
 @include('AppPurchaseDetail::action_js')

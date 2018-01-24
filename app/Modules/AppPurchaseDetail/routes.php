@@ -10,7 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::group(['module' => 'AppPurchaseDetail', 'middleware' => ['web'], 'namespace' => 'App\Modules\AppPurchaseDetail\Controllers'], function(){
+		Route::group(['module' => 'AppPurchaseDetail', 'middleware' => ['web'], 'namespace' => 'App\Modules\AppPurchaseDetail\Controllers'], function(){
     Route::get('purchase_detail','AppPurchaseDetailController@index');
 		Route::post('purchase_detail','AppPurchaseDetailController@index');
 		Route::post('purchase_detail/save','AppPurchaseDetailController@save');

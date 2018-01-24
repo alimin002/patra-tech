@@ -33,11 +33,11 @@ class AppPurchaseDetailController extends Controller
 				$data_detail=AppPurchaseDetail::select('app_purchase_detail.*','app_purchase.*','app_raw_material.*',"app_raw_material.name as raw_material_name")
 																					->leftJoin('app_purchase','app_purchase.app_purchase_id','=', 	 'app_purchase_detail.app_purchase_id')
 																					->leftJoin('app_raw_material','app_raw_material.app_raw_material_id','=', 	 'app_purchase_detail.app_raw_material_id')
-																					->where('app_purchase_detail.app_purchase_id', '=',$app_purchase_id)->paginate(3);
+																					->where('app_purchase_detail.app_purchase_id', '=',$app_purchase_id)->get();
 			 $lookup_suplier 			= Lookup::getLookupSuplier();
 			 $lookup_raw_material	= Lookup::getLookupRawMaterial();	
 			 $data_purchase				= json_decode(json_encode($data_detail),true);
-			 $json_purchase=json_encode($data_purchase['data']);
+			 $json_purchase=json_encode($data_purchase);
         return view("AppPurchaseDetail::index")
 							->with("lookup_suplier",$lookup_suplier)
 							->with("lookup_raw_material",$lookup_raw_material)
@@ -80,7 +80,7 @@ class AppPurchaseDetailController extends Controller
 		
 		public function save(Request $request)
 		{
-			$data_purchase_item = json_decode($request->input("data_purchase_item"),true);
+			$data_purchase_item = json_decode($request->input("data_purchase_item_new"),true);
 			
 			//echo $data_purchase_item[0]["unit_price"]; die();
 			

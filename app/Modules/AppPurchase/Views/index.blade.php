@@ -79,12 +79,15 @@
 							<td class=" ">{{$values["description"]}}</td>
 							<td class=" ">
 								<div class="hidden-sm hidden-xs action-buttons">
-									<a class="green" href="#" onclick="edit('{{$values['app_raw_material_id']}}')">
+									<a class="green" href="#" onclick="edit('{{$values['app_purchase_id']}}')">
 										<i class="ace-icon fa fa-pencil bigger-130"></i>
 									</a>
 
-									<a class="red" href="#" onclick="deleteData('{{$values['app_raw_material_id']}}')">
+									<a class="red" href="#" onclick="deleteData('{{$values['app_purchase_id']}}')">
 										<i class="ace-icon fa fa-trash-o bigger-130"></i>
+									</a>
+									<a class="red" href="#" onclick="detail('{{$values['app_purchase_id']}}')">
+										<i class="ace-icon fa fa-list bigger-130"></i>
 									</a>
 								</div>
 
@@ -96,7 +99,7 @@
 
 										<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 											<li>
-												<a href="#" onclick="edit('{{$values['app_raw_material_id']}}')" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
+												<a href="#" onclick="edit('{{$values['app_purchase_id']}}')" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
 													<span class="green" >
 														<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 													</span>
@@ -104,12 +107,21 @@
 											</li>
 
 											<li>
-												<a href="#" onclick="deleteData('{{$values['app_raw_material_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete" onclick="deleteData('{{$values['app_raw_material_id']}}')">
+												<a href="#" onclick="deleteData('{{$values['app_purchase_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete" onclick="deleteData('{{$values['app_raw_material_id']}}')">
 													<span class="red">
 														<i class="ace-icon fa fa-trash-o bigger-120"></i>
 													</span>
 												</a>
 											</li>
+											
+											<li>
+												<a href="#" onclick="deleteData('{{$values['app_purchase_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete" onclick="deleteData('{{$values['app_raw_material_id']}}')">
+													<span class="red">
+														<i class="ace-icon fa fa-list bigger-120"></i>
+													</span>
+												</a>
+											</li>
+											
 										</ul>
 									</div>
 								</div>

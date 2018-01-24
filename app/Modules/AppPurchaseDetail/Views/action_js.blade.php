@@ -1,9 +1,82 @@
+<script src="{{url('assets/js/jquery.min.js')}}"></script>
 <script>
 /**
  window.onbeforeunload = function() {
    return "Warning: data purchase item will be lost, are you sure you want to leave? Think of the kittens!";
  }
  **/
+
+ $(function() {
+		bindPurchaseItem();
+ });
+	
+	function bindPurchaseItem(){
+			 var data_purchase_item=JSON.parse($("#data_purchase_item").val());
+			 for(var i=0; i<= data_purchase_item.length-1; i++){
+					var app_raw_material_id = data_purchase_item[i].app_raw_material_id;
+					var raw_material_name 	= data_purchase_item[i].raw_material_name;
+					var unit_price					= data_purchase_item[i].unit_price;
+					var qty									= data_purchase_item[i].qty;
+					var sub_total						= data_purchase_item[i].sub_total;
+				  var tr="<tr>"+
+									"<td class='center  sorting_1'>"+
+										"<label class='position-relative'>"+
+											"<input type='checkbox' class='ace'>"+
+											"<span class='lbl'></span>"+
+										"</label>"+
+									"</td>"+
+									"<td class='footable-visible footable-first-column'>"+
+										""+raw_material_name+""+
+									"</td>"+
+									"<td class='footable-visible footable-first-column'>"+
+										""+unit_price+""+
+									"</td>"+
+									"<td  class='footable-visible footable-first-column'>"+
+										""+qty+""+
+									"</td>"+
+									"<td  class='footable-visible footable-first-column'>"+
+										""+sub_total+""+
+									"</td>"+
+									"<td  class=' '>"+
+									
+										"<div class='hidden-sm hidden-xs action-buttons'>"+
+											"<a class='green' href='#'>"+
+												"<i class='ace-icon fa fa-pencil bigger-130'></i>"+
+											"</a>"+
+											"<a class='red' href='#'>"+
+												"<i class='ace-icon fa fa-trash-o bigger-130'></i>"+
+											"</a>"+
+										"</div>"+	
+											"<div class='hidden-md hidden-lg'>"+
+												"<div class='inline position-relative'>"+
+													"<button class='btn btn-minier btn-yellow dropdown-toggle' data-toggle='dropdown' data-position='auto'>"+
+														"<i class='ace-icon fa fa-caret-down icon-only bigger-120'></i>"+
+													"</button>"+
+													"<ul class='dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close'>"+
+														"<li>"+
+															"<a href='#'  class='tooltip-success' data-rel='tooltip' title='' data-original-title='Edit' >"+
+																"<span class='green' >"+
+																	"<i class='ace-icon fa fa-pencil-square-o bigger-120'></i>"+
+																"</span>"+
+															"</a>"+
+														"</li>"+
+														"<li>"+
+															"<a href='#' class='tooltip-error' data-rel='tooltip' title='' data-original-title='Delete'>"+
+																"<span class='red'>"+
+																	"<i class='ace-icon fa fa-trash-o bigger-120'></i>"+
+																"</span>"+
+															"</a>"+
+														"</li>"+
+													"</ul>"+
+												"</div>"+
+											"</div>"+								
+									"</td>"+						
+								"</tr>";
+								$("#tbody_purchase").append(tr);
+			 }
+				
+	}
+	
 	function doSave(){
 		$("#modal-add").modal("hide");
 		$("#frm-create").submit();
@@ -191,8 +264,7 @@
 			o["two"] = 2;
 			o["three"] = 3;
 	*/
-	var data_purchase= new Object();
-	var row_purchase=0;
+	var obj_data_purchase_item_new =[];
 	function addToPurchase(){
 		
 		var app_raw_material_id = $("#frm-create #app_raw_material_id").val();
@@ -200,13 +272,26 @@
 		var unit_price					= $("#frm-create #unit_price").val();
 		var qty									= $("#frm-create #qty").val();
 		var sub_total						= $("#frm-create #sub_total").val();
+		//define new data
+		var new_data={ "app_raw_material_id" :app_raw_material_id, "unit_price" : unit_price,"qty": qty,"sub_total":sub_total};
 		
-		data_purchase[row_purchase] = { "app_raw_material_id" :app_raw_material_id, "unit_price" : unit_price,"qty": qty,"sub_total":sub_total};
-		//
-		row_purchase = row_purchase + 1;
-		//alert(JSON.stringify(data_purchase));
-		$("#data_purchase_item").val(JSON.stringify(data_purchase));
+			//this block to append new data and prevent double records in database
+			
+		  obj_data_purchase_item_new.push(new_data);//variabel not assign textarea value
+			//alert(JSON.stringify(obj_data_purchase_item_new));
+			$("#data_purchase_item_new").val(JSON.stringify(obj_data_purchase_item_new))
+			//this block to  append old data with new data in data grid update
+			var obj_data_purchase_item		 = JSON.parse($("#data_purchase_item").val());
+			obj_data_purchase_item.push(new_data);
+		
+			$("#data_purchase_item").val(JSON.stringify(obj_data_purchase_item));	//variable assign textarea value		
 				 var tr="<tr>"+
+									"<td class='center  sorting_1'>"+
+										"<label class='position-relative'>"+
+											"<input type='checkbox' class='ace'>"+
+											"<span class='lbl'></span>"+
+										"</label>"+
+									"</td>"+
 									"<td class='footable-visible footable-first-column'>"+
 										""+raw_material_name+""+
 									"</td>"+
@@ -219,18 +304,40 @@
 									"<td  class='footable-visible footable-first-column'>"+
 										""+sub_total+""+
 									"</td>"+
-									"<td  class='text-right footable-visible footable-last-column'>"+
-										"<button id=row-"+row_purchase+" class='btn btn-primary' onclick='editItem(this.id)'>"+
-											"<i class='fa fa-edit'>"+
-											"</i>"+
-										"</button>"+
-										"&nbsp;"+
-										"<button class='btn btn-primary'>"+
-											"<i class='fa fa-trash'>"+
-											"</i>"+
-										"</button>"+
-									"</td>"+	
+									"<td  class=' '>"+
 									
+										"<div class='hidden-sm hidden-xs action-buttons'>"+
+											"<a class='green' href='#'>"+
+												"<i class='ace-icon fa fa-pencil bigger-130'></i>"+
+											"</a>"+
+											"<a class='red' href='#'>"+
+												"<i class='ace-icon fa fa-trash-o bigger-130'></i>"+
+											"</a>"+
+										"</div>"+	
+											"<div class='hidden-md hidden-lg'>"+
+												"<div class='inline position-relative'>"+
+													"<button class='btn btn-minier btn-yellow dropdown-toggle' data-toggle='dropdown' data-position='auto'>"+
+														"<i class='ace-icon fa fa-caret-down icon-only bigger-120'></i>"+
+													"</button>"+
+													"<ul class='dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close'>"+
+														"<li>"+
+															"<a href='#'  class='tooltip-success' data-rel='tooltip' title='' data-original-title='Edit' >"+
+																"<span class='green' >"+
+																	"<i class='ace-icon fa fa-pencil-square-o bigger-120'></i>"+
+																"</span>"+
+															"</a>"+
+														"</li>"+
+														"<li>"+
+															"<a href='#' class='tooltip-error' data-rel='tooltip' title='' data-original-title='Delete'>"+
+																"<span class='red'>"+
+																	"<i class='ace-icon fa fa-trash-o bigger-120'></i>"+
+																"</span>"+
+															"</a>"+
+														"</li>"+
+													"</ul>"+
+												"</div>"+
+											"</div>"+								
+									"</td>"+						
 								"</tr>";
 		$("#tbody_purchase").append(tr)
 		$("#modal-add").modal("hide");
