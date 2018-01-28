@@ -18,7 +18,7 @@
 					var unit_price					= data_purchase_item[i].unit_price;
 					var qty									= data_purchase_item[i].qty;
 					var sub_total						= data_purchase_item[i].sub_total;
-				  var tr="<tr>"+
+				  var tr="<tr id=tr-"+i+">"+
 									"<td class='center  sorting_1'>"+
 										"<label class='position-relative'>"+
 											"<input type='checkbox' class='ace'>"+
@@ -41,7 +41,7 @@
 									
 										"<div class='hidden-sm hidden-xs action-buttons'>"+
 											"<a class='green' href='#'>"+
-												"<i class='ace-icon fa fa-pencil bigger-130'></i>"+
+												"<i class='ace-icon fa fa-pencil bigger-130' id=row-"+i+" class='btn btn-primary' onclick='editItem(this.id)'></i>"+
 											"</a>"+
 											"<a class='red' href='#'>"+
 												"<i class='ace-icon fa fa-trash-o bigger-130'></i>"+
@@ -56,7 +56,7 @@
 														"<li>"+
 															"<a href='#'  class='tooltip-success' data-rel='tooltip' title='' data-original-title='Edit' >"+
 																"<span class='green' >"+
-																	"<i class='ace-icon fa fa-pencil-square-o bigger-120'></i>"+
+																	"<i class='ace-icon fa fa-pencil-square-o bigger-120' id=row-"+i+" class='btn btn-primary' onclick='editItem(this.id)'></i>"+
 																"</span>"+
 															"</a>"+
 														"</li>"+
@@ -265,8 +265,7 @@
 			o["three"] = 3;
 	*/
 	var obj_data_purchase_item_new =[];
-	function addToPurchase(){
-		
+	function addToPurchase(){	
 		var app_raw_material_id = $("#frm-create #app_raw_material_id").val();
 		var raw_material_name 	= $("#frm-create #app_raw_material_id option:selected").text();
 		var unit_price					= $("#frm-create #unit_price").val();
@@ -308,7 +307,7 @@
 									
 										"<div class='hidden-sm hidden-xs action-buttons'>"+
 											"<a class='green' href='#'>"+
-												"<i class='ace-icon fa fa-pencil bigger-130'></i>"+
+												"<i class='ace-icon fa fa-pencil bigger-130' id=row-"+row_purchase+" class='btn btn-primary' onclick='editItem(this.id)'></i>"+
 											"</a>"+
 											"<a class='red' href='#'>"+
 												"<i class='ace-icon fa fa-trash-o bigger-130'></i>"+
@@ -323,7 +322,7 @@
 														"<li>"+
 															"<a href='#'  class='tooltip-success' data-rel='tooltip' title='' data-original-title='Edit' >"+
 																"<span class='green' >"+
-																	"<i class='ace-icon fa fa-pencil-square-o bigger-120'></i>"+
+																	"<i class='ace-icon fa fa-pencil-square-o bigger-120' id=row-"+row_purchase+" class='btn btn-primary' onclick='editItem(this.id)'></i>"+
 																"</span>"+
 															"</a>"+
 														"</li>"+
@@ -344,7 +343,20 @@
 	}
 	
 	function editItem(row_id){
-		//alert(row_id.replace("row-",""));
+		row_id="tr-"+row_id.replace("row-","");
+		//alert("#tr-"+row_id+" "+"td:eq(1)");
+		//alert($("#tr-0 td:eq(1)").text());
+		var raw_material_name =$("#"+row_id+" "+"td:eq(1)").text();
+		var unit_price				=$("#"+row_id+" "+"td:eq(2)").text();
+		var qty								=$("#"+row_id+" "+"td:eq(3)").text();
+		var sub_total					=$("#"+row_id+" "+"td:eq(4)").text();
+		var description				=$("#"+row_id+" "+"td:eq(5)").text();
+		
+		$("#frm-edit #app_raw_material_id").prepend("<option selected  name="+app_raw_material_id+">"+raw_material_name+"</option>");
+		$("#frm-edit #unit_price").val(unit_price);
+		$("#frm-edit #qty").val(qty);
+		$("#frm-edit #sub_total").val(sub_total);
+		$("#frm-edit #description").val(description);
 		$("#modal-edit").modal("toggle");
 	}
 	
