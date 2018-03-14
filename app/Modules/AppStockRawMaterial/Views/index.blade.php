@@ -1,103 +1,144 @@
 @extends('main')
 @section('title', 'Stock Raw Material')
 @section('content')
-	<div class="row wrapper border-bottom white-bg page-heading">
-			<div class="col-lg-10">
-					<h2>Stock Raw Material</h2>
-					<ol class="breadcrumb">
-							<li>
-									<a href="{{url('')}}">Home</a>
-							</li>
-							<li class="active">
-									<strong>Stock Raw Material</strong>
-							</li>
-					</ol>
-			</div>
-			<div class="col-lg-2">
+	<div class="page-content">
+		<div class="col-xs-12">
+				@if(session()->has('message'))							
+					<div class="alert alert-block alert-success">
+						<button type="button" class="close" data-dismiss="alert">
+							<i class="ace-icon fa fa-times"></i>
+						</button>
 
+						<i class="ace-icon fa fa-check green"></i>
+
+						{{session()->get('message')}}
+					</div>
+				@endif
+			
+			<h3 class="header smaller lighter blue">Data @yield("title")</h3>
+			<div class="table-header">
+				Results for "@yield('title')"
 			</div>
-	</div>
-						
-	<div class="wrapper wrapper-content animated fadeInRight">
-		<div class="row">
-				<div class="col-lg-12">									
-					<div class="ibox-content">
-					@if(session()->has('message'))							
-						<div class="alert alert-info">
-							{{session()->get('message')}}
+			<div>
+				<div id="sample-table-2_wrapper" class="dataTables_wrapper form-inline" role="grid">
+					<div class="row">
+						<div class="col-xs-6">
+							<div id="sample-table-2_length" class="dataTables_length">
+								<label>Display <select size="1" name="sample-table-2_length" aria-controls="sample-table-2"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> records</label>
+							</div>
 						</div>
-					@endif
-					 <div class="table-responsive">
-						<div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-						<div class="html5buttons">
-						<div class="dt-buttons btn-group">
-							<a class="btn btn-default buttons-html5" data-toggle="modal" data-target="#modal-add">
-								<i class="fa fa-plus"></i>&nbsp;<span>Add Data</span>
-							</a>
-						</div>
-						</div>
-						<div id="DataTables_Table_0_filter" class="dataTables_filter">
-							<label>
-								
-								<form action="{{url('stock_raw_material')}}" method="post">
-								 {{ csrf_field() }}
-									Search: <input style="width:300px;" name="keyword" type="search" class="form-control input-sm" placeholder="type keyword and press enter" aria-controls="DataTables_Table_0">
+						<div class="col-xs-6">
+							<div class="dataTables_filter" id="sample-table-2_filter">
+								<form action="{{url('raw_material')}}" method="post">
+									{{ csrf_field() }}
+								<label>Search: <input placeholder="type keyword" name="keyword" type="text" aria-controls="sample-table-2"></label>
 								</form>
-							</label>
-						</div>
-						<div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">
-							<span class="pull-left">Total Data {{$data->total()}}</span>
-							<span class="pull-right">Page {{$data->currentPage()}} Of {{$data->lastPage()}}</span>
-						</div>
-						<table class="table table-striped table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" role="grid">
-							<thead>
-								<tr role="row">
-									<th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 206.566px;">
-										Raw Material Name
-									</th>
-									<th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 256.566px;">
-										Stock
-									</th>
-									<th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 229.899px;">
-										Description
-									</th>
-									<th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 176.566px;">
-										Action
-									</th>
-								</tr>
-							</thead>
-						<tbody>
-						@foreach($data as $key => $values)
-						<tr class="gradeA odd" role="row">
-								<td>{{$values["name"]}}</td>
-								<td>{{$values["stock"]}}</td>
-								<td>{{$values["description"]}}</td>
-								<?php
-									$app_stock_raw_material_id=$values['app_stock_raw_material_id'];
-								?>
-								<td>
-									<button class="btn btn-primary" onclick="deleteData('{{$values['app_stock_raw_material_id']}}')">
-										<i class="fa fa-trash"></i>
-									</button>
-									<button class="btn btn-primary" onclick="edit('{{$values['app_stock_raw_material_id']}}')">
-										<i class="fa fa-edit"></i>
-									</button>
-								</td>
-						</tr>
-						@endforeach
-						</tbody>              
-					 </table>
-						<div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-							`{{$data->links()}}
+							</div>
 						</div>
 					</div>
-				</div>
+					<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
+					<thead>
+						<tr role="row">
+							<th class="center sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="">
+								<label class="position-relative">
+									<input type="checkbox" class="ace">
+									<span class="lbl"></span>
+								</label>
+							</th>
+							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">
+								Raw Material Name
+							</th>
+							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">
+								Stock
+							</th>
+							<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending">
+								Description
+							</th>
+							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="								
+								Update
+							: activate to sort column ascending">
+								<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+								Action
+							</th>
+						</tr>
+					</thead>			
+				<tbody role="alert" aria-live="polite" aria-relevant="all">
+				<?php $row_style=1; ?>
+				@foreach($data as $key => $values)
+				<tr @if($row_style % 2 ==0) class="odd" @else class="even"  @endif>
+							<td class="center  sorting_1">
+								<label class="position-relative">
+									<input type="checkbox" class="ace">
+									<span class="lbl"></span>
+								</label>
+							</td>
+							<td class=" ">{{$values["name"]}}</td>
+							<td class="hidden-480 ">{{$values["stock"]}}</td>
+							<td class=" ">{{$values["description"]}}</td>
+							<td class=" ">
+								<!---dekstop view-->
+								<div class="hidden-sm hidden-xs action-buttons">
+									<a class="green" href="#" onclick="edit('{{$values['app_stock_raw_material_id']}}')">
+										<i class="ace-icon fa fa-pencil bigger-130"></i>
+									</a>
+									<a class="red" href="#" onclick="deleteData('{{$values['app_stock_raw_material_id']}}')">
+										<i class="ace-icon fa fa-trash-o bigger-130"></i>
+									</a>
+								</div>
+								<!--end dekstop view-->
+								<!---mobile view--->
+								<div class="hidden-md hidden-lg">
+									<div class="inline position-relative">
+										<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+											<i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+										</button>
+
+										<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+											<li>
+												<a href="#" onclick="edit('{{$values['app_stock_raw_material_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete" >
+													<span class="red">
+														<i class="ace-icon fa fa-pencil bigger-120"></i>
+													</span>
+												</a>
+											</li>
+											
+											<li>
+												<a href="#" onclick="deleteData('{{$values['app_stock_raw_material_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+													<span class="red">
+														<i class="ace-icon fa fa-trash bigger-120"></i>
+													</span>
+												</a>
+											</li>
+											
+										</ul>
+									</div>
+								</div>
+								<!--end mobile view--->
+							</td>
+						</tr>
+						<?php $row_style ++; ?>
+						@endforeach
+						</tbody>
+						</table>
+						<div class="row">
+						<div class="col-xs-6">
+							<button class="btn btn-white btn-primary" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus">&nbsp;Add</i></button>
+							<div class="dataTables_info" id="sample-table-2_info"><!--Showing 1 to 10 of 23 entries--></div>
+						</div>
+						<div class="col-xs-6">
+						<div class="dataTables_paginate paging_bootstrap">
+							<ul class="pagination">
+								{{$data->links()}}
+							</ul>
+						</div>
+						</div>
+						</div>
+					</div>
 			</div>
 		</div>
 	</div>
-</div>
-				@include('AppStockRawMaterial::create')
-				@include('AppStockRawMaterial::action_js')
-				@include('AppStockRawMaterial::edit')				
-				@include('AppStockRawMaterial::delete')		
+	@include('AppStockRawMaterial::create')
+	@include('AppStockRawMaterial::action_js')
+	@include('AppStockRawMaterial::edit')				
+	@include('AppStockRawMaterial::delete')		
 @endsection

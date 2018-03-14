@@ -47,11 +47,13 @@
 						</div>
 						<input readonly type="hidden" name="app_purchase_detail_id" id="app_purchase_detail_id" required="" class="form-control"/>
 						<input readonly type="hidden" value="{{$data_header['app_purchase_id']}}" name="app_purchase_id" id="app_purchase_id" required="" class="form-control"/>
+						<!--selected row to delete-->
+						<input readonly type="text" name="selected_element" id="selected_element" required="" class="form-control"/>
 					</form>																	
 				 </div>														
 			</div>
 			<div class="modal-footer">
-				<button onclick="doUpdate()" type="button" class="btn btn-primary">Update</button>
+				<button onclick="doUpdateItem()" type="button" class="btn btn-primary">Update</button>
 				<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 			</div>										
 		</div>

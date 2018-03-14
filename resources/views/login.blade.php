@@ -32,7 +32,7 @@
 								<option value="{{$value['name']}}">{{$value['name']}}</option>
 								@endforeach
 							</select>
-						<i class="ace-icon fa fa-user"></i>
+						
 					</span>
 				</label>
 

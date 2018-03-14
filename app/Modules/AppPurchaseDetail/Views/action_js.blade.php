@@ -11,6 +11,8 @@
  });
 	
 	function bindPurchaseItem(){
+			 //clear grid data to prevent double record
+			 $("#tbody_purchase").empty();
 			 var data_purchase_item=JSON.parse($("#data_purchase_item").val());
 			 for(var i=0; i<= data_purchase_item.length-1; i++){
 					var app_raw_material_id = data_purchase_item[i].app_raw_material_id;
@@ -41,7 +43,7 @@
 									
 										"<div class='hidden-sm hidden-xs action-buttons'>"+
 											"<a class='green' href='#'>"+
-												"<i class='ace-icon fa fa-pencil bigger-130' id=row-"+i+" class='btn btn-primary' onclick='editItem(this.id)'></i>"+
+												"<i class='ace-icon fa fa-pencil bigger-130' id=row-"+i+" class='btn btn-primary' onclick='editItem(this.id,"+app_raw_material_id+")'></i>"+
 											"</a>"+
 											"<a class='red' href='#'>"+
 												"<i class='ace-icon fa fa-trash-o bigger-130'></i>"+
@@ -104,14 +106,22 @@
 	*/
 	
 	function getRawMaterialById(select_object){
+		//alert(select_object.value);
 		var app_raw_material_id=select_object.value;
 		$.ajax({ 
     type: 'GET', 
     url: '{{url("raw_material/edit")}}'+'/'+app_raw_material_id, 
     dataType: 'json',
-    success: function (response){ 
+    success: function (response){
+				//bind in form create
 				$("#frm-create #unit_price").val(response["unit_price"]);
 				$("#frm-create #description").val(response["description"]);
+				
+				//bind in form edit
+				$("#frm-edit #unit_price").val(response["unit_price"]);
+				$("#frm-edit #description").val(response["description"]);
+				//get sub total edit
+				getSubTotalEdit();
     }
 		});	
 	}
@@ -265,14 +275,14 @@
 			o["three"] = 3;
 	*/
 	var obj_data_purchase_item_new =[];
-	function addToPurchase(){	
-		var app_raw_material_id = $("#frm-create #app_raw_material_id").val();
-		var raw_material_name 	= $("#frm-create #app_raw_material_id option:selected").text();
-		var unit_price					= $("#frm-create #unit_price").val();
-		var qty									= $("#frm-create #qty").val();
-		var sub_total						= $("#frm-create #sub_total").val();
-		//define new data
-		var new_data={ "app_raw_material_id" :app_raw_material_id, "unit_price" : unit_price,"qty": qty,"sub_total":sub_total};
+	function addToPurchase(){
+			var app_raw_material_id = $("#frm-create #app_raw_material_id").val();
+			var raw_material_name 	= $("#frm-create #app_raw_material_id option:selected").text();
+			var unit_price					= $("#frm-create #unit_price").val();
+			var qty									= $("#frm-create #qty").val();
+			var sub_total						= $("#frm-create #sub_total").val();
+			//define new data
+			var new_data={ "app_raw_material_id" :app_raw_material_id, "unit_price" : unit_price,"qty": qty,"sub_total":sub_total};
 		
 			//this block to append new data and prevent double records in database
 			
@@ -282,9 +292,16 @@
 			//this block to  append old data with new data in data grid update
 			var obj_data_purchase_item		 = JSON.parse($("#data_purchase_item").val());
 			obj_data_purchase_item.push(new_data);
-		
+			
+			
+			//get last element and then increment 1 step
+			var row_purchase=0;
+			var row_count = $('#tbody_purchase tr').length;
+			if(row_count!=0){
+				row_purchase = row_count;
+			}
 			$("#data_purchase_item").val(JSON.stringify(obj_data_purchase_item));	//variable assign textarea value		
-				 var tr="<tr>"+
+				 var tr="<tr id=tr-"+row_purchase+">"+
 									"<td class='center  sorting_1'>"+
 										"<label class='position-relative'>"+
 											"<input type='checkbox' class='ace'>"+
@@ -342,26 +359,61 @@
 		$("#modal-add").modal("hide");
 	}
 	
-	function editItem(row_id){
+	function editItem(row_id,app_raw_material_id){
 		row_id="tr-"+row_id.replace("row-","");
 		//alert("#tr-"+row_id+" "+"td:eq(1)");
 		//alert($("#tr-0 td:eq(1)").text());
+		//alert(app_raw_material_id);
 		var raw_material_name =$("#"+row_id+" "+"td:eq(1)").text();
 		var unit_price				=$("#"+row_id+" "+"td:eq(2)").text();
 		var qty								=$("#"+row_id+" "+"td:eq(3)").text();
 		var sub_total					=$("#"+row_id+" "+"td:eq(4)").text();
 		var description				=$("#"+row_id+" "+"td:eq(5)").text();
 		
-		$("#frm-edit #app_raw_material_id").prepend("<option selected  name="+app_raw_material_id+">"+raw_material_name+"</option>");
+		$("#frm-edit #app_raw_material_id").prepend("<option selected value="+app_raw_material_id+">"+raw_material_name+"</option>");
 		$("#frm-edit #unit_price").val(unit_price);
 		$("#frm-edit #qty").val(qty);
 		$("#frm-edit #sub_total").val(sub_total);
 		$("#frm-edit #description").val(description);
+		$("#frm-edit #selected_element").val(row_id.replace("tr-",""));
 		$("#modal-edit").modal("toggle");
 	}
 	
 	function doPurchaseRawMaterial(){
 		$("#frm-purchase-item").submit();
+	}
+	
+	function doUpdateItem(){
+		//get old data purchase
+		var obj_data_purchase_item= JSON.parse($("#data_purchase_item").val());
+		
+		//remove selected elemnt
+		var selected_element  =$("#selected_element").val();		
+		obj_data_purchase_item.splice(selected_element, 1);
+		//change with new element
+		//alert($("#frm-edit #app_raw_material_id").val());
+		var app_raw_material_id = $("#frm-edit #app_raw_material_id").val();
+		var raw_material_name 	= $("#frm-edit #app_raw_material_id option:selected").text();
+		var unit_price					= $("#frm-edit #unit_price").val();
+		var qty									= $("#frm-edit #qty").val();
+		var sub_total						= $("#frm-edit #sub_total").val();
+		//define new data
+		var new_data={ "app_raw_material_id" :app_raw_material_id,"raw_material_name" :raw_material_name, "unit_price" : unit_price,"qty": qty,"sub_total":sub_total};
+		
+		//prevent remains value from obj_data_purchase_item_new because it in the global scope
+		obj_data_purchase_item_new.push(new_data);//variabel not assign textarea value
+		//alert(JSON.stringify(obj_data_purchase_item_new));
+		//$("#data_purchase_item_new").val(JSON.stringify(obj_data_purchase_item_new))
+		//this block to  append old data with new data in data grid update
+		//var obj_data_purchase_item		 = JSON.parse($("#data_purchase_item").val());
+		obj_data_purchase_item.push(new_data);
+		//document.write(JSON.stringify(obj_data_purchase_item));
+		
+		//clear #data_purchase_item to prevent double value in grid
+		$("#data_purchase_item").val(JSON.stringify(obj_data_purchase_item));
+		bindPurchaseItem();
+		//document.write(JSON.stringify(data_purchase_item));
+		$("#modal-edit").modal("hide");
 	}
 	
 </script>
