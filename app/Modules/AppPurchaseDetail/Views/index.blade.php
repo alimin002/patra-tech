@@ -99,73 +99,8 @@
 							<th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label=""></th>
 						</tr>
 					</thead>			
-				<tbody role="alert" aria-live="polite" aria-relevant="all" id="tbody_purchase">
-				<?php $row_style=1; $data=array();?>
-				@foreach($data as $key => $values)
-				<tr @if($row_style % 2 ==0) class="odd" @else class="even"  @endif>
-							<td class="center  sorting_1">
-								<label class="position-relative">
-									<input type="checkbox" class="ace">
-									<span class="lbl"></span>
-								</label>
-							</td>
-							<td class=" ">{{$values["raw_name"]}}</td>
-							<td class=" ">{{$values["unit"]}}</td>
-							<td class="hidden-480 ">{{$values["unit_price"]}}</td>
-							<td class=" ">
-								@if ($values["stock"] == "")
-									<p>
-										Please go to <a href="{{url('stock_raw_material')}}"><b>menu stock</b></a>&nbsp;to assign number of stock for this raw material! 
-									</p>
-								@elseif ($values["stock"] == 0)
-									<p style="color:red">
-										{{$values["stock"]}}&nbsp;{{$values["unit"]}}
-									</p>
-								@else
-									{{$values["stock"]}}&nbsp;{{$values["unit"]}}
-								@endif
-								
-							</td>
-							<td class="hidden-480 ">{{$values["unit_price"]}}	</td>
-							<td class=" ">
-								<div class="hidden-sm hidden-xs action-buttons">
-									<a class="green" href="#" onclick="edit('{{$values['app_raw_material_id']}}')">
-										<i class="ace-icon fa fa-pencil bigger-130"></i>
-									</a>
-
-									<a class="red" href="#" onclick="deleteData('{{$values['app_raw_material_id']}}')">
-										<i class="ace-icon fa fa-trash-o bigger-130"></i>
-									</a>
-								</div>
-
-								<div class="hidden-md hidden-lg">
-									<div class="inline position-relative">
-										<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
-											<i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
-										</button>
-
-										<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-											<li>
-												<a href="#" onclick="edit('{{$values['app_raw_material_id']}}')" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
-													<span class="green" >
-														<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-													</span>
-												</a>
-											</li>
-											<li>
-												<a href="#" onclick="deleteData('{{$values['app_raw_material_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete" onclick="deleteData('{{$values['app_raw_material_id']}}')">
-													<span class="red">
-														<i class="ace-icon fa fa-trash-o bigger-120"></i>
-													</span>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</td>
-						</tr>
-						<?php $row_style ++; ?>
-						@endforeach
+						<tbody role="alert" aria-live="polite" aria-relevant="all" id="tbody_purchase">
+							<!--data duisplayed with javascript-->
 						</tbody>
 						</table>
 						<div class="row">
@@ -184,7 +119,7 @@
 					</div>
 			</div>
 		</div>
-		<div class="col-sm-12" style="display:none">
+		<div class="col-sm-12" style="display:block">
 			<div class="form-group">
 					<form name="frm-purchase-item" id="frm-purchase-item" action="{{url('purchase_detail/save')}}" method="post">
 						{{ csrf_field() }}

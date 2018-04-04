@@ -51,7 +51,7 @@
 			</div>
 			<div class="modal-footer">
 				<button onclick="addToPurchase()" type="button" class="btn btn-primary">Save</button>
-				<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
 			</div>										
 		</div>
 	</div>

@@ -183,7 +183,7 @@
 							</li>
 
 							<li class="">
-								<a href="{{url('')}}">
+								<a href="{{url('product')}}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Products
 								</a>
@@ -193,6 +193,12 @@
 								<a href="{{url('')}}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Company
+								</a>
+							</li>
+							<li class="">
+								<a href="{{url('tes')}}">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Tes
 								</a>
 							</li>
 						</ul>
@@ -219,7 +225,7 @@
 							</li>
 
 							<li class="">
-								<a href="jqgrid.html">
+								<a href="{{url('sales')}}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Sale
 								</a>

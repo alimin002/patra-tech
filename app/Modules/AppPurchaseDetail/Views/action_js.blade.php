@@ -5,8 +5,8 @@
    return "Warning: data purchase item will be lost, are you sure you want to leave? Think of the kittens!";
  }
  **/
-
- $(function() {
+	
+ $(function(){
 		bindPurchaseItem();
  });
 	
@@ -46,7 +46,7 @@
 												"<i class='ace-icon fa fa-pencil bigger-130' id=row-"+i+" class='btn btn-primary' onclick='editItem(this.id,"+app_raw_material_id+")'></i>"+
 											"</a>"+
 											"<a class='red' href='#'>"+
-												"<i class='ace-icon fa fa-trash-o bigger-130'></i>"+
+												"<i class='ace-icon fa fa-trash-o bigger-130' id=row-"+i+" onclick='deleteItem(this.id)'></i>"+
 											"</a>"+
 										"</div>"+	
 											"<div class='hidden-md hidden-lg'>"+
@@ -63,9 +63,9 @@
 															"</a>"+
 														"</li>"+
 														"<li>"+
-															"<a href='#' class='tooltip-error' data-rel='tooltip' title='' data-original-title='Delete'>"+
+															"<a href='#' class='tooltip-error' data-rel='tooltip' title='' onclick='deleteData(this.id)' data-original-title='Delete'>"+
 																"<span class='red'>"+
-																	"<i class='ace-icon fa fa-trash-o bigger-120'></i>"+
+																	"<i class='ace-icon fa fa-trash-o bigger-120' id=row-"+i+"></i>"+
 																"</span>"+
 															"</a>"+
 														"</li>"+
@@ -223,7 +223,7 @@
     type: 'GET', 
 		url: '{{url("purchase_detail/edit")}}'+'/'+app_purchase_detail_id, 
     dataType: 'json',
-    success: function (response){ 
+    success: function (response){
 				$("#frm-edit #app_purchase_detail_id").val(response["app_purchase_detail_id"]);
 				$("#frm-edit #app_raw_material_id").val(response["app_raw_material_id"]);
 				$("#frm-edit #qty").val(response["qty"]);	
@@ -236,6 +236,9 @@
 				$("#frm-edit #app_raw_material_id").prepend("<option value="+app_raw_material_id+">"+raw_material_name+"</option>");
 				renderLookupRawMaterial();				
 				$("#modal-edit").modal("toggle");
+				//deleting selected item
+				//var old_data_purchase=$("#data_purchase_item").val();
+				//alert(old_data_purchase);
     }
 		});		
 	}
@@ -247,6 +250,7 @@
 	}
 	
 	function deleteData(id){
+		//alert(1)
 			var app_purchase_detail_id=id;
 		$.ajax({ 
     type: 'GET', 
@@ -274,8 +278,23 @@
 			o["two"] = 2;
 			o["three"] = 3;
 	*/
+	function checkItemExists(app_raw_material_id){
+		var result=0;
+		 var data_purchase_item=JSON.parse($("#data_purchase_item").val());
+			 for(var i=0; i<= data_purchase_item.length-1; i++){
+				 if( app_raw_material_id == data_purchase_item[i].app_raw_material_id){
+					 result =1;
+				 }
+			 }
+			 
+			 return result;
+			 
+	}
 	var obj_data_purchase_item_new =[];
 	function addToPurchase(){
+      //prevent duplicare item
+			
+			
 			var app_raw_material_id = $("#frm-create #app_raw_material_id").val();
 			var raw_material_name 	= $("#frm-create #app_raw_material_id option:selected").text();
 			var unit_price					= $("#frm-create #unit_price").val();
@@ -283,8 +302,10 @@
 			var sub_total						= $("#frm-create #sub_total").val();
 			//define new data
 			var new_data={ "app_raw_material_id" :app_raw_material_id, "unit_price" : unit_price,"qty": qty,"sub_total":sub_total};
-		
-			//this block to append new data and prevent double records in database
+			
+			//prevent duplicate rawmaterial
+			if(checkItemExists(app_raw_material_id)==0){
+				//this block to append new data and prevent double records in database
 			
 		  obj_data_purchase_item_new.push(new_data);//variabel not assign textarea value
 			//alert(JSON.stringify(obj_data_purchase_item_new));
@@ -357,18 +378,32 @@
 								"</tr>";
 		$("#tbody_purchase").append(tr)
 		$("#modal-add").modal("hide");
+			}else{
+				alert("this Item already exists please select anoter item")
+			}
+			
 	}
 	
 	function editItem(row_id,app_raw_material_id){
 		row_id="tr-"+row_id.replace("row-","");
-		//alert("#tr-"+row_id+" "+"td:eq(1)");
-		//alert($("#tr-0 td:eq(1)").text());
-		//alert(app_raw_material_id);
 		var raw_material_name =$("#"+row_id+" "+"td:eq(1)").text();
 		var unit_price				=$("#"+row_id+" "+"td:eq(2)").text();
 		var qty								=$("#"+row_id+" "+"td:eq(3)").text();
 		var sub_total					=$("#"+row_id+" "+"td:eq(4)").text();
 		var description				=$("#"+row_id+" "+"td:eq(5)").text();
+		
+		//delete selected item
+		var data_purchase_item=JSON.parse($("#data_purchase_item").val());
+		var selected_row=row_id.replace("tr-","");
+		var start_index = selected_row;//target update row
+    var number_of_elements_to_remove = 1;
+    data_purchase_item.splice(start_index, number_of_elements_to_remove);
+		$("#data_purchase_item").val(JSON.stringify(data_purchase_item));
+		bindPurchaseItem();
+    console.log(data_purchase_item);
+        //[1,2,3,4];
+		
+		
 		
 		$("#frm-edit #app_raw_material_id").prepend("<option selected value="+app_raw_material_id+">"+raw_material_name+"</option>");
 		$("#frm-edit #unit_price").val(unit_price);
@@ -379,6 +414,36 @@
 		$("#modal-edit").modal("toggle");
 	}
 	
+	//display modal delete
+  function deleteItem(row_id,app_raw_material_id){
+		row_id="tr-"+row_id.replace("row-","");
+		var raw_material_name =$("#"+row_id+" "+"td:eq(1)").text();
+		var unit_price				=$("#"+row_id+" "+"td:eq(2)").text();
+		var qty								=$("#"+row_id+" "+"td:eq(3)").text();
+		var sub_total					=$("#"+row_id+" "+"td:eq(4)").text();
+		var description				=$("#"+row_id+" "+"td:eq(5)").text();
+		//delete selected item
+		var data_purchase_item=JSON.parse($("#data_purchase_item").val());
+		var selected_row=row_id.replace("tr-","");
+		var start_index = selected_row;//target update row
+    var number_of_elements_to_remove = 1;
+    data_purchase_item.splice(start_index, number_of_elements_to_remove);
+		$("#data_purchase_item").val(JSON.stringify(data_purchase_item));
+		bindPurchaseItem();
+    console.log(data_purchase_item);
+        //[1,2,3,4];
+		
+		
+		
+		$("#frm-delete #app_raw_material_id").prepend("<option selected value="+app_raw_material_id+">"+raw_material_name+"</option>");
+		$("#frm-delete #unit_price").val(unit_price);
+		$("#frm-delete #qty").val(qty);
+		$("#frm-delete #sub_total").val(sub_total);
+		$("#frm-delete #description").val(description);
+		$("#frm-delete #selected_element").val(row_id.replace("tr-",""));
+		$("#modal-delete").modal("toggle");
+	}
+	
 	function doPurchaseRawMaterial(){
 		$("#frm-purchase-item").submit();
 	}
@@ -386,10 +451,9 @@
 	function doUpdateItem(){
 		//get old data purchase
 		var obj_data_purchase_item= JSON.parse($("#data_purchase_item").val());
-		
 		//remove selected elemnt
 		var selected_element  =$("#selected_element").val();		
-		obj_data_purchase_item.splice(selected_element, 1);
+		//obj_data_purchase_item.splice(selected_element, 1);
 		//change with new element
 		//alert($("#frm-edit #app_raw_material_id").val());
 		var app_raw_material_id = $("#frm-edit #app_raw_material_id").val();
@@ -399,21 +463,43 @@
 		var sub_total						= $("#frm-edit #sub_total").val();
 		//define new data
 		var new_data={ "app_raw_material_id" :app_raw_material_id,"raw_material_name" :raw_material_name, "unit_price" : unit_price,"qty": qty,"sub_total":sub_total};
-		
-		//prevent remains value from obj_data_purchase_item_new because it in the global scope
-		obj_data_purchase_item_new.push(new_data);//variabel not assign textarea value
-		//alert(JSON.stringify(obj_data_purchase_item_new));
-		//$("#data_purchase_item_new").val(JSON.stringify(obj_data_purchase_item_new))
-		//this block to  append old data with new data in data grid update
-		//var obj_data_purchase_item		 = JSON.parse($("#data_purchase_item").val());
-		obj_data_purchase_item.push(new_data);
-		//document.write(JSON.stringify(obj_data_purchase_item));
+	
+		//updating with new data
+		var start_index = $("#selected_element").val();//target update row
+		var number_of_elements_to_remove = 0;
+		obj_data_purchase_item.splice(start_index, number_of_elements_to_remove,new_data);
 		
 		//clear #data_purchase_item to prevent double value in grid
 		$("#data_purchase_item").val(JSON.stringify(obj_data_purchase_item));
 		bindPurchaseItem();
 		//document.write(JSON.stringify(data_purchase_item));
 		$("#modal-edit").modal("hide");
+	}
+	
+	//deleteing selected item
+	function doDeleteItem(){
+		//get old data purchase
+		var obj_data_purchase_item= JSON.parse($("#data_purchase_item").val());
+		//remove selected elemnt
+		var start_index = $("#selected_element").val();//target delete row
+		var number_of_elements_to_remove = 0;
+		obj_data_purchase_item.splice(start_index, number_of_elements_to_remove);
+		
+		//clear #data_purchase_item to prevent double value in grid
+		$("#data_purchase_item").val(JSON.stringify(obj_data_purchase_item));
+		bindPurchaseItem();
+		//document.write(JSON.stringify(data_purchase_item));
+		$("#modal-delete").modal("hide");
+	}
+	
+	function cancelEditItem(){
+		$("#modal-edit").modal("hide");
+		location.reload();
+	}
+	
+	function cancelDeleteItem(){
+		$("#modal-delete").modal("hide");
+		location.reload();
 	}
 	
 </script>
