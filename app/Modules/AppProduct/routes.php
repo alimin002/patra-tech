@@ -18,6 +18,7 @@ Route::group(['module' => 'AppProduct', 'middleware' => ['web'], 'namespace' => 
 		Route::post('product/save','AppProductController@save');
 		Route::get('product/edit/{app_product_id}','AppProductController@edit');
 		Route::post('product/update','AppProductController@update');
+		Route::get('product/render_lookup_category','AppProductController@renderLookupCategory');
 		Route::post('product/destroy','AppProductController@destroy');
 });
 

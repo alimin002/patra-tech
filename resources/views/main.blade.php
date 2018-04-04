@@ -185,7 +185,13 @@
 							<li class="">
 								<a href="{{url('product')}}">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Products
+									Product
+								</a>
+							</li>
+							<li class="">
+								<a href="{{url('category_product')}}">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Category Product
 								</a>
 							</li>
 
