@@ -3,7 +3,7 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<button type="button" class="close" onclick="cancelDeleteItem()">&times;</button>
 				<h4 class="modal-title">Delete Item Purchase</h4>
 			</div>
 			<div class="modal-body">
@@ -56,8 +56,8 @@
 				 </div>														
 			</div>
 			<div class="modal-footer">
-				<button onclick="doDelete()" type="button" class="btn btn-primary">Delete</button>
-				<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				<button onclick="doDeleteItem()" type="button" class="btn btn-primary">Delete</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="cancelDeleteItem()">Cancel</button>
 			</div>										
 		</div>
 	</div>

@@ -77,48 +77,67 @@ class AppPurchaseDetailController extends Controller
 			$lookup_raw_material = Lookup::getLookupRawMaterial();
 			echo json_encode($lookup_raw_material);
 		}	
+		//check if item purchase exists
+		public function checkItemExists($app_purchase_id){
+				$num_rows=AppPurchaseDetail::where('app_purchase_detail.app_purchase_id', '=',$app_purchase_id)->count();
+				
+				if($num_rows > 0){
+					return 1;
+				}else{
+					return 0;
+				}
+		}
 		
 		public function save(Request $request)
-		{
-			$data_purchase_item = json_decode($request->input("data_purchase_item_new"),true);
+		{ 
+		  
 			
-			//echo $data_purchase_item[0]["unit_price"]; die();
+			$data_purchase_item = json_decode($request->input("data_purchase_item"),true);
 			
 			$app_purchase_id			= $request["app_purchase_idx"];
 			$app_raw_material_id	= $request["app_raw_material_id"];
 			$qty									= $request["qty"];
 			
-							
-				DB::beginTransaction();
-				try {
-						
-						foreach($data_purchase_item as $key =>$values)
-						{
-							$app_purchase_id		 =$app_purchase_id;
-							$app_raw_material_id =$values["app_raw_material_id"];
-							$qty								 =$values["qty"];
-							$sub_total					 =$values["sub_total"];
-							
-							$purchase_detail=	array("app_purchase_id"			=>$app_purchase_id,
-																			"app_raw_material_id"	=>$app_raw_material_id,
-																			"qty"									=>$qty,
-																			"sub_total"						=>$sub_total);
-																																
-							$save=AppPurchaseDetail::insertGetId($purchase_detail);
-							
-							$stock_in=$this->stockIn($app_raw_material_id,$qty);
-						}
-						
-						
-						
-						DB::commit();
-						$message="Input data Purchase Item Succes";
-				} catch (\Exception $e){
-						DB::rollback();
-						$message="Input data Item Failed, please try again<br>Developer message:".$e;
+				if($this->checkItemExists($app_purchase_id)==1){
+					 $delete = AppPurchaseDetail::where('app_purchase_id', '=',$app_purchase_id)
+																										->delete();
+				 
+						return Redirect::to('purchase_detail?purchase_id='.$app_purchase_id)
+														->with("message",$message);
 				}
-				return Redirect::to('purchase_detail?purchase_id='.$app_purchase_id)
-												->with("message",$message);
+
+						 DB::beginTransaction();
+							try {
+									foreach($data_purchase_item as $key =>$values)
+									{
+										//saving item purchase
+										$app_purchase_id		 =$app_purchase_id;
+										$app_raw_material_id =$values["app_raw_material_id"];
+										$qty								 =$values["qty"];
+										$sub_total					 =$values["sub_total"];
+										
+										$purchase_detail=	array("app_purchase_id"			=>$app_purchase_id,
+																						"app_raw_material_id"	=>$app_raw_material_id,
+																						"qty"									=>$qty,
+																						"sub_total"						=>$sub_total);
+																																			
+										$save=AppPurchaseDetail::insertGetId($purchase_detail);
+										
+										//update stock
+										$stock_in=$this->stockIn($app_raw_material_id,$qty);										
+									}
+									
+									
+									
+									DB::commit();
+									$message="Input data Purchase Item Succes";
+							} catch (\Exception $e){
+								DB::rollback();
+								$message="Input data Item Failed, please try again<br>Developer message:".$e;
+						}
+							return Redirect::to('purchase_detail?purchase_id='.$app_purchase_id)
+												->with("message",$message);			
+				
 		}
 		
 		public function stockIn($app_raw_material_id,$num_of_entri){
@@ -180,7 +199,7 @@ class AppPurchaseDetailController extends Controller
 												->with("message",$message);
     }
 		
-		 public function destroy(Request $request)
+		public function destroy(Request $request)
     {
 			 $app_purchase_id				= $request["app_purchase_id"];
 			 $app_purchase_detail_id = $request->input("app_purchase_detail_id");

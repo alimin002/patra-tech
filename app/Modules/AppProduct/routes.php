@@ -13,8 +13,12 @@
 
 
 Route::group(['module' => 'AppProduct', 'middleware' => ['web'], 'namespace' => 'App\Modules\AppProduct\Controllers'], function() {
-   Route::get('products','AppProductController@index');
-
+    Route::post('product','AppProductController@index');
+		Route::get('product','AppProductController@index');
+		Route::post('product/save','AppProductController@save');
+		Route::get('product/edit/{app_product_id}','AppProductController@edit');
+		Route::post('product/update','AppProductController@update');
+		Route::post('product/destroy','AppProductController@destroy');
 });
 
 
