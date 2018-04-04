@@ -54,7 +54,7 @@
     url: "{{url('product/edit')}}"+"/"+app_product_id, 
     dataType: 'json',
     success: function (response){ 
-        //alert(response["raw_name"]);
+        //alert(response["product_name"]);
 				$("#frm-edit #name").val(response["product_name"]);
 				$("#frm-edit #unit").val(response["unit"]);
 				$("#frm-edit #unit_price").val(response["unit_price"]);
@@ -101,5 +101,21 @@
     }
 		});
 
+	}
+	
+	function renderlookupCategory(){
+		$.ajax({ 
+    type: 'GET', 
+    url: '{{url("product/render_lookup_category")}}', 
+    dataType: 'json',
+    success: function (response){
+				//alert(response);
+				for(var i=0; i< response.length -1; i++ ){
+					var category_name=response[i]["name"];
+					var app_category_id=response[i]["app_category_id"];
+					$("#frm-edit #app_category_id").append("<option value="+app_category_id+">"+category_name+"</option>");
+				}
+			}
+		});
 	}
 </script>
