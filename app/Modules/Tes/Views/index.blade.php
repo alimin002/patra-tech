@@ -25,7 +25,7 @@
 					<div class="row">
 						<div class="col-xs-6">
 							<div id="sample-table-2_length" class="dataTables_length">
-								<label>Display <select size="1" name="sample-table-2_length" aria-controls="sample-table-2"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> records</label>
+								<label>Display TESTING  <select size="1" name="sample-table-2_length" aria-controls="sample-table-2"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> records</label>
 							</div>
 						</div>
 						<div class="col-xs-6">
