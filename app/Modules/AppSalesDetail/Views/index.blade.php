@@ -100,7 +100,8 @@
 						</table>
 						<div class="row">
 						<div class="col-xs-6">
-							<button class="btn btn-white btn-primary" onclick="doPurchaseRawMaterial()"><i class="fa fa-floppy-o" aria-hidden="true">&nbsp;Save Item @yield("title")</i></button>
+							<button class="btn btn-white btn-primary" onclick="doSaleProduct()"><i class="fa fa-floppy-o" aria-hidden="true">&nbsp;Save Item @yield("title")</i></button>
+							<button class="btn btn-white btn-primary" onclick="printInvoice()"><i class="fa fa-print" aria-hidden="true">&nbsp;Print Invoice</i></button>
 							<div class="dataTables_info" id="sample-table-2_info"><!--Showing 1 to 10 of 23 entries--></div>
 						</div>
 						<div class="col-xs-6">
@@ -115,10 +116,10 @@
 		</div>
 		<div class="col-sm-12" style="display:block">
 			<div class="form-group">
-					<form name="frm-sales-item" id="frm-sale-item" action="{{url('purchase_detail/save')}}" method="post">
+					<form name="frm-sales-item" id="frm-sales-item" action="{{url('sales_detail/save')}}" method="post">
 						{{ csrf_field() }}
 						<textarea class="col-md-12" name="data_sales_item" id="data_sales_item">{{$json_sales}}</textarea>
-						<input readonly type="text" value="" name="app_purchase_idx" id="app_purchase_idx" required="" class="form-control"/>
+						<input readonly type="text" value="{{$data_header['app_sales_id']}}" name="app_sales_id_in_detail" id="app_sales_id_in_detail" required="" class="form-control"/>
 					</form>
 			</div>
 		</div>

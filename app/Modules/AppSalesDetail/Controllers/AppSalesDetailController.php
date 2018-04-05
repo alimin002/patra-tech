@@ -7,8 +7,8 @@ use App\Http\Controllers\Controller;
 
 use App\Modules\AppSalesDetail\Models\AppSalesDetail;
 use App\Modules\AppSales\Models\AppSales;
-use App\Modules\AppProduct\Models\AppRawMaterial;
-use App\Modules\AppStockRawMaterial\Models\AppStockRawMaterial;
+use App\Modules\AppProduct\Models\AppProduct;
+use App\Modules\AppStockProduct\Models\AppStockProduct;
 use app\Providers\Lookup;
 use app\Providers\Common;
 use Illuminate\Pagination\Paginator;
@@ -39,6 +39,76 @@ class AppSalesDetailController extends Controller
 								->with("json_sales",$json_sales)
 								->with("data_header",$data_header);
     }
+		
+		//check if item sales exists
+		public function checkItemExists($app_sales_id){
+				$num_rows=AppSalesDetail::where('app_sales_detail.app_sales_id', '=',$app_sales_id)->count();
+				
+				if($num_rows > 0){
+					return 1;
+				}else{
+					return 0;
+				}
+		}
+		public function stockIn($app_product_id,$num_of_entri){
+			$data					 = AppStockProduct::where('app_product_id','=',$app_product_id)->first();
+			$current_stock =$data["stock"];
+			$new_stock		 =$current_stock + $num_of_entri;//num_of_entri= entri from purchase and other factor
+			//return $new_stock;
+			$new_stock_product=array(
+																"stock"=>$new_stock
+															);
+			$update=AppStockProduct::where("app_product_id","=",$app_product_id)
+																	 ->update($new_stock_product);																		
+				return $update;
+			
+		}
+		
+		public function save(Request $request){
+			$data_sales_item = json_decode($request->input("data_sales_item"),true);
+			
+			$app_sales_id			= $request["app_sales_id_in_detail"];
+			$app_product_id	= $request["app_product_id"];
+			$qty									= $request["qty"];
+			
+				if($this->checkItemExists($app_sales_id)==1){
+					 $delete = AppSalesDetail::where('app_sales_id', '=',$app_sales_id)
+																										->delete();
+						
+				}
+
+						 DB::beginTransaction();
+							try {
+									foreach($data_sales_item as $key =>$values)
+									{
+										//saving item purchase
+										$app_sales_id		 =$app_sales_id;
+										$app_product_id =$values["app_product_id"];
+										$qty								 =$values["qty"];
+										$sub_total					 =$values["sub_total"];
+										
+										$sales_detail=	array("app_sales_id"			=>$app_sales_id,
+																						"app_product_id"	=>$app_product_id,
+																						"qty"									=>$qty,
+																						"sub_total"						=>$sub_total);
+																																			
+										$save=AppSalesDetail::insertGetId($sales_detail);
+										
+										//update stock
+										$stock_in=$this->stockIn($app_product_id,$qty);										
+									}
+									
+									
+									
+									DB::commit();
+									$message="Input data Sales Item Succes";
+							} catch (\Exception $e){
+								DB::rollback();
+								$message="Input data Item Failed, please try again<br>Developer message:".$e;
+						}
+							return Redirect::to('sales_detail?sales_id='.$app_sales_id)
+												->with("message",$message);			
+		}
 
     /**
      * Show the form for creating a new resource.
