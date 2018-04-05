@@ -2,6 +2,7 @@
 
 namespace App\Modules\Tes\Controllers;
 
+use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -23,6 +24,10 @@ class TesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+	 public function save(Request $request)
+	 {
+		echo $request->input("name");  
+	 }
     public function create()
     {
         //

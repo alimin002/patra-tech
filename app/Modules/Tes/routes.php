@@ -10,8 +10,9 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::group(['module' => 'AppRawMaterial', 'middleware' => ['web'], 'namespace' => 'App\Modules\Tes\Controllers'], function() {
-    Route::post('test','TesController@index');
+Route::group(['module' => 'Tes', 'middleware' => ['web'], 'namespace' => 'App\Modules\Tes\Controllers'], function() {
+    Route::post('tes','TesController@index');
+	Route::post('tes/save','TesController@save');
 });
 
 
