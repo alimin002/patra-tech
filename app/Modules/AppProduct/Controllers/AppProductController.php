@@ -49,8 +49,28 @@ class AppProductController extends Controller
 		 
 		 
 		  function getProductByAppProductId($app_product_id){
-			 $data=AppProduct::select("app_products.name as product_name","app_products.*")->where('app_products.app_product_id', '=',$app_product_id)->first()->toArray();
+			 $data=AppProduct::select("app_products.name as product_name","app_category.app_category_id","app_category.name as category_name","app_products.*")
+			 ->leftJoin('app_category', 'app_products.app_category_id', '=', 'app_category.app_category_id')
+			 ->where('app_products.app_product_id', '=',$app_product_id)->first()->toArray();
 			 return $data;
+		 }
+		 
+		  function doUpdate($request){
+			 $app_product_id																		= $request["app_product_id"];
+			 $product=array(			"name"												=>$request["name"],
+														"unit"												=>$request["unit"],
+														"unit_price"									=>$request["unit_price"],
+														"app_category_id"							=>$request["app_category_id"]);
+			 
+			 $update = AppProduct::where('app_product_id', '=',$app_product_id)
+																			->update($product);
+			 return $update;
+			 
+		 }
+		 function doDelete($request){
+			 $app_product_id=$request['app_product_id'];
+			 $delete = AppProduct::where('app_product_id', '=',$app_product_id)->delete();
+			 return $delete;
 		 }
 		 
 		  /***end query section****/
@@ -137,9 +157,15 @@ class AppProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+   	public function update(Request $request)
     {
-        //
+        $update=$this->doUpdate($request->all());
+				if($update == true){
+					$message="Update data successfull";
+				}else{
+					$message="Update data failed!";
+				}
+				return Redirect::to('product')->with('message', $message);
     }
 
     /**
@@ -148,9 +174,16 @@ class AppProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+   	public function destroy(Request $request)
     {
         //
+				$delete=$this->doDelete($request->all());
+				if($delete==true){
+						$message="Delete data successfull";
+				}else{
+						$message="Delete data failed, please try again!";
+				}
+				return Redirect::to('product')->with('message', $message);
     }
 		 /**end bridge between query data and view**/
 }

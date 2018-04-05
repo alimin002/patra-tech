@@ -5,8 +5,8 @@ namespace App\Modules\AppSalesDetail\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Modules\AppPurchaseDetail\Models\AppPurchaseDetail;
-use App\Modules\AppPurchase\Models\AppPurchase;
+use App\Modules\AppSalesDetail\Models\AppSalesDetail;
+use App\Modules\AppSales\Models\AppSales;
 use App\Modules\AppProduct\Models\AppRawMaterial;
 use App\Modules\AppStockRawMaterial\Models\AppStockRawMaterial;
 use app\Providers\Lookup;
@@ -23,9 +23,21 @@ class AppSalesDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view("AppSalesDetail::index");
+				$app_sales_id=$_GET["sales_id"];
+				$data_header=$data = AppSales::where('app_sales.app_sales_id', '=',$app_sales_id)->first();							
+				$data_detail=AppSalesDetail::select('app_sales_detail.*','app_sales.*','app_products.*',"app_products.name as product_name")
+																					->leftJoin('app_sales','app_sales.app_sales_id','=','app_sales_detail.app_sales_detail_id')
+																					->leftJoin('app_products','app_products.app_product_id','=','app_sales_detail.app_product_id')
+																					->where('app_sales_detail.app_sales_id', '=',$app_sales_id)->get();
+				$lookup_product	= Lookup::getLookupProduct();	
+				$data_sales				= json_decode(json_encode($data_detail),true);
+				$json_sales=json_encode($data_sales);
+				 return view("AppSalesDetail::index")
+				        ->with("lookup_product",$lookup_product)
+								->with("json_sales",$json_sales)
+								->with("data_header",$data_header);
     }
 
     /**

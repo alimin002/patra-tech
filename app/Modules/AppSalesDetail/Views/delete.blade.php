@@ -1,24 +1,29 @@
 <!-- Modal Add Data-->
-<div class="modal fade" id="modal-add" role="dialog">
+<div class="modal fade" id="modal-delete" role="dialog">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Add Item Purchase</h4>
+				<button type="button" class="close" onclick="cancelDeleteItem()">&times;</button>
+				<h4 class="modal-title">Delete Item @yield("title")</h4>
 			</div>
 			<div class="modal-body">
-					<form name="frm-create" id="frm-create" method="post">
+					<form name="frm-delete" id="frm-delete" action="{{url('sales_detail/destroy')}}" method="post">
 					{{ csrf_field() }}
 					<div class="row">
+					<div class="col-sm-12">
+							<div class="form-group">
+								<p>The following data will be deleted are you sure to continue this process?</p>
+							</div>
+						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label>Raw Material</label> 
-								<select required="" id="app_raw_material_id" name="app_raw_material_id" class="form-control" onChange="getRawMaterialById(this)">
+								<label>Product</label> 
+								<select id="app_product_id" disabled name="app_product_id" class="form-control" onChange="getRawMaterialById(this)">
 									<option> 
-										Choose Raw Material
+										Choose Product
 									</option>
-								@foreach($lookup_raw_material as $key=>$values)
-									<option value="{{$values['app_raw_material_id']}}"> 
+								@foreach($lookup_product as $key=>$values)
+									<option value="{{$values['app_purchase_id']}}"> 
 									{{$values["name"]}} 
 									</option>
 								@endforeach
@@ -26,13 +31,13 @@
 							</div>
 							<div class="form-group">
 								<label>Unit Price</label> 
-								<input type="text" readonly placeholder="" name="unit_price" id="unit_price" required="" class="form-control"/>
+								<input disabled type="text" readonly placeholder="" name="unit_price" id="unit_price" required="" class="form-control"/>
 							</div>
 						</div>
 						<div class="col-sm-6">														
 							<div class="form-group">
 								<label>Qty</label> 
-								<input  type="text" onkeyup="getSubTotal()" placeholder="" name="qty" id="qty" required="" class="form-control"/>
+								<input  type="text" disabled onkeyup="getSubTotalEdit()" placeholder="" name="qty" id="qty" required="" class="form-control"/>
 							</div>
 							<div class="form-group">
 								<label>Sub Total</label> 
@@ -45,13 +50,14 @@
 								<textarea disabled name="description" id="description" class="form-control" style="height:100px;"></textarea>
 							</div>
 						</div>
+						<input readonly type="hidden" name="app_purchase_detail_id" id="app_purchase_detail_id" required="" class="form-control"/>
 						<input readonly type="hidden" value="{{$data_header['app_purchase_id']}}" name="app_purchase_id" id="app_purchase_id" required="" class="form-control"/>
 					</form>																	
 				 </div>														
 			</div>
 			<div class="modal-footer">
-				<button onclick="addToSales()" type="button" class="btn btn-primary">Save</button>
-				<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+				<button onclick="doDeleteItem()" type="button" class="btn btn-primary">Delete</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="cancelDeleteItem()">Cancel</button>
 			</div>										
 		</div>
 	</div>

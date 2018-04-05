@@ -141,6 +141,7 @@
 			<div class="col-xs-6">
 			<div class="dataTables_paginate paging_bootstrap">
 				<ul class="pagination">
+					{{$data->links()}}
 				</ul>
 			</div>
 			</div>
