@@ -119,12 +119,11 @@
 					</div>
 			</div>
 		</div>
-		<div class="col-sm-12" style="display:block">
+		<div class="col-sm-12" style="display:none">
 			<div class="form-group">
 					<form name="frm-purchase-item" id="frm-purchase-item" action="{{url('purchase_detail/save')}}" method="post">
 						{{ csrf_field() }}
 						<textarea class="col-md-12" name="data_purchase_item" id="data_purchase_item">{{$json_purchase}}</textarea>
-						<textarea class="col-md-12" name="data_purchase_item_new" id="data_purchase_item_new" style="margin-top:60px;"></textarea>
 						<input readonly type="text" value="{{$data_header['app_purchase_id']}}" name="app_purchase_idx" id="app_purchase_idx" required="" class="form-control"/>
 					</form>
 			</div>

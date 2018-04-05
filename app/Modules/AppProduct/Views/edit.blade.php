@@ -7,7 +7,7 @@
 				<h4 class="modal-title">Edit @yield("title")</h4>
 			</div>
 			<div class="modal-body">
-					<form name="frm-edit" id="frm-edit" action="{{url('raw_material/update')}}" method="post">
+					<form name="frm-edit" id="frm-edit" action="{{url('product/update')}}" method="post">
 					{{ csrf_field() }}
 					<div class="row">
 						<div class="col-sm-6">

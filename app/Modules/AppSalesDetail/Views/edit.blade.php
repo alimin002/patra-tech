@@ -1,24 +1,24 @@
 <!-- Modal Add Data-->
-<div class="modal fade" id="modal-add" role="dialog">
+<div class="modal fade" id="modal-edit" role="dialog">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Add Item Purchase</h4>
+				<button type="button" class="close" onclick="cancelEditItem()">&times;</button>
+				<h4 class="modal-title">Edit Item @yield('title')</h4>
 			</div>
 			<div class="modal-body">
-					<form name="frm-create" id="frm-create" method="post">
+					<form name="frm-edit" id="frm-edit" action="{{url('purchase_detail/update')}}" method="post">
 					{{ csrf_field() }}
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label>Raw Material</label> 
-								<select required="" id="app_raw_material_id" name="app_raw_material_id" class="form-control" onChange="getRawMaterialById(this)">
+								<label>@yield('title')</label> 
+								<select id="app_product_id" name="app_product_id" class="form-control" onChange="getProductById(this)">
 									<option> 
 										Choose Raw Material
 									</option>
-								@foreach($lookup_raw_material as $key=>$values)
-									<option value="{{$values['app_raw_material_id']}}"> 
+								@foreach($lookup_product as $key=>$values)
+									<option value="{{$values['app_product_id']}}"> 
 									{{$values["name"]}} 
 									</option>
 								@endforeach
@@ -32,7 +32,7 @@
 						<div class="col-sm-6">														
 							<div class="form-group">
 								<label>Qty</label> 
-								<input  type="text" onkeyup="getSubTotal()" placeholder="" name="qty" id="qty" required="" class="form-control"/>
+								<input  type="text" onkeyup="getSubTotalEdit()" placeholder="" name="qty" id="qty" required="" class="form-control"/>
 							</div>
 							<div class="form-group">
 								<label>Sub Total</label> 
@@ -45,13 +45,16 @@
 								<textarea disabled name="description" id="description" class="form-control" style="height:100px;"></textarea>
 							</div>
 						</div>
-						<input readonly type="hidden" value="{{$data_header['app_purchase_id']}}" name="app_purchase_id" id="app_purchase_id" required="" class="form-control"/>
+						<input readonly type="hidden" name="app_purchase_detail_id" id="app_purchase_detail_id" required="" class="form-control"/>
+						<input readonly type="hidden" value="{{$data_header['app_sales_id']}}" name="app_sales_id" id="app_sales_id" required="" class="form-control"/>
+						<!--selected row to delete-->
+						<input readonly type="text" name="selected_element" id="selected_element" required="" class="form-control"/>
 					</form>																	
 				 </div>														
 			</div>
 			<div class="modal-footer">
-				<button onclick="addToSales()" type="button" class="btn btn-primary">Save</button>
-				<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+				<button onclick="doUpdateItem()" type="button" class="btn btn-primary">Update</button>
+				<button onclick="cancelEditItem()" type="button" class="btn btn-primary">Cancel</button>
 			</div>										
 		</div>
 	</div>

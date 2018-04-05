@@ -101,9 +101,7 @@ class AppPurchaseDetailController extends Controller
 				if($this->checkItemExists($app_purchase_id)==1){
 					 $delete = AppPurchaseDetail::where('app_purchase_id', '=',$app_purchase_id)
 																										->delete();
-				 
-						return Redirect::to('purchase_detail?purchase_id='.$app_purchase_id)
-														->with("message",$message);
+						
 				}
 
 						 DB::beginTransaction();

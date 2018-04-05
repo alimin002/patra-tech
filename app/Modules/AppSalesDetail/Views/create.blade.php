@@ -4,21 +4,21 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Add Item Purchase</h4>
+				<h4 class="modal-title">Add Item Sales</h4>
 			</div>
 			<div class="modal-body">
-					<form name="frm-create" id="frm-create" method="post">
+					<form name="frm-create" id="frm-create">
 					{{ csrf_field() }}
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label>Raw Material</label> 
-								<select required="" id="app_raw_material_id" name="app_raw_material_id" class="form-control" onChange="getRawMaterialById(this)">
+								<label>Product</label> 
+								<select required="" id="app_product_id" name="app_product_id" class="form-control" onChange="getProductById(this)">
 									<option> 
-										Choose Raw Material
+										Choose Product
 									</option>
-								@foreach($lookup_raw_material as $key=>$values)
-									<option value="{{$values['app_raw_material_id']}}"> 
+								@foreach($lookup_product as $key=>$values)
+									<option value="{{$values['app_product_id']}}"> 
 									{{$values["name"]}} 
 									</option>
 								@endforeach

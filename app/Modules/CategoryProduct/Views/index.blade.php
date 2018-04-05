@@ -62,9 +62,59 @@
 						</tr>
 					</thead>			
 						<tbody role="alert" aria-live="polite" aria-relevant="all">
+						<?php $row_style=1; ?>
 							@foreach($data_category as $key => $values)
-								{{$values["app_category_id"]}}
-								{{$values["name"]}}
+							<tr @if($row_style % 2 ==0) class="odd" @else class="even"  @endif>
+							<td class="center  sorting_1">
+								<label class="position-relative">
+									<input type="checkbox" class="ace">
+									<span class="lbl"></span>
+								</label>
+							</td>
+							<td class=" ">	{{$values["name"]}} </td>
+							<td class=" ">	{{$values["app_category_id"]}} </td>
+							<td class=" ">
+							<!---dekstop view-->
+								<div class="hidden-sm hidden-xs action-buttons">
+									<a class="green" href="#" onclick="edit('{{$values['app_stock_raw_material_id']}}')">
+										<i class="ace-icon fa fa-pencil bigger-130"></i>
+									</a>
+									<a class="red" href="#" onclick="deleteData('{{$values['app_stock_raw_material_id']}}')">
+										<i class="ace-icon fa fa-trash-o bigger-130"></i>
+									</a>
+								</div>
+								<!--end dekstop view-->
+								<!---mobile view--->
+								<div class="hidden-md hidden-lg">
+									<div class="inline position-relative">
+										<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+											<i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+										</button>
+
+										<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+											<li>
+												<a href="#" onclick="edit('{{$values['app_stock_raw_material_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete" >
+													<span class="red">
+														<i class="ace-icon fa fa-pencil bigger-120"></i>
+													</span>
+												</a>
+											</li>
+											
+											<li>
+												<a href="#" onclick="deleteData('{{$values['app_stock_raw_material_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+													<span class="red">
+														<i class="ace-icon fa fa-trash bigger-120"></i>
+													</span>
+												</a>
+											</li>
+											
+										</ul>
+									</div>
+								</div>
+								<!--end mobile view--->
+							</td>
+						</tr>
+							<?php $row_style ++; ?>
 							@endforeach
 						</tbody>
 						</table>

@@ -5,6 +5,8 @@ namespace App\Modules\CategoryProduct\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Modules\CategoryProduct\Models\CategoryProduct;
+Use Redirect;
+use Session;
 
 class CategoryProductController extends Controller
 {
@@ -13,7 +15,15 @@ class CategoryProductController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
+     
+	 
+	/** public function __construct(Request $request) 
+		{
+			//guard system from direct access
+       if ($request->session()->has('session_login')==false) {			
+						return Redirect::to('')->send();
+			 }
+		} */
 	 
 	 function get_category()
 	 {
@@ -62,6 +72,24 @@ class CategoryProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+	 
+	 //function save
+	 public function save(Request $request)
+		{
+			echo $request->input("name");die();
+				$category_product=array("name"=>$request->input("name"));
+											
+								
+			  $save=CategoryProduct::insert($category_product);				
+				if($save==1){
+					$message="Save data successful";
+				}else{
+					$message="save data failed";
+				}
+				
+				return Redirect::to('category_product')
+								->with("message",$message);
+		}
     public function show($id)
     {
         //

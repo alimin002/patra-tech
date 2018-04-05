@@ -6,6 +6,7 @@ use App\app_category_raw_material;
 use App\app_category_product;
 
 use App\Modules\AppRawMaterial\Models\AppRawMaterial;
+use App\Modules\AppProduct\Models\AppProduct;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -48,6 +49,10 @@ class Lookup extends ServiceProvider
 		}
 		public static function getLookupRawMaterial(){
 			$data=AppRawMaterial::get();
+			return $data;
+		}
+		public static function getLookupProduct(){
+			$data=AppProduct::get();
 			return $data;
 		}
 }

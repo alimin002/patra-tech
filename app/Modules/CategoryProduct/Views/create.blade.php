@@ -7,19 +7,17 @@
 				<h4 class="modal-title">Add @yield("title")</h4>
 			</div>
 			<div class="modal-body">
-					<form name="frm-create" id="frm-create" action="{{url('stock_raw_material/save')}}" method="post">
+					<form name="frm-create" id="frm-create" action="{{url('category_product/save')}}" method="post">
 					{{ csrf_field() }}
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="form-group">
 								<label>Category Product</label> 
-								<select id="app_raw_material_id" name="app_raw_material_id" class="form-control">
-								
-								</select>
+								<input type="text" placeholder="" name="name" id="name" required="" class="form-control">
 							</div>
 							<div class="form-group">
-								<label>Description</label> 
-								<textarea placeholder="" name="description" id="description" required="" class="form-control"></textarea>
+								<label>Category ID</label> 
+								<input type="text" placeholder="" name="app_category_id" id="app_category_id" required="" class="form-control">
 							</div>
 						</div>
 					</form>																	
