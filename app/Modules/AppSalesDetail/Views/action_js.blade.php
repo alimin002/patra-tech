@@ -10,6 +10,13 @@
 		bindSalesItem();
  });
 	
+	function backToSales(){
+		var url="{{url('sales')}}";
+		//alert(url);
+		//window.location.href = url;
+		window.open(url);
+		//window.open(url);
+	}
 	function bindSalesItem(){
 			 //clear grid data to prevent double record
 			 $("#tbody_sales").empty();
@@ -175,42 +182,40 @@
 		});
 	}
 	
-	function closePopOverPurchaseDate(){
-			$("#frm-edit-header #purchase_date").popover("hide");			
+	function closePopOverSalesDate(){
+			$("#frm-edit-header #sales_date").popover("hide");			
 	}
 	
 	function editHeader(id){
 		//alert(id);
-		var app_purchase_id=id;
+		var app_sales_id=id;
 		$.ajax({ 
     type: 'GET', 
-		url: '{{url("purchase/edit")}}'+'/'+app_purchase_id, 
+		url: '{{url("sales/edit")}}'+'/'+app_sales_id, 
     dataType: 'json',
 			success: function (response){ 
 				 //setup popover system
-				 $("#frm-edit-header #purchase_date").popover({
+				 $("#frm-edit-header #sales_date").popover({
 						  trigger: 'manual',
 							placement: 'auto bottom',
 							html: 'true',
 							title :'<span class="text-info"><strong>Info</strong></span>'+
-                '<button type="button" id="close" class="close" onclick="closePopOverPurchaseDate()">&times;</button>',
+                '<button type="button" id="close" class="close" onclick="closePopOverSalesDate()">&times;</button>',
 							content: function() {
 								 var message = "Purchase Date will automaticly updated by system";
 								 return message;
 							}
 					});
-					$("#frm-edit-header #purchase_date").popover("show");				
-					//$("#frm-edit-header #purchase_date").popover('toggle');
+					$("#frm-edit-header #sales_date").popover("show");				
+					//$("#frm-edit-header #sales_date").popover('toggle');
 					
-					$("#frm-edit-header #app_purchase_id").val(response["app_purchase_id"]);
-					$("#frm-edit-header #purchase_number").val(response["purchase_number"]);
-					$("#frm-edit-header #purchase_date").val(response["purchase_date"]);
+					$("#frm-edit-header #app_sales_id").val(response["app_sales_id"]);
+					$("#frm-edit-header #invoice_number").val(response["invoice_number"]);
+					$("#frm-edit-header #sales_date").val(response["sale_date"]);
 					$("#frm-edit-header #description").val(response["description"]);						
 					var app_suplier_id=response["app_suplier_id"];
-					var suplier_name=response["suplier_name"];
-					$("#frm-edit-header #app_suplier_id").empty();
-					$("#frm-edit-header #app_suplier_id").prepend("<option value="+app_suplier_id+">"+suplier_name+"</option>");
-					renderLookupSuplier();				
+					var customer_name=response["customer_name"];
+					$("#frm-edit-header #customer_name").val(customer_name);
 					$("#modal-edit-header").modal("toggle");
 			}
 		});		

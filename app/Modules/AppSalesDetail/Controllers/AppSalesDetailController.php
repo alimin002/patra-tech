@@ -14,7 +14,8 @@ use app\Providers\Common;
 use Illuminate\Pagination\Paginator;
 Use Redirect;
 use DB;
-
+use PDF;
+use Session;
 class AppSalesDetailController extends Controller
 {
 
@@ -23,6 +24,13 @@ class AppSalesDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+		 //direct access guard
+		public function __construct(Request $request) 
+		{
+			 if ($request->session()->has('session_login')==false) {
+						return Redirect::to('logout')->send();
+			 }
+		}
     public function index(Request $request)
     {
 				$app_sales_id=$_GET["sales_id"];
@@ -34,10 +42,12 @@ class AppSalesDetailController extends Controller
 				$lookup_product	= Lookup::getLookupProduct();	
 				$data_sales				= json_decode(json_encode($data_detail),true);
 				$json_sales=json_encode($data_sales);
-				 return view("AppSalesDetail::index")
+				return view("AppSalesDetail::index")
 				        ->with("lookup_product",$lookup_product)
 								->with("json_sales",$json_sales)
 								->with("data_header",$data_header);
+				//$pdf=PDF::loadView('AppSalesDetail::invoice');
+				//return $pdf->download('invoice.pdf');
     }
 		
 		//check if item sales exists
@@ -109,6 +119,67 @@ class AppSalesDetailController extends Controller
 							return Redirect::to('sales_detail?sales_id='.$app_sales_id)
 												->with("message",$message);			
 		}
+		
+		function get_header($app_sales_id){
+			$data_header=$data = AppSales::where('app_sales.app_sales_id', '=',$app_sales_id)->first();							
+				$data_detail=AppSalesDetail::select('app_sales_detail.*','app_sales.*','app_products.*',"app_products.name as product_name")
+																					->leftJoin('app_sales','app_sales.app_sales_id','=','app_sales_detail.app_sales_detail_id')
+																					->leftJoin('app_products','app_products.app_product_id','=','app_sales_detail.app_product_id')
+																					->where('app_sales_detail.app_sales_id', '=',$app_sales_id)->get();
+																					return $data_header;
+		}
+		
+		function get_detail($app_sales_id){
+			$data_detail=AppSalesDetail::select('app_sales_detail.*','app_sales.*','app_products.*',"app_products.name as product_name")
+																					->leftJoin('app_sales','app_sales.app_sales_id','=','app_sales_detail.app_sales_detail_id')
+																					->leftJoin('app_products','app_products.app_product_id','=','app_sales_detail.app_product_id')
+																					->where('app_sales_detail.app_sales_id', '=',$app_sales_id)->get();
+			return $data_detail;
+		}
+		
+		public function download_pdf($app_sales_id){
+			
+			$data_header=$this->get_header($app_sales_id);
+			$data_detail=$this->get_detail($app_sales_id);
+			//print_r($data_detail); die();
+			$data=array("data_header"=>$data_header,
+									"data_detail"=>$data_detail
+			);
+			//echo "<pre>";
+				//print_r($data);
+			//echo "</pre>";
+			//die();
+				$pdf=PDF::loadView('AppSalesDetail::invoice_pdf', compact('data'));
+				return $pdf->download('invoice_pdf.pdf');
+		}
+		
+			public function preview_pdf($app_sales_id){
+			  //echo 1;
+				//$pdf=PDF::loadView('AppSalesDetail::invoice_pdf');
+				//$pdf->stream("AppSalesDetail::invoice_pdf.pdf", array("Attachment" => false));
+				//exit(0);
+				return response()->file(
+        public_path('download/test.pdf')
+    );
+		}
+		
+		public function update_header(Request $request)
+    {
+				$app_sales_id = $request->input("app_sales_id");
+				$sales=array("customer_name" =>$request["customer_name"],
+												"sale_date"  =>date("Y-m-d"));
+								
+			  $update=AppSales::where("app_sales_id","=",$app_sales_id)
+																		 ->update($sales);																		
+				if($update==1){
+					$message="update header successful";
+				}else{
+					$message="update header failed";
+				}
+				
+				return Redirect::to('sales_detail?sales_id='.$app_sales_id)
+												->with("message",$message);
+    }
 
     /**
      * Show the form for creating a new resource.
