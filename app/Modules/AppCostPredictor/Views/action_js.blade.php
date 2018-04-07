@@ -90,8 +90,8 @@
 	function add_raw(){
 		num ++;
 		num_string= "'"+num+"'";
-			 var html="<div class='col-sm-12' style='border:1px solid red;'>"+	
-										"<div class='col-sm-4'>"+	
+			 var html="<div class='col-sm-12' id='main-cover-"+num+"' style='border:1px solid red;'>"+	
+										"<div class='col-sm-3'>"+	
 											"<div class='form-group'>"+	
 												"<label>Raw Material&nbsp;"+num+"</label>"+	
 													"<select required='' id="+"'app_raw_material_id_"+num+"'"+" name="+"'app_raw_material_id_"+num+"'"+" class='form-control' onchange=getRawMaterialById(this,"+num_string+")>"+
@@ -101,16 +101,28 @@
 													"</select>"+	
 												"</div>"+
 											"</div>"+	
-											"<div class='col-sm-4'>"+
+											"<div class='col-sm-2'>"+
 												"<div class='form-group'>"+	
 													"<label>Unit Price</label>"+
 													"<input type='text'  placeholder='' value='' id='unit_price_"+num+"' name='unit_price_"+num+"' required='' class='form-control'>"+	
 												"</div>"+
 											"</div>"+
-												"<div class='col-sm-4'>"+
+												"<div class='col-sm-3'>"+
 												"<div class='form-group'>"+	
 													"<label>Unit</label>"+
 													"<input type='text'  placeholder='' id='unit_"+num+"' name='unit_"+num+"' value='' required='' class='form-control'>"+	
+												"</div>"+
+											"</div>"+
+											"<div class='col-sm-2'>"+
+												"<div class='form-group'>"+	
+													"<label>Amount</label>"+
+													"<input type='text'  placeholder='' id='unit_"+num+"' name='unit_"+num+"' value='' required='' class='form-control'>"+	
+												"</div>"+
+											"</div>"+
+											"<div class='col-sm-2'>"+
+												"<div class='form-group'>"+	
+													"<label>&nbsp;</label>"+
+													"<button type='button' class='form-control fa fa-trash' onclick=removeRow("+num_string+")></button>"+	
 												"</div>"+
 											"</div>"+
 										"</div>"+										
@@ -120,7 +132,10 @@
 				
 		}
 	
-
+  function removeRow(row_id){
+		//alert(row_id)
+		$("#main-cover-"+row_id).remove();
+	}
 	function getRawMaterialById(select_object,row_id){
 		//alert(select_object.value);
 		alert(select_object.value);
