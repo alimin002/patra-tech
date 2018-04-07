@@ -271,7 +271,6 @@
 							</li>
 						</ul>
 					</li>
-
 					<li class="">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-file-text"></i>
@@ -297,6 +296,26 @@
 									Report Purchase
 								</a>
 
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					
+					</li>
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-file-text"></i>
+							<span class="menu-text"> Tools </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+						<ul class="submenu">
+							<li class="">
+								<a href="{{url('cost_predictor')}}">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Cost Predictor
+								</a>
 								<b class="arrow"></b>
 							</li>
 						</ul>
