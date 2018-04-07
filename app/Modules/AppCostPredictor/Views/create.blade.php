@@ -31,7 +31,10 @@
 							</div>							
 						</div>
 						<div  class="col-sm-12" id="main-body" style="border:1px solid blue;">																						
-						</div>														
+						</div>
+						<div  class="col-sm-12" id="main-body" style="border:1px solid blue;">
+								<textarea class="form-control" id="product_composition" name="product_composition"></textarea>
+						</div>						
 				</div>
 			</form>
 			<div class="modal-footer">

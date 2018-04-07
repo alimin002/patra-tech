@@ -1,7 +1,7 @@
 <script>
 	function doSave(){
-		$("#modal-add").modal("hide");
-		$("#frm-create").submit();
+		//alert(JSON.stringify(array_composition));
+		$("#product_composition").val(JSON.stringify(array_composition));
 	}
 	
 	function doDelete(){
@@ -87,8 +87,11 @@
 	}
 	
 	var num=0;
+	var array_composition=[];
 	function add_raw(){
 		num ++;
+		//var json_composition={"app_raw_material_id":}
+		//array_composition[]
 		num_string= "'"+num+"'";
 			 var html="<div class='col-sm-12' id='main-cover-"+num+"' style='border:1px solid red;'>"+	
 										"<div class='col-sm-3'>"+	
@@ -116,7 +119,7 @@
 											"<div class='col-sm-2'>"+
 												"<div class='form-group'>"+	
 													"<label>Amount</label>"+
-													"<input type='text'  placeholder='' id='unit_"+num+"' name='unit_"+num+"' value='' required='' class='form-control'>"+	
+													"<input type='text'  placeholder='' id='amount_"+num+"' name='amount_"+num+"' onchange=addDataToJson("+num_string+") value='' required='' class='form-control'>"+	
 												"</div>"+
 											"</div>"+
 											"<div class='col-sm-2'>"+
@@ -131,21 +134,28 @@
 			$("#main-body").append(html);
 				
 		}
+	function addDataToJson(data){
+		//alert(data.id);
+		var json_composition={"app_raw_material_id":$("#app_raw_material_id_"+num).val(),"amount":$("#amount_"+num).val()}
+		array_composition.push(json_composition);
+		//array_composition
+		//alert(json_composition);
+	}
 	
   function removeRow(row_id){
 		//alert(row_id)
 		$("#main-cover-"+row_id).remove();
+		num --;
 	}
 	function getRawMaterialById(select_object,row_id){
 		//alert(select_object.value);
-		alert(select_object.value);
+		//alert(select_object.value);
 		var app_raw_material_id=select_object.value;
 		$.ajax({ 
     type: 'GET', 
     url: '{{url("raw_material/edit")}}'+'/'+app_raw_material_id, 
     dataType: 'json',
     success: function (response){
-				//bind in form create
 				$("#frm-create #unit_price_"+row_id).val(response["unit_price"]);
 				$("#frm-create #unit_"+row_id).val(response["unit"]);
 				//get sub total edit
