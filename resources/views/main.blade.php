@@ -78,11 +78,39 @@
 
 					<!-- /section:basics/navbar.toggle -->
 				</div>
-
+				
 				<!-- #section:basics/navbar.dropdown -->
 				<div class="navbar-buttons navbar-header pull-right" role="navigation">
 					<ul class="nav ace-nav">
 						<!-- #section:basics/navbar.user_menu -->
+						<!--notification bar-->
+						<li class="purple">
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+								<i class="ace-icon fa fa-bell"></i>
+								<span class="badge badge-important">8</span>
+							</a>
+
+							<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+								<li class="dropdown-header">
+									<i class="ace-icon fa fa-exclamation-triangle"></i>
+									8 Notifications
+								</li>
+
+								<li>
+									<a href="{{url('cost_predictor/stock_out_prediction/1')}}">
+										<div class="clearfix">
+											<span class="pull-left">
+												<i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>
+												Raw Material Stock Out
+											</span>
+											<span class="pull-right badge badge-info">+12</span>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</li>
+						<!---->
+						
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 								<img class="nav-user-photo" src="{{url('assets/avatars/user.jpg')}}" alt="Jason's Photo" />

@@ -1,7 +1,19 @@
 <script>
 	function doSave(){
-		//alert(JSON.stringify(array_composition));
+		array_composition=[];
+		//$("#product_composition").val(JSON.stringify(array_composition));
+		for(var i=0; i<= num-1; i++){
+			var app_raw_material_id=$(".col-raw-material:eq("+i+") div select").val();
+			var unit_price 				 =$(".col-unit-price:eq("+i+") div input").val();
+			var unit							 =$(".col-unit:eq("+i+") div input").val();
+			var amount						 =$(".col-amount:eq("+i+") div input").val();
+			
+			json_composition	 ={"app_raw_material_id":app_raw_material_id,"amount":amount};
+			array_composition[i]=json_composition;
+		}
 		$("#product_composition").val(JSON.stringify(array_composition));
+		//alert(JSON.stringify(array_composition));
+		$("#frm-create").submit();
 	}
 	
 	function doDelete(){
@@ -94,8 +106,8 @@
 		//array_composition[]
 		num_string= "'"+num+"'";
 			 var html="<div class='col-sm-12' id='main-cover-"+num+"' style='border:1px solid red;'>"+	
-										"<div class='col-sm-3'>"+	
-											"<div class='form-group'>"+	
+										"<div class='col-sm-3 col-raw-material'>"+	
+											"<div class='form-group'>"+
 												"<label>Raw Material&nbsp;"+num+"</label>"+	
 													"<select required='' id="+"'app_raw_material_id_"+num+"'"+" name="+"'app_raw_material_id_"+num+"'"+" class='form-control' onchange=getRawMaterialById(this,"+num_string+")>"+
 														"<option>"+ 
@@ -104,22 +116,22 @@
 													"</select>"+	
 												"</div>"+
 											"</div>"+	
-											"<div class='col-sm-2'>"+
+											"<div class='col-sm-2 col-unit-price'>"+
 												"<div class='form-group'>"+	
 													"<label>Unit Price</label>"+
-													"<input type='text'  placeholder='' value='' id='unit_price_"+num+"' name='unit_price_"+num+"' required='' class='form-control'>"+	
+													"<input type='text' readonly='readonly'  placeholder='' value='' id='unit_price_"+num+"' name='unit_price_"+num+"' required='' class='form-control'>"+	
 												"</div>"+
 											"</div>"+
-												"<div class='col-sm-3'>"+
+												"<div class='col-sm-3 col-unit'>"+
 												"<div class='form-group'>"+	
 													"<label>Unit</label>"+
-													"<input type='text'  placeholder='' id='unit_"+num+"' name='unit_"+num+"' value='' required='' class='form-control'>"+	
+													"<input type='text' readonly='readonly'  placeholder='' id='unit_"+num+"' name='unit_"+num+"' value='' required='' class='form-control'>"+	
 												"</div>"+
 											"</div>"+
-											"<div class='col-sm-2'>"+
+											"<div class='col-sm-2 col-amount'>"+
 												"<div class='form-group'>"+	
 													"<label>Amount</label>"+
-													"<input type='text'  placeholder='' id='amount_"+num+"' name='amount_"+num+"' onchange=addDataToJson("+num_string+") value='' required='' class='form-control'>"+	
+													"<input type='text' placeholder='' id='amount_"+num+"' name='amount_"+num+"' onchange=addDataToJson("+num_string+",this) value='' required='' class='form-control'>"+	
 												"</div>"+
 											"</div>"+
 											"<div class='col-sm-2'>"+
@@ -130,16 +142,38 @@
 											"</div>"+
 										"</div>"+										
 									"</div>";
+									
+								
+									/**
+									var html="<table>"+
+									          "<tr>"+
+															 "<td>"+
+															 "</td>"+
+														"</tr>"+
+														"</table>"+
+									***/						
 									renderLookupRawMaterial(num);
 			$("#main-body").append(html);
 				
 		}
-	function addDataToJson(data){
+	function addDataToJson(data,object){
 		//alert(data.id);
-		var json_composition={"app_raw_material_id":$("#app_raw_material_id_"+num).val(),"amount":$("#amount_"+num).val()}
-		array_composition.push(json_composition);
-		//array_composition
-		//alert(json_composition);
+		//alert(object.id)
+		var num_row_id=object.id.replace("amount_","");
+		//alert(num_row_id);
+		var app_raw_material_id=$("#app_raw_material_id_"+num_row_id).val();
+		var amount						 =$("#amount_"+num_row_id).val();
+		var json_composition={};
+		json_composition={"app_raw_material_id":app_raw_material_id,"amount":amount};
+				/**
+				if($("#amount_"+num_row_id).val() != ""){
+				var start_index =num_row_id;//target update row
+				var number_of_elements_to_remove = 0;
+				array_composition.splice(start_index, number_of_elements_to_remove);
+				alert(JSON.stringify(array_composition));
+				}
+				**/
+				array_composition.push(json_composition);		
 	}
 	
   function removeRow(row_id){
