@@ -64,19 +64,21 @@
 		var url='{{url("sales_detail")}}?'+'sales_id='+app_sales_id;
 		location.href = url;
 	}
+	function test(){
+		$("#modal-edit").modal("toggle");
+		
+	}
+	
 	
 	function deleteData(id){
-		var app_sales_id=id;
+		var app_product_composition_id=id;
 		$.ajax({ 
     type: 'GET', 
-		url: '{{url("sales/edit")}}'+'/'+app_sales_id, 
+		url: '{{url("cost_predictor/edit")}}'+'/'+app_product_composition_id, 
     dataType: 'json',
     success: function (response){ 
-				$("#frm-delete #app_sales_id").val(response["app_sales_id"]);
-				$("#frm-delete #invoice_number").val(response["invoice_number"]);
-					$("#frm-delete #customer_name").val(response["customer_name"]);
-				$("#frm-delete #description").val(response["description"]);				
-				
+				$("#frm-delete #app_product_composition_id").val(response["app_product_composition_id"]);
+				$("#frm-delete #product_name").val(response["product_name"]);				
 				$("#modal-delete").modal("toggle");
     }
 		});		

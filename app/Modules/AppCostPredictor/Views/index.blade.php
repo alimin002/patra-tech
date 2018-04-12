@@ -75,7 +75,7 @@
 													<i class="ace-icon fa fa-pencil bigger-130"></i>
 												</a>
 
-												<a class="red" href="#" onclick="deleteData('{{$values['app_product_id']}}')">
+												<a class="red" href="#" onclick="deleteData('{{$values['app_product_composition_id']}}')">
 													<i class="ace-icon fa fa-trash-o bigger-130"></i>
 												</a>
 											</div>
@@ -96,7 +96,7 @@
 														</li>
 
 														<li>
-															<a href="#" onclick="deleteData('{{$values['app_product_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete" onclick="deleteData('{{$values['app_raw_material_id']}}')">
+															<a href="#" onclick="deleteData('{{$values['app_product_composition_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete" >
 																<span class="red">
 																	<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																</span>
@@ -130,8 +130,8 @@
 			</div>
 		</div>
 	</div>
+@include('AppCostPredictor::delete')	
+@include('AppCostPredictor::edit')
 @include('AppCostPredictor::create')
-@include('AppCostPredictor::edit')						
-@include('AppCostPredictor::delete')
 @include('AppCostPredictor::action_js')	
 @endsection

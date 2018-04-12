@@ -228,13 +228,7 @@
 									<i class="menu-icon fa fa-caret-right"></i>
 									Company
 								</a>
-							</li>
-							<li class="">
-								<a href="{{url('tes')}}">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Tes
-								</a>
-							</li>
+							</li>							
 						</ul>
 					</li>
 
@@ -331,7 +325,7 @@
 					</li>
 					<li class="">
 						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-file-text"></i>
+							<i class="menu-icon fa fa-cogs"></i>
 							<span class="menu-text"> Tools </span>
 
 							<b class="arrow fa fa-angle-down"></b>

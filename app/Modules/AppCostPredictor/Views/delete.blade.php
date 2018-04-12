@@ -1,4 +1,4 @@
-<!-- Modal Add Data-->
+<!-- Modal Delete Data-->
 <div class="modal fade" id="modal-delete" role="dialog">
 	<div class="modal-dialog md-12">
 		<div class="modal-content">
@@ -7,24 +7,16 @@
 				<h4 class="modal-title">Delete Sales</h4>
 			</div>
 			<div class="modal-body">
-					<form name="frm-delete" id="frm-delete" action="{{url('sales/destroy')}}" method="post">
+					<form name="frm-delete" id="frm-delete" action="{{url('cost_predictor/destroy')}}" method="post">
 					{{ csrf_field() }}
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="form-group">
-								<p>The following data will be deleted, are you sure to continue this process!</p> 
-								<label>Purcahse Number</label> 
-								<input type="text" readonly="readonly" placeholder="" name="invoice_number" id="invoice_number" required="" class="form-control">
-							</div>	
-							<div class="form-group">
-								<label>Customer Name</label> 
-								<input type="text" readonly="readonly" placeholder="" name="customer_name" id="customer_name" required="" class="form-control">
-							</div>	
-							<div class="form-group">
-								<label>Description</label> 
-								<textarea disabled placeholder="" name="description" id="description" required="" class="form-control"></textarea>
-							</div>
-							<input type="hidden" readonly="readonly" placeholder="" name="app_sales_id" id="app_sales_id" required="" class="form-control">
+							<p>The following data will be deleted, are you sure to continue this process!</p> 
+								<label>Product Name</label> 
+								<input type="text" readonly="readonly" placeholder="" name="product_name" id="product_name" required="" class="form-control">
+							</div>								
+							<input type="hidden" readonly="readonly" placeholder="" name="app_product_composition_id" id="app_product_composition_id" required="" class="form-control">
 						</div>
 					</form>																	
 				 </div>														

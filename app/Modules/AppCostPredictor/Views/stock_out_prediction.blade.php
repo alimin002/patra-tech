@@ -14,7 +14,12 @@
 						{{session()->get('message')}}
 					</div>
 				@endif
-			
+				<div class="col-sm-12">
+					<div class="form-group">
+							<label class="control-label" for="purchase_date">Invoice Number</label>
+							<input disabled id="description" name="description"  placeholder="" class="form-control"/>
+					</div>
+				</div>
 			<h3 class="header smaller lighter blue">Stock Out Prediction</h3>
 			<div class="table-header">
 				Results for "@yield('title')"

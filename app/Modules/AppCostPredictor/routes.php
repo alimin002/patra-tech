@@ -13,7 +13,7 @@
 Route::group(['module' => 'AppCostPredictor', 'middleware' => ['web'], 'namespace' => 'App\Modules\AppCostPredictor\Controllers'], function(){
     Route::get('cost_predictor','AppCostPredictorController@index');
 		Route::post('cost_predictor/save','AppCostPredictorController@save');
-		Route::get('cost_predictor/edit/{app_cost_predictor_id}','AppCostPredicotorController@edit');
+		Route::get('cost_predictor/edit/{app_product_composition_id}','AppCostPredictorController@edit');
 		Route::post('cost_predictor/update','AppCostPredictorController@update');
 		Route::post('cost_predictor/destroy','AppCostPredictorController@destroy');
 		Route::get('cost_predictor/stock_out_prediction/{app_sales_id}','AppCostPredictorController@stock_out_prediction');
