@@ -4,6 +4,39 @@
 			 	//alert(1);
 				bindSalesItem();
 			});
+		
+		function getRawMaterialById(app_raw_material_id){
+		var httpRequest=$.ajax({ 
+    type: 'GET', 
+		async:false,
+    url: '{{url("raw_material/edit")}}'+'/'+app_raw_material_id, 
+    dataType: 'json',
+    success: function (response){
+			//alert(response);
+			//return response;
+			
+    }
+		});	
+		//httpRequest.responseText;
+		//alert(httpRequest.responseText);
+		return JSON.parse(httpRequest.responseText);
+		}
+	
+		function renderRawMaterialNameObjectComposition(obj_composition,qty){
+			var string_name="";
+			for(var i=0; i<= obj_composition.length-1; i++){
+				//string_name=string_name+getRawMaterialById(obj_composition[i].app_raw_material_id).name;
+				//getRawMaterialById(obj_composition[i].app_raw_material_id);
+				//alert(getRawMaterialById(obj_composition[i].app_raw_material_id).raw_name);
+				//alert(getRawMaterialById(obj_composition[i].app_raw_material_id));
+				var raw_material_name = getRawMaterialById(obj_composition[i].app_raw_material_id).raw_name
+				var raw_material_total_amount = qty * parseInt(obj_composition[i].amount);
+				string_name=string_name +"raw material : "+raw_material_name +"&nbsp;"+"<br/>" + "total amount : " + raw_material_total_amount +"<br/><hr/>";
+			}
+			//alert(string_name);
+			return string_name;
+		}
+		
 		function bindSalesItem(){
 			//alert(1);
 			 //clear grid data to prevent double record
@@ -15,6 +48,13 @@
 					var unit_price					= data_sales_item[i].unit_price;
 					var qty									= data_sales_item[i].qty;
 					var sub_total						= data_sales_item[i].sub_total;
+					var data_composition				= data_sales_item[i].data_composition;
+					var obj_composition=JSON.parse(data_composition);
+					var string_name;
+					if(data_composition != null){
+						//parameter qty used to get total amount off raw material
+						string_name = renderRawMaterialNameObjectComposition(obj_composition,data_sales_item[i].qty);
+					}
 				  var tr="<tr id=tr-"+i+">"+
 									"<td class='center  sorting_1'>"+
 										"<label class='position-relative'>"+
@@ -31,8 +71,8 @@
 									"<td  class='footable-visible footable-first-column'>"+
 										""+qty+""+
 									"</td>"+
-									"<td  class='footable-visible footable-first-column'>"+
-										""+sub_total+""+
+									"<td  id=row-composition"+i+" class='footable-visible footable-first-column'>"+
+										""+string_name+""+
 									"</td>"+
 									"<td  class=' '>"+
 									
@@ -70,6 +110,7 @@
 									"</td>"+						
 								"</tr>";
 								$("#tbody_sales").append(tr);
+								string_name="";
 			 }
 				
 	}

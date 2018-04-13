@@ -28,9 +28,10 @@ class AppBudgetProductionController extends Controller
     {
 				$app_sales_id=$_GET["sales_id"];
 				$data_header=$data = AppSales::where('app_sales.app_sales_id', '=',$app_sales_id)->first();							
-				$data_detail=AppSalesDetail::select('app_sales_detail.*','app_sales.*','app_products.*',"app_products.name as product_name")
+				$data_detail=AppSalesDetail::select('app_sales_detail.*','app_sales.*','app_products.*',"app_products.name as product_name","app_product_composition.*")
 																					->leftJoin('app_sales','app_sales.app_sales_id','=','app_sales_detail.app_sales_detail_id')
 																					->leftJoin('app_products','app_products.app_product_id','=','app_sales_detail.app_product_id')
+																					->leftJoin('app_product_composition','app_product_composition.app_product_id','=','app_sales_detail.app_product_id')
 																					->where('app_sales_detail.app_sales_id', '=',$app_sales_id)->get();
 				$lookup_product	= Lookup::getLookupProduct();	
 				$data_sales				= json_decode(json_encode($data_detail),true);

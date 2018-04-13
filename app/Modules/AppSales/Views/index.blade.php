@@ -90,7 +90,7 @@
 										<i class="ace-icon fa fa-list bigger-130"></i>
 									</a>									
 									<a class="red" href="#" onclick="budget_production('{{$values['app_sales_id']}}')">
-										<i class="ace-icon fa fa-lightbulb-o bigger-130"></i>yy
+										<i class="ace-icon fa fa-lightbulb-o bigger-130"></i>
 									</a>
 									
 								</div>
