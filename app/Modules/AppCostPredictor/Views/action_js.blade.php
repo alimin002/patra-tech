@@ -1,4 +1,53 @@
+
+<script src="{{url('assets/js/jquery.min.js')}}"></script>
 <script>
+	//bind data composition	
+	function productComposition(json_composition){		
+			//alert(json_composition);
+			var obj_composition=JSON.parse(json_composition);
+			
+			var section_head="<table >"+
+														"<thead>"+
+															"<tr>"+
+																"<th>"+
+																	"<i class='fa fa-truck' aria-hidden='true'></i>&nbsp;Raw material"+
+																"</th>"+
+																"<th style='margin-left:10px;'>"+
+																	"<i class='fa fa-balance-scale' aria-hidden='true'></i>&nbsp;Amount"+
+																"</th>"+
+															"</tr>"+
+														"</thead>"+
+														"<tbody>";	
+			var row_composition="";														
+			for(var i=0; i<= obj_composition.length-1; i++){
+				var app_raw_material_id=obj_composition[i]["app_raw_material_id"];
+				var raw_material=getRawMaterialByIdInEdit(app_raw_material_id);
+				row_composition=row_composition+"<tr>"+
+																"<td style='margin-left:10px;'>"+
+																	raw_material.raw_name+
+																"</td>"+
+																"<td>"+
+																	obj_composition[i]["amount"]+"&nbsp;"+raw_material.unit+
+																"</td>"+
+															"</tr>";
+			}
+			var section_foot="</tbody></table>";
+			
+			var html_composition=section_head+row_composition+section_foot;
+			//alert(html_composition);
+			//document.write(html_composition);
+			return html_composition;
+	}
+	$(document).ready(function() {
+		for(var i=0; i<= $(".col-composition").length-1; i++ ){
+			var json_composition=$(".col-composition:eq("+i+") input").val();
+			var composition = productComposition(json_composition);	
+			//alert(composition);
+			$(".col-composition:eq("+i+")").append(composition);
+		}
+	
+	});
+	//bindProductComposition();
 	function doSave(){
 		array_composition=[];
 		//$("#product_composition").val(JSON.stringify(array_composition));
@@ -200,7 +249,7 @@
     url: '{{url("purchase_detail/render_lookup_raw_material")}}', 
     dataType:'json',
     success: function (response){
-				for(var i=0; i< response.length -1; i++ ){
+				for(var i=0; i< response.length; i++ ){
 					//alert(response[i].name);
 					var raw_material_name=response[i]["name"];
 					var app_raw_material_id=response[i]["app_raw_material_id"];
@@ -218,7 +267,7 @@
     dataType:'json',
     success: function (response){
 				//alert(response);
-				for(var i=0; i< response.length -1; i++ ){
+				for(var i=0; i< response.length; i++ ){
 					var raw_material_name=response[i]["name"];
 					var app_raw_material_id=response[i]["app_raw_material_id"];
 					$("#frm-edit #app_raw_material_id_"+row_id).append("<option value="+app_raw_material_id+">"+raw_material_name+"</option>");

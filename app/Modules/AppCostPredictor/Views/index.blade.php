@@ -57,7 +57,7 @@
 							</th>									
 						</tr>
 					</thead>			
-						<tbody role="alert" aria-live="polite" aria-relevant="all">
+						<tbody role="alert" aria-live="polite" aria-relevant="all" id="tbody_composition">
 							<?php $row_style=1; ?>
 							@foreach($composition as $key => $values)
 							<tr @if($row_style % 2 ==0) class="odd" @else class="even"  @endif>
@@ -68,7 +68,7 @@
 											</label>
 										</td>
 										<td class=" ">{{$values["product_name"]}}</td>
-										<td class=" ">{{$values["data_composition"]}}</td>
+										<td class="col-composition" ><input type="hidden" value="{{$values['data_composition']}}"/></td>
 										<td class=" " style="width:80px;">
 											<div class="hidden-sm hidden-xs action-buttons">
 												<a class="green" href="#" onclick="edit('{{$values['app_product_id']}}','{{$values['app_product_composition_id']}}')">
@@ -109,7 +109,6 @@
 									</tr>
 									<?php $row_style ++; ?>
 									@endforeach
-						</tbody>
 				</tbody>
 			</table>
 		
