@@ -44,4 +44,5 @@
 		</div>
 	</div>
 </div>
+</div>
 <!--end modal add data-->

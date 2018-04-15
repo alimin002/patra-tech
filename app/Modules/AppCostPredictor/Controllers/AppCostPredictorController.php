@@ -119,9 +119,23 @@ class AppCostPredictorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+				$app_product_composition_id = $request["app_product_composition_id"];
+       	$app_product_id						  = $request["app_product_id"];
+				$data_composition						= $request["product_composition"];
+				$composition								=	array("app_product_id"	=>$app_product_id,
+																					"data_composition"=>$data_composition);
+				 $update = AppCostPredictor::where('app_product_composition_id', '=',$app_product_composition_id)
+																			->update($composition);
+				if($update==1){
+					$message="Save data successful";
+				}else{
+					$message="save data failed";
+				}
+				
+				return Redirect::to('cost_predictor')
+								->with("message",$message);
     }
 
     /**

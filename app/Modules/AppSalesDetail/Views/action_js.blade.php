@@ -393,7 +393,7 @@
 		
 		//delete selected item
 		var data_sales_item=JSON.parse($("#data_sales_item").val());
-		alert($("#data_sales_item").val());
+		//alert($("#data_sales_item").val());
 		var selected_row=row_id.replace("tr-","");
 		var start_index = selected_row;//target update row
     var number_of_elements_to_remove = 1;

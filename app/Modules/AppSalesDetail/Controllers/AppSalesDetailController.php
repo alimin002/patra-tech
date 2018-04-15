@@ -163,6 +163,11 @@ class AppSalesDetailController extends Controller
     );
 		}
 		
+		public function renderLookupProduct(){
+			$lookup_product = Lookup::getLookupProduct();
+			echo json_encode($lookup_product);
+		}	
+		
 		public function update_header(Request $request)
     {
 				$app_sales_id = $request->input("app_sales_id");

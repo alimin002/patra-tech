@@ -1,10 +1,10 @@
-<!-- Modal Add Data-->
+<!-- Modal  Edit-->
 <div class="modal fade" id="modal-edit" role="dialog">
-	<div class="modal-dialog md-12">
+	<div class="modal-dialog modal-lg"><!---this tag is to determine the large of modal-->
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Edit Sales</h4>
+				<h4 class="modal-title">Edit Product Composition</h4>
 			</div>
 			<div class="modal-body">
 					<form name="frm-edit" id="frm-edit" action="{{url('cost_predictor/update')}}" method="post">
@@ -12,27 +12,30 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="form-group">
-								<label>Invoice Number</label> 
-								<input type="text" readonly="readonly" placeholder="" name="invoice_number" id="invoice_number" required="" class="form-control">
-							</div>
-							<div class="form-group">
-								<label>Customer Name</label> 
-								<input type="text" placeholder="" name="customer_name" id="customer_name" required="" class="form-control">
-							</div>								
-							<div class="form-group">
-								<label>Description</label> 
-								<textarea placeholder="" name="description" id="description" required="" class="form-control"></textarea>
-							</div>
-							<input type="hidden" readonly="readonly" placeholder="" name="app_sales_id" id="app_sales_id" required="" class="form-control">
+								<label>Product Name</label> 
+								<select required="" id="app_product_id" name="app_product_id" class="form-control">																							
+								</select>
+							</div>							
 						</div>
-					</form>																	
-				 </div>														
-			</div>
+						<div class="col-sm-12">
+							<div class="form-group">
+								<button class="btn btn-primary" type="button" onclick="add_raw_edit()">Add raw Material</button>
+							</div>							
+						</div>
+						<div  class="col-sm-12" id="main-body" style="border:1px solid blue;">																						
+						</div>
+						<div  class="col-sm-12" id="main-body" style="border:1px solid blue;">
+								<textarea class="form-control" id="product_composition" name="product_composition"></textarea>
+								<input type="text" id="app_product_composition_id" name="app_product_composition_id">
+						</div>						
+				</div>
+			</form>
 			<div class="modal-footer">
-				<button onclick="doUpdate()" type="button" class="btn btn-primary">Update</button>
+				<button onclick="doUpdate()" type="button" class="btn btn-primary">Save</button>
 				<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
 			</div>										
 		</div>
 	</div>
 </div>
-<!--end modal add data-->
+</div>
+<!--end modal edit data-->

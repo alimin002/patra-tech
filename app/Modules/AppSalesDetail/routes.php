@@ -19,6 +19,7 @@
 		Route::get('sales_detail/edit/{app_sales_detail_id}','AppSalesDetailController@edit');
 		Route::get('sales_detail/render_lookup_suplier','AppSalesDetailController@renderLookupSuplier');
 		Route::get('sales_detail/render_lookup_raw_material','AppSalesDetailController@renderLookupRawMaterial');
+		Route::get('sales_detail/render_lookup_product','AppSalesDetailController@renderLookupProduct');
 		Route::post('sales_detail/update','AppSalesDetailController@update');
 		Route::post('sales_detail/update_header','AppSalesDetailController@update_header');
 		Route::post('sales_detail/destroy','AppSalesDetailController@destroy');

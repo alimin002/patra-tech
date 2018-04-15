@@ -28,4 +28,4 @@
 		</div>
 	</div>
 </div>
-<!--end modal add data-->
+<!--end modal delete data-->

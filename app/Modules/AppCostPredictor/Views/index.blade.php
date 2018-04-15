@@ -71,7 +71,7 @@
 										<td class=" ">{{$values["data_composition"]}}</td>
 										<td class=" ">
 											<div class="hidden-sm hidden-xs action-buttons">
-												<a class="green" href="#" onclick="edit('{{$values['app_product_id']}}')">
+												<a class="green" href="#" onclick="edit('{{$values['app_product_id']}}','{{$values['app_product_composition_id']}}')">
 													<i class="ace-icon fa fa-pencil bigger-130"></i>
 												</a>
 
@@ -88,7 +88,7 @@
 
 													<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 														<li>
-															<a href="#" onclick="edit('{{$values['app_product_id']}}')" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
+															<a href="#" onclick="edit('{{$values['app_product_id']}}','{{$values['app_product_composition_id']}}')" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
 																<span class="green" >
 																	<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 																</span>
@@ -130,8 +130,8 @@
 			</div>
 		</div>
 	</div>
-@include('AppCostPredictor::delete')	
-@include('AppCostPredictor::edit')
-@include('AppCostPredictor::create')
-@include('AppCostPredictor::action_js')	
+	@include('AppCostPredictor::delete')
+	@include('AppCostPredictor::edit')
+	@include('AppCostPredictor::create')
+	@include('AppCostPredictor::action_js')	
 @endsection
