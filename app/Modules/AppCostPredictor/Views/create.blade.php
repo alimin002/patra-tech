@@ -30,9 +30,9 @@
 								<button class="btn btn-primary" type="button" onclick="add_raw()">Add raw Material</button>
 							</div>							
 						</div>
-						<div  class="col-sm-12" id="main-body" style="border:1px solid blue;">																						
+						<div  class="col-sm-12" id="main-body" style="border:1px solid white;">																						
 						</div>
-						<div  class="col-sm-12" id="main-body" style="border:1px solid blue;">
+						<div  class="col-sm-12" style="display:none">
 								<textarea class="form-control" id="product_composition" name="product_composition"></textarea>
 						</div>						
 				</div>

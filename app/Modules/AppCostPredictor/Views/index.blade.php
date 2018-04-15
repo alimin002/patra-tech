@@ -69,7 +69,7 @@
 										</td>
 										<td class=" ">{{$values["product_name"]}}</td>
 										<td class=" ">{{$values["data_composition"]}}</td>
-										<td class=" ">
+										<td class=" " style="width:80px;">
 											<div class="hidden-sm hidden-xs action-buttons">
 												<a class="green" href="#" onclick="edit('{{$values['app_product_id']}}','{{$values['app_product_composition_id']}}')">
 													<i class="ace-icon fa fa-pencil bigger-130"></i>
@@ -115,7 +115,7 @@
 		
 			<div class="row">
 			<div class="col-xs-6">
-				<button class="btn btn-white btn-primary" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus">&nbsp;Add</i></button>
+				<button class="btn btn-white btn-primary" onclick="addComposition()" ><i class="fa fa-plus">&nbsp;Add</i></button>
 				<div class="dataTables_info" id="sample-table-2_info"><!--Showing 1 to 10 of 23 entries--></div>
 			</div>
 			<div class="col-xs-6">

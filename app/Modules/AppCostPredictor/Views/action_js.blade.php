@@ -74,6 +74,11 @@
 		return obj_composition;
 	}
 	
+	function addComposition(){
+		$("#frm-create #main-body").empty();
+		$("#modal-add").modal("toggle");
+	}
+	
 	function edit(id,app_product_composition_id){
 		//alert(app_product_composition_id);
 		var app_product_id=id;
@@ -86,13 +91,13 @@
 				$("#frm-edit #app_product_id").empty();
 				var obj_composition = getComposition(app_product_composition_id);
 				var super_html="";
-				$("#main-body").empty();
+				$("#frm-edit #main-body").empty();
 				for (var i =0; i<=obj_composition.length-1; i++){
 				 var i_string= "'"+i+"'";
-				 var html="<div class='col-sm-12 main-cover' id='main-cover-"+i+"' style='border:1px solid red;'>"+	
+				 var html="<div class='col-sm-12 main-cover' id='main-cover-"+i+"' style='border:1px solid white;'>"+	
 										"<div class='col-sm-3 col-raw-material'>"+	
 											"<div class='form-group'>"+
-												"<label>Raw Material&nbsp;"+i+"</label>"+	
+												"<label>Raw Material&nbsp;"+"&nbsp;"+"</label>"+	
 													"<select required='' id="+"'app_raw_material_id_"+i+"'"+" name="+"'app_raw_material_id_"+i+"'"+" class='form-control' onchange=getRawMaterialById2(this,"+i_string+")>"+														
 													"</select>"+	
 												"</div>"+
@@ -231,10 +236,10 @@
 		//var json_composition={"app_raw_material_id":}
 		//array_composition[]
 		num_string= "'"+num+"'";
-			 var html="<div class='col-sm-12' id='main-cover-"+num+"' style='border:1px solid red;'>"+	
+			 var html="<div class='col-sm-12' id='main-cover-"+num+"' style='border:1px solid white;'>"+	
 										"<div class='col-sm-3 col-raw-material'>"+	
 											"<div class='form-group'>"+
-												"<label>Raw Material&nbsp;"+num+"</label>"+	
+												"<label>Raw Material&nbsp;"+"&nbsp;"+"</label>"+	
 													"<select required='' id="+"'app_raw_material_id_"+num+"'"+" name="+"'app_raw_material_id_"+num+"'"+" class='form-control' onchange=getRawMaterialById(this,"+num_string+")>"+
 														"<option>"+ 
 															"Choose Raw Material"+	
@@ -279,7 +284,7 @@
 														"</table>"+
 									***/						
 									renderLookupRawMaterial(num);
-			$("#main-body").append(html);
+			$("#frm-create #main-body").append(html);
 				
 		}
 		

@@ -96,6 +96,7 @@
 						<div class="row">
 						<div class="col-xs-6">
 							<button class="btn btn-white btn-primary" onclick="doSaleProduct()">Approve Prediction (Stock Out)</i></button>	
+							<a href="{{url('sales')}}"><button class="btn btn-white btn-primary"><i class="ace-icon fa fa-angle-double-left" aria-hidden="true">&nbsp;Back to sales</i></button></a>
 							<div class="dataTables_info" id="sample-table-2_info"><!--Showing 1 to 10 of 23 entries--></div>
 						</div>
 						<div class="col-xs-6">
@@ -108,7 +109,7 @@
 					</div>
 			</div>
 		</div>
-		<div class="col-sm-12" style="display:block">
+		<div class="col-sm-12" style="display:none">
 			<div class="form-group">
 					<form name="frm-sales-item" id="frm-sales-item" action="{{url('sales_detail/save')}}" method="post">
 						{{ csrf_field() }}
