@@ -21,20 +21,44 @@
 		//alert(httpRequest.responseText);
 		return JSON.parse(httpRequest.responseText);
 		}
-	
+				
 		function renderRawMaterialNameObjectComposition(obj_composition,qty){
 			var string_name="";
+			
+				var section_head="<table >"+
+														"<thead>"+
+															"<tr>"+
+																"<th>"+
+																	"<i class='fa fa-truck' aria-hidden='true'></i>&nbsp;Raw material"+
+																"</th>"+
+																"<th style='margin-left:10px;'>"+
+																	"<i class='fa fa-calculator' aria-hidden='true'></i>&nbsp;Total Amount"+
+																"</th>"+
+															"</tr>"+
+														"</thead>"+
+														"<tbody>";	
+														
+					 var section_foot="</tbody>"+
+				                  "</table>";
+					 var row_resources ="";
 			for(var i=0; i<= obj_composition.length-1; i++){
-				//string_name=string_name+getRawMaterialById(obj_composition[i].app_raw_material_id).name;
-				//getRawMaterialById(obj_composition[i].app_raw_material_id);
-				//alert(getRawMaterialById(obj_composition[i].app_raw_material_id).raw_name);
-				//alert(getRawMaterialById(obj_composition[i].app_raw_material_id));
+				
+				
 				var raw_material_name = getRawMaterialById(obj_composition[i].app_raw_material_id).raw_name
 				var raw_material_total_amount = qty * parseInt(obj_composition[i].amount);
-				string_name=string_name +"raw material : "+raw_material_name +"&nbsp;"+"<br/>" + "total amount : " + raw_material_total_amount +"<br/><hr/>";
+				
+					row_resources=row_resources+"<tr>"+
+																"<td style='margin-left:10px;'>"+
+																	raw_material_name+
+																"</td>"+
+																"<td style='text-align:center;'>"+
+																	raw_material_total_amount+
+																"</td>"+
+															"</tr>";
 			}
-			//alert(string_name);
-			return string_name;
+			var html_resources="";
+			html_resources=section_head+row_resources+section_foot;
+			return html_resources;
 		}
 		
 		function bindSalesItem(){

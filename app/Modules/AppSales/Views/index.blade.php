@@ -89,7 +89,7 @@
 									<a class="red" href="#" onclick="detail('{{$values['app_sales_id']}}')">
 										<i class="ace-icon fa fa-list bigger-130"></i>
 									</a>									
-									<a class="red" href="#" onclick="budget_production('{{$values['app_sales_id']}}')">
+									<a class="red" title="budget production" href="#" onclick="budget_production('{{$values['app_sales_id']}}')">
 										<i class="ace-icon fa fa-lightbulb-o bigger-130"></i>
 									</a>
 									
@@ -129,7 +129,7 @@
 											</li>
 											
 											<li>
-												<a href="#" onclick="budget_production('{{$values['app_sales_id']}}')" class="tooltip-error" data-rel="tooltip" title="budget production" data-original-title="detail">
+												<a href="#" title="budget production onclick="budget_production('{{$values['app_sales_id']}}')" class="tooltip-error" data-rel="tooltip" title="budget production" data-original-title="detail">
 													<span class="red">
 														<i class="ace-icon fa fa-lightbulb-o bigger-120"></i>
 													</span>

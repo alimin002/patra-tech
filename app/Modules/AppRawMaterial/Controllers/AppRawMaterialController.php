@@ -40,7 +40,7 @@ class AppRawMaterialController extends Controller
 		
 		public function save(Request $request){
 			$save_data=doSave($request->all());
-			if($save_data==1){
+			if($save_data!=0){
 				$message="Save data successful";
 			}else{
 				$message="save data failed";
