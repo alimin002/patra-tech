@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Invoice</title>
+<title>Purchase Order</title>
 
 <style type="text/css">
     * {
@@ -28,7 +28,7 @@
     <tr>
         <td valign="top"><img src="{{url('assets/img/logo-ex-4.png')}}" alt="" width="150"/></td>
         <td align="right">
-            <h3>Company Name</h3>
+            <h3>Shinra Electric power company</h3>
             <pre>
                 Company representative name
                 Company address
@@ -38,25 +38,29 @@
             </pre>
         </td>
     </tr>
+
   </table>
+
   <table width="100%">
     <tr>
         <td><strong>From:</strong>{{ session('session_login')['username'] }}</td>
-        <td><strong>To:</strong>{{$data["data_header"]["customer_name"]}}</td>
+        <td><strong>To:</strong>{{$data['data_header']['suplier_name']}}</td>
     </tr>
+
   </table>
 	<table width="100%">
     <tr>
-        <td><h1>Invoice</h1></td>
+        <td><h1>Purchase Order</h1></td>
     </tr>
 
   </table>
   <br/>
+
   <table width="100%">
     <thead style="background-color: lightgray;">
       <tr>
         <th>#</th>
-        <th>Product Name</th>
+        <th>Raw Material Name</th>
         <th>Price</th>
         <th>Quantity</th>
         <th>Sub Total $</th>
@@ -76,7 +80,7 @@
 			?>
       <tr>
         <th scope="row">{{$number}}</th>
-        <td>{{$values["product_name"]}}</td>
+        <td>{{$values["raw_material_name"]}}</td>
         <td align="right">{{$values["unit_price"]}}</td>
         <td align="right">{{$values["qty"]}}</td>
         <td align="right">{{$sub_total}}</td>

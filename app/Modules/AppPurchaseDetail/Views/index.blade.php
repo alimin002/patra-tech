@@ -114,7 +114,7 @@
 
 											<ul class="dropdown-menu dropdown-success">
 												<li>
-													<a href="#">Print Invoice</a>
+													<a href="{{url('purchase_detail/download_pdf/'.$app_purchase_id)}}">Print Document PO</a>
 												</li>
 
 												<li>
