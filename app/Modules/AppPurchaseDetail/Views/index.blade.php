@@ -15,7 +15,7 @@
 				@endif
 					<div class="form-group">
 							<?php $app_purchase_id=$data_header["app_purchase_id"];?>
-							<button class="btn btn-default buttons-html5 pull-right" onclick="editHeader('{{$app_purchase_id}}')">
+							<button class="btn btn-white btn-primary pull-right" onclick="editHeader('{{$app_purchase_id}}')">
 								<i class="fa fa-edit"></i>&nbsp;Edit Purchase
 							</button>
 					</div>
@@ -47,7 +47,7 @@
 			<input type="hidden" readonly value="{{$data_header['app_purchase_id']}}" id="app_purchase_id" name="app_purchase_id"  placeholder="" class="form-control"/>
 			<div class="col-sm-12">
 				<div class="dataTables_filter" id="sample-table-2_filter">
-					<button class="btn btn-default" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus">&nbsp;Add Item Purchase</i></button>
+					<button class="btn btn-white btn-primary" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus">&nbsp;Add Item Purchase</i></button>
 				</div>
 			</div>	
 		<div class="col-xs-12">
@@ -106,6 +106,23 @@
 						<div class="row">
 						<div class="col-xs-6">
 							<button class="btn btn-white btn-primary" onclick="doPurchaseRawMaterial()"><i class="fa fa-floppy-o" aria-hidden="true">&nbsp;Save Item Purchase</i></button>
+								<div class="btn-group">
+											<button class="btn btn-white btn-primary">others</button>
+											<button data-toggle="dropdown" class="btn btn-white btn-primary">
+												<span class="ace-icon fa fa-caret-down icon-only"></span>
+											</button>
+
+											<ul class="dropdown-menu dropdown-success">
+												<li>
+													<a href="{{url('purchase_detail/download_pdf/'.$app_purchase_id)}}">Print Document PO</a>
+												</li>
+
+												<li>
+													<a href="#">Send Invoice To Email</a>
+												</li>									
+												<li class="divider"></li>
+											</ul>
+										</div>
 							<div class="dataTables_info" id="sample-table-2_info"><!--Showing 1 to 10 of 23 entries--></div>
 						</div>
 						<div class="col-xs-6">

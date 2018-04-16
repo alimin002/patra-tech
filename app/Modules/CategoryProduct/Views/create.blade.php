@@ -7,7 +7,7 @@
 				<h4 class="modal-title">Add @yield("title")</h4>
 			</div>
 			<div class="modal-body">
-					<form name="frm-create" id="frm-create" action="{{url('category_product/save')}}" method="post">
+					<form name="frm-create" id="frm-create" action="{{url('test_post')}}" method="post">
 					{{ csrf_field() }}
 					<div class="row">
 						<div class="col-sm-12">

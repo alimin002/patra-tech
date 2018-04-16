@@ -14,8 +14,8 @@
 					</div>
 				@endif
 					<div class="form-group">
-						
-							<button class="btn btn-default buttons-html5 pull-right" onclick="">
+							<?php $app_sales_id = $data_header["app_sales_id"]; ?>
+							<button class="btn btn-white btn-primary pull-right" onclick="editHeader('{{$app_sales_id}}')">
 								<i class="fa fa-edit"></i>&nbsp;Edit Sale
 							</button>
 					</div>
@@ -41,7 +41,7 @@
 			<input type="hidden" readonly value="" id="app_sales_id" name="app_sales_id"  placeholder="" class="form-control"/>
 			<div class="col-sm-12">
 				<div class="dataTables_filter" id="sample-table-2_filter">
-					<button class="btn btn-default" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus">&nbsp;Add Item Sales</i></button>
+					<button class="btn btn-white btn-primary" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus">&nbsp;Add Item Sales</i></button>
 				</div>
 			</div>	
 		<div class="col-xs-12">
@@ -100,7 +100,30 @@
 						</table>
 						<div class="row">
 						<div class="col-xs-6">
-							<button class="btn btn-white btn-primary" onclick="doPurchaseRawMaterial()"><i class="fa fa-floppy-o" aria-hidden="true">&nbsp;Save Item @yield("title")</i></button>
+							<button class="btn btn-white btn-primary" onclick="doSaleProduct()"><i class="fa fa-floppy-o" aria-hidden="true">&nbsp;Save Item @yield("title")</i></button>
+									<div class="btn-group">
+											<button class="btn btn-white btn-primary">others</button>
+											<button data-toggle="dropdown" class="btn btn-white btn-primary">
+												<span class="ace-icon fa fa-caret-down icon-only"></span>
+											</button>
+
+											<ul class="dropdown-menu dropdown-success">
+												<li>
+													<a href="{{url('sales_detail/preview_pdf/'.$app_sales_id)}}">Print Invoice</a>
+												</li>
+												<li>
+													<a href="{{url('sales_detail/download_pdf/'.$app_sales_id)}}">Download Invoice To PDF</a>
+												</li>
+												<li>
+													<a href="#">Export Invoice To Excel</a>
+												</li>
+												<li>
+													<a href="#">Send Invoice To Email</a>
+												</li>									
+												<li class="divider"></li>
+											</ul>
+											<a href="{{url('sales')}}"><button class="btn btn-white btn-primary"><i class="ace-icon fa fa-angle-double-left" aria-hidden="true">&nbsp;Back to sales</i></button></a>
+										</div>
 							<div class="dataTables_info" id="sample-table-2_info"><!--Showing 1 to 10 of 23 entries--></div>
 						</div>
 						<div class="col-xs-6">
@@ -113,12 +136,12 @@
 					</div>
 			</div>
 		</div>
-		<div class="col-sm-12" style="display:block">
+		<div class="col-sm-12" style="display:none">
 			<div class="form-group">
-					<form name="frm-sales-item" id="frm-sale-item" action="{{url('purchase_detail/save')}}" method="post">
+					<form name="frm-sales-item" id="frm-sales-item" action="{{url('sales_detail/save')}}" method="post">
 						{{ csrf_field() }}
 						<textarea class="col-md-12" name="data_sales_item" id="data_sales_item">{{$json_sales}}</textarea>
-						<input readonly type="text" value="" name="app_purchase_idx" id="app_purchase_idx" required="" class="form-control"/>
+						<input readonly type="text" value="{{$data_header['app_sales_id']}}" name="app_sales_id_in_detail" id="app_sales_id_in_detail" required="" class="form-control"/>
 					</form>
 			</div>
 		</div>

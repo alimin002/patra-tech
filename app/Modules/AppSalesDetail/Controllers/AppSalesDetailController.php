@@ -7,14 +7,15 @@ use App\Http\Controllers\Controller;
 
 use App\Modules\AppSalesDetail\Models\AppSalesDetail;
 use App\Modules\AppSales\Models\AppSales;
-use App\Modules\AppProduct\Models\AppRawMaterial;
-use App\Modules\AppStockRawMaterial\Models\AppStockRawMaterial;
+use App\Modules\AppProduct\Models\AppProduct;
+use App\Modules\AppStockProduct\Models\AppStockProduct;
 use app\Providers\Lookup;
 use app\Providers\Common;
 use Illuminate\Pagination\Paginator;
 Use Redirect;
 use DB;
-
+use PDF;
+use Session;
 class AppSalesDetailController extends Controller
 {
 
@@ -23,6 +24,13 @@ class AppSalesDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+		 //direct access guard
+		public function __construct(Request $request) 
+		{
+			 if ($request->session()->has('session_login')==false) {
+						return Redirect::to('logout')->send();
+			 }
+		}
     public function index(Request $request)
     {
 				$app_sales_id=$_GET["sales_id"];
@@ -34,10 +42,148 @@ class AppSalesDetailController extends Controller
 				$lookup_product	= Lookup::getLookupProduct();	
 				$data_sales				= json_decode(json_encode($data_detail),true);
 				$json_sales=json_encode($data_sales);
-				 return view("AppSalesDetail::index")
+				return view("AppSalesDetail::index")
 				        ->with("lookup_product",$lookup_product)
 								->with("json_sales",$json_sales)
 								->with("data_header",$data_header);
+				//$pdf=PDF::loadView('AppSalesDetail::invoice');
+				//return $pdf->download('invoice.pdf');
+    }
+		
+		//check if item sales exists
+		public function checkItemExists($app_sales_id){
+				$num_rows=AppSalesDetail::where('app_sales_detail.app_sales_id', '=',$app_sales_id)->count();
+				
+				if($num_rows > 0){
+					return 1;
+				}else{
+					return 0;
+				}
+		}
+		public function stockIn($app_product_id,$num_of_entri){
+			$data					 = AppStockProduct::where('app_product_id','=',$app_product_id)->first();
+			$current_stock =$data["stock"];
+			$new_stock		 =$current_stock + $num_of_entri;//num_of_entri= entri from purchase and other factor
+			//return $new_stock;
+			$new_stock_product=array(
+																"stock"=>$new_stock
+															);
+			$update=AppStockProduct::where("app_product_id","=",$app_product_id)
+																	 ->update($new_stock_product);																		
+				return $update;
+			
+		}
+		
+		public function save(Request $request){
+			$data_sales_item = json_decode($request->input("data_sales_item"),true);
+			
+			$app_sales_id			= $request["app_sales_id_in_detail"];
+			$app_product_id	= $request["app_product_id"];
+			$qty									= $request["qty"];
+			
+				if($this->checkItemExists($app_sales_id)==1){
+					 $delete = AppSalesDetail::where('app_sales_id', '=',$app_sales_id)
+																										->delete();
+						
+				}
+
+						 DB::beginTransaction();
+							try {
+									foreach($data_sales_item as $key =>$values)
+									{
+										//saving item purchase
+										$app_sales_id		 =$app_sales_id;
+										$app_product_id =$values["app_product_id"];
+										$qty								 =$values["qty"];
+										$sub_total					 =$values["sub_total"];
+										
+										$sales_detail=	array("app_sales_id"			=>$app_sales_id,
+																						"app_product_id"	=>$app_product_id,
+																						"qty"									=>$qty,
+																						"sub_total"						=>$sub_total);
+																																			
+										$save=AppSalesDetail::insertGetId($sales_detail);
+										
+										//update stock
+										$stock_in=$this->stockIn($app_product_id,$qty);										
+									}
+									
+									
+									
+									DB::commit();
+									$message="Input data Sales Item Succes";
+							} catch (\Exception $e){
+								DB::rollback();
+								$message="Input data Item Failed, please try again<br>Developer message:".$e;
+						}
+							return Redirect::to('sales_detail?sales_id='.$app_sales_id)
+												->with("message",$message);			
+		}
+		
+		function get_header($app_sales_id){
+			$data_header=$data = AppSales::where('app_sales.app_sales_id', '=',$app_sales_id)->first();							
+				$data_detail=AppSalesDetail::select('app_sales_detail.*','app_sales.*','app_products.*',"app_products.name as product_name")
+																					->leftJoin('app_sales','app_sales.app_sales_id','=','app_sales_detail.app_sales_detail_id')
+																					->leftJoin('app_products','app_products.app_product_id','=','app_sales_detail.app_product_id')
+																					->where('app_sales_detail.app_sales_id', '=',$app_sales_id)->get();
+																					return $data_header;
+		}
+		
+		function get_detail($app_sales_id){
+			$data_detail=AppSalesDetail::select('app_sales_detail.*','app_sales.*','app_products.*',"app_products.name as product_name")
+																					->leftJoin('app_sales','app_sales.app_sales_id','=','app_sales_detail.app_sales_detail_id')
+																					->leftJoin('app_products','app_products.app_product_id','=','app_sales_detail.app_product_id')
+																					->where('app_sales_detail.app_sales_id', '=',$app_sales_id)->get();
+			return $data_detail;
+		}
+		
+		public function download_pdf($app_sales_id){
+			
+			$data_header=$this->get_header($app_sales_id);
+			$data_detail=$this->get_detail($app_sales_id);
+			//print_r($data_detail); die();
+			$data=array("data_header"=>$data_header,
+									"data_detail"=>$data_detail
+			);
+			//echo "<pre>";
+				//print_r($data);
+			//echo "</pre>";
+			//die();
+				$pdf=PDF::loadView('AppSalesDetail::invoice_pdf', compact('data'));
+				return $pdf->download('invoice_pdf.pdf');
+		}
+		
+			public function preview_pdf($app_sales_id){
+			  //echo 1;
+				//$pdf=PDF::loadView('AppSalesDetail::invoice_pdf');
+				//$pdf->stream("AppSalesDetail::invoice_pdf.pdf", array("Attachment" => false));
+				//exit(0);
+				return response()->file(
+        public_path('download/test.pdf')
+    );
+		}
+		
+		public function renderLookupProduct(){
+			$lookup_product = Lookup::getLookupProduct();
+			echo json_encode($lookup_product);
+		}	
+		
+		public function update_header(Request $request)
+    {
+				$app_sales_id = $request->input("app_sales_id");
+				$sales=array("customer_name" =>$request["customer_name"],
+												"sale_date"  =>date("Y-m-d"));
+								
+			  $update=AppSales::where("app_sales_id","=",$app_sales_id)
+																		 ->update($sales);																		
+				if($update==1){
+					$message="update header successful";
+				}else{
+					$message="update header failed";
+				}
+				
+				return Redirect::to('sales_detail?sales_id='.$app_sales_id)
+												->with("message",$message);
     }
 
     /**

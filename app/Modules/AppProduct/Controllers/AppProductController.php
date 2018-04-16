@@ -38,6 +38,7 @@ class AppProductController extends Controller
 			 return $data;
 			
 		 }
+		 
 		  function doSave($request){
 			 $product=			array("name"												=>$request["name"],
 														"unit"												=>$request["unit"],

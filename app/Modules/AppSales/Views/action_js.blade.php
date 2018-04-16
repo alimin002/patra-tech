@@ -69,4 +69,10 @@
     }
 		});		
 	}
+	
+		function budget_production(id){
+			var app_purchase_id=id;
+			var url='{{url("budget_production")}}?'+'sales_id='+app_purchase_id;
+			location.href = url;
+		}
 </script>

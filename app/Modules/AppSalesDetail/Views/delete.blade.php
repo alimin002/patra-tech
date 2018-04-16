@@ -7,7 +7,7 @@
 				<h4 class="modal-title">Delete Item @yield("title")</h4>
 			</div>
 			<div class="modal-body">
-					<form name="frm-delete" id="frm-delete" action="{{url('sales_detail/destroy')}}" method="post">
+					<form name="frm-delete" id="frm-delete">
 					{{ csrf_field() }}
 					<div class="row">
 					<div class="col-sm-12">

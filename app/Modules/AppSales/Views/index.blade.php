@@ -83,14 +83,19 @@
 									<a class="green" href="#" onclick="edit('{{$values['app_sales_id']}}')">
 										<i class="ace-icon fa fa-pencil bigger-130"></i>
 									</a>
-
 									<a class="red" href="#" onclick="deleteData('{{$values['app_sales_id']}}')">
 										<i class="ace-icon fa fa-trash-o bigger-130"></i>
-									</a>
+									</a>								
 									<a class="red" href="#" onclick="detail('{{$values['app_sales_id']}}')">
 										<i class="ace-icon fa fa-list bigger-130"></i>
+									</a>									
+									<a class="red" title="budget production" href="#" onclick="budget_production('{{$values['app_sales_id']}}')">
+										<i class="ace-icon fa fa-lightbulb-o bigger-130"></i>
 									</a>
+									
 								</div>
+								<!--dekstop view-->
+								
 								<!--mobile view-->
 								<div class="hidden-md hidden-lg">
 									<div class="inline position-relative">
@@ -116,9 +121,17 @@
 											</li>
 											
 											<li>
-												<a href="#" onclick="deleteData('{{$values['app_sales_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+												<a href="#" onclick="detail('{{$values['app_sales_id']}}')" class="tooltip-error" data-rel="tooltip" title="Detail sales" data-original-title="detail">
 													<span class="red">
 														<i class="ace-icon fa fa-list bigger-120"></i>
+													</span>
+												</a>
+											</li>
+											
+											<li>
+												<a href="#" title="budget production onclick="budget_production('{{$values['app_sales_id']}}')" class="tooltip-error" data-rel="tooltip" title="budget production" data-original-title="detail">
+													<span class="red">
+														<i class="ace-icon fa fa-lightbulb-o bigger-120"></i>
 													</span>
 												</a>
 											</li>

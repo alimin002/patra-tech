@@ -4,6 +4,8 @@
  *	AppRawMaterial Helper  
  */
  use App\Modules\AppRawMaterial\Models\AppRawMaterial;
+ use App\Modules\AppStockRawMaterial\Models\AppStockRawMaterial;
+
  use Illuminate\Pagination\Paginator;
  use App\app_suplier;
  function getRawMaterialAll(){
@@ -42,7 +44,12 @@
 												"app_suplier_id"							=>$request["app_suplier_id"],
 												"app_category_raw_material_id"=>$request["app_category_raw_material_id"],
 												"description"									=>$request["description"]);
-	 $save=AppRawMaterial::insert($raw_material);
+	 $save=AppRawMaterial::insertGetId($raw_material);
+	 //echo $save; die();
+	 $data_stock=array("app_raw_material_id"=>$save,
+											"stock"=>0
+	 );
+	 AppStockRawMaterial::insert($data_stock);
 	 return $save;
  }
  

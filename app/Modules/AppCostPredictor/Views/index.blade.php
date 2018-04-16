@@ -1,0 +1,136 @@
+@extends('main')
+@section('title', 'Cost Predictor')
+@section('content')
+<div class="page-content">
+		<div class="col-xs-12">
+				@if(session()->has('message'))							
+					<div class="alert alert-block alert-success">
+						<button type="button" class="close" data-dismiss="alert">
+							<i class="ace-icon fa fa-times"></i>
+						</button>
+
+						<i class="ace-icon fa fa-check green"></i>
+
+						{{session()->get('message')}}
+					</div>
+				@endif
+			
+			<h3 class="header smaller lighter blue">Product Composition</h3>
+			<div class="table-header">
+				Results for "@yield('title')"
+			</div>
+			<div>
+				<div id="sample-table-2_wrapper" class="dataTables_wrapper form-inline" role="grid">
+					<div class="row">
+						<div class="col-xs-6">
+							<div id="sample-table-2_length" class="dataTables_length">
+								<label>Display <select size="1" name="sample-table-2_length" aria-controls="sample-table-2"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> records</label>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="dataTables_filter" id="sample-table-2_filter">
+								<form action="{{url('raw_material')}}" method="post">
+									{{ csrf_field() }}
+								<label>Search: <input placeholder="type keyword" name="keyword" type="text" aria-controls="sample-table-2"></label>
+								</form>
+							</div>
+						</div>
+					</div>
+					<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
+					<thead>
+						<tr role="row">
+							<th class="center sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="">
+								<label class="position-relative">
+									<input type="checkbox" class="ace">
+									<span class="lbl"></span>
+								</label>
+							</th>
+							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">
+								Product Name
+								
+							</th>
+							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">
+								Composition
+							</th>
+							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">
+								Action
+							</th>									
+						</tr>
+					</thead>			
+						<tbody role="alert" aria-live="polite" aria-relevant="all" id="tbody_composition">
+							<?php $row_style=1; ?>
+							@foreach($composition as $key => $values)
+							<tr @if($row_style % 2 ==0) class="odd" @else class="even"  @endif>
+										<td class="center  sorting_1">
+											<label class="position-relative">
+												<input type="checkbox" class="ace">
+												<span class="lbl"></span>
+											</label>
+										</td>
+										<td class=" ">{{$values["product_name"]}}</td>
+										<td class="col-composition" ><input type="hidden" value="{{$values['data_composition']}}"/></td>
+										<td class=" " style="width:80px;">
+											<div class="hidden-sm hidden-xs action-buttons">
+												<a class="green" href="#" onclick="edit('{{$values['app_product_id']}}','{{$values['app_product_composition_id']}}')">
+													<i class="ace-icon fa fa-pencil bigger-130"></i>
+												</a>
+
+												<a class="red" href="#" onclick="deleteData('{{$values['app_product_composition_id']}}')">
+													<i class="ace-icon fa fa-trash-o bigger-130"></i>
+												</a>
+											</div>
+
+											<div class="hidden-md hidden-lg">
+												<div class="inline position-relative">
+													<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+														<i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+													</button>
+
+													<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+														<li>
+															<a href="#" onclick="edit('{{$values['app_product_id']}}','{{$values['app_product_composition_id']}}')" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
+																<span class="green" >
+																	<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+																</span>
+															</a>
+														</li>
+
+														<li>
+															<a href="#" onclick="deleteData('{{$values['app_product_composition_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete" >
+																<span class="red">
+																	<i class="ace-icon fa fa-trash-o bigger-120"></i>
+																</span>
+															</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<?php $row_style ++; ?>
+									@endforeach
+				</tbody>
+			</table>
+		
+			<div class="row">
+			<div class="col-xs-6">
+				<button class="btn btn-white btn-primary" onclick="addComposition()" ><i class="fa fa-plus">&nbsp;Add</i></button>
+				<div class="dataTables_info" id="sample-table-2_info"><!--Showing 1 to 10 of 23 entries--></div>
+			</div>
+			<div class="col-xs-6">
+			<div class="dataTables_paginate paging_bootstrap">
+				<ul class="pagination">
+					{{$composition->links()}}
+				</ul>
+			</div>
+			</div>
+			</div>
+					</div>
+			</div>
+		</div>
+	</div>
+	@include('AppCostPredictor::delete')
+	@include('AppCostPredictor::edit')
+	@include('AppCostPredictor::create')
+	@include('AppCostPredictor::action_js')	
+@endsection

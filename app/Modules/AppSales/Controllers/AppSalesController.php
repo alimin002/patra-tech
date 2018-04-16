@@ -5,10 +5,13 @@ namespace App\Modules\AppSales\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Modules\AppSales\Models\AppSales;
+use App\Modules\AppSalesDetail\Models\AppSalesDetail;
 use app\Providers\Lookup;
 use app\Providers\Common;
 use Illuminate\Pagination\Paginator;
 Use Redirect;
+use DB;
+use Session;
 class AppSalesController extends Controller
 {
 
@@ -17,6 +20,12 @@ class AppSalesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+		 	public function __construct(Request $request) 
+		{
+			 if ($request->session()->has('session_login')==false) {
+						return Redirect::to('logout')->send();
+			 }
+		}
     public function index()
     {
       
@@ -131,16 +140,24 @@ class AppSalesController extends Controller
      */
     public function destroy(Request $request)
     {
-				//
-				 $app_sales_id = $request->input("app_sales_id");
-				 $delete = AppSales::where('app_sales_id', '=',$app_sales_id)
-														 ->delete();
-				 if($delete ==true){
-					 $message="Delete data successfull";
-				 }else{
-					 $message="Delete data failed";
-				 }
-				 return Redirect::to('sales')
-								->with("message",$message);
+				 //if delete sales or sales detail failed execution will be roll back and process delete terminated 
+				 DB::beginTransaction();
+							try {
+									 $app_sales_id = $request->input("app_sales_id");
+									 AppSales::where('app_sales_id', '=',$app_sales_id)
+																			 ->delete();
+										$app_sales_id = $request->input("app_sales_id");
+									 AppSalesDetail::where('app_sales_id', '=',$app_sales_id)
+																			 ->delete();	
+									DB::commit();
+								 $message="Delete data successfull";
+							} catch (\Exception $e){
+								DB::rollback();
+								$message="Input data Item Failed, please try again<br>Developer message:".$e;
+						}
+						return Redirect::to('sales')
+													->with("message",$message);
+				
+				
     }
 }

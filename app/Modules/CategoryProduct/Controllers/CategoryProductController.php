@@ -90,6 +90,10 @@ class CategoryProductController extends Controller
 				return Redirect::to('category_product')
 								->with("message",$message);
 		}
+		public function test_post(Request $request){
+			echo $request["name"];
+			
+		}
     public function show($id)
     {
         //

@@ -13,6 +13,7 @@ use app\Providers\Common;
 use Illuminate\Pagination\Paginator;
 Use Redirect;
 use DB;
+use PDF;
 class AppPurchaseDetailController extends Controller
 {
 
@@ -212,6 +213,31 @@ class AppPurchaseDetailController extends Controller
 												->with("message",$message);
     }
 		
+		function get_header($app_purchase_id){
+			$data_header=$data = AppPurchase::where('app_purchase.app_purchase_id', '=',$app_purchase_id)->first();							
+			
+		}
+		
+		function get_detail($app_purchase_id){
+				$data_detail=AppPurchaseDetail::select('app_purchase_detail.*','app_purchase.*','app_raw_material.*',"app_raw_material.name as raw_material_name")
+																					->leftJoin('app_purchase','app_purchase.app_purchase_id','=', 	 'app_purchase_detail.app_purchase_id')
+																					->leftJoin('app_raw_material','app_raw_material.app_raw_material_id','=', 	 'app_purchase_detail.app_raw_material_id')
+																					->where('app_purchase_detail.app_purchase_id', '=',$app_purchase_id)->get();
+																					return $data_detail;
+		}
+		
+			public function download_pdf($app_purchase_id){
+			
+			$data_header=$this->get_header($app_purchase_id);
+			$data_detail=$this->get_detail($app_purchase_id);
+			//print_r($data_detail); die();
+			$data=array("data_header"=>$data_header,
+									"data_detail"=>$data_detail
+			);
+			
+				$pdf=PDF::loadView('AppPurchaseDetail::purchase_order_pdf', compact('data'));
+				return $pdf->download('purchase_order_pdf.pdf');
+		}
 	
 
     /**

@@ -15,6 +15,8 @@
 		Route::post('purchase_detail','AppPurchaseDetailController@index');
 		Route::post('purchase_detail/save','AppPurchaseDetailController@save');
 		Route::get('purchase_detail/edit/{app_purchase_detail_id}','AppPurchaseDetailController@edit');
+		Route::get('purchase_detail/download_pdf/{app_purchase_detail_id}','AppPurchaseDetailController@download_pdf');
+
 		Route::get('purchase_detail/render_lookup_suplier','AppPurchaseDetailController@renderLookupSuplier');
 		Route::get('purchase_detail/render_lookup_raw_material','AppPurchaseDetailController@renderLookupRawMaterial');
 		Route::post('purchase_detail/update','AppPurchaseDetailController@update');

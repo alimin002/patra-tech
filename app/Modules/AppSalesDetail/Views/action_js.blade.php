@@ -10,6 +10,13 @@
 		bindSalesItem();
  });
 	
+	function backToSales(){
+		var url="{{url('sales')}}";
+		//alert(url);
+		//window.location.href = url;
+		window.open(url);
+		//window.open(url);
+	}
 	function bindSalesItem(){
 			 //clear grid data to prevent double record
 			 $("#tbody_sales").empty();
@@ -74,7 +81,7 @@
 											"</div>"+								
 									"</td>"+						
 								"</tr>";
-								$("#tbody_purchase").append(tr);
+								$("#tbody_sales").append(tr);
 			 }
 				
 	}
@@ -175,42 +182,40 @@
 		});
 	}
 	
-	function closePopOverPurchaseDate(){
-			$("#frm-edit-header #purchase_date").popover("hide");			
+	function closePopOverSalesDate(){
+			$("#frm-edit-header #sales_date").popover("hide");			
 	}
 	
 	function editHeader(id){
 		//alert(id);
-		var app_purchase_id=id;
+		var app_sales_id=id;
 		$.ajax({ 
     type: 'GET', 
-		url: '{{url("purchase/edit")}}'+'/'+app_purchase_id, 
+		url: '{{url("sales/edit")}}'+'/'+app_sales_id, 
     dataType: 'json',
 			success: function (response){ 
 				 //setup popover system
-				 $("#frm-edit-header #purchase_date").popover({
+				 $("#frm-edit-header #sales_date").popover({
 						  trigger: 'manual',
 							placement: 'auto bottom',
 							html: 'true',
 							title :'<span class="text-info"><strong>Info</strong></span>'+
-                '<button type="button" id="close" class="close" onclick="closePopOverPurchaseDate()">&times;</button>',
+                '<button type="button" id="close" class="close" onclick="closePopOverSalesDate()">&times;</button>',
 							content: function() {
 								 var message = "Purchase Date will automaticly updated by system";
 								 return message;
 							}
 					});
-					$("#frm-edit-header #purchase_date").popover("show");				
-					//$("#frm-edit-header #purchase_date").popover('toggle');
+					$("#frm-edit-header #sales_date").popover("show");				
+					//$("#frm-edit-header #sales_date").popover('toggle');
 					
-					$("#frm-edit-header #app_purchase_id").val(response["app_purchase_id"]);
-					$("#frm-edit-header #purchase_number").val(response["purchase_number"]);
-					$("#frm-edit-header #purchase_date").val(response["purchase_date"]);
+					$("#frm-edit-header #app_sales_id").val(response["app_sales_id"]);
+					$("#frm-edit-header #invoice_number").val(response["invoice_number"]);
+					$("#frm-edit-header #sales_date").val(response["sale_date"]);
 					$("#frm-edit-header #description").val(response["description"]);						
 					var app_suplier_id=response["app_suplier_id"];
-					var suplier_name=response["suplier_name"];
-					$("#frm-edit-header #app_suplier_id").empty();
-					$("#frm-edit-header #app_suplier_id").prepend("<option value="+app_suplier_id+">"+suplier_name+"</option>");
-					renderLookupSuplier();				
+					var customer_name=response["customer_name"];
+					$("#frm-edit-header #customer_name").val(customer_name);
 					$("#modal-edit-header").modal("toggle");
 			}
 		});		
@@ -305,12 +310,6 @@
 			
 			//prevent duplicate rawmaterial
 			if(checkItemExists(app_product_id)==0){
-				//this block to append new data and prevent double records in database
-			
-		  //obj_data_sales_itemm_new.push(new_data);//variabel not assign textarea value
-			//alert(JSON.stringify(obj_data_sales_itemm_new));
-			//$("#data_sales_item_new").val(JSON.stringify(obj_data_sales_itemm_new))
-			//this block to  append old data with new data in data grid update
 			var obj_data_sales_item		 = JSON.parse($("#data_sales_item").val());
 			obj_data_sales_item.push(new_data);
 			
@@ -384,28 +383,29 @@
 			
 	}
 	
-	function editItem(row_id,app_raw_material_id){
+	function editItem(row_id,app_product_id){
 		row_id="tr-"+row_id.replace("row-","");
-		var raw_material_name =$("#"+row_id+" "+"td:eq(1)").text();
+		var product_name =$("#"+row_id+" "+"td:eq(1)").text();
 		var unit_price				=$("#"+row_id+" "+"td:eq(2)").text();
 		var qty								=$("#"+row_id+" "+"td:eq(3)").text();
 		var sub_total					=$("#"+row_id+" "+"td:eq(4)").text();
 		var description				=$("#"+row_id+" "+"td:eq(5)").text();
 		
 		//delete selected item
-		var data_purchase_item=JSON.parse($("#data_purchase_item").val());
+		var data_sales_item=JSON.parse($("#data_sales_item").val());
+		//alert($("#data_sales_item").val());
 		var selected_row=row_id.replace("tr-","");
 		var start_index = selected_row;//target update row
     var number_of_elements_to_remove = 1;
-    data_purchase_item.splice(start_index, number_of_elements_to_remove);
-		$("#data_purchase_item").val(JSON.stringify(data_purchase_item));
-		bindPurchaseItem();
-    console.log(data_purchase_item);
+    data_sales_item.splice(start_index, number_of_elements_to_remove);
+		$("#data_sales_item").val(JSON.stringify(data_sales_item));
+		bindSalesItem();
+    console.log(data_sales_item);
         //[1,2,3,4];
 		
 		
 		
-		$("#frm-edit #app_raw_material_id").prepend("<option selected value="+app_raw_material_id+">"+raw_material_name+"</option>");
+		$("#frm-edit #app_product_id").prepend("<option selected value="+app_product_id+">"+product_name+"</option>");
 		$("#frm-edit #unit_price").val(unit_price);
 		$("#frm-edit #qty").val(qty);
 		$("#frm-edit #sub_total").val(sub_total);
@@ -415,7 +415,7 @@
 	}
 	
 	//display modal delete
-  function deleteItem(row_id,app_raw_material_id){
+  function deleteItem(row_id,app_product_id){
 		row_id="tr-"+row_id.replace("row-","");
 		var raw_material_name =$("#"+row_id+" "+"td:eq(1)").text();
 		var unit_price				=$("#"+row_id+" "+"td:eq(2)").text();
@@ -423,19 +423,19 @@
 		var sub_total					=$("#"+row_id+" "+"td:eq(4)").text();
 		var description				=$("#"+row_id+" "+"td:eq(5)").text();
 		//delete selected item
-		var data_purchase_item=JSON.parse($("#data_purchase_item").val());
+		var data_sales_item=JSON.parse($("#data_sales_item").val());
 		var selected_row=row_id.replace("tr-","");
 		var start_index = selected_row;//target update row
     var number_of_elements_to_remove = 1;
-    data_purchase_item.splice(start_index, number_of_elements_to_remove);
-		$("#data_purchase_item").val(JSON.stringify(data_purchase_item));
-		bindPurchaseItem();
-    console.log(data_purchase_item);
+    data_sales_item.splice(start_index, number_of_elements_to_remove);
+		$("#data_sales_item").val(JSON.stringify(data_sales_item));
+		bindSalesItem();
+    console.log(data_sales_item);
         //[1,2,3,4];
 		
 		
 		
-		$("#frm-delete #app_raw_material_id").prepend("<option selected value="+app_raw_material_id+">"+raw_material_name+"</option>");
+		$("#frm-delete #app_product_id").prepend("<option selected value="+app_product_id+">"+raw_material_name+"</option>");
 		$("#frm-delete #unit_price").val(unit_price);
 		$("#frm-delete #qty").val(qty);
 		$("#frm-delete #sub_total").val(sub_total);
@@ -444,8 +444,8 @@
 		$("#modal-delete").modal("toggle");
 	}
 	
-	function doPurchaseRawMaterial(){
-		$("#frm-purchase-item").submit();
+	function doSaleProduct(){
+		$("#frm-sales-item").submit();
 	}
 	
 	function doUpdateItem(){
@@ -479,16 +479,16 @@
 	//deleteing selected item
 	function doDeleteItem(){
 		//get old data purchase
-		var obj_data_purchase_item= JSON.parse($("#data_purchase_item").val());
+		var obj_data_sales_item= JSON.parse($("#data_sales_item").val());
 		//remove selected elemnt
 		var start_index = $("#selected_element").val();//target delete row
 		var number_of_elements_to_remove = 0;
-		obj_data_purchase_item.splice(start_index, number_of_elements_to_remove);
+		obj_data_sales_item.splice(start_index, number_of_elements_to_remove);
 		
-		//clear #data_purchase_item to prevent double value in grid
-		$("#data_purchase_item").val(JSON.stringify(obj_data_purchase_item));
-		bindPurchaseItem();
-		//document.write(JSON.stringify(data_purchase_item));
+		//clear #data_sales_item to prevent double value in grid
+		$("#data_sales_item").val(JSON.stringify(obj_data_sales_item));
+		bindSalesItem();
+		//document.write(JSON.stringify(data_sales_item));
 		$("#modal-delete").modal("hide");
 	}
 	
