@@ -130,9 +130,18 @@ class AppReturnPurchaseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
+				 $app_return_purchase_id=$request['app_return_purchase_id'];
+				 $delete = AppReturnPurchase::where('app_return_purchase_id', '=',$app_return_purchase_id)->delete();
+				 if($delete ==true){
+					 $message="Delete data successfull";
+				 }else{
+					 $message="Delete data failed";
+				 }
+				 return Redirect::to('return_purchase')
+								->with("message",$message);
     }
 		
 		public function save(Request $request){

@@ -7,7 +7,7 @@
 				<h4 class="modal-title">Edit data Raw Material</h4>
 			</div>
 			<div class="modal-body">
-					<form name="frm-delete" id="frm-delete" action="{{url('raw_material/destroy')}}" method="post">
+					<form name="frm-delete" id="frm-delete" action="{{url('return_purchase/destroy')}}" method="post">
 					{{ csrf_field() }}
 					<div class="row">
 						<div class="col-sm-12">

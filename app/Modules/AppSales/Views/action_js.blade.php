@@ -35,7 +35,7 @@
 		var app_sales_id=id;
 		$.ajax({ 
     type: 'GET', 
-		url: '{{url("return_purchase/edit")}}'+'/'+app_sales_id, 
+		url: '{{url("sales/edit")}}'+'/'+app_sales_id, 
     dataType: 'json',
     success: function (response){ 
 				$("#frm-edit #app_sales_id").val(response["app_sales_id"]);

@@ -77,29 +77,31 @@
 	}
 	
 	function deleteData(id){
-		var app_raw_material_id=id;
+			var app_return_purchase_id=id;
 		$.ajax({ 
     type: 'GET', 
-    url: '{{url("raw_material/edit")}}'+'/'+app_raw_material_id, 
+    url: '{{url("return_purchase/edit")}}'+'/'+app_return_purchase_id, 
     dataType: 'json',
     success: function (response){ 
-				$("#frm-delete #name").val(response["raw_name"]);
-				$("#frm-delete #unit").val(response["unit"]);
+        //alert(JSON.stringify(response));
+				$("#frm-delete #return_purchase_number").val(response["return_purchase_number"]);
 				$("#frm-delete #unit_price").val(response["unit_price"]);
+				
 				var app_suplier_id=response["app_suplier_id"];
-				var app_category_raw_material_id=response["app_category_raw_material_id"];
 				var suplier_name=response["suplier_name"];
 				$("#frm-delete #app_suplier_id").empty();
-				$("#frm-delete #app_suplier_id").prepend("<option>"+suplier_name+"</option>");
-				$("#frm-delete #app_suplier_id :first-child").attr("selected");
-				//:first-child
-				$("#frm-delete #app_suplier_id :first-child").val(app_suplier_id);
-				$("#frm-delete #app_category_raw_material_id").prepend("<option>"+app_suplier_id+"</option>");
-				$("#frm-delete #description").val(response["description"]);	
-				$("#frm-delete #app_raw_material_id").val(response["app_raw_material_id"])			
+				$("#frm-delete #app_suplier_id").prepend("<option value="+app_suplier_id+">"+suplier_name+"</option>");
+				renderlookupSuplier();
+				
+				
+				$("#frm-delete #invoice_number").val(response["invoice_number"]);
+				$("#frm-delete #return_reason").val(response["return_reason"]);					
+				$("#frm-delete #app_return_purchase_id").val(response["app_return_purchase_id"])					
 				$("#modal-delete").modal("toggle");
     }
 		});
+		
+		
 
 	}
 </script>

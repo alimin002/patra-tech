@@ -7,38 +7,23 @@
 				<h4 class="modal-title">Edit Sales</h4>
 			</div>
 			<div class="modal-body">
-					<form name="frm-edit" id="frm-edit" action="{{url('return_purchase/update')}}" method="post">
+					<form name="frm-edit" id="frm-edit" action="{{url('sales/update')}}" method="post">
 					{{ csrf_field() }}
 					<div class="row">
-						<div class="col-sm-4">
-							<div class="form-group">
-								<label>Return Number</label> 
-								<input type="text" placeholder="" value="" name="return_purchase_number" id="return_purchase_number" required="" class="form-control">
-							</div>	
-						</div>
-						<div class="col-sm-4">
-							<div class="form-group">
-								<label>Invoice Number</label> 
-								<input type="text" placeholder="" name="invoice_number" id="invoice_number" required="" class="form-control">
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="form-group">
-								<label>Suplier</label> 
-								<select class="form-control" name="app_suplier_id" id="app_suplier_id" class="form-control">
-									<option>Choose Suplier</option>
-									@foreach($lookup_suplier as $key =>$values)
-									<option value="{{$values['app_suplier_id']}}">{{$values["name"]}}</option>
-									@endforeach
-								</select>
-							</div>					
-						</div>
 						<div class="col-sm-12">
 							<div class="form-group">
-								<label>Return Reason</label> 
-								<textarea name="return_reason" id="return_reason" class="form-control" style="height:100px;"></textarea>
-								<input type="text" placeholder="" value="" name="app_return_purchase_id" id="app_return_purchase_id" required="" class="form-control">
+								<label>Invoice Number</label> 
+								<input type="text" readonly="readonly" placeholder="" name="invoice_number" id="invoice_number" required="" class="form-control">
 							</div>
+							<div class="form-group">
+								<label>Customer Name</label> 
+								<input type="text" placeholder="" name="customer_name" id="customer_name" required="" class="form-control">
+							</div>								
+							<div class="form-group">
+								<label>Description</label> 
+								<textarea placeholder="" name="description" id="description" required="" class="form-control"></textarea>
+							</div>
+							<input type="hidden" readonly="readonly" placeholder="" name="app_sales_id" id="app_sales_id" required="" class="form-control">
 						</div>
 					</form>																	
 				 </div>														
