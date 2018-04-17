@@ -79,59 +79,19 @@
 						//parameter qty used to get total amount off raw material
 						string_name = renderRawMaterialNameObjectComposition(obj_composition,data_sales_item[i].qty);
 					}
-				  var tr="<tr id=tr-"+i+">"+
-									"<td class='center  sorting_1'>"+
-										"<label class='position-relative'>"+
-											"<input type='checkbox' class='ace'>"+
-											"<span class='lbl'></span>"+
-										"</label>"+
-									"</td>"+
-									"<td class='footable-visible footable-first-column'>"+
+				  var tr="<tr id=tr-"+i+">"+								
+									"<td class=' '>"+
 										""+product_name+""+
 									"</td>"+
-									"<td class='footable-visible footable-first-column'>"+
+									"<td class=' '>"+
 										""+unit_price+""+
 									"</td>"+
-									"<td  class='footable-visible footable-first-column'>"+
+									"<td  class=' '>"+
 										""+qty+""+
 									"</td>"+
-									"<td  id=row-composition"+i+" class='footable-visible footable-first-column'>"+
-										""+string_name+""+
-									"</td>"+
-									"<td  class=' '>"+
-									
-										"<div class='hidden-sm hidden-xs action-buttons'>"+
-											"<a class='green' href='#'>"+
-												"<i class='ace-icon fa fa-pencil bigger-130' id=row-"+i+" class='btn btn-primary' onclick='editItem(this.id,"+app_product_id+")'></i>"+
-											"</a>"+
-											"<a class='red' href='#'>"+
-												"<i class='ace-icon fa fa-trash-o bigger-130' id=row-"+i+" onclick='deleteItem(this.id)'></i>"+
-											"</a>"+
-										"</div>"+	
-											"<div class='hidden-md hidden-lg'>"+
-												"<div class='inline position-relative'>"+
-													"<button class='btn btn-minier btn-yellow dropdown-toggle' data-toggle='dropdown' data-position='auto'>"+
-														"<i class='ace-icon fa fa-caret-down icon-only bigger-120'></i>"+
-													"</button>"+
-													"<ul class='dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close'>"+
-														"<li>"+
-															"<a href='#'  class='tooltip-success' data-rel='tooltip' title='' data-original-title='Edit' >"+
-																"<span class='green' >"+
-																	"<i class='ace-icon fa fa-pencil-square-o bigger-120' id=row-"+i+" class='btn btn-primary' onclick='editItem(this.id)'></i>"+
-																"</span>"+
-															"</a>"+
-														"</li>"+
-														"<li>"+
-															"<a href='#' class='tooltip-error' data-rel='tooltip' title='' onclick='deleteData(this.id)' data-original-title='Delete'>"+
-																"<span class='red'>"+
-																	"<i class='ace-icon fa fa-trash-o bigger-120' id=row-"+i+"></i>"+
-																"</span>"+
-															"</a>"+
-														"</li>"+
-													"</ul>"+
-												"</div>"+
-											"</div>"+								
-									"</td>"+						
+									"<td  id=row-composition"+i+" class=' '>"+
+										""+string_name+
+									"</td>"+													
 								"</tr>";
 								$("#tbody_sales").append(tr);
 								string_name="";

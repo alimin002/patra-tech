@@ -1,7 +1,7 @@
 @extends('main')
-@section('title', 'Sales')
+@section('title', 'Rerturn Purchase')
 @section('content')
-<div class="page-content">
+	<div class="page-content">
 		<div class="col-xs-12">
 				@if(session()->has('message'))							
 					<div class="alert alert-block alert-success">
@@ -46,25 +46,27 @@
 								</label>
 							</th>
 							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">
-								Invoice Number
+								Return Number
 							</th>
 							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">
-								Sales Date
+								Suplier Name
 							</th>
 							<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending">
-								Customer Name
+								Invoice Number
 							</th>
 							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="								
 								Update
 							: activate to sort column ascending">
-								<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
-								Description
+								Return Date
+							</th>
+								<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending">
+								Return Reason
 							</th>
 							<th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label=""></th>
 						</tr>
 					</thead>			
 				<tbody role="alert" aria-live="polite" aria-relevant="all">
-					<?php $row_style=1; ?>
+				<?php $row_style=1; ?>
 				@foreach($data as $key => $values)
 				<tr @if($row_style % 2 ==0) class="odd" @else class="even"  @endif>
 							<td class="center  sorting_1">
@@ -73,30 +75,22 @@
 									<span class="lbl"></span>
 								</label>
 							</td>
+							<td class=" ">{{$values["return_purchase_number"]}}</td>
+							<td class=" ">{{$values["suplier_name"]}}</td>
 							<td class=" ">{{$values["invoice_number"]}}</td>
-							<td class=" ">{{$values["sale_date"]}}</td>
-							<td class="hidden-480 ">{{$values["customer_name"]}}</td>
-							<td class=" ">{{$values["description"]}}</td>
+							<td class=" ">{{$values["return_date"]}}</td>
+							<td class=" ">{{$values["return_reason"]}}</td>
 							<td class=" ">
-								<!--dekstop view-->
 								<div class="hidden-sm hidden-xs action-buttons">
-									<a class="green" href="#" onclick="edit('{{$values['app_sales_id']}}')">
+									<a class="green" href="#" onclick="edit('{{$values['app_return_purchase_id']}}')">
 										<i class="ace-icon fa fa-pencil bigger-130"></i>
 									</a>
-									<a class="red" href="#" onclick="deleteData('{{$values['app_sales_id']}}')">
+
+									<a class="red" href="#" onclick="deleteData('{{$values['app_return_purchase_id']}}')">
 										<i class="ace-icon fa fa-trash-o bigger-130"></i>
-									</a>								
-									<a class="red" href="#" onclick="detail('{{$values['app_sales_id']}}')" title = "Detail sales">
-										<i class="ace-icon fa fa-list bigger-130"></i>
-									</a>									
-									<a class="red" title="budget production" href="#" onclick="budget_production('{{$values['app_sales_id']}}')">
-										<i class="ace-icon fa fa-lightbulb-o bigger-130"></i>
 									</a>
-									
 								</div>
-								<!--dekstop view-->
-								
-								<!--mobile view-->
+
 								<div class="hidden-md hidden-lg">
 									<div class="inline position-relative">
 										<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
@@ -105,7 +99,7 @@
 
 										<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 											<li>
-												<a href="#" onclick="edit('{{$values['app_sales_id']}}')" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
+												<a href="#" onclick="edit('{{$values['app_return_purchase_id']}}')" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
 													<span class="green" >
 														<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 													</span>
@@ -113,29 +107,12 @@
 											</li>
 
 											<li>
-												<a href="#" onclick="deleteData('{{$values['app_sales_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+												<a href="#" onclick="deleteData('{{$values['app_return_purchase_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete" onclick="deleteData('{{$values['app_raw_material_id']}}')">
 													<span class="red">
 														<i class="ace-icon fa fa-trash-o bigger-120"></i>
 													</span>
 												</a>
 											</li>
-											
-											<li>
-												<a href="#" onclick="detail('{{$values['app_sales_id']}}')" class="tooltip-error" data-rel="tooltip" title = "Detail sales" data-original-title="detail">
-													<span class="red">
-														<i class="ace-icon fa fa-list bigger-120"></i>
-													</span>
-												</a>
-											</li>
-											
-											<li>
-												<a href="#" title="budget production onclick="budget_production('{{$values['app_sales_id']}}')" class="tooltip-error" data-rel="tooltip" title="budget production" data-original-title="detail">
-													<span class="red">
-														<i class="ace-icon fa fa-lightbulb-o bigger-120"></i>
-													</span>
-												</a>
-											</li>
-											
 										</ul>
 									</div>
 								</div>
@@ -144,27 +121,26 @@
 						<?php $row_style ++; ?>
 						@endforeach
 						</tbody>
-				</tbody>
-			</table>
-			<div class="row">
-			<div class="col-xs-6">
-				<button class="btn btn-white btn-primary" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus">&nbsp;Add</i></button>
-				<div class="dataTables_info" id="sample-table-2_info"><!--Showing 1 to 10 of 23 entries--></div>
-			</div>
-			<div class="col-xs-6">
-			<div class="dataTables_paginate paging_bootstrap">
-				<ul class="pagination">
-					{{$data->links()}}
-				</ul>
-			</div>
-			</div>
-			</div>
+						</table>
+						<div class="row">
+						<div class="col-xs-6">
+							<button class="btn btn-white btn-primary" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus">&nbsp;Add</i></button>
+							<div class="dataTables_info" id="sample-table-2_info"><!--Showing 1 to 10 of 23 entries--></div>
+						</div>
+						<div class="col-xs-6">
+						<div class="dataTables_paginate paging_bootstrap">
+							<ul class="pagination">
+								{{$data->links()}}
+							</ul>
+						</div>
+						</div>
+						</div>
 					</div>
 			</div>
 		</div>
 	</div>
-@include('AppSales::create')
-@include('AppSales::action_js')
-@include('AppSales::edit')						
-@include('AppSales::delete')	
+	@include('AppReturnPurchase::create')
+	@include('AppReturnPurchase::action_js')
+	@include('AppReturnPurchase::edit')
+	@include('AppReturnPurchase::delete')			
 @endsection

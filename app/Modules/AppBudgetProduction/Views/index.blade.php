@@ -64,29 +64,19 @@
 					</div>
 					<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
 					<thead>
-						<tr role="row">
-							<th class="center sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="">
-								<label class="position-relative">
-									<input type="checkbox" class="ace">
-									<span class="lbl"></span>
-								</label>
-							</th>
+						<tr role="row">			
 							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">
 								Product name
 							</th>
 							<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending">
 								Unit Price
 							</th>
-							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="								
-								Update
-							: activate to sort column ascending">
-								<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending">
 								Quantity
 							</th>
-							<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending">
+							<th class="sorting_disabled" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending">
 								Resources Prediction
 							</th>
-							<th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label=""></th>
 						</tr>
 					</thead>			
 						<tbody role="alert" aria-live="polite" aria-relevant="all" id="tbody_sales">

@@ -274,17 +274,18 @@
 						<b class="arrow"></b>
 
 						<ul class="submenu">
+						
 							<li class="">
-								<a href="tables.html">
+								<a href="{{url('return_sale')}}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Return Sale
 								</a>
 
-								<b class="arrow"></b>
+							<b class="arrow"></b>
 							</li>
-
+						
 							<li class="">
-								<a href="jqgrid.html">
+								<a href="{{url('return_purchase')}}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Return Purchase
 								</a>
@@ -343,7 +344,7 @@
 						</ul>
 					
 					</li>
-
+					{{--
 					<li class="">
 						<a href="widgets.html">
 							<i class="menu-icon fa fa-list-alt"></i>
@@ -371,11 +372,11 @@
 								<b class="arrow"></b>
 							</li>
 						</ul>
-					</li>
-					<li class="">
+					</li>--}}
+						<li class="">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-wrench"></i>
-							<span class="menu-text">Setting</span>
+							<span class="menu-text">Return</span>
 
 							<b class="arrow fa fa-angle-down"></b>
 						</a>
@@ -384,54 +385,18 @@
 
 						<ul class="submenu">
 							<li class="">
-								<a href="profile.html">
+								<a href="tables.html">
 									<i class="menu-icon fa fa-caret-right"></i>
-									User Profile
+									Users
 								</a>
 
 								<b class="arrow"></b>
 							</li>
 
 							<li class="">
-								<a href="inbox.html">
+								<a href="jqgrid.html">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Inbox
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="">
-								<a href="pricing.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Pricing Tables
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="">
-								<a href="invoice.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Invoice
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="">
-								<a href="timeline.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Timeline
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="">
-								<a href="login.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Login &amp; Register
+									Company
 								</a>
 
 								<b class="arrow"></b>
