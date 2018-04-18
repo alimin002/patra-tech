@@ -75,7 +75,7 @@
 		
 	}
 	
-	function deleteData(){
+	function deleteData(id){
 		var app_product_id=id;
 		$.ajax({ 
     type: 'GET', 

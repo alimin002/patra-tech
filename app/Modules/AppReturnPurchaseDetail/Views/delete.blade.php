@@ -1,19 +1,24 @@
 <!-- Modal Add Data-->
-<div class="modal fade" id="modal-edit" role="dialog">
+<div class="modal fade" id="modal-delete" role="dialog">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" onclick="cancelEditItem()">&times;</button>
-				<h4 class="modal-title">Edit Item Return</h4>
+				<button type="button" class="close" onclick="cancelDeleteItem()">&times;</button>
+				<h4 class="modal-title">Delete Item Purchase</h4>
 			</div>
 			<div class="modal-body">
-					<form name="frm-edit" id="frm-edit" action="{{url('purchase_detail/update')}}" method="post">
+					<form name="frm-delete" id="frm-delete" action="{{url('purchase_detail/destroy')}}" method="post">
 					{{ csrf_field() }}
 					<div class="row">
+					<div class="col-sm-12">
+							<div class="form-group">
+								<p>The following data will be deleted are you sure to continue this process?</p>
+							</div>
+						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label>Raw Material</label> 
-								<select id="app_raw_material_id" name="app_raw_material_id" class="form-control" onChange="getRawMaterialById(this)">
+								<select id="app_raw_material_id" disabled name="app_raw_material_id" class="form-control" onChange="getRawMaterialById(this)">
 									<option> 
 										Choose Raw Material
 									</option>
@@ -26,13 +31,13 @@
 							</div>
 							<div class="form-group">
 								<label>Unit Price</label> 
-								<input type="text" readonly placeholder="" name="unit_price" id="unit_price" required="" class="form-control"/>
+								<input disabled type="text" readonly placeholder="" name="unit_price" id="unit_price" required="" class="form-control"/>
 							</div>
 						</div>
 						<div class="col-sm-6">														
 							<div class="form-group">
 								<label>Qty</label> 
-								<input  type="text" onkeyup="getSubTotalEdit()" placeholder="" name="qty" id="qty" required="" class="form-control"/>
+								<input  type="text" disabled onkeyup="getSubTotalEdit()" placeholder="" name="qty" id="qty" required="" class="form-control"/>
 							</div>
 							<div class="form-group">
 								<label>Sub Total</label> 
@@ -47,14 +52,12 @@
 						</div>
 						<input readonly type="hidden" name="app_purchase_detail_id" id="app_purchase_detail_id" required="" class="form-control"/>
 						<input readonly type="hidden" value="{{$data_header['app_purchase_id']}}" name="app_purchase_id" id="app_purchase_id" required="" class="form-control"/>
-						<!--selected row to delete-->
-						<input readonly type="hidden" name="selected_element" id="selected_element" required="" class="form-control"/>
 					</form>																	
 				 </div>														
 			</div>
 			<div class="modal-footer">
-				<button onclick="doUpdateItem()" type="button" class="btn btn-primary">Update</button>
-				<button onclick="cancelEditItem()" type="button" class="btn btn-primary">Cancel</button>
+				<button onclick="doDeleteItem()" type="button" class="btn btn-primary">Delete</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="cancelDeleteItem()">Cancel</button>
 			</div>										
 		</div>
 	</div>
