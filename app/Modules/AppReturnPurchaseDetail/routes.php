@@ -14,8 +14,8 @@
     Route::get('return_purchase_detail','AppReturnPurchaseDetailController@index');
 		Route::post('return_purchase_detail','AppReturnPurchaseDetailController@index');
 		Route::post('return_purchase_detail/save','AppReturnPurchaseDetailController@save');
-		Route::get('return_purchase_detail/edit/{app_purchase_detail_id}','AppReturnPurchaseDetailController@edit');
-		Route::get('return_purchase_detail/download_pdf/{app_purchase_detail_id}','AppReturnPurchaseDetailController@download_pdf');
+		Route::get('return_purchase_detail/edit/{app_return_purchase_detail_id}','AppReturnPurchaseDetailController@edit');
+		Route::get('return_purchase_detail/download_pdf/{app_return_purchase_detail_id}','AppReturnPurchaseDetailController@download_pdf');
 
 		Route::get('return_purchase_detail/render_lookup_suplier','AppReturnPurchaseDetailController@renderLookupSuplier');
 		Route::get('return_purchase_detail/render_lookup_raw_material','AppReturnPurchaseDetailController@renderLookupRawMaterial');

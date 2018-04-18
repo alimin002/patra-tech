@@ -44,13 +44,16 @@
   <table width="100%">
     <tr>
         <td><strong>From:</strong>{{ session('session_login')['username'] }}</td>
-        <td><strong>To:</strong>{{$data['data_header']['suplier_name']}}</td>
+				<td><strong>To:</strong>{{$data['data_header']['suplier_name']}}</td>
     </tr>
-
+		<tr>
+        <td><strong>Return Reason:</strong></td>
+        <td>{{$data['data_header']['return_reason']}}</td>
+    </tr>
   </table>
 	<table width="100%">
     <tr>
-        <td><h1>Purchase Order</h1></td>
+        <td><h1>Return Purchase</h1></td>
     </tr>
 
   </table>

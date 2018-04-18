@@ -1,5 +1,6 @@
 <script src="{{url('assets/js/jquery.min.js')}}"></script>
 <script>
+
 		 $(function(){
 			 	//alert(1);
 				bindSalesItem();

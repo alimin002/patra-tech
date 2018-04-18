@@ -11,9 +11,19 @@ use App\Modules\AppStockRawMaterial\Models\AppStockRawMaterial;
 use app\Providers\Lookup;
 use DB;
 Use Redirect;
+use PDF;
+use Session;
 
 class AppReturnPurchaseDetailController extends Controller
 {
+		
+		 //direct access guard
+		public function __construct(Request $request) 
+		{
+			 if ($request->session()->has('session_login')==false) {
+						return Redirect::to('logout')->send();
+			 }
+		}
 
     /**
      * Display a listing of the resource.
@@ -175,6 +185,34 @@ class AppReturnPurchaseDetailController extends Controller
 																	 ->update($new_stock_raw_material);																		
 				return $update;
 			
+		}
+		
+		function get_header($app_return_purchase_id){
+			$data_header=$data =  AppReturnPurchase::select('app_return_purchase.*','app_suplier.*',"app_suplier.name as suplier_name")																
+																					->leftJoin('app_suplier','app_suplier.app_suplier_id','=','app_return_purchase.app_suplier_id')
+																					->where('app_return_purchase.app_return_purchase_id', '=',$app_return_purchase_id)
+																					->first();						
+																					return $data_header;
+		}
+		
+		function get_detail($app_return_purchase_id){
+			$data_detail=AppReturnPurchaseDetail::select('app_return_purchase_detail.*','app_return_purchase.*','app_raw_material.*',"app_raw_material.name as raw_material_name")
+																					->leftJoin('app_return_purchase','app_return_purchase.app_return_purchase_id','=','app_return_purchase_detail.app_return_purchase_id')
+																					->leftJoin('app_raw_material','app_raw_material.app_raw_material_id','=','app_return_purchase_detail.app_raw_material_id')
+																					->where('app_return_purchase_detail.app_return_purchase_id', '=',$app_return_purchase_id)->get();
+			return $data_detail;
+		}
+		
+		public function download_pdf($app_return_purchase_id){
+			
+			$data_header=$this->get_header($app_return_purchase_id);
+			$data_detail=$this->get_detail($app_return_purchase_id);
+			//print_r($data_detail); die();
+			$data=array("data_header"=>$data_header,
+									"data_detail"=>$data_detail
+			);
+				$pdf=PDF::loadView('AppReturnPurchaseDetail::return_purchase_pdf', compact('data'));
+				return $pdf->download('return_purchase_pdf.pdf');
 		}
 		
 		

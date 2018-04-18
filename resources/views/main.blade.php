@@ -251,7 +251,7 @@
 
 								<b class="arrow"></b>
 							</li>
-
+						
 							<li class="">
 								<a href="{{url('sales')}}">
 									<i class="menu-icon fa fa-caret-right"></i>
@@ -274,7 +274,7 @@
 						<b class="arrow"></b>
 
 						<ul class="submenu">
-						
+							<!--
 							<li class="">
 								<a href="{{url('return_sale')}}">
 									<i class="menu-icon fa fa-caret-right"></i>
@@ -283,7 +283,7 @@
 
 							<b class="arrow"></b>
 							</li>
-						
+						-->
 							<li class="">
 								<a href="{{url('return_purchase')}}">
 									<i class="menu-icon fa fa-caret-right"></i>

@@ -121,7 +121,7 @@
 
 										<ul class="dropdown-menu dropdown-success">
 											<li>
-												<a href="{{url('return_purchase_detail/preview_pdf/'.$app_return_purchase_id)}}">Print Invoice</a>
+												<a href="{{url('return_purchase_detail/preview_pdf/'.$app_return_purchase_id)}}">Print Return</a>
 											</li>
 											<li>
 												<a href="{{url('return_purchase_detail/download_pdf/'.$app_return_purchase_id)}}">Download Return To PDF</a>
