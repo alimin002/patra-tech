@@ -129,7 +129,7 @@
 											</li>
 											
 											<li>
-												<a href="#" title="budget production onclick="budget_production('{{$values['app_sales_id']}}')" class="tooltip-error" data-rel="tooltip" title="budget production" data-original-title="detail">
+												<a href="#" title="budget production onclick=budget_production('{{$values['app_sales_id']}}') class="tooltip-error" data-rel="tooltip" title="budget production" data-original-title="detail">
 													<span class="red">
 														<i class="ace-icon fa fa-lightbulb-o bigger-120"></i>
 													</span>

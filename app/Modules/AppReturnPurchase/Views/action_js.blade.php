@@ -99,9 +99,11 @@
 				$("#frm-delete #app_return_purchase_id").val(response["app_return_purchase_id"])					
 				$("#modal-delete").modal("toggle");
     }
-		});
-		
-		
-
+		});	
+	}
+	function detail(id){
+		var app_return_purchase_id=id;
+		var url='{{url("return_purchase_detail")}}?'+'app_return_purchase_id='+app_return_purchase_id;
+		location.href = url;
 	}
 </script>

@@ -88,6 +88,9 @@
 
 									<a class="red" href="#" onclick="deleteData('{{$values['app_return_purchase_id']}}')">
 										<i class="ace-icon fa fa-trash-o bigger-130"></i>
+									</a>									
+										<a class="red" href="#" onclick="detail('{{$values['app_return_purchase_id']}}')">
+										<i class="ace-icon fa fa-list bigger-130"></i>
 									</a>
 								</div>
 

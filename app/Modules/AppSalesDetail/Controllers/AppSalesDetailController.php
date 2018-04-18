@@ -46,8 +46,6 @@ class AppSalesDetailController extends Controller
 				        ->with("lookup_product",$lookup_product)
 								->with("json_sales",$json_sales)
 								->with("data_header",$data_header);
-				//$pdf=PDF::loadView('AppSalesDetail::invoice');
-				//return $pdf->download('invoice.pdf');
     }
 		
 		//check if item sales exists
