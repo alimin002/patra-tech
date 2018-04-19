@@ -127,6 +127,7 @@ class AppReturnPurchaseDetailController extends Controller
 					return 0;
 				}
 		}
+		
 			public function save(Request $request){
 			$data_return_purchase_item = json_decode($request->input("data_return_purchase_item"),true);
 			
