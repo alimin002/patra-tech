@@ -4,7 +4,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Edit Stock Raw Material</h4>
+				<h4 class="modal-title">Edit Category </h4>
 			</div>
 			<div class="modal-body">
 					<form name="frm-edit" id="frm-edit" action="{{url('stock_raw_material/update')}}" method="post">
@@ -12,7 +12,8 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="form-group">
-								<label>Raw Material Name</label> 
+								<label>Raw Material Name
+								</label> 
 								<select id="app_raw_material_id" name="app_raw_material_id" class="form-control">								
 								</select>
 							</div>

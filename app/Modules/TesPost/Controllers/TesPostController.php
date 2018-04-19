@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Modules\Tes\Controllers;
+namespace App\Modules\TesPost\Controllers;
 
-use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class TesController extends Controller
+class TesPostController extends Controller
 {
+	public function save(Request $request)
+    {
+        echo $request["name"];
+    }
 
     /**
      * Display a listing of the resource.
@@ -16,7 +19,7 @@ class TesController extends Controller
      */
     public function index()
     {
-        return view("Tes::index");
+        return view("TesPost::index");
     }
 
     /**
@@ -24,10 +27,7 @@ class TesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-	 public function save(Request $request)
-	 {
-		echo $request->input("name");  
-	 }
+	 
     public function create()
     {
         //
