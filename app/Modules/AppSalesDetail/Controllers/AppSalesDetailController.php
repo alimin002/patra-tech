@@ -36,7 +36,7 @@ class AppSalesDetailController extends Controller
 				$app_sales_id=$_GET["sales_id"];
 				$data_header=$data = AppSales::where('app_sales.app_sales_id', '=',$app_sales_id)->first();							
 				$data_detail=AppSalesDetail::select('app_sales_detail.*','app_sales.*','app_products.*',"app_products.name as product_name")
-																					->leftJoin('app_sales','app_sales.app_sales_id','=','app_sales_detail.app_sales_detail_id')
+																					->leftJoin('app_sales','app_sales.app_sales_id','=','app_sales_detail.app_sales_id')
 																					->leftJoin('app_products','app_products.app_product_id','=','app_sales_detail.app_product_id')
 																					->where('app_sales_detail.app_sales_id', '=',$app_sales_id)->get();
 				$lookup_product	= Lookup::getLookupProduct();	
@@ -125,7 +125,7 @@ class AppSalesDetailController extends Controller
 		
 		function get_detail($app_sales_id){
 			$data_detail=AppSalesDetail::select('app_sales_detail.*','app_sales.*','app_products.*',"app_products.name as product_name")
-																					->leftJoin('app_sales','app_sales.app_sales_id','=','app_sales_detail.app_sales_detail_id')
+																					->leftJoin('app_sales','app_sales.app_sales_id','=','app_sales_detail.app_sales_id')
 																					->leftJoin('app_products','app_products.app_product_id','=','app_sales_detail.app_product_id')
 																					->where('app_sales_detail.app_sales_id', '=',$app_sales_id)->get();
 			return $data_detail;

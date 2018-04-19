@@ -66,11 +66,11 @@
 				<!-- /section:basics/sidebar.mobile.toggle -->
 				<div class="navbar-header pull-left">
 					<!-- #section:basics/navbar.layout.brand -->
+					<small>
 					<a href="#" class="navbar-brand">
-						<small>
-							Patra  Application
-						</small>
+						Patra  Application
 					</a>
+					</small>
 
 					<!-- /section:basics/navbar.layout.brand -->
 
@@ -84,12 +84,13 @@
 					<ul class="nav ace-nav">
 						<!-- #section:basics/navbar.user_menu -->
 						<!--notification bar-->
+						{{--
 						<li class="purple">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 								<i class="ace-icon fa fa-bell"></i>
 								<span class="badge badge-important">8</span>
 							</a>
-
+							
 							<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
 								<li class="dropdown-header">
 									<i class="ace-icon fa fa-exclamation-triangle"></i>
@@ -108,12 +109,14 @@
 									</a>
 								</li>
 							</ul>
+							
 						</li>
+						--}}
 						<!---->
 						
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="{{url('assets/avatars/user.jpg')}}" alt="Jason's Photo" />
+								<img class="nav-user-photo" src="{{url('assets/avatars/avatar2.png')}}" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>Welcome,</small>
 									{{ session('session_login')['username'] }}
@@ -263,6 +266,17 @@
 						</ul>
 					</li>
 					
+					<li class="">
+						<a href="{{url('stock_opname_raw_material')}}" onclick="goToStockOpname()" class="dropdown-toggle">
+							<i class="menu-icon fa fa-sticky-note"></i>
+							<span class="menu-text">Stock Opname</span>
+						</a>
+					</li>
+					<script>
+						function goToStockOpname(){
+							location.href = "{{url('stock_opname_raw_material')}}";
+						}
+					</script>
 					<li class="">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-thumbs-down"></i>
