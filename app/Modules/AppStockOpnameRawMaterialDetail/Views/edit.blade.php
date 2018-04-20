@@ -1,19 +1,19 @@
 <!-- Modal Add Data-->
 <div class="modal fade" id="modal-edit" role="dialog">
-	<div class="modal-dialog modal-lg">
+	<div class="modal-dialog md-12">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" onclick="cancelEditItem()">&times;</button>
-				<h4 class="modal-title">Edit Item Purchase</h4>
+				<h4 class="modal-title">Edit Item Stock Opname</h4>
 			</div>
 			<div class="modal-body">
 					<form name="frm-edit" id="frm-edit" action="{{url('purchase_detail/update')}}" method="post">
 					{{ csrf_field() }}
 					<div class="row">
-						<div class="col-sm-6">
+							<div class="col-sm-4">
 							<div class="form-group">
 								<label>Raw Material</label> 
-								<select id="app_raw_material_id" name="app_raw_material_id" class="form-control" onChange="getRawMaterialById(this)">
+								<select required="" id="app_raw_material_id" name="app_raw_material_id" class="form-control" onChange="getRawMaterialByIdEdit(this)">
 									<option> 
 										Choose Raw Material
 									</option>
@@ -24,31 +24,38 @@
 								@endforeach
 								</select>
 							</div>
+							
+						</div>
+						<div class="col-sm-4">														
 							<div class="form-group">
-								<label>Unit Price</label> 
-								<input type="text" readonly placeholder="" name="unit_price" id="unit_price" required="" class="form-control"/>
+								<label>Stock</label> 
+								<input type="text" readonly placeholder="" name="stock" id="stock" required="" class="form-control"/>
+							</div>
+						</div>
+						<div class="col-sm-4">														
+							<div class="form-group">
+								<label>Available Stock</label> 
+								<input type="text"  placeholder="" name="stock_opname" id="stock_opname" onchange="getDeviationEdit(this)" required="" class="form-control"/>
 							</div>
 						</div>
 						<div class="col-sm-6">														
 							<div class="form-group">
-								<label>Qty</label> 
-								<input  type="text" onkeyup="getSubTotalEdit()" placeholder="" name="qty" id="qty" required="" class="form-control"/>
-							</div>
-							<div class="form-group">
-								<label>Sub Total</label> 
-								<input readonly type="text" placeholder="" name="sub_total" id="sub_total" required="" class="form-control"/>
+								<label>Deviation</label> 
+								<input type="text" readonly placeholder="" name="deviation" id="deviation" required="" class="form-control"/>
 							</div>
 						</div>
-						<div class="col-sm-12">
+						<div class="col-sm-6">														
 							<div class="form-group">
-								<label>Description</label> 
-								<textarea disabled name="description" id="description" class="form-control" style="height:100px;"></textarea>
+								<label>Information</label> 
+								<input type="text"  placeholder="" name="information" id="information" required="" class="form-control"/>
 							</div>
 						</div>
+						<input readonly type="hidden" value="{{$data_header['app_purchase_id']}}" name="app_purchase_id" id="app_purchase_id" required="" class="form-control"/>
+					</form>																	
 						<input readonly type="hidden" name="app_purchase_detail_id" id="app_purchase_detail_id" required="" class="form-control"/>
 						<input readonly type="hidden" value="{{$data_header['app_purchase_id']}}" name="app_purchase_id" id="app_purchase_id" required="" class="form-control"/>
 						<!--selected row to delete-->
-						<input readonly type="text" name="selected_element" id="selected_element" required="" class="form-control"/>
+						<input readonly type="hidden" name="selected_element" id="selected_element" required="" class="form-control"/>
 					</form>																	
 				 </div>														
 			</div>

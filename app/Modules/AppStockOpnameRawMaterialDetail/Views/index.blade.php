@@ -119,7 +119,7 @@
 												</li>									
 												<li class="divider"></li>
 											</ul>
-											<a href="{{url('sales')}}"><button class="btn btn-white btn-primary"><i class="ace-icon fa fa-angle-double-left" aria-hidden="true">&nbsp;Back to sales</i></button></a>
+											<a href="{{url('stock_opname_raw_material')}}"><button class="btn btn-white btn-primary"><i class="ace-icon fa fa-angle-double-left" aria-hidden="true">&nbsp;Back to stock opname</i></button></a>
 										</div>
 							<div class="dataTables_info" id="sample-table-2_info"><!--Showing 1 to 10 of 23 entries--></div>
 						</div>
