@@ -109,13 +109,13 @@
 
 											<ul class="dropdown-menu dropdown-success">
 												<li>
-													<a href="{{url('app_stock_opname_raw_material_detail/preview_pdf/'.$app_stock_opname_raw_material_id)}}">Print Stock Opname</a>
+													<a href="{{url('stock_opname_raw_material_detail/preview_pdf/'.$app_stock_opname_raw_material_id)}}">Print Stock Opname</a>
 												</li>
 												<li>
-													<a href="{{url('app_stock_opname_raw_material_detail/download_pdf/'.$app_stock_opname_raw_material_id)}}">Dowload Invoice</a>
+													<a href="{{url('stock_opname_raw_material_detail/download_pdf/'.$app_stock_opname_raw_material_id)}}">Dowload Stock Opname</a>
 												</li>									
 												<li>
-													<a href="#">Send Invoice To Email</a>
+													<a href="#">Send Stock Opname To Email</a>
 												</li>									
 												<li class="divider"></li>
 											</ul>

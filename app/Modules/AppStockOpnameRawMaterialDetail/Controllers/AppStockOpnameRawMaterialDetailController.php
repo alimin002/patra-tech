@@ -163,4 +163,36 @@ class AppStockOpnameRawMaterialDetailController extends Controller
 						return Redirect::to('stock_opname_raw_material_detail?app_stock_opname_raw_material_id='.$app_stock_opname_raw_material_id)
 											->with("message",$message);			
 		}
+		
+		function get_header($app_stock_opname_raw_material_id){
+			$data_header=$data = AppStockOpnameRawMaterial::where('app_stock_opname_raw_material.app_stock_opname_raw_material_id', '=',$app_stock_opname_raw_material_id)->first();							
+																					return $data_header;
+		}
+		
+		function get_detail($app_stock_opname_raw_material_id){
+			$data_detail=AppStockOpnameRawMaterialDetail::select('app_stock_opname_raw_material_detail.*','app_stock_opname_raw_material.*','app_raw_material.*',"app_raw_material.name as raw_material_name")
+																					->leftJoin('app_stock_opname_raw_material','app_stock_opname_raw_material.app_stock_opname_raw_material_id','=','app_stock_opname_raw_material_detail.app_stock_opname_raw_material_id')
+																					->leftJoin('app_raw_material','app_raw_material.app_raw_material_id','=','app_stock_opname_raw_material_detail.app_raw_material_id')
+																					->where('app_stock_opname_raw_material_detail.app_stock_opname_raw_material_id', '=',$app_stock_opname_raw_material_id)->get();
+			return $data_detail;
+		}
+		public function test(){
+			echo 1;
+		}
+		
+		public function download_pdf($app_stock_opname_raw_material_id){
+			$data_header=$this->get_header($app_stock_opname_raw_material_id);
+			$data_detail=$this->get_detail($app_stock_opname_raw_material_id);
+			//print_r($data_detail); die();
+			$data=array("data_header"=>$data_header,
+									"data_detail"=>$data_detail
+			);
+			//echo "<pre>";
+				//print_r($data);
+			//echo "</pre>";
+			//die();
+				$pdf=PDF::loadView('AppStockOpnameRawMaterialDetail::stock_opname_pdf', compact('data'));
+				return $pdf->download('stock_opname_pdf.pdf');
+		}
+		
 }

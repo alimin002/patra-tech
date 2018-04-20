@@ -13,8 +13,8 @@
 		Route::group(['module' => 'AppStockOpnameRawMaterialDetail', 'middleware' => ['web'], 'namespace' => 'App\Modules\AppStockOpnameRawMaterialDetail\Controllers'], function(){
     Route::get('stock_opname_raw_material_detail','AppStockOpnameRawMaterialDetailController@index');
 		Route::get('stock_opname_raw_material_detail','AppStockOpnameRawMaterialDetailController@index');
-		Route::get('stock_opname_raw_material_detail/download_pdf/{app_sales_id}','AppStockOpnameRawMaterialDetailController@download_pdf');
-		Route::get('stock_opname_raw_material_detail/preview_pdf/{app_sales_id}','AppStockOpnameRawMaterialDetailController@preview_pdf');
+		Route::get('stock_opname_raw_material_detail/download_pdf/{app_stock_opname_raw_material_id}','AppStockOpnameRawMaterialDetailController@download_pdf');
+		Route::get('stock_opname_raw_material_detail/preview_pdf/{app_stock_opname_raw_material_id}','AppStockOpnameRawMaterialDetailController@preview_pdf');
 		Route::post('stock_opname_raw_material_detail/save','AppStockOpnameRawMaterialDetailController@save');
 		Route::get('stock_opname_raw_material_detail/edit/{app_sales_detail_id}','AppStockOpnameRawMaterialDetailController@edit');
 		Route::get('stock_opname_raw_material_detail/render_lookup_suplier','AppStockOpnameRawMaterialDetailController@renderLookupSuplier');
@@ -23,6 +23,8 @@
 		Route::post('stock_opname_raw_material_detail/update','AppStockOpnameRawMaterialDetailController@update');
 		Route::post('stock_opname_raw_material_detail/update_header','AppStockOpnameRawMaterialDetailController@update_header');
 		Route::post('stock_opname_raw_material_detail/destroy','AppStockOpnameRawMaterialDetailController@destroy');
+			Route::get('stock_opname_raw_material_detail/test','AppStockOpnameRawMaterialDetailController@test');
+
 });
 
 
