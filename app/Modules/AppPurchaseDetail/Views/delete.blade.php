@@ -19,7 +19,7 @@
 							<div class="form-group">
 								<label>Raw Material</label> 
 								<input type="text" class="form-control" readonly="readonly" name="raw_material_name" id="raw_material_name"/>
-								<input type="text" class="form-control" name="app_raw_material_id" id="app_raw_material_id"/>
+								<input type="hidden" class="form-control" name="app_raw_material_id" id="app_raw_material_id"/>
 							</div>
 							<div class="form-group">
 								<label>Unit Price</label> 
@@ -35,13 +35,7 @@
 								<label>Sub Total</label> 
 								<input readonly type="text" placeholder="" name="sub_total" id="sub_total" required="" class="form-control"/>
 							</div>
-						</div>
-						<div class="col-sm-12">
-							<div class="form-group">
-								<label>old qty</label> 
-								<textarea disabled name="description" id="description" class="form-control" style="height:100px;"></textarea>
-							</div>
-						</div>
+						</div>						
 						<div class="col-sm-12">
 							<div class="form-group">
 								<label>Description</label> 
