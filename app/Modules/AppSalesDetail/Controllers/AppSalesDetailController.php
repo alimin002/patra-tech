@@ -82,7 +82,12 @@ class AppSalesDetailController extends Controller
 				if($this->checkItemExists($app_sales_id)==1){
 					 $delete = AppSalesDetail::where('app_sales_id', '=',$app_sales_id)
 																										->delete();
-						
+				//update stock to 0
+				$new_stock_product=array(
+																"stock"=>0
+															);																					
+				AppStockProduct::where("app_product_id","=",$app_product_id)																	 
+																						->update($new_stock_product);																								
 				}
 
 						 DB::beginTransaction();

@@ -122,7 +122,8 @@
 												</li>									
 												<li class="divider"></li>
 											</ul>
-										</div>
+									</div>
+									<a href="{{url('purchase')}}"><button class="btn btn-white btn-primary"><i class="ace-icon fa fa-angle-double-left" aria-hidden="true">&nbsp;Back to purchase</i></button></a>
 							<div class="dataTables_info" id="sample-table-2_info"><!--Showing 1 to 10 of 23 entries--></div>
 						</div>
 						<div class="col-xs-6">
@@ -136,11 +137,12 @@
 					</div>
 			</div>
 		</div>
-		<div class="col-sm-12" style="display:none">
+		<div class="col-sm-12" style="display:block">
 			<div class="form-group">
 					<form name="frm-purchase-item" id="frm-purchase-item" action="{{url('purchase_detail/save')}}" method="post">
 						{{ csrf_field() }}
 						<textarea class="col-md-12" name="data_purchase_item" id="data_purchase_item">{{$json_purchase}}</textarea>
+						<textarea class="col-md-12" name="deleted_item" id="deleted_item"></textarea>
 						<input readonly type="text" value="{{$data_header['app_purchase_id']}}" name="app_purchase_idx" id="app_purchase_idx" required="" class="form-control"/>
 					</form>
 			</div>

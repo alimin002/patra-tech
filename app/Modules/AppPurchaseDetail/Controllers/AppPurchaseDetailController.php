@@ -102,6 +102,15 @@ class AppPurchaseDetailController extends Controller
 				if($this->checkItemExists($app_purchase_id)==1){
 					 $delete = AppPurchaseDetail::where('app_purchase_id', '=',$app_purchase_id)
 																										->delete();
+					//if deleted item exists go to there
+					if($request["deleted_item"]!=""){
+							$deleted_item=json_decode($request->input("deleted_item"),true);
+							
+							foreach($deleted_item as $key=>$value){
+								$this->stockOut($value["app_raw_material_id"],$value["qty"]);
+							}
+					}
+					
 						
 				}
 
@@ -122,8 +131,22 @@ class AppPurchaseDetailController extends Controller
 																																			
 										$save=AppPurchaseDetail::insertGetId($purchase_detail);
 										
-										//update stock
-										$stock_in=$this->stockIn($app_raw_material_id,$qty);										
+										//update stock to 0 
+										if($this->checkItemExists($app_purchase_id)==1){
+												if(isset($values["old_qty"])){
+													//echo 1; die();
+													$old_qty	 =$values["old_qty"];
+													$stock 		 =$values["stock"];
+													$stock_in	 =$this->stockInOnUpdateItem($app_raw_material_id,$old_qty,$qty);
+												}
+												else{
+													$stock_in=$this->stockIn($app_raw_material_id,$qty);
+												}
+												
+										}else{
+												$stock_in=$this->stockIn($app_raw_material_id,$qty);
+										}
+																			
 									}
 									
 									
@@ -142,6 +165,38 @@ class AppPurchaseDetailController extends Controller
 		public function stockIn($app_raw_material_id,$num_of_entri){
 			$data					 = AppStockRawMaterial::where('app_raw_material_id','=',$app_raw_material_id)->first();
 			$current_stock =$data["stock"];
+			$new_stock		 =$current_stock + $num_of_entri;//num_of_entri= entri from purchase and other factor
+			//return $new_stock;
+			$new_stock_raw_material=array(
+																"stock"=>$new_stock
+															);
+			$update=AppStockRawMaterial::where("app_raw_material_id","=",$app_raw_material_id)
+																	 ->update($new_stock_raw_material);																		
+				return $update;
+			
+		}
+		
+			public function stockOut($app_raw_material_id,$num_of_entri){
+			$data					 = AppStockRawMaterial::where('app_raw_material_id','=',$app_raw_material_id)->first();
+			$current_stock =$data["stock"];
+			$new_stock		 =$current_stock - $num_of_entri;//num_of_entri= entri from purchase and other factor
+			//return $new_stock;
+			$new_stock_raw_material=array(
+																"stock"=>$new_stock
+															);
+			$update=AppStockRawMaterial::where("app_raw_material_id","=",$app_raw_material_id)
+																	 ->update($new_stock_raw_material);																		
+				return $update;
+			
+		}
+		
+		public function stockInOnUpdateItem($app_raw_material_id,$old_qty,$num_of_entri){
+			$data					 = AppStockRawMaterial::where('app_raw_material_id','=',$app_raw_material_id)->first();
+			$current_stock =$data["stock"];
+			//step back to old stock
+			$current_stock	 =$current_stock-$old_qty;
+			
+			//count new stock
 			$new_stock		 =$current_stock + $num_of_entri;//num_of_entri= entri from purchase and other factor
 			//return $new_stock;
 			$new_stock_raw_material=array(

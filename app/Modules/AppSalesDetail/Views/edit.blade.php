@@ -48,7 +48,7 @@
 						<input readonly type="hidden" name="app_purchase_detail_id" id="app_purchase_detail_id" required="" class="form-control"/>
 						<input readonly type="hidden" value="{{$data_header['app_sales_id']}}" name="app_sales_id" id="app_sales_id" required="" class="form-control"/>
 						<!--selected row to delete-->
-						<input readonly type="text" name="selected_element" id="selected_element" required="" class="form-control"/>
+						<input readonly type="hidden" name="selected_element" id="selected_element" required="" class="form-control"/>
 					</form>																	
 				 </div>														
 			</div>

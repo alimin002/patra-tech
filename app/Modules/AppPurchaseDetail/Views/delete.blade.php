@@ -18,16 +18,8 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label>Raw Material</label> 
-								<select id="app_raw_material_id" disabled name="app_raw_material_id" class="form-control" onChange="getRawMaterialById(this)">
-									<option> 
-										Choose Raw Material
-									</option>
-								@foreach($lookup_raw_material as $key=>$values)
-									<option value="{{$values['app_raw_material_id']}}"> 
-									{{$values["name"]}} 
-									</option>
-								@endforeach
-								</select>
+								<input type="text" class="form-control" readonly="readonly" name="raw_material_name" id="raw_material_name"/>
+								<input type="text" class="form-control" name="app_raw_material_id" id="app_raw_material_id"/>
 							</div>
 							<div class="form-group">
 								<label>Unit Price</label> 
@@ -42,6 +34,12 @@
 							<div class="form-group">
 								<label>Sub Total</label> 
 								<input readonly type="text" placeholder="" name="sub_total" id="sub_total" required="" class="form-control"/>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label>old qty</label> 
+								<textarea disabled name="description" id="description" class="form-control" style="height:100px;"></textarea>
 							</div>
 						</div>
 						<div class="col-sm-12">
