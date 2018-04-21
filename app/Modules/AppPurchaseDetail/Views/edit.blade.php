@@ -39,26 +39,8 @@
 								<label>Sub Total</label> 
 								<input readonly type="text" placeholder="" name="sub_total" id="sub_total" required="" class="form-control"/>
 							</div>
-						</div>						
-						<div class="col-sm-12">
-							<div class="form-group">
-								<label>Stock</label> 
-								<input type="text" value="" readonly="readonly" name="stock" id="stock" class="form-control"/>
-							</div>						
-						</div>
-						<div class="col-sm-12" style="display:none">
-							<div class="form-group">
-								<label>Old Stock</label> 
-								<input type="text" readonly="readonly" value="" name="old_stock" id="old_stock" class="form-control"/>
-							</div>						
-						</div>
-						<div class="col-sm-12" style="display:none">
-							<div class="form-group">
-								<label>New Stock</label> 
-								<input type="text" readonly="readonly" value="" name="new_stock" id="new_stock" class="form-control"/>
-							</div>						
-						</div>					
-						<div class="col-sm-12">
+						</div>									
+						<div class="col-sm-12" style="display:none;">
 							<div class="form-group">
 								<label>Old Qty</label> 
 								<input type="text" readonly="readonly" value="" name="old_qty" id="old_qty" class="form-control"/>

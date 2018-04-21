@@ -436,8 +436,6 @@
 		$("#frm-edit #sub_total").val(sub_total);
 		$("#frm-edit #description").val(description);
 		$("#frm-edit #selected_element").val(row_id.replace("tr-",""));
-		$("#frm-edit #stock").val(stock);
-		$("#frm-edit #old_stock").val(stock-qty);
 		$("#modal-edit").modal("toggle");
 	}
 	

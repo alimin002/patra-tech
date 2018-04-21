@@ -136,7 +136,6 @@ class AppPurchaseDetailController extends Controller
 												if(isset($values["old_qty"])){
 													//echo 1; die();
 													$old_qty	 =$values["old_qty"];
-													$stock 		 =$values["stock"];
 													$stock_in	 =$this->stockInOnUpdateItem($app_raw_material_id,$old_qty,$qty);
 												}
 												else{
