@@ -195,7 +195,6 @@
 								<a href="{{url('raw_material')}}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Raw Materials
-									<b class="arrow fa fa-angle-down"></b>
 								</a>
 							</li>
 
@@ -210,6 +209,12 @@
 								<a href="{{url('stock_raw_material')}}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Stock Raw Materials
+								</a>
+							</li>
+								<li class="">
+								<a href="{{url('stock_product')}}">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Stock Products
 								</a>
 							</li>
 

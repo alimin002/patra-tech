@@ -136,7 +136,7 @@
 												</a>
 											</li>	
 											<li>
-												<a href="#" onclick="edit('{{$values['app_purchase_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+												<a href="#" onclick="detail('{{$values['app_purchase_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
 													<span class="red">
 														<i class="ace-icon fa fa-list bigger-120"></i>
 													</span>

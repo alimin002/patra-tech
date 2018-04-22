@@ -58,7 +58,7 @@
 														"<li>"+
 															"<a href='#'  class='tooltip-success' data-rel='tooltip' title='' data-original-title='Edit' >"+
 																"<span class='green' >"+
-																	"<i class='ace-icon fa fa-pencil-square-o bigger-120' id=row-"+i+" class='btn btn-primary' onclick='editItem(this.id)'></i>"+
+																	"<i class='ace-icon fa fa-pencil-square-o bigger-120' id=row-"+i+" class='btn btn-primary' onclick='editItem(this.id,"+app_raw_material_id+")'></i>"+
 																"</span>"+
 															"</a>"+
 														"</li>"+
