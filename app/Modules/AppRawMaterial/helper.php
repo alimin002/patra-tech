@@ -13,6 +13,7 @@
 												->leftJoin('app_suplier', 'app_raw_material.app_suplier_id', '=', 'app_suplier.app_suplier_id')
 												->leftJoin('app_category_raw_material', 'app_raw_material.app_category_raw_material_id', '=', 'app_category_raw_material.app_category_raw_material_id')
 												->leftJoin('app_stock_raw_material', 'app_raw_material.app_raw_material_id', '=', 'app_stock_raw_material.app_raw_material_id')
+												->orderBy('app_raw_material.app_raw_material_id', 'desc')
 												->paginate(3);
 						
 	 return $data;
@@ -25,6 +26,7 @@
 												->leftJoin('app_category_raw_material', 'app_raw_material.app_category_raw_material_id', '=', 'app_category_raw_material.app_category_raw_material_id')
 												->leftJoin('app_stock_raw_material', 'app_raw_material.app_raw_material_id', '=', 'app_stock_raw_material.app_raw_material_id')
 					->where('app_raw_material.name', 'LIKE','%'.$keyword.'%')
+					->orderBy('app_raw_material.app_raw_material_id', 'desc')
 					->paginate(3);
 	 return $data;
  }
