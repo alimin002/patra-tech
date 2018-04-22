@@ -46,10 +46,10 @@
 						<div class="login-container">
 							<div class="center">
 								<h1>
-									<span class="red">Patra Tech</span>
+									<span class="red">Patra</span>
 									<span class="white" id="id-text2">Application</span>
 								</h1>
-								<h4 class="blue" id="id-company-text">&copy; Patra Tech</h4>
+								{{--<h4 class="blue" id="id-company-text">&copy; Patra Tech</h4>--}}
 							</div>
 
 							<div class="space-6"></div>
