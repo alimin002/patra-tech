@@ -29,9 +29,11 @@ class AppSuplierController extends Controller
 				
 				if($request->input("keyword")!= null){
 					$data=AppSuplier::where('app_suplier.name', 'LIKE','%'.$keyword.'%')
+											->orderBy('app_suplier.app_suplier_id', 'desc')
 											->paginate(3);
 				}else{
-					$data= AppSuplier::paginate(3);
+					$data= AppSuplier::orderBy('app_suplier.app_suplier_id', 'desc')
+					paginate(3);
 				}
         return view("AppSuplier::index")
 								->with("data",$data);
