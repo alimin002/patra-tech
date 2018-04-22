@@ -36,7 +36,7 @@
 								<input readonly type="text" placeholder="" name="sub_total" id="sub_total" required="" class="form-control"/>
 							</div>
 						</div>
-						<div class="col-sm-12">
+						<div class="col-sm-12" style="display:none;">
 							<div class="form-group">
 								<label>Old Qty</label> 
 								<input type="text" class="form-control" id="old_qty" name="old_qty">
