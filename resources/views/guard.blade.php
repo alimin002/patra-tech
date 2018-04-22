@@ -36,6 +36,8 @@
 		<script src="../assets/js/html5shiv.js"></script>
 		<script src="../assets/js/respond.min.js"></script>
 		<![endif]-->
+		<!--icon title-->
+		<link rel="shortcut icon" href="{{URL('assets/avatars/patra-title.ico')}}" />
 	</head>
 
 	<body class="login-layout">
