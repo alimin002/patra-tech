@@ -18,16 +18,8 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label>Product</label> 
-								<select id="app_product_id" disabled name="app_product_id" class="form-control" onChange="getRawMaterialById(this)">
-									<option> 
-										Choose Product
-									</option>
-								@foreach($lookup_product as $key=>$values)
-									<option value="{{$values['app_purchase_id']}}"> 
-									{{$values["name"]}} 
-									</option>
-								@endforeach
-								</select>
+								<input type="text" disabled class="form-control" id="product_name" name="product_name"/>
+								<input type="hidden" class="form-control" id="app_product_id" name="app_product_id"/>
 							</div>
 							<div class="form-group">
 								<label>Unit Price</label> 
@@ -50,8 +42,8 @@
 								<textarea disabled name="description" id="description" class="form-control" style="height:100px;"></textarea>
 							</div>
 						</div>
-						<input readonly type="hidden" name="app_purchase_detail_id" id="app_purchase_detail_id" required="" class="form-control"/>
-						<input readonly type="hidden" value="{{$data_header['app_purchase_id']}}" name="app_purchase_id" id="app_purchase_id" required="" class="form-control"/>
+						<input readonly type="hidden" name="app_sales_detail_id" id="app_sales_detail_id" required="" class="form-control"/>
+						<input readonly type="hidden" value="{{$data_header['app_sales_id']}}" name="app_sales_id" id="app_sales_id" required="" class="form-control"/>
 					</form>																	
 				 </div>														
 			</div>

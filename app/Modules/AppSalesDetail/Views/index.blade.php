@@ -141,6 +141,7 @@
 					<form name="frm-sales-item" id="frm-sales-item" action="{{url('sales_detail/save')}}" method="post">
 						{{ csrf_field() }}
 						<textarea class="col-md-12" name="data_sales_item" id="data_sales_item">{{$json_sales}}</textarea>
+							<textarea class="col-md-12" name="deleted_item" id="deleted_item"></textarea>
 						<input readonly type="text" value="{{$data_header['app_sales_id']}}" name="app_sales_id_in_detail" id="app_sales_id_in_detail" required="" class="form-control"/>
 					</form>
 			</div>

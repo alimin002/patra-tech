@@ -13,10 +13,7 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label>@yield('title')</label> 
-								<select id="app_product_id" name="app_product_id" class="form-control" onChange="getProductById(this)">
-									<option> 
-										Choose Raw Material
-									</option>
+								<select id="app_product_id" name="app_product_id" class="form-control" onChange="getProductById(this)">									
 								@foreach($lookup_product as $key=>$values)
 									<option value="{{$values['app_product_id']}}"> 
 									{{$values["name"]}} 
@@ -37,6 +34,12 @@
 							<div class="form-group">
 								<label>Sub Total</label> 
 								<input readonly type="text" placeholder="" name="sub_total" id="sub_total" required="" class="form-control"/>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label>Old Qty</label> 
+								<input type="text" class="form-control" id="old_qty" name="old_qty">
 							</div>
 						</div>
 						<div class="col-sm-12">

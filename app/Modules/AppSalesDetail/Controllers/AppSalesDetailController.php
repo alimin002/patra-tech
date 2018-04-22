@@ -58,9 +58,40 @@ class AppSalesDetailController extends Controller
 					return 0;
 				}
 		}
+		
+		public function stockOut($app_product_id,$num_of_entri){
+			$data					 = AppStockProduct::where('app_product_id','=',$app_product_id)->first();
+			$current_stock =$data["stock"];
+			$new_stock		 =$current_stock - $num_of_entri;//num_of_entri= entri from purchase and other factor
+			$new_stock_product=array(
+																"stock"=>$new_stock
+															);
+			$update=AppStockProduct::where("app_product_id","=",$app_product_id)
+																	 ->update($new_stock_product);																		
+				return $update;
+			
+		}
+		
 		public function stockIn($app_product_id,$num_of_entri){
 			$data					 = AppStockProduct::where('app_product_id','=',$app_product_id)->first();
 			$current_stock =$data["stock"];
+			$new_stock		 =$current_stock + $num_of_entri;//num_of_entri= entri from purchase and other factor
+			$new_stock_product=array(
+																"stock"=>$new_stock
+															);
+			$update=AppStockProduct::where("app_product_id","=",$app_product_id)
+																	 ->update($new_stock_product);																		
+				return $update;
+			
+		}
+		
+		public function stockOutOnUpdateItem($app_product_id,$old_qty,$num_of_entri){
+			$data					 = AppStockProduct::where('app_product_id','=',$app_product_id)->first();
+			$current_stock =$data["stock"];
+			//step back to old stock
+			$current_stock	 =$current_stock + $old_qty;
+			
+			//count new stock
 			$new_stock		 =$current_stock + $num_of_entri;//num_of_entri= entri from purchase and other factor
 			//return $new_stock;
 			$new_stock_product=array(
@@ -82,12 +113,14 @@ class AppSalesDetailController extends Controller
 				if($this->checkItemExists($app_sales_id)==1){
 					 $delete = AppSalesDetail::where('app_sales_id', '=',$app_sales_id)
 																										->delete();
-				//update stock to 0
-				$new_stock_product=array(
-																"stock"=>0
-															);																					
-				AppStockProduct::where("app_product_id","=",$app_product_id)																	 
-																						->update($new_stock_product);																								
+				//if deleted item exists go to there
+					if($request["deleted_item"]!=""){
+							$deleted_item=json_decode($request->input("deleted_item"),true);
+							
+							foreach($deleted_item as $key=>$value){
+								$this->stockIn($value["app_product_id"],$value["qty"]);
+							}
+					}																							
 				}
 
 						 DB::beginTransaction();
@@ -95,8 +128,8 @@ class AppSalesDetailController extends Controller
 									foreach($data_sales_item as $key =>$values)
 									{
 										//saving item purchase
-										$app_sales_id		 =$app_sales_id;
-										$app_product_id =$values["app_product_id"];
+										$app_sales_id		 		 =$app_sales_id;
+										$app_product_id 		= $values["app_product_id"];
 										$qty								 =$values["qty"];
 										$sub_total					 =$values["sub_total"];
 										
@@ -107,8 +140,24 @@ class AppSalesDetailController extends Controller
 																																			
 										$save=AppSalesDetail::insertGetId($sales_detail);
 										
-										//update stock
-										$stock_in=$this->stockIn($app_product_id,$qty);										
+										//update stock										
+											//update stock to 0 
+										if($this->checkItemExists($app_sales_id)==1){
+												if(isset($values["old_qty"])){
+													//update edit item mode
+													$old_qty	 =$values["old_qty"];
+													$stock_out	 =$this->stockOutOnUpdateItem($app_product_id,$old_qty,$qty);
+												}	else{
+													//update add item mode
+													$stock_out=$this->stockOut($app_product_id,$qty);
+												}
+												
+										}else{
+												$stock_out=$this->stockOut($app_product_id,$qty);
+										}
+										
+										
+										//$stock_in=$this->stockOut($app_product_id,$qty);										
 									}
 									
 									
