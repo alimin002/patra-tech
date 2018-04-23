@@ -26,10 +26,20 @@ class AppSalesController extends Controller
 						return Redirect::to('logout')->send();
 			 }
 		}
-    public function index()
+    public function index(Request $request)
     {
-      
-					$data= AppSales::paginate(3);
+			  //echo 1; die();
+				if($request->input("keyword")!= null){
+					//echo 1; die();
+								$keyword =$request->input("keyword");
+								$data= AppSales::where('app_sales.customer_name', 'LIKE','%'.$keyword.'%')
+																->orderBy('app_sales.app_sales_id', 'desc')				
+																->paginate(3);
+				}else{
+					$data= AppSales::orderBy('app_sales.app_sales_id', 'desc')
+																 ->orderBy('app_sales.app_sales_id', 'desc')							
+																 ->paginate(3);
+				}
 					//print_r($data); die();
 				$descending_data = AppSales::orderBy("app_sales_id","desc")->first();	
 				//print_r($descending_data);

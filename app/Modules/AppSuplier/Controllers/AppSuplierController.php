@@ -33,7 +33,7 @@ class AppSuplierController extends Controller
 											->paginate(3);
 				}else{
 					$data= AppSuplier::orderBy('app_suplier.app_suplier_id', 'desc')
-					paginate(3);
+														->paginate(3);
 				}
         return view("AppSuplier::index")
 								->with("data",$data);

@@ -27,10 +27,12 @@ class AppPurchaseController extends Controller
 					$data=AppPurchase::select('app_suplier.*','app_purchase.*','app_purchase.description as purcahse_description','app-suplier.name as suplier_name')
 																		->leftJoin('app_suplier', 'app_suplier.app_suplier_id','=', 'app_purchase.app_suplier_id')
 																		->where('app_purchase.description', 'LIKE','%'.$keyword.'%')
+																		->orderBy('app_purchase.app_purchase_id', 'desc')
 																		->paginate(3);
 				}else{
 					$data= AppPurchase::select('app_suplier.*','app_purchase.*','app_purchase.description as purcahse_description','app_suplier.name as suplier_name')
 																		->leftJoin('app_suplier', 'app_suplier.app_suplier_id','=', 'app_purchase.app_suplier_id')
+																		->orderBy('app_purchase.app_purchase_id', 'desc')
 																		->paginate(3);
 				}
 				

@@ -12,6 +12,7 @@
 */
 Route::group(['module' => 'AppReturnPurchase', 'middleware' => ['web'], 'namespace' => 'App\Modules\AppReturnPurchase\Controllers'], function(){
     Route::get('return_purchase','AppReturnPurchaseController@index');
+		Route::post('return_purchase','AppReturnPurchaseController@index');
 		Route::post('return_purchase/save','AppReturnPurchaseController@save');
 		Route::get('return_purchase/edit/{app_sales_id}','AppReturnPurchaseController@edit');
 		Route::get('return_purchase/render_lookup_suplier','AppReturnPurchaseController@renderLookupSuplier');

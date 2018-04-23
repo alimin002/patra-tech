@@ -29,14 +29,21 @@ class AppCostPredictorController extends Controller
 				$lookup_product=Lookup::getLookupProduct();
 				$lookup_raw_material=Lookup::getLookupRawMaterial();
 					if($request->input("keyword")!= null){
-							$data_composition	=AppCostPredictor::select("app_product_composition.*","app_product_composition.data_composition")
-																									->leftJoin('app_products','app_product_composition.app_product_id','=','app_products.app_product_id')
+							$keyword=$request->input("keyword");
+							$data_composition	=AppCostPredictor::select("app_product_composition.*","app_product_composition.data_composition","app_products.*","app_products.name as product_name")
+																									->leftJoin('app_products','app_products.app_product_id','=','app_product_composition.app_product_id')
+																									->orderBy('app_product_composition.app_product_composition_id', 'desc')	
 																									->where('app_products.name', 'LIKE','%'.$keyword.'%')->paginate(3);
 					}else{
 						 $data_composition =AppCostPredictor::select("app_product_composition.*","app_product_composition.data_composition","app_products.name as product_name")
-															 ->leftJoin('app_products','app_product_composition.app_product_id','=','app_products.app_product_id')
+															 ->leftJoin('app_products','app_products.app_product_id','=','app_product_composition.app_product_id')
+															 ->orderBy('app_product_composition.app_product_composition_id', 'desc')	
 															 ->paginate(3);
-					}					
+					}
+//echo "<pre>";
+//print_r(json_decode(json_encode($data_composition,true)));				
+//echo "</pre>";
+//die();
         return view("AppCostPredictor::index")
 							->with("composition",$data_composition)
 							->with("lookup_product",$lookup_product)

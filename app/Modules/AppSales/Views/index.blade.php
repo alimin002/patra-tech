@@ -29,7 +29,7 @@
 						</div>
 						<div class="col-xs-6">
 							<div class="dataTables_filter" id="sample-table-2_filter">
-								<form action="{{url('raw_material')}}" method="post">
+								<form action="{{url('sales')}}" method="post">
 									{{ csrf_field() }}
 								<label>Search: <input placeholder="type keyword" name="keyword" type="text" aria-controls="sample-table-2"></label>
 								</form>

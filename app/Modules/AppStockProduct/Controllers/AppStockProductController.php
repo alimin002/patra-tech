@@ -19,13 +19,16 @@ class AppStockProductController extends Controller
     public function index(Request $request)
     {
         if($request->input("keyword")!= null){
+					$keyword=$request->input("keyword");
 					$data=AppStockProduct::select('app_products.*','app_stock.*','app_stock.description as stock_description')
 																		->leftJoin('app_products', 'app_products.app_product_id', '=', 'app_stock.app_product_id')
 																		->where('app_stock.description', 'LIKE','%'.$keyword.'%')
+																		->orderBy('app_stock.app_stock_id', 'desc')
 																		->paginate(3);
 				}else{
 					$data= AppStockProduct::select('app_products.*','app_stock.*','app_stock.description as stock_description')
 																		->leftJoin('app_products', 'app_products.app_product_id', '=', 'app_stock.app_product_id')
+																		->orderBy('app_stock.app_stock_id', 'desc')
 																		->paginate(3);
 				}
 				$lookup_product=Lookup::getLookupProduct();

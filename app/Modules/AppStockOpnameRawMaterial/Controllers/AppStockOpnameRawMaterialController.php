@@ -27,12 +27,15 @@ class AppStockOpnameRawMaterialController extends Controller
      */
     public function index(Request $request)
     {
-				$data= AppStockOpnameRawMaterial::paginate(3);
-					//print_r($data); die();
-				$descending_data = AppStockOpnameRawMaterial::orderBy("app_stock_opname_raw_material_id","desc")->first();	
-				//print_r($descending_data);
-				$app_stock_opname_raw_material_id_desc = $descending_data["app_stock_opname_raw_material_id"];
-				
+				if($request->input("keyword")!= null){
+					$keyword=$request->input("keyword");
+					$data= AppStockOpnameRawMaterial::orderBy('app_stock_opname_raw_material.app_stock_opname_raw_material_id', 'desc')
+																						->where('app_stock_opname_raw_material.warehouse_supervisor', 'LIKE','%'.$keyword.'%')
+																						->paginate(3);
+				}else{
+					$data= AppStockOpnameRawMaterial::orderBy('app_stock_opname_raw_material.app_stock_opname_raw_material_id', 'desc')
+																					->paginate(3);
+				}
 				$descending_data = AppStockOpnameRawMaterial::orderBy("app_stock_opname_raw_material_id","desc")->first();	
 				$app_stock_opname_raw_material_id_desc = $descending_data["app_stock_opname_raw_material_id"];
 				

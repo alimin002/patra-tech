@@ -28,6 +28,7 @@ class AppProductController extends Controller
 		 public function getProductByKeyword($keyword){
 			 $data=AppProduct::select("app_products.name as product_name,app_products.*")->where('app_products.name', 'LIKE','%'.$keyword.'%')
 							->leftJoin('app_stock', 'app_stock.app_stock_id', '=', 'app_products.app_product_id')
+							->orderBy('app_products.app_product_id', 'desc')		
 							->paginate(3);
 			 return $data;
 		 }
@@ -35,8 +36,9 @@ class AppProductController extends Controller
 		 
 		  function getProductlAll(){
 			 $data=AppProduct::select("app_products.*","app_products.name as product_name","app_stock.*")
-			 ->leftJoin('app_stock', 'app_stock.app_product_id', '=', 'app_products.app_product_id')
-			 ->paginate(3);
+													->leftJoin('app_stock', 'app_stock.app_product_id', '=', 'app_products.app_product_id')
+													->orderBy('app_products.app_product_id', 'desc')	
+													->paginate(3);
 			
 			 return $data;
 			

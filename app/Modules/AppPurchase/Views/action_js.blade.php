@@ -38,6 +38,11 @@
 		url: '{{url("purchase/edit")}}'+'/'+app_purchase_id, 
     dataType: 'json',
     success: function (response){ 
+				//start clear data residue from begining operation
+				$("#frm-edit #app_purchase_id").val("");
+				$("#frm-edit #description").val("");
+				//end clear data residue from begining operation
+				
 				$("#frm-edit #app_purchase_id").val(response["app_purchase_id"]);
 				$("#frm-edit #purchase_number").val(response["purchase_number"]);
 				$("#frm-edit #description").val(response["description"]);				

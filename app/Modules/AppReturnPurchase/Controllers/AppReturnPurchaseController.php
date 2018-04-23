@@ -28,13 +28,16 @@ class AppReturnPurchaseController extends Controller
     {
 				$lookup_suplier	=Lookup::getLookupSuplier();
 				if($request->input("keyword")!= null){
+					$keyword=$request->input("keyword");
 					$data=AppReturnPurchase::select("app_suplier.*","app_suplier.name as suplier_name","app_return_purchase.*")
 											->leftJoin('app_suplier','app_return_purchase.app_suplier_id','=','app_suplier.app_suplier_id')
 											->where('app_suplier.name', 'LIKE','%'.$keyword.'%')
+											->orderBy('app_return_purchase.app_return_purchase_id', 'desc')	
 											->paginate(3);
 				}else{
 					$data= AppReturnPurchase::select("app_suplier.*","app_suplier.name as suplier_name","app_return_purchase.*")
-											->leftJoin('app_suplier','app_return_purchase.app_suplier_id','=','app_suplier.app_suplier_id')											
+											->leftJoin('app_suplier','app_return_purchase.app_suplier_id','=','app_suplier.app_suplier_id')	
+											->orderBy('app_return_purchase.app_return_purchase_id', 'desc')												
 											->paginate(3);
 				}
 				

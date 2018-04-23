@@ -12,6 +12,7 @@
 */
 Route::group(['module' => 'AppCostPredictor', 'middleware' => ['web'], 'namespace' => 'App\Modules\AppCostPredictor\Controllers'], function(){
     Route::get('cost_predictor','AppCostPredictorController@index');
+		Route::post('cost_predictor','AppCostPredictorController@index');
 		Route::post('cost_predictor/save','AppCostPredictorController@save');
 		Route::get('cost_predictor/edit/{app_product_composition_id}','AppCostPredictorController@edit');
 		Route::post('cost_predictor/update','AppCostPredictorController@update');

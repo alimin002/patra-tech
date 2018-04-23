@@ -131,6 +131,7 @@
 	function edit(id,app_product_composition_id){
 		//alert(app_product_composition_id);
 		var app_product_id=id;
+		alert(app_product_id);
 		$.ajax({ 
     type: 'GET', 
 		url: '{{url("product/edit")}}'+'/'+app_product_id, 
@@ -139,6 +140,7 @@
 				//alert(response.product_name);
 				$("#frm-edit #app_product_id").empty();
 				var obj_composition = getComposition(app_product_composition_id);
+				//alert(JSON.stringify(obj_composition));
 				var super_html="";
 				$("#frm-edit #main-body").empty();
 				for (var i =0; i<=obj_composition.length-1; i++){
@@ -177,9 +179,9 @@
 											"</div>"+
 										"</div>"+										
 									"</div>";
-									//var super_html=super_html+html;
 									$("#main-body").append(html);
 									$("#amount_"+i).val(obj_composition[i].amount);
+									
 									var app_raw_material_id=obj_composition[i].app_raw_material_id;
 									var obj_raw_material = getRawMaterialByIdInEdit(app_raw_material_id);
 									

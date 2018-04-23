@@ -32,10 +32,12 @@ class AppStockRawMaterialController extends Controller
 					$data=AppStockRawMaterial::select('app_raw_material.*','app_stock_raw_material.*','app_stock_raw_material.description as stock_description')
 																		->leftJoin('app_raw_material', 'app_raw_material.app_raw_material_id', '=', 'app_stock_raw_material.app_raw_material_id')
 																		->where('app_stock_raw_material.description', 'LIKE','%'.$keyword.'%')
+																		->orderBy('app_stock_raw_material.app_stock_raw_material_id', 'desc')
 																		->paginate(3);
 				}else{
 					$data= AppStockRawMaterial::select('app_raw_material.*','app_stock_raw_material.*','app_stock_raw_material.description as stock_description')
 																		->leftJoin('app_raw_material', 'app_raw_material.app_raw_material_id', '=', 'app_stock_raw_material.app_raw_material_id')
+																		->orderBy('app_stock_raw_material.app_stock_raw_material_id', 'desc')
 																		->paginate(3);
 				}
 				$lookup_raw_material=Lookup::getLookupRawMaterial();
