@@ -12,22 +12,22 @@
 			<fieldset>
 				<label class="block clearfix">
 					<span class="block input-icon input-icon-right">
-						<input type="text" id="username" name="username" class="form-control" placeholder="Username" />
+						<input type="text" id="username" name="username" class="form-control" placeholder="Username" required ="" />
 						<i class="ace-icon fa fa-user"></i>
 					</span>
 				</label>
 
 				<label class="block clearfix">
 					<span class="block input-icon input-icon-right">
-						<input type="password" name="password" id="password" class="form-control" placeholder="Password" />
+						<input type="password" name="password" id="password" class="form-control" placeholder="Password" required =""/>
 						<i class="ace-icon fa fa-lock"></i>
 					</span>
 				</label>
-				
+				{{--
 				<label class="block clearfix">
 					<span class="block input-icon input-icon-right">
 						 <select name="role" id="role" class="form-control" placeholder="Password" required="">
-								<option>Select Roles</option>
+								<option value="">Select Roles</option>
 								@foreach($sys_roles as $key => $value)
 								<option value="{{$value['name']}}">{{$value['name']}}</option>
 								@endforeach
@@ -35,7 +35,7 @@
 						
 					</span>
 				</label>
-
+				--}}
 				<div class="space"></div>
 
 				<div class="clearfix">

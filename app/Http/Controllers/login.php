@@ -42,12 +42,14 @@ class login extends Controller
 				$username 		= $data_user["username"];
 				$password 		= $data_user["password"];
 				$occupation		= $data_user["occupation"];
+				$role					= $data_user["sys_roles_id"];
 				$message  ="";
 				if($data_user !=""){
 					if($username == $request->input('username')){
 						 if($password == $request->input('password')){
-							 $request->session()->put('session_login',array('username'=>$username,//session key and set it's  value
-																												      'occupation'=>$occupation //session key and set it's  value
+							 $request->session()->put('session_login',array('username'=>$username, 							 
+																												      'occupation'=>$occupation, 
+																															'role'=>$role 
 																											 ));
 								return view('Dashboard::index');
 						 }else{

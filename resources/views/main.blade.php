@@ -117,7 +117,7 @@
 						
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="{{url('assets/avatars/avatar2.png')}}" alt="Jason's Photo" />
+								<img class="nav-user-photo" src="{{url('assets/avatars/avatar2.png')}}" alt="user's Photo" />
 								<span class="user-info">
 									<small>Welcome,</small>
 									{{ session('session_login')['username'] }}
@@ -198,7 +198,6 @@
 									Raw Materials
 								</a>
 							</li>
-
 							<li class="">
 								<a href="{{url('suplier')}}">
 									<i class="menu-icon fa fa-caret-right"></i>
@@ -225,22 +224,25 @@
 									Product
 								</a>
 							</li>
+							@if(session('session_login')['role']!= 2)
 							<li class="">
 								<a href="{{url('category_product')}}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Category Product
 								</a>
 							</li>
-
+							@endif
+							{{--
 							<li class="">
 								<a href="{{url('')}}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Company
 								</a>
-							</li>							
+							</li>	
+							--}}							
 						</ul>
 					</li>
-
+					@if(session('session_login')['role']!= 2)
 					<li class="">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-money"></i>
@@ -271,7 +273,7 @@
 							</li>
 						</ul>
 					</li>
-					
+					@endif
 					<li class="">
 						<a href="{{url('stock_opname_raw_material')}}" onclick="goToStockOpname()" class="dropdown-toggle">
 							<i class="menu-icon fa fa-sticky-note"></i>
@@ -283,6 +285,7 @@
 							location.href = "{{url('stock_opname_raw_material')}}";
 						}
 					</script>
+					@if(session('session_login')['role']!= 2)
 					<li class="">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-thumbs-down"></i>
@@ -314,6 +317,7 @@
 							</li>
 						</ul>
 					</li>
+				
 					<li class="">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-file-text"></i>
@@ -364,39 +368,12 @@
 						</ul>
 					
 					</li>
-					{{--
+					
+					@if(session('session_login')['role']!= 1)
 					<li class="">
-						<a href="widgets.html">
-							<i class="menu-icon fa fa-list-alt"></i>
-							<span class="menu-text"> Refferences </span>
-						</a>
-
-						<b class="arrow"></b>
-						<b class="arrow"></b>
-						<ul class="submenu">
-							<li class="">
-								<a href="tables.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Category
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="">
-								<a href="jqgrid.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Stock
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>--}}
-						<li class="">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-wrench"></i>
-							<span class="menu-text">Return</span>
+							<span class="menu-text">Setting</span>
 
 							<b class="arrow fa fa-angle-down"></b>
 						</a>
@@ -405,7 +382,7 @@
 
 						<ul class="submenu">
 							<li class="">
-								<a href="tables.html">
+								<a href="{{url('setting/sys_users')}}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Users
 								</a>
@@ -414,7 +391,7 @@
 							</li>
 
 							<li class="">
-								<a href="jqgrid.html">
+								<a href="{{url('setting/company')}}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Company
 								</a>
@@ -423,6 +400,8 @@
 							</li>
 						</ul>
 					</li>
+					@endif
+					@endif
 				</ul><!-- /.nav-list -->
 
 				<!-- #section:basics/sidebar.layout.minimize -->
