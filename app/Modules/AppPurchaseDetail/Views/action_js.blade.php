@@ -350,10 +350,10 @@
 									
 										"<div class='hidden-sm hidden-xs action-buttons'>"+
 											"<a class='green' href='#'>"+
-												"<i class='ace-icon fa fa-pencil bigger-130' id=row-"+row_purchase+" class='btn btn-primary' onclick='editItem(this.id)'></i>"+
+												"<i class='ace-icon fa fa-pencil bigger-130' id=row-"+row_purchase+" class='btn btn-primary' onclick='editItem(this.id,"+app_raw_material_id+")'></i>"+
 											"</a>"+
 											"<a class='red' href='#'>"+
-												"<i class='ace-icon fa fa-trash-o bigger-130'></i>"+
+												"<i class='ace-icon fa fa-trash-o bigger-130' onclick='deleteItem(this.id,"+app_raw_material_id+")'></i>"+
 											"</a>"+
 										"</div>"+	
 											"<div class='hidden-md hidden-lg'>"+
@@ -365,14 +365,14 @@
 														"<li>"+
 															"<a href='#'  class='tooltip-success' data-rel='tooltip' title='' data-original-title='Edit' >"+
 																"<span class='green' >"+
-																	"<i class='ace-icon fa fa-pencil-square-o bigger-120' id=row-"+row_purchase+" class='btn btn-primary' onclick='editItem(this.id)'></i>"+
+																	"<i class='ace-icon fa fa-pencil-square-o bigger-120' id=row-"+row_purchase+" class='btn btn-primary' onclick='editItem(this.id,"+app_raw_material_id+")'></i>"+
 																"</span>"+
 															"</a>"+
 														"</li>"+
 														"<li>"+
 															"<a href='#' class='tooltip-error' data-rel='tooltip' title='' data-original-title='Delete'>"+
 																"<span class='red'>"+
-																	"<i class='ace-icon fa fa-trash-o bigger-120'></i>"+
+																	"<i class='ace-icon fa fa-trash-o bigger-120' onclick='deleteItem(this.id,"+app_raw_material_id+")'></i>"+
 																"</span>"+
 															"</a>"+
 														"</li>"+
@@ -413,11 +413,9 @@
 		var qty								=$("#"+row_id+" "+"td:eq(3)").text();
 		var sub_total					=$("#"+row_id+" "+"td:eq(4)").text();
 		var description				=$("#"+row_id+" "+"td:eq(5)").text();
-		
 		var stock= getStock(app_raw_material_id).stock;
-		//alert(stock);
-		//delete selected item
 		var data_purchase_item=JSON.parse($("#data_purchase_item").val());
+		alert(data_purchase_item);
 		var selected_row=row_id.replace("tr-","");
 		var start_index = selected_row;//target update row
     var number_of_elements_to_remove = 1;

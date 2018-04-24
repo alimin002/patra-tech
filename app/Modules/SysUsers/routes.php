@@ -15,6 +15,7 @@ Route::group(['module' => 'SysUsers', 'middleware' => ['web'], 'namespace' => 'A
 		Route::post('sys_user','SysUsersController@index');
 		Route::post('sys_user/save','SysUsersController@save');
 		Route::get('sys_user/edit/{app_sys_user_id}','SysUsersController@edit');
+		Route::get('sys_user/render_lookup_roles','SysUsersController@renderLookupRoles');
 		Route::post('sys_user/update','SysUsersController@update');
 		Route::post('sys_user/destroy','SysUsersController@destroy');
 });

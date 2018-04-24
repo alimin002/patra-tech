@@ -23,6 +23,10 @@ class SysUsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+		 public function renderLookupRoles(){
+			$lookup_roles = Lookup::getLookupRoles();
+			echo json_encode($lookup_roles);
+		 }
     public function index(Request $request)
     {									
 				if($request->input("keyword")!= null){
@@ -106,9 +110,24 @@ class SysUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+         //
+				$sys_user_id = $request->input("sys_user_id");
+				$user=array("username" =>$request["username"],
+									  "sys_roles_id"=>$request["sys_roles_id"]
+										);
+					//print_r($user); die();
+			  $update=SysUsers::where("sys_user_id","=",$sys_user_id)
+														  ->update($user);																		
+				if($update==1){
+					$message="update data successful";
+				}else{
+					$message="update data failed";
+				}
+				
+				return Redirect::to('sys_user')
+								->with("message",$message);
     }
 
     /**
@@ -117,8 +136,18 @@ class SysUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
+				 $sys_user_id = $request->input("sys_user_id");
+				 $delete = SysUsers::where('sys_user_id', '=',$sys_user_id)
+																									->delete();
+				 if($delete ==true){
+					 $message="Delete data successfull";
+				 }else{
+					 $message="Delete data failed";
+				 }
+				 return Redirect::to('sys_user')
+								->with("message",$message);
     }
 }

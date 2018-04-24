@@ -14,17 +14,17 @@
 		$("#frm-edit").submit();
 	}
 	
-	function renderLookupSuplier(){
+	function renderLookupRoles(){
 		$.ajax({ 
     type: 'GET', 
-    url: '{{url("purchase/render_lookup_suplier")}}', 
+    url: '{{url("sys_user/render_lookup_roles")}}', 
     dataType:'json',
     success: function (response){
 				//alert(response);
 				for(var i=0; i< response.length -1; i++ ){
-					var suplier_name=response[i]["name"];
-					var app_suplier_id=response[i]["app_suplier_id"];
-					$("#frm-edit #app_suplier_id").append("<option value="+app_suplier_id+">"+suplier_name+"</option>");
+					var roles_role_name=response[i]["role_name"];
+					var sys_roles_id=response[i]["sys_roles_id"];
+					$("#frm-edit #sys_roles_id").append("<option value="+sys_roles_id+">"+roles_role_name+"</option>");
 				}
 			}
 		});
@@ -40,16 +40,18 @@
     success: function (response){ 
 		var sys_roles_id=response["sys_roles_id"];
 		var role_name   =response["role_name"];
-			$("#frm-edit #sys_users_id").val("");
+			$("#frm-edit #sys_user_id").val("");
 			$("#frm-edit #sys_roles_id").empty();
 			$("#frm-edit #username").val("");
 			
 			$("#frm-edit #username").val(response["username"]);	
-			$("#frm-edit #sys_users_id").val(response["sys_users_id"]);
-				//$("#frm-edit #sys_roles_id").val(response["sys_roles_id"]);	
-				$("#frm-edit #sys_roles_id").prepend("<option value="+sys_roles_id+">"+role_name+"</option>");
-				$("#frm-edit #username").val(response["username"]);	
-				$("#modal-edit").modal("toggle");
+			$("#frm-edit #sys_user_id").val(response["sys_user_id"]);
+			
+			//binding lokkup
+			$("#frm-edit #sys_roles_id").prepend("<option value="+sys_roles_id+">"+role_name+"</option>");
+			renderLookupRoles();
+			//end binding lokkup		
+			$("#modal-edit").modal("toggle");
     }
 		});		
 	}
@@ -61,18 +63,25 @@
 	}
 	
 	function deleteData(id){
-		var app_sales_id=id;
+		var sys_user_id=id;
 		$.ajax({ 
     type: 'GET', 
-		url: '{{url("sales/edit")}}'+'/'+app_sales_id, 
+		url: '{{url("sys_user/edit/")}}'+'/'+sys_user_id, 
     dataType: 'json',
     success: function (response){ 
-				$("#frm-delete #app_sales_id").val(response["app_sales_id"]);
-				$("#frm-delete #invoice_number").val(response["invoice_number"]);
-					$("#frm-delete #customer_name").val(response["customer_name"]);
-				$("#frm-delete #description").val(response["description"]);				
-				
-				$("#modal-delete").modal("toggle");
+		var sys_roles_id=response["sys_roles_id"];
+		var role_name   =response["role_name"];
+			$("#frm-delete #sys_user_id").val("");
+			$("#frm-delete #sys_roles_id").empty();
+			$("#frm-delete #username").val("");
+			
+			$("#frm-delete #username").val(response["username"]);	
+			$("#frm-delete #sys_user_id").val(response["sys_user_id"]);
+			//binding lokkup
+			$("#frm-delete #sys_roles_id").prepend("<option value="+sys_roles_id+">"+role_name+"</option>");
+			renderLookupRoles();
+			//end binding lokkup		
+			$("#modal-delete").modal("toggle");
     }
 		});		
 	}

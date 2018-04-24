@@ -7,13 +7,13 @@
 				<h4 class="modal-title">User</h4>
 			</div>
 			<div class="modal-body">
-					<form name="frm-edit" id="frm-edit" action="{{url('sales/update')}}" method="post">
+					<form name="frm-edit" id="frm-edit" action="{{url('sys_user/update')}}" method="post">
 					{{ csrf_field() }}
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="form-group">
 								<label>Username</label> 
-								<input type="text" readonly="readonly" placeholder="" name="username" id="username" required="" class="form-control">
+								<input type="text" placeholder="" name="username" id="username" required="" class="form-control">
 							</div>
 							<div class="form-group">
 								<label>Role</label> 
@@ -21,7 +21,7 @@
 									
 								</select>
 							</div>	
-							<input type="hidden" readonly="readonly" placeholder="" name="sys_user_id" id="sys_user_id" required="" class="form-control">
+							<input type="hidden" placeholder="" name="sys_user_id" id="sys_user_id" required="" class="form-control">
 						</div>
 					</form>																	
 				 </div>														
