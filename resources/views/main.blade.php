@@ -382,7 +382,7 @@
 
 						<ul class="submenu">
 							<li class="">
-								<a href="{{url('setting/sys_users')}}">
+								<a href="{{url('sys_user')}}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Users
 								</a>
