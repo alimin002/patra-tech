@@ -138,7 +138,7 @@
 						</table>
 						<div class="row">
 						<div class="col-xs-6">
-							<button class="btn btn-white btn-primary" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus">&nbsp;Add</i></button>
+							<button onclick="add()" class="btn btn-white btn-primary"><i class="fa fa-plus">&nbsp;Add</i></button>
 							<div class="dataTables_info" id="sample-table-2_info"><!--Showing 1 to 10 of 23 entries--></div>
 						</div>
 						<div class="col-xs-6">

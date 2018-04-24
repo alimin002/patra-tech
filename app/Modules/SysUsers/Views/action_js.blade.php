@@ -1,10 +1,4 @@
 <script>
-	function add()
-	{
-		$("#modal-add").modal("toggle");
-		$("#frm-create #customer_name").val("");		
-		$("#frm-create #description").val("");	
-	}
 	function doSave(){
 		$("#modal-add").modal("hide");
 		$("#frm-create").submit();
@@ -38,16 +32,23 @@
 	
 	
 	function edit(id){
-		var app_sales_id=id;
+		var sys_user_id=id;
 		$.ajax({ 
     type: 'GET', 
-		url: '{{url("sales/edit")}}'+'/'+app_sales_id, 
+		url: '{{url("sys_user/edit/")}}'+'/'+sys_user_id, 
     dataType: 'json',
     success: function (response){ 
-				$("#frm-edit #app_sales_id").val(response["app_sales_id"]);
-				$("#frm-edit #invoice_number").val(response["invoice_number"]);
-				$("#frm-edit #customer_name").val(response["customer_name"]);		
-				$("#frm-edit #description").val(response["description"]);				
+		var sys_roles_id=response["sys_roles_id"];
+		var role_name   =response["role_name"];
+			$("#frm-edit #sys_users_id").val("");
+			$("#frm-edit #sys_roles_id").empty();
+			$("#frm-edit #username").val("");
+			
+			$("#frm-edit #username").val(response["username"]);	
+			$("#frm-edit #sys_users_id").val(response["sys_users_id"]);
+				//$("#frm-edit #sys_roles_id").val(response["sys_roles_id"]);	
+				$("#frm-edit #sys_roles_id").prepend("<option value="+sys_roles_id+">"+role_name+"</option>");
+				$("#frm-edit #username").val(response["username"]);	
 				$("#modal-edit").modal("toggle");
     }
 		});		

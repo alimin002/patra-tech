@@ -4,7 +4,7 @@ namespace App\Providers;
 use App\app_suplier;
 use App\app_category_raw_material;
 use App\app_category_product;
-
+use App\sys_roles;
 use App\Modules\AppRawMaterial\Models\AppRawMaterial;
 use App\Modules\AppProduct\Models\AppProduct;
 
@@ -34,6 +34,11 @@ class Lookup extends ServiceProvider
 		
 		public static function getLookupSuplier(){
 			$data=app_suplier::get();
+			return $data;
+		}
+		
+		public static function getLookupRoles(){
+			$data=sys_roles::select("sys_roles.*","sys_roles.name as role_name")->get();
 			return $data;
 		}
 		//lookup category raw_material

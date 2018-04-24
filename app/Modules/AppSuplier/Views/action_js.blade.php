@@ -1,4 +1,10 @@
 <script>
+	function add(){
+		$("#frm-create #name").val("");
+		$("#frm-create #addres").val("");
+		$("#frm-create #telephone_number").val("");
+		$("#modal-add").modal("toggle");	
+	}
 	function doSave(){
 		$("#modal-add").modal("hide");
 		$("#frm-create").submit();

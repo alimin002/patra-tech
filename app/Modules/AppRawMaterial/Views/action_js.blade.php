@@ -1,4 +1,14 @@
 <script>
+function add(){
+		$("#modal-add").modal("toggle");
+		$("#frm-create #name").val("");
+		$("#frm-create #unit").val("");
+		$("#frm-create #unit_price").val("");
+		$("#frm-create #app_suplier_id").val("");
+		$("#frm-create #app_category_raw_material_id").val("");
+		$("#frm-create #description").val("");
+		
+	}
 	function doSave(){
 		$("#modal-add").modal("hide");
 		$("#frm-create").submit();

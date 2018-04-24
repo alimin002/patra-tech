@@ -1,4 +1,11 @@
 <script>
+	function add()
+	{
+		$("#modal-add").modal("toggle");
+		$("#frm-create #app_stock_id").val("");
+		$("#frm-create #stock").val("");
+		$("#frm-create #description").val("");	
+	}
 	function doSave(){
 		$("#modal-add").modal("hide");
 		$("#frm-create").submit();
