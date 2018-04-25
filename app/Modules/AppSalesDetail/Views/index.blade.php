@@ -113,12 +113,9 @@
 												</li>
 												<li>
 													<a href="{{url('sales_detail/download_pdf/'.$app_sales_id)}}">Download Invoice To PDF</a>
-												</li>
+												</li>										
 												<li>
-													<a href="#">Export Invoice To Excel</a>
-												</li>
-												<li>
-													<a href="#">Send Invoice To Email</a>
+													<a href="{{url('sales_detail/send_invoice_to_email/'.$app_sales_id)}}">Send Invoice To Email</a>
 												</li>									
 												<li class="divider"></li>
 											</ul>

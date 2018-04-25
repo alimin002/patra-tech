@@ -118,7 +118,7 @@
 												</li>
 
 												<li>
-													<a href="#">Send Invoice To Email</a>
+													<a href="{{url('purchase_detail/send_po_to_email/'.$app_purchase_id)}}">Send PO To Email</a>
 												</li>									
 												<li class="divider"></li>
 											</ul>

@@ -16,6 +16,7 @@ Use Redirect;
 use DB;
 use PDF;
 use Session;
+use Mail;
 class AppSalesDetailController extends Controller
 {
 
@@ -202,10 +203,6 @@ class AppSalesDetailController extends Controller
 		}
 		
 			public function preview_pdf($app_sales_id){
-			  //echo 1;
-				//$pdf=PDF::loadView('AppSalesDetail::invoice_pdf');
-				//$pdf->stream("AppSalesDetail::invoice_pdf.pdf", array("Attachment" => false));
-				//exit(0);
 				return response()->file(
         public_path('download/test.pdf')
     );
@@ -233,6 +230,21 @@ class AppSalesDetailController extends Controller
 				return Redirect::to('sales_detail?sales_id='.$app_sales_id)
 												->with("message",$message);
     }
+		
+		function sendInvoiceToEmail($app_sales_id){
+			$data_header=$this->get_header($app_sales_id);
+			$data_detail=$this->get_detail($app_sales_id);
+			$data = array('data'=>array("data_header"=>$data_header,
+									  "data_detail"=>$data_detail));
+										
+      Mail::send('AppSalesDetail::email_Invoice', $data, function($email_message) {
+         $email_message->to('alimin1313@gmail.com', 'Invoice')->subject('Purchase Order');
+         $email_message->from('patradigitalgarage@gmail.com','Alimin');
+      });
+      $message="email has sent...";
+			return Redirect::to('sales_detail?sales_id='.$app_sales_id)
+												->with("message",$message);
+		}
 
     /**
      * Show the form for creating a new resource.

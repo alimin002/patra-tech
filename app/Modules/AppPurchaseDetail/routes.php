@@ -22,6 +22,8 @@
 		Route::post('purchase_detail/update','AppPurchaseDetailController@update');
 		Route::post('purchase_detail/update_header','AppPurchaseDetailController@update_header');
 		Route::post('purchase_detail/destroy','AppPurchaseDetailController@destroy');
+		Route::get('purchase_detail/send_po_to_email/{app_purchase_detail_id}','AppPurchaseDetailController@sendPoToEmail');
+		Route::get('purchase_detail/test_email','AppPurchaseDetailController@sendEmail');
 });
 
 

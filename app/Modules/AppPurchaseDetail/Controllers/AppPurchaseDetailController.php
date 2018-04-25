@@ -14,6 +14,7 @@ use Illuminate\Pagination\Paginator;
 Use Redirect;
 use DB;
 use PDF;
+use Mail;
 class AppPurchaseDetailController extends Controller
 {
 
@@ -268,7 +269,11 @@ class AppPurchaseDetailController extends Controller
     }
 		
 		function get_header($app_purchase_id){
-			$data_header=$data = AppPurchase::where('app_purchase.app_purchase_id', '=',$app_purchase_id)->first();							
+			$data_header=$data = AppPurchase::select("app_purchase.*","app_suplier.*","app_suplier.name as suplier_name")
+																->leftJoin("app_suplier","app_purchase.app_suplier_id","=","app_suplier.app_suplier_id")
+																->where('app_purchase.app_purchase_id', '=',$app_purchase_id)->first();	
+
+									return $data_header;
 			
 		}
 		
@@ -325,4 +330,31 @@ class AppPurchaseDetailController extends Controller
     {
         //
     }
+		
+		function sendEmail(){
+			$data = array('name'=>"Alimin");
+      Mail::send('AppPurchaseDetail::mail', $data, function($email_message) {
+         $email_message->to('alimin1313@gmail.com', 'test email')->subject
+            ('Laravel HTML Testing Mail');
+         $email_message->from('patradigitalgarage@gmail.com','Alimin');
+      });
+      $message="email has sent...";
+			return Redirect::to('purchase_detail?purchase_id='.$app_purchase_id)
+												->with("message",$message);
+		}
+		
+		function sendPoToEmail($app_purchase_id){
+			$data_header=$this->get_header($app_purchase_id);
+			$data_detail=$this->get_detail($app_purchase_id);
+			$data = array('data'=>array("data_header"=>$data_header,
+									  "data_detail"=>$data_detail));
+										
+      Mail::send('AppPurchaseDetail::email_po', $data, function($email_message) {
+         $email_message->to('alimin1313@gmail.com', 'Purchase Order')->subject('Purchase Order');
+         $email_message->from('patradigitalgarage@gmail.com','Alimin');
+      });
+      $message="email has sent...";
+			return Redirect::to('purchase_detail?purchase_id='.$app_purchase_id)
+												->with("message",$message);
+		}
 }
