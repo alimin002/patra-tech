@@ -1,4 +1,10 @@
 <script>
+	function add()
+	{
+		$("#modal-add").modal("toggle");
+		$("#frm-create #description").val("");
+		
+	}
 	function doSave(){
 		$("#modal-add").modal("hide");
 		$("#frm-create").submit();
