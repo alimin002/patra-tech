@@ -22,7 +22,11 @@
 							<div class="form-group">
 								<label>Telephone Number</label> 
 								<input type="text" placeholder="" name="telephone_number" id="telephone_number" required="" class="form-control">
-							</div>					
+							</div>
+							<div class="form-group">
+								<label>Email</label> 
+								<input type="text" placeholder="" name="email" id="email" required="" class="form-control">
+							</div>								
 								<input type="hidden" placeholder="" name="app_suplier_id" id="app_suplier_id" required="" class="form-control">							
 						</div>
 					</form>																	

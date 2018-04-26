@@ -29,7 +29,7 @@
 						</div>
 						<div class="col-xs-6">
 							<div class="dataTables_filter" id="sample-table-2_filter">
-								<form action="{{url('raw_material')}}" method="post">
+								<form action="{{url('suplier')}}" method="post">
 									{{ csrf_field() }}
 								<label>Search: <input placeholder="type keyword" name="keyword" type="text" aria-controls="sample-table-2"></label>
 								</form>
@@ -59,6 +59,11 @@
 							: activate to sort column ascending">
 								Telephone Number
 							</th>
+							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="								
+								Update
+							: activate to sort column ascending">
+								Email
+							</th>
 							<th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label=""></th>
 						</tr>
 					</thead>			
@@ -75,7 +80,8 @@
 							<td class=" ">{{$values["name"]}}</td>
 							<td class=" ">{{$values["gender"]}}</td>
 							<td class="hidden-480 ">{{$values["addres"]}}</td>
-							<td class=" ">{{$values["addres"]}}</td>
+							<td class=" ">{{$values["telephone_number"]}}</td>
+							<td class=" ">{{$values["email"]}}</td>
 							<td class=" ">
 								<div class="hidden-sm hidden-xs action-buttons">
 									<a class="green" href="#" onclick="edit('{{$values['app_suplier_id']}}')">

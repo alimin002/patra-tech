@@ -5,7 +5,12 @@
    return "Warning: data purchase item will be lost, are you sure you want to leave? Think of the kittens!";
  }
  **/
-	
+ 
+function numberWithCommas(n) {
+    var parts=n.toString().split(".");
+    return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+}
+ 
  $(function(){
 		bindPurchaseItem();
  });

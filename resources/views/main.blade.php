@@ -35,6 +35,7 @@
 
 		<!-- ace settings handler -->
 		<script src="{{url('assets/js/ace-extra.min.js')}}"></script>
+		<script src="{{url('assets/js/common.js')}}"></script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 

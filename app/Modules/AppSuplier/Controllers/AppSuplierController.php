@@ -28,6 +28,7 @@ class AppSuplierController extends Controller
 				
 				
 				if($request->input("keyword")!= null){
+					$keyword=$request->input("keyword");
 					$data=AppSuplier::where('app_suplier.name', 'LIKE','%'.$keyword.'%')
 											->orderBy('app_suplier.app_suplier_id', 'desc')
 											->paginate(3);
@@ -42,7 +43,10 @@ class AppSuplierController extends Controller
 		public function save(Request $request){
 				$suplier=array("name"							=>$request["name"],
 											 "addres"						=>$request["addres"],
-									     "telephone_number"	=>$request["telephone_number"]);
+									     "telephone_number"	=>$request["telephone_number"],
+											 "email"						=>$request["email"],
+											 
+											 );
 								
 			 $save=AppSuplier::insert($suplier);				
 				if($save==1){
@@ -68,7 +72,10 @@ class AppSuplierController extends Controller
 				 $app_suplier_id															= $request->input("app_suplier_id");
 				 $suplier=array( "name"												=>$request->input("name"),
 												 "addres"											=>$request->input("addres"),
-												 "telephone_number"						=>$request->input("telephone_number"));
+												 "telephone_number"						=>$request->input("telephone_number"),
+												 "email"											=>$request->input("email")
+												 
+												 );
 				 $app_suplier_id=$request['app_suplier_id'];
 				 $update = AppSuplier::where('app_suplier_id', '=',$app_suplier_id)
 																				->update($suplier);

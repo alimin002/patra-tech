@@ -347,11 +347,15 @@ class AppPurchaseDetailController extends Controller
 			$data_header=$this->get_header($app_purchase_id);
 			$data_detail=$this->get_detail($app_purchase_id);
 			$data = array('data'=>array("data_header"=>$data_header,
-									  "data_detail"=>$data_detail));
-										
-      Mail::send('AppPurchaseDetail::email_po', $data, function($email_message) {
-         $email_message->to('alimin1313@gmail.com', 'Purchase Order')->subject('Purchase Order');
-         $email_message->from('patradigitalgarage@gmail.com','Alimin');
+									  "data_detail"=>$data_detail)									
+										);
+			//echo $suplier_email; die();	
+			$email_data=array("email_to"=>$data_header["email"],
+												"email_from"=>"patradigitalgarage@gmail.com"
+			);
+      Mail::send('AppPurchaseDetail::email_po', $data, function($email_message)use($email_data){
+         $email_message->to($email_data["email_to"], 'Purchase Order')->subject('Purchase Order');
+         $email_message->from($email_data["email_from"],'Alimin');
       });
       $message="email has sent...";
 			return Redirect::to('purchase_detail?purchase_id='.$app_purchase_id)

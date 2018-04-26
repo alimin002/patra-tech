@@ -3,6 +3,7 @@
 		$("#frm-create #name").val("");
 		$("#frm-create #addres").val("");
 		$("#frm-create #telephone_number").val("");
+		$("#frm-create #email").val("");
 		$("#modal-add").modal("toggle");	
 	}
 	function doSave(){
@@ -22,6 +23,7 @@
 					$("#frm-edit #addres").val(response["addres"]);
 					$("#frm-edit #telephone_number").val(response["telephone_number"]);
 					$("#frm-edit #app_suplier_id").val(response["app_suplier_id"]);
+					$("#frm-edit #email").val(response["email"]);
 					$("#modal-edit").modal("toggle");
 			}
 		});		
@@ -43,6 +45,7 @@
 					$("#frm-delete #addres").val(response["addres"]);
 					$("#frm-delete #telephone_number").val(response["telephone_number"]);
 					$("#frm-delete #app_suplier_id").val(response["app_suplier_id"]);
+					$("#frm-delete #email").val(response["email"]);
 					$("#modal-delete").modal("toggle");
     }
 		});
