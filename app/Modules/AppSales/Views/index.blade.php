@@ -54,6 +54,9 @@
 							<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending">
 								Customer Name
 							</th>
+							<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending">
+								Customer Email
+							</th>
 							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="								
 								Update
 							: activate to sort column ascending">
@@ -76,6 +79,7 @@
 							<td class=" ">{{$values["invoice_number"]}}</td>
 							<td class=" ">{{$values["sale_date"]}}</td>
 							<td class="hidden-480 ">{{$values["customer_name"]}}</td>
+							<td class="hidden-480 ">{{$values["customer_email"]}}</td>
 							<td class=" ">{{$values["description"]}}</td>
 							<td class=" ">
 								<!--dekstop view-->

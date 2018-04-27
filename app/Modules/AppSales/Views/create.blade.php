@@ -18,7 +18,11 @@
 							<div class="form-group">
 								<label>Customer Name</label> 
 								<input type="text" placeholder="" name="customer_name" id="customer_name" required="" class="form-control">
-							</div>							
+							</div>
+							<div class="form-group">
+								<label>Customer Email</label> 
+								<input type="text" placeholder="" name="customer_email" id="customer_email" required="" class="form-control">
+							</div>									
 							<div class="form-group">
 								<label>Description</label> 
 								<textarea placeholder="" name="description" id="description" required="" class="form-control"></textarea>

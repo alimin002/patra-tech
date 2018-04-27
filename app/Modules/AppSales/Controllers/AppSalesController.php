@@ -59,8 +59,10 @@ class AppSalesController extends Controller
 			//save purchase
 			public function save(Request $request){
 			$purchase=	array("invoice_number"		=>$request["invoice_number"],											 
-												"sale_date"			=>date("Y-m-d"),												
-												"customer_name"			=>$request["customer_name"]);
+												"sale_date"					=>date("Y-m-d"),												
+												"customer_name"			=>$request["customer_name"],
+												"customer_email"		=>$request["customer_email"],
+												);
 								
 			 $save=AppSales::insert($purchase);				
 				if($save==1){
@@ -129,7 +131,7 @@ class AppSalesController extends Controller
     {
 				//
 				$app_sales_id = $request->input("app_sales_id");
-				$sales=array("customer_name" =>$request["customer_name"]);												   
+				$sales=array("customer_name" =>$request["customer_name"],"customer_email" =>$request["customer_email"]);												   
 			  $update=AppSales::where("app_sales_id","=",$app_sales_id)
 													->update($sales);																		
 				if($update==1){

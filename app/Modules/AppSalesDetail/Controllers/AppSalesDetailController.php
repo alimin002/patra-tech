@@ -236,10 +236,13 @@ class AppSalesDetailController extends Controller
 			$data_detail=$this->get_detail($app_sales_id);
 			$data = array('data'=>array("data_header"=>$data_header,
 									  "data_detail"=>$data_detail));
+			$email_data=array("email_to"=>$data_header["customer_email"],
+												"email_from"=>"patradigitalgarage@gmail.com"
+			);
 										
-      Mail::send('AppSalesDetail::email_Invoice', $data, function($email_message) {
-         $email_message->to('alimin1313@gmail.com', 'Invoice')->subject('Purchase Order');
-         $email_message->from('patradigitalgarage@gmail.com','Alimin');
+      Mail::send('AppSalesDetail::email_Invoice', $data, function($email_message)use($email_data){
+         $email_message->to($email_data["email_to"], 'Invoice')->subject('Purchase Order');
+         $email_message->from($email_data["email_from"],'Alimin');
       });
       $message="email has sent...";
 			return Redirect::to('sales_detail?sales_id='.$app_sales_id)

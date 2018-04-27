@@ -20,19 +20,25 @@
 							</button>
 					</div>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-6">
 					<div class="form-group">
 							<label class="control-label" for="invoice_number">Invoice Number</label>
 							<input type="text" value="{{$data_header['invoice_number']}}" readonly id="invoice_number" name="invoice_number"  placeholder="" class="form-control">
 					</div>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-6">
 					<div class="form-group">
 							<label class="control-label" for="customer_name">Customer Name</label>
 							<input type="text" readonly value="{{$data_header['customer_name']}}" id="customer_name" name="customer_name" value="" placeholder="" class="form-control">
 					</div>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-6">
+					<div class="form-group">
+							<label class="control-label" for="customer_email">Customer Email</label>
+							<input type="text" readonly value="{{$data_header['customer_email']}}" id="customer_email" name="customer_email" value="" placeholder="" class="form-control">
+					</div>
+			</div>
+			<div class="col-sm-6">
 					<div class="form-group">
 							<label class="control-label" for="sales_date">Sales Date</label>
 							<input type="text" readonly value="{{$data_header['sale_date']}}" id="sale_date" name="sale_date"  placeholder="" class="form-control">

@@ -47,7 +47,8 @@
 				$("#frm-edit #app_sales_id").val(response["app_sales_id"]);
 				$("#frm-edit #invoice_number").val(response["invoice_number"]);
 				$("#frm-edit #customer_name").val(response["customer_name"]);		
-				$("#frm-edit #description").val(response["description"]);				
+				$("#frm-edit #description").val(response["description"]);	
+				$("#frm-edit #customer_email").val(response["customer_email"]);							
 				$("#modal-edit").modal("toggle");
     }
 		});		
@@ -68,7 +69,8 @@
     success: function (response){ 
 				$("#frm-delete #app_sales_id").val(response["app_sales_id"]);
 				$("#frm-delete #invoice_number").val(response["invoice_number"]);
-					$("#frm-delete #customer_name").val(response["customer_name"]);
+				$("#frm-delete #customer_name").val(response["customer_name"]);
+				$("#frm-delete #customer_email").val(response["customer_email"]);
 				$("#frm-delete #description").val(response["description"]);				
 				
 				$("#modal-delete").modal("toggle");
