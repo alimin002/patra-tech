@@ -17,6 +17,17 @@ use PDF;
 use Mail;
 class AppPurchaseDetailController extends Controller
 {
+		 /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+		public function __construct(Request $request) 
+		{
+       if ($request->session()->has('session_login')==false) {
+						return Redirect::to('logout')->send();
+			 }
+		}
 
     /**
      * Display a listing of the resource.
@@ -91,9 +102,10 @@ class AppPurchaseDetailController extends Controller
 		}
 		
 		public function save(Request $request)
-		{ 
-		  
-			
+		{
+		  //$number= Common::removeCommas("1000,000,000"); 
+			//echo $number;
+			//die();
 			$data_purchase_item = json_decode($request->input("data_purchase_item"),true);
 			
 			$app_purchase_id			= $request["app_purchase_idx"];
@@ -123,7 +135,8 @@ class AppPurchaseDetailController extends Controller
 										$app_purchase_id		 =$app_purchase_id;
 										$app_raw_material_id =$values["app_raw_material_id"];
 										$qty								 =$values["qty"];
-										$sub_total					 =$values["sub_total"];
+										//removing commas from number format
+										$sub_total					 =Common::removeCommas($values["sub_total"]);
 										
 										$purchase_detail=	array("app_purchase_id"			=>$app_purchase_id,
 																						"app_raw_material_id"	=>$app_raw_material_id,
@@ -286,13 +299,12 @@ class AppPurchaseDetailController extends Controller
 		}
 		
 			public function download_pdf($app_purchase_id){
-			
+			//echo Common::number_with_commas(10000000);die();
 			$data_header=$this->get_header($app_purchase_id);
 			$data_detail=$this->get_detail($app_purchase_id);
 			//print_r($data_detail); die();
 			$data=array("data_header"=>$data_header,
-									"data_detail"=>$data_detail
-			);
+									"data_detail"=>$data_detail);
 			
 				$pdf=PDF::loadView('AppPurchaseDetail::purchase_order_pdf', compact('data'));
 				return $pdf->download('purchase_order_pdf.pdf');
@@ -344,6 +356,7 @@ class AppPurchaseDetailController extends Controller
 		}
 		
 		function sendPoToEmail($app_purchase_id){
+			//echo Common::number_with_commas(1000000);die();
 			$data_header=$this->get_header($app_purchase_id);
 			$data_detail=$this->get_detail($app_purchase_id);
 			$data = array('data'=>array("data_header"=>$data_header,

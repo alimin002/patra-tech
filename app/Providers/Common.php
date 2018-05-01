@@ -42,5 +42,17 @@ class Common extends ServiceProvider
 			return $result;
 	
 		}
+		
+		public static function number_with_commas($number){
+			$result = number_format($number);
+			return $result;
+		}
+		public static function removeCommas($str){
+			$str = str_replace( ',', '', $str );
+
+			$result = intval($str);
+			
+			return $result;
+		}
 	
 }

@@ -2,6 +2,7 @@
 @section('title', 'Dashboards')
 @section('content')
 	<div class="page-content">
+	 {{--
 		<div class="widget-box">
    <div class="widget-header widget-header-flat widget-header-small">
       <h5 class="widget-title">
@@ -44,7 +45,8 @@
       </div>
    </div>
    <div class="widget-body">
-      <div class="widget-main">
+	
+	 <div class="widget-main">
          <!-- #section:plugins/charts.flotchart -->
          <div id="piechart-placeholder" style="width: 90%; min-height: 150px; padding: 0px; position: relative;">
             <canvas class="flot-base" width="444" height="134" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 494px; height: 150px;"></canvas>
@@ -102,6 +104,7 @@
         
       </div>
       <!-- /.widget-main -->
+			--}}
    </div>
 	 
 	 

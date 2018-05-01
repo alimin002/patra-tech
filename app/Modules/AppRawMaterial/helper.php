@@ -5,7 +5,7 @@
  */
  use App\Modules\AppRawMaterial\Models\AppRawMaterial;
  use App\Modules\AppStockRawMaterial\Models\AppStockRawMaterial;
-
+ use app\Providers\Common;	
  use Illuminate\Pagination\Paginator;
  use App\app_suplier;
  function getRawMaterialAll(){
@@ -42,7 +42,7 @@
  function doSave($request){
 	 $raw_material=array("name"													=>$request["name"],
 												"unit"												=>$request["unit"],
-												"unit_price"									=>$request["unit_price"],
+												"unit_price"									=>Common::removeCommas($request["unit_price"]),
 												"app_suplier_id"							=>$request["app_suplier_id"],
 												"app_category_raw_material_id"=>$request["app_category_raw_material_id"],
 												"description"									=>$request["description"]);
@@ -64,7 +64,7 @@
 	 $app_raw_material_id																= $request["app_raw_material_id"];
 	 $raw_material=array("name"													=>$request["name"],
 												"unit"												=>$request["unit"],
-												"unit_price"									=>$request["unit_price"],
+												"unit_price"									=>Common::removeCommas($request["unit_price"]),
 												"app_suplier_id"							=>$request["app_suplier_id"],
 												"app_category_raw_material_id"=>$request["app_category_raw_material_id"],
 												"description"									=>$request["description"]);

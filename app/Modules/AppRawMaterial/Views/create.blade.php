@@ -21,7 +21,7 @@
 							</div>
 							<div class="form-group">
 								<label>Unit Price</label> 
-								<input type="text" placeholder="" name="unit_price" id="unit_price" required="" class="form-control">
+								<input type="text" placeholder="" name="unit_price" onchange="addCommas(this)" id="unit_price" required="" class="form-control">
 							</div>
 						</div>
 						<div class="col-sm-6">

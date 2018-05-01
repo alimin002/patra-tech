@@ -1,4 +1,5 @@
 <script src="{{url('assets/js/jquery.min.js')}}"></script>
+<script src="{{url('assets/js/common.js')}}"></script>
 <script>
 /**
  window.onbeforeunload = function() {
@@ -6,10 +7,24 @@
  }
  **/
  
-function numberWithCommas(n) {
-    var parts=n.toString().split(".");
-    return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
-}
+ function addItem(){
+	 $("#frm-create #unit_price").val("");
+	 $("#frm-create #qty").val("");
+	 $("#frm-create #sub_total").val("");
+	 $("#frm-create #description").val("");
+	 //$("#frm-create #app_raw_material_id").empty();
+	 renderLookupRawMaterial();
+	 //
+	 /*
+	 $("#frm-create #unit_price").val();
+	 $("#frm-create #qty").val();
+	 $("#frm-create #sub_total").val();
+	 $("#frm-create #description").val();
+	 **/
+	 $("#modal-add").modal("toggle");
+	 
+ }
+
  
  $(function(){
 		bindPurchaseItem();
@@ -36,13 +51,13 @@ function numberWithCommas(n) {
 										""+raw_material_name+""+
 									"</td>"+
 									"<td class='footable-visible footable-first-column'>"+
-										""+unit_price+""+
+										""+numberWithCommas(unit_price)+""+
 									"</td>"+
 									"<td  class='footable-visible footable-first-column'>"+
 										""+qty+""+
 									"</td>"+
 									"<td  class='footable-visible footable-first-column'>"+
-										""+sub_total+""+
+										""+numberWithCommas(sub_total)+""+
 									"</td>"+
 									"<td  class=' '>"+
 									
@@ -118,13 +133,15 @@ function numberWithCommas(n) {
     url: '{{url("raw_material/edit")}}'+'/'+app_raw_material_id, 
     dataType: 'json',
     success: function (response){
+				var unit_price=response["unit_price"];
+				var description=response["description"];
 				//bind in form create
-				$("#frm-create #unit_price").val(response["unit_price"]);
-				$("#frm-create #description").val(response["description"]);
+				$("#frm-create #unit_price").val(numberWithCommas(unit_price));
+				$("#frm-create #description").val(description);
 				
 				//bind in form edit
-				$("#frm-edit #unit_price").val(response["unit_price"]);
-				$("#frm-edit #description").val(response["description"]);
+				$("#frm-edit #unit_price").val(unit_price);
+				$("#frm-edit #description").val(description);
 				//get sub total edit
 				getSubTotalEdit();
     }
@@ -135,8 +152,8 @@ function numberWithCommas(n) {
 	function getSubTotal(){
 		var unit_price= $("#frm-create #unit_price").val();
 		var qty 			= $("#frm-create #qty").val();
-		var sub_total = unit_price * qty;
-		$("#frm-create #sub_total").val(sub_total);
+		var sub_total = removeCommas(unit_price) * qty;
+		$("#frm-create #sub_total").val(numberWithCommas(sub_total));
 	}
 	
 	//get sub total when edit
@@ -146,10 +163,10 @@ function numberWithCommas(n) {
 		//old stock = stock before item purchase updated
 		var old_stock	= $("#old_stock").val();
 		var new_stock = 0;
-		var sub_total = unit_price * qty;
+		var sub_total = removeCommas(unit_price) * qty;
 				new_stock=parseInt(old_stock) + parseInt(qty);
 		$("#new_stock").val(new_stock);		
-		$("#frm-edit #sub_total").val(sub_total);
+		$("#frm-edit #sub_total").val(numberWithCommas(sub_total));
 	}
 	
 	
@@ -420,7 +437,7 @@ function numberWithCommas(n) {
 		var description				=$("#"+row_id+" "+"td:eq(5)").text();
 		var stock= getStock(app_raw_material_id).stock;
 		var data_purchase_item=JSON.parse($("#data_purchase_item").val());
-		alert(data_purchase_item);
+		//alert(data_purchase_item);
 		var selected_row=row_id.replace("tr-","");
 		var start_index = selected_row;//target update row
     var number_of_elements_to_remove = 1;

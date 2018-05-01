@@ -53,7 +53,7 @@
 			<input type="hidden" readonly value="{{$data_header['app_purchase_id']}}" id="app_purchase_id" name="app_purchase_id"  placeholder="" class="form-control"/>
 			<div class="col-sm-12">
 				<div class="dataTables_filter" id="sample-table-2_filter">
-					<button class="btn btn-white btn-primary" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus">&nbsp;Add Item Purchase</i></button>
+					<button class="btn btn-white btn-primary" onclick="addItem()"><i class="fa fa-plus">&nbsp;Add Item Purchase</i></button>
 				</div>
 			</div>	
 		<div class="col-xs-12">

@@ -132,7 +132,7 @@ class AppSalesDetailController extends Controller
 										$app_sales_id		 		 =$app_sales_id;
 										$app_product_id 		= $values["app_product_id"];
 										$qty								 =$values["qty"];
-										$sub_total					 =$values["sub_total"];
+										$sub_total					 =Common::removeCommas($values["sub_total"]);
 										
 										$sales_detail=	array("app_sales_id"			=>$app_sales_id,
 																						"app_product_id"	=>$app_product_id,

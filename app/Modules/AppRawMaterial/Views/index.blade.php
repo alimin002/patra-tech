@@ -1,6 +1,7 @@
 @extends('main')
 @section('title', 'Raw Material')
 @section('content')
+<?php use app\Providers\Common; ?>
 	<div class="page-content">
 		<div class="col-xs-12">
 				@if(session()->has('message'))							
@@ -78,7 +79,7 @@
 							</td>
 							<td class=" ">{{$values["raw_name"]}}</td>
 							<td class=" ">{{$values["unit"]}}</td>
-							<td class="hidden-480 ">{{$values["unit_price"]}}</td>
+							<td class="hidden-480 ">{{Common::number_with_commas($values["unit_price"])}}</td>
 							<td class=" ">
 								@if ($values["stock"] == "")
 									<p>
@@ -93,7 +94,7 @@
 								@endif
 								
 							</td>
-							<td class="hidden-480 ">{{$values["unit_price"]}}	</td>
+							<td class="hidden-480 ">{{$values["suplier_name"]}}	</td>
 							<td class=" ">
 								<div class="hidden-sm hidden-xs action-buttons">
 									<a class="green" href="#" onclick="edit('{{$values['app_raw_material_id']}}')">

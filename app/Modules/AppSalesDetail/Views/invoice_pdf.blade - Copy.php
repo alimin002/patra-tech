@@ -1,3 +1,4 @@
+<?php use app\Providers\Common; ?>
 <!doctype html>
 <html lang="en">
 <head>

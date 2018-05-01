@@ -1,3 +1,4 @@
+<script src="{{url('assets/js/common.js')}}"></script>
 <script>
 function add(){
 		$("#modal-add").modal("toggle");
@@ -9,6 +10,12 @@ function add(){
 		$("#frm-create #description").val("");
 		
 	}
+	
+ function addCommas(){
+	 var unit_price= $("#frm-create #unit_price").val();
+	 $("#frm-create #unit_price").val(numberWithCommas(unit_price))
+	 
+ }
 	function doSave(){
 		$("#modal-add").modal("hide");
 		$("#frm-create").submit();
@@ -67,7 +74,7 @@ function add(){
         //alert(response["raw_name"]);
 				$("#frm-edit #name").val(response["raw_name"]);
 				$("#frm-edit #unit").val(response["unit"]);
-				$("#frm-edit #unit_price").val(response["unit_price"]);
+				$("#frm-edit #unit_price").val(numberWithCommas(response["unit_price"]));
 				
 				var app_suplier_id=response["app_suplier_id"];
 				var suplier_name=response["suplier_name"];
@@ -101,7 +108,7 @@ function add(){
     success: function (response){ 
 				$("#frm-delete #name").val(response["raw_name"]);
 				$("#frm-delete #unit").val(response["unit"]);
-				$("#frm-delete #unit_price").val(response["unit_price"]);
+				$("#frm-delete #unit_price").val(numberWithCommas(response["unit_price"]));
 				var app_suplier_id=response["app_suplier_id"];
 				var app_category_raw_material_id=response["app_category_raw_material_id"];
 				var suplier_name=response["suplier_name"];

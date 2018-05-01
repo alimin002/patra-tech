@@ -40,14 +40,14 @@
 			</div>
 			<div class="col-sm-6">
 					<div class="form-group">
-							<label class="control-label" for="sales_date">Sales Date</label>
+							<label class="control-label" for="sales_date">Sale Date</label>
 							<input type="text" readonly value="{{$data_header['sale_date']}}" id="sale_date" name="sale_date"  placeholder="" class="form-control">
 					</div>
 			</div>
 			<input type="hidden" readonly value="" id="app_sales_id" name="app_sales_id"  placeholder="" class="form-control"/>
 			<div class="col-sm-12">
 				<div class="dataTables_filter" id="sample-table-2_filter">
-					<button class="btn btn-white btn-primary" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus">&nbsp;Add Item Sales</i></button>
+					<button class="btn btn-white btn-primary" onclick="addItem()"><i class="fa fa-plus">&nbsp;Add Item Sales</i></button>
 				</div>
 			</div>	
 		<div class="col-xs-12">

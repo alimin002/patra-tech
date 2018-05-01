@@ -1,10 +1,28 @@
 <script src="{{url('assets/js/jquery.min.js')}}"></script>
+<script src="{{url('assets/js/common.js')}}"></script>
+
 <script>
 /**
  window.onbeforeunload = function() {
    return "Warning: data purchase item will be lost, are you sure you want to leave? Think of the kittens!";
  }
  **/
+ 
+  function addItem(){
+	 $("#frm-create #unit_price").val("");
+	 $("#frm-create #qty").val("");
+	 $("#frm-create #sub_total").val("");
+	 $("#frm-create #description").val("");
+	 //
+	 /*
+	 $("#frm-create #unit_price").val();
+	 $("#frm-create #qty").val();
+	 $("#frm-create #sub_total").val();
+	 $("#frm-create #description").val();
+	 **/
+	 $("#modal-add").modal("toggle");
+	 
+ }
 	
  $(function(){
 		bindSalesItem();
@@ -38,13 +56,13 @@
 										""+product_name+""+
 									"</td>"+
 									"<td class='footable-visible footable-first-column'>"+
-										""+unit_price+""+
+										""+numberWithCommas(unit_price)+""+
 									"</td>"+
 									"<td  class='footable-visible footable-first-column'>"+
 										""+qty+""+
 									"</td>"+
 									"<td  class='footable-visible footable-first-column'>"+
-										""+sub_total+""+
+										""+numberWithCommas(sub_total)+""+
 									"</td>"+
 									"<td  class=' '>"+
 									
@@ -121,11 +139,11 @@
     dataType: 'json',
     success: function (response){
 				//bind in form create
-				$("#frm-create #unit_price").val(response["unit_price"]);
+				$("#frm-create #unit_price").val(numberWithCommas(response["unit_price"]));
 				$("#frm-create #description").val(response["description"]);
 				
 				//bind in form edit
-				$("#frm-edit #unit_price").val(response["unit_price"]);
+				$("#frm-edit #unit_price").val(numberWithCommas(response["unit_price"]));
 				$("#frm-edit #description").val(response["description"]);
 				//get sub total edit
 				getSubTotalEdit();
@@ -137,16 +155,16 @@
 	function getSubTotal(){
 		var unit_price= $("#frm-create #unit_price").val();
 		var qty 			= $("#frm-create #qty").val();
-		var sub_total = unit_price * qty;
-		$("#frm-create #sub_total").val(sub_total);
+		var sub_total = removeCommas(unit_price) * qty;
+		$("#frm-create #sub_total").val(numberWithCommas(sub_total));
 	}
 	
 	//get sub total when edit
 	function getSubTotalEdit(){
 		var unit_price= $("#frm-edit #unit_price").val();
 		var qty 			= $("#frm-edit #qty").val();
-		var sub_total = unit_price * qty;
-		$("#frm-edit #sub_total").val(sub_total);
+		var sub_total = removeCommas(unit_price) * qty;
+		$("#frm-edit #sub_total").val(numberWithCommas(sub_total));
 	}
 	
 	
