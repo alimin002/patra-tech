@@ -241,7 +241,7 @@ class AppSalesDetailController extends Controller
 			);
 										
       Mail::send('AppSalesDetail::email_Invoice', $data, function($email_message)use($email_data){
-         $email_message->to($email_data["email_to"], 'Invoice')->subject('Purchase Order');
+         $email_message->to($email_data["email_to"], 'Invoice')->subject('Invoice');
          $email_message->from($email_data["email_from"],'Alimin');
       });
       $message="email has sent...";

@@ -1,3 +1,4 @@
+<?php use app\Providers\Common; ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -59,7 +60,7 @@
         <th>Product Name</th>
         <th>Price</th>
         <th>Quantity</th>
-        <th>Sub Total $</th>
+        <th>Sub Total Rp</th>
       </tr>
     </thead>
     <tbody>
@@ -77,9 +78,9 @@
       <tr>
         <th scope="row">{{$number}}</th>
         <td>{{$values["product_name"]}}</td>
-        <td align="right">{{$values["unit_price"]}}</td>
+        <td align="right">{{Common::number_with_commas($values["unit_price"])}}</td>
         <td align="right">{{$values["qty"]}}</td>
-        <td align="right">{{$sub_total}}</td>
+        <td align="right">{{Common::number_with_commas($sub_total)}}</td>
       </tr>
 			@endforeach
     </tbody>
@@ -87,7 +88,7 @@
         <tr>
             <td colspan="3"></td>
             <td align="right">Total $</td>
-            <td align="right">${{$total}}</td>
+            <td align="right">Rp{{$total}}</td>
         </tr>
     </tfoot>
   </table>
