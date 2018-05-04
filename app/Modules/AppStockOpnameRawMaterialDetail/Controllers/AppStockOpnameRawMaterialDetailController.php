@@ -183,7 +183,10 @@ class AppStockOpnameRawMaterialDetailController extends Controller
 		public function download_pdf($app_stock_opname_raw_material_id){
 			$data_header=$this->get_header($app_stock_opname_raw_material_id);
 			$data_detail=$this->get_detail($app_stock_opname_raw_material_id);
-			//print_r($data_detail); die();
+			//echo "<pre>";
+			//print_r($data_detail); 
+			//echo "</pre>";
+			//die();
 			$data=array("data_header"=>$data_header,
 									"data_detail"=>$data_detail
 			);

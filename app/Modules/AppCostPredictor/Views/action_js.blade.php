@@ -1,4 +1,4 @@
-
+<script src="{{url('assets/js/common.js')}}"></script>
 <script src="{{url('assets/js/jquery.min.js')}}"></script>
 <script>
 	//bind data composition	
@@ -131,7 +131,7 @@
 	function edit(id,app_product_composition_id){
 		//alert(app_product_composition_id);
 		var app_product_id=id;
-		alert(app_product_id);
+		//alert(app_product_id);
 		$.ajax({ 
     type: 'GET', 
 		url: '{{url("product/edit")}}'+'/'+app_product_id, 
@@ -187,7 +187,7 @@
 									
 									
 									//alert(JSON.stringify(obj_raw_material));
-									$("#unit_price_"+i).val(obj_raw_material.unit_price);
+									$("#unit_price_"+i).val(numberWithCommas(obj_raw_material.unit_price));
 									$("#unit_"+i).val(obj_raw_material.unit);
 									$("#app_raw_material_id_"+i).prepend("<option value="+app_raw_material_id+">"+obj_raw_material.raw_name+"</option>");
 									renderLookupRawMaterialEdit(i);
@@ -452,8 +452,10 @@
     url: '{{url("raw_material/edit")}}'+'/'+app_raw_material_id, 
     dataType: 'json',
     success: function (response){
-				$("#frm-create #unit_price_"+row_id).val(response["unit_price"]);
-				$("#frm-create #unit_"+row_id).val(response["unit"]);
+			var unit_price=response["unit_price"];
+	    var unit=response["unit"];
+				$("#frm-create #unit_price_"+row_id).val(numberWithCommas(unit_price));
+				$("#frm-create #unit_"+row_id).val(unit);
 				//get sub total edit
 				getSubTotalEdit();
     }
@@ -461,15 +463,18 @@
 	}
 		
 		//triger onchange when edit
-		function getRawMaterialById2(select_object,row_id){
+	function getRawMaterialById2(select_object,row_id){
 		var app_raw_material_id=select_object.value;
 		$.ajax({ 
     type: 'GET', 
     url: '{{url("raw_material/edit")}}'+'/'+app_raw_material_id, 
     dataType: 'json',
     success: function (response){
-				$("#frm-edit #unit_price_"+row_id).val(response["unit_price"]);
-				$("#frm-edit #unit_"+row_id).val(response["unit"]);
+			var unit_price=response["unit_price"];
+	    var unit=response["unit"];
+			
+				$("#frm-edit #unit_price_"+row_id).val(numberWithCommas(unit_price));
+				$("#frm-edit #unit_"+row_id).val(unit);
 				//get sub total edit
 				getSubTotalEdit();
     }

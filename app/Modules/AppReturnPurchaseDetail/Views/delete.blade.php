@@ -4,7 +4,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" onclick="cancelDeleteItem()">&times;</button>
-				<h4 class="modal-title">Delete Item Purchase</h4>
+				<h4 class="modal-title">Delete Item Return</h4>
 			</div>
 			<div class="modal-body">
 					<form name="frm-delete" id="frm-delete" action="{{url('purchase_detail/destroy')}}" method="post">

@@ -62,6 +62,7 @@
         <th>Raw Material Name</th>
         <th>Stock</th>
         <th>Available Stock</th>
+				<th>Deviation</th>
         <th>Information</th>
       </tr>
     </thead>
@@ -82,6 +83,7 @@
         <td>{{$values["raw_material_name"]}}</td>
         <td align="right">{{$values["stock"]}}</td>
         <td align="right">{{$values["stock_opname"]}}</td>
+				 <td align="right">{{$values["deviation"]}}</td>
         <td align="right">{{$values["information"]}}</td>
       </tr>
 			@endforeach

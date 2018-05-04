@@ -40,6 +40,7 @@
 					var unit_price					= data_purchase_item[i].unit_price;
 					var qty									= data_purchase_item[i].qty;
 					var sub_total						= data_purchase_item[i].sub_total;
+					//alert(raw_material_name+app_raw_material_id);
 				  var tr="<tr id=tr-"+i+">"+
 									"<td class='center  sorting_1'>"+
 										"<label class='position-relative'>"+

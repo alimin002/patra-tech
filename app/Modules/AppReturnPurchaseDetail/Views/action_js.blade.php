@@ -1,10 +1,19 @@
 <script src="{{url('assets/js/jquery.min.js')}}"></script>
+<script src="{{url('assets/js/common.js')}}"></script>
 <script>
 /**
  window.onbeforeunload = function() {
    return "Warning: data purchase item will be lost, are you sure you want to leave? Think of the kittens!";
  }
  **/
+
+function addItem(){
+	 $("#frm-create #unit_price").val("");
+	 $("#frm-create #qty").val("");
+	 $("#frm-create #sub_total").val("");
+	 $("#frm-create #description").val("");
+	 $("#modal-add").modal("toggle");
+}
 	
  $(function(){
 		bindReturnPurchaseItem();
@@ -24,6 +33,7 @@
 					var unit_price					= data_return_purchase_item[i].unit_price;
 					var qty									= data_return_purchase_item[i].qty;
 					var sub_total						= data_return_purchase_item[i].sub_total;
+					//alert(unit_price);
 				  var tr="<tr id=tr-"+i+">"+
 									"<td class='center  sorting_1'>"+
 										"<label class='position-relative'>"+
@@ -35,13 +45,13 @@
 										""+raw_material_name+""+
 									"</td>"+
 									"<td class='footable-visible footable-first-column'>"+
-										""+unit_price+""+
+										""+numberWithCommas(unit_price)+""+
 									"</td>"+
 									"<td  class='footable-visible footable-first-column'>"+
 										""+qty+""+
 									"</td>"+
 									"<td  class='footable-visible footable-first-column'>"+
-										""+sub_total+""+
+										""+numberWithCommas(sub_total)+""+
 									"</td>"+
 									"<td  class=' '>"+
 									
@@ -50,7 +60,7 @@
 												"<i class='ace-icon fa fa-pencil bigger-130' id=row-"+i+" class='btn btn-primary' onclick='editItem(this.id,"+app_raw_material_id+")'></i>"+
 											"</a>"+
 											"<a class='red' href='#'>"+
-												"<i class='ace-icon fa fa-trash-o bigger-130' id=row-"+i+" onclick='deleteItem(this.id)'></i>"+
+												"<i class='ace-icon fa fa-trash-o bigger-130' id=row-"+i+" onclick='deleteItem(this.id,"+app_raw_material_id+")'></i>"+
 											"</a>"+
 										"</div>"+	
 											"<div class='hidden-md hidden-lg'>"+
@@ -62,12 +72,12 @@
 														"<li>"+
 															"<a href='#'  class='tooltip-success' data-rel='tooltip' title='' data-original-title='Edit' >"+
 																"<span class='green' >"+
-																	"<i class='ace-icon fa fa-pencil-square-o bigger-120' id=row-"+i+" class='btn btn-primary' onclick='editItem(this.id)'></i>"+
+																	"<i class='ace-icon fa fa-pencil-square-o bigger-120' id=row-"+i+" class='btn btn-primary' onclick='editItem(this.id,"+app_raw_material_id+")'></i>"+
 																"</span>"+
 															"</a>"+
 														"</li>"+
 														"<li>"+
-															"<a href='#' class='tooltip-error' data-rel='tooltip' title='' onclick='deleteData(this.id)' data-original-title='Delete'>"+
+															"<a href='#' class='tooltip-error' data-rel='tooltip' title='' onclick='deleteItem(this.id,"+app_raw_material_id+")' data-original-title='Delete'>"+
 																"<span class='red'>"+
 																	"<i class='ace-icon fa fa-trash-o bigger-120' id=row-"+i+"></i>"+
 																"</span>"+
@@ -117,13 +127,16 @@
     url: '{{url("raw_material/edit")}}'+'/'+app_raw_material_id, 
     dataType: 'json',
     success: function (response){
+			var unit_price =response["unit_price"];
+			var description=response["description"];
+			
 				//bind in form create
-				$("#frm-create #unit_price").val(response["unit_price"]);
-				$("#frm-create #description").val(response["description"]);
+				$("#frm-create #unit_price").val(numberWithCommas(unit_price));
+				$("#frm-create #description").val(description);
 				
 				//bind in form edit
-				$("#frm-edit #unit_price").val(response["unit_price"]);
-				$("#frm-edit #description").val(response["description"]);
+				$("#frm-edit #unit_price").val(numberWithCommas(unit_price));
+				$("#frm-edit #description").val(description);
 				//get sub total edit
 				getSubTotalEdit();
     }
@@ -134,16 +147,16 @@
 	function getSubTotal(){
 		var unit_price= $("#frm-create #unit_price").val();
 		var qty 			= $("#frm-create #qty").val();
-		var sub_total = unit_price * qty;
-		$("#frm-create #sub_total").val(sub_total);
+		var sub_total = removeCommas(unit_price) * qty;
+		$("#frm-create #sub_total").val(numberWithCommas(sub_total));
 	}
 	
 	//get sub total when edit
 	function getSubTotalEdit(){
 		var unit_price= $("#frm-edit #unit_price").val();
 		var qty 			= $("#frm-edit #qty").val();
-		var sub_total = unit_price * qty;
-		$("#frm-edit #sub_total").val(sub_total);
+		var sub_total = removeCommas(unit_price) * qty;
+		$("#frm-edit #sub_total").val(numberWithCommas(sub_total));
 	}
 	
 	
@@ -350,10 +363,10 @@
 									
 										"<div class='hidden-sm hidden-xs action-buttons'>"+
 											"<a class='green' href='#'>"+
-												"<i class='ace-icon fa fa-pencil bigger-130' id=row-"+row_return_purchase+" class='btn btn-primary' onclick='editItem(this.id)'></i>"+
+												"<i class='ace-icon fa fa-pencil bigger-130' id=row-"+row_return_purchase+" class='btn btn-primary' onclick='editItem(this.id,"+app_raw_material_id+")'></i>"+
 											"</a>"+
 											"<a class='red' href='#'>"+
-												"<i class='ace-icon fa fa-trash-o bigger-130'></i>"+
+												"<i class='ace-icon fa fa-trash-o bigger-130' onclick='deleteItem(this.id,"+app_raw_material_id+")'></i>"+
 											"</a>"+
 										"</div>"+	
 											"<div class='hidden-md hidden-lg'>"+
@@ -365,14 +378,14 @@
 														"<li>"+
 															"<a href='#'  class='tooltip-success' data-rel='tooltip' title='' data-original-title='Edit' >"+
 																"<span class='green' >"+
-																	"<i class='ace-icon fa fa-pencil-square-o bigger-120' id=row-"+row_return_purchase+" class='btn btn-primary' onclick='editItem(this.id)'></i>"+
+																	"<i class='ace-icon fa fa-pencil-square-o bigger-120' id=row-"+row_return_purchase+" class='btn btn-primary' onclick='editItem(this.id,"+app_raw_material_id+")'></i>"+
 																"</span>"+
 															"</a>"+
 														"</li>"+
 														"<li>"+
 															"<a href='#' class='tooltip-error' data-rel='tooltip' title='' data-original-title='Delete'>"+
 																"<span class='red'>"+
-																	"<i class='ace-icon fa fa-trash-o bigger-120'></i>"+
+																	"<i class='ace-icon fa fa-trash-o bigger-120' onclick='deleteItem(this.id,"+app_raw_material_id+")'></i>"+
 																"</span>"+
 															"</a>"+
 														"</li>"+
@@ -421,12 +434,18 @@
 	
 	//display modal delete
   function deleteItem(row_id,app_raw_material_id){
+				//alert($("#tr-1 td:eq(1)").text());
+
 		row_id="tr-"+row_id.replace("row-","");
+		//alert(row_id);
+		//alert($("#"+row_id+" "+"td:eq(1)").text());
 		var raw_material_name =$("#"+row_id+" "+"td:eq(1)").text();
+		//alert(raw_material_name);
 		var unit_price				=$("#"+row_id+" "+"td:eq(2)").text();
 		var qty								=$("#"+row_id+" "+"td:eq(3)").text();
 		var sub_total					=$("#"+row_id+" "+"td:eq(4)").text();
 		var description				=$("#"+row_id+" "+"td:eq(5)").text();
+		//alert(app_raw_material_id);
 		//delete selected item
 		var data_return_purchase_item=JSON.parse($("#data_return_purchase_item").val());
 		var selected_row=row_id.replace("tr-","");
@@ -435,8 +454,8 @@
     data_return_purchase_item.splice(start_index, number_of_elements_to_remove);
 		$("#data_return_purchase_item").val(JSON.stringify(data_return_purchase_item));
 		bindReturnPurchaseItem();
-    console.log(data_return_purchase_item);
-        //[1,2,3,4];
+    //console.log(data_return_purchase_item);
+    //[1,2,3,4];
 		
 		
 		

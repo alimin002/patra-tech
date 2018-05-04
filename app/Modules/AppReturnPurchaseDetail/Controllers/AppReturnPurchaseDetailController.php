@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Modules\AppReturnPurchase\Models\AppReturnPurchase;
 use App\Modules\AppReturnPurchaseDetail\Models\AppReturnPurchaseDetail;
 use App\Modules\AppStockRawMaterial\Models\AppStockRawMaterial;
-
+use app\Providers\Common;
 use app\Providers\Lookup;
 use DB;
 Use Redirect;
@@ -154,7 +154,7 @@ class AppReturnPurchaseDetailController extends Controller
 										$return_purchase=	array("app_return_purchase_id"			=>$app_return_purchase_id,
 																						"app_raw_material_id"	=>$app_raw_material_id,
 																						"qty"									=>$qty,
-																						"sub_total"						=>$sub_total);
+																						"sub_total"						=>Common::removeCommas($sub_total));
 																																			
 										$save=AppReturnPurchaseDetail::insertGetId($return_purchase);
 										

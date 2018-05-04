@@ -4,7 +4,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" onclick="cancelEditItem()">&times;</button>
-				<h4 class="modal-title">Edit Item Purchase</h4>
+				<h4 class="modal-title">Edit Item Return</h4>
 			</div>
 			<div class="modal-body">
 					<form name="frm-edit" id="frm-edit" action="{{url('purchase_detail/update')}}" method="post">
@@ -48,7 +48,7 @@
 						<input readonly type="hidden" name="app_purchase_detail_id" id="app_purchase_detail_id" required="" class="form-control"/>
 						<input readonly type="hidden" value="{{$data_header['app_purchase_id']}}" name="app_purchase_id" id="app_purchase_id" required="" class="form-control"/>
 						<!--selected row to delete-->
-						<input readonly type="text" name="selected_element" id="selected_element" required="" class="form-control"/>
+						<input readonly type="hidden" name="selected_element" id="selected_element" required="" class="form-control"/>
 					</form>																	
 				 </div>														
 			</div>

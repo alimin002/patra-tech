@@ -53,7 +53,7 @@
 			<input type="hidden" readonly value="" id="app_return_purchase_id" name="app_return_purchase_id"  placeholder="" class="form-control"/>
 			<div class="col-sm-12">
 				<div class="dataTables_filter" id="sample-table-2_filter">
-					<button class="btn btn-white btn-primary" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus">&nbsp;Add Return Item</i></button>
+					<button class="btn btn-white btn-primary" onclick="addItem()"><i class="fa fa-plus">&nbsp;Add Return Item</i></button>
 				</div>
 			</div>	
 		<div class="col-xs-12">
@@ -119,19 +119,10 @@
 											<span class="ace-icon fa fa-caret-down icon-only"></span>
 										</button>
 
-										<ul class="dropdown-menu dropdown-success">
-											<li>
-												<a href="{{url('return_purchase_detail/preview_pdf/'.$app_return_purchase_id)}}">Print Return</a>
-											</li>
+										<ul class="dropdown-menu dropdown-success">										
 											<li>
 												<a href="{{url('return_purchase_detail/download_pdf/'.$app_return_purchase_id)}}">Download Return To PDF</a>
-											</li>
-											<li>
-												<a href="#">Export Return To Excel</a>
-											</li>
-											<li>
-												<a href="#">Send Invoice To Email</a>
-											</li>									
+											</li>																				
 											<li class="divider"></li>
 										</ul>
 										<a href="{{url('return_purchase')}}"><button class="btn btn-white btn-primary"><i class="ace-icon fa fa-angle-double-left" aria-hidden="true">&nbsp;Back to Return Purchase</i></button></a>
