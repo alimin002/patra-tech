@@ -13,3 +13,12 @@ function removeCommas(str){
 	var number=str.replace(/\,/g,'');
 	return number;
 }
+
+function isJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}

@@ -441,7 +441,14 @@
 			//alert(response);
     }
 		});
-		return JSON.parse(httpRequest.responseText);
+		//alert(httpRequest.responseText);
+		if(isJsonString(httpRequest.responseText)==true){
+			return JSON.parse(httpRequest.responseText);
+			
+		}else{
+			alert("not valid json")
+			return [];
+		}
 		//alert(httpRequest.responseText);
 	}
 	
