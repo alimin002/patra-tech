@@ -189,7 +189,7 @@ class AppPurchaseDetailController extends Controller
 			
 		}
 		
-			public function stockOut($app_raw_material_id,$num_of_entri){
+		public function stockOut($app_raw_material_id,$num_of_entri){
 			$data					 = AppStockRawMaterial::where('app_raw_material_id','=',$app_raw_material_id)->first();
 			$current_stock =$data["stock"];
 			$new_stock		 =$current_stock - $num_of_entri;//num_of_entri= entri from purchase and other factor

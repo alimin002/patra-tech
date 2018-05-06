@@ -7,8 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Modules\AppSalesDetail\Models\AppSalesDetail;
 use App\Modules\AppSales\Models\AppSales;
-use App\Modules\AppProduct\Models\AppProduct;
-use App\Modules\AppStockProduct\Models\AppStockProduct;
+use App\Modules\AppStockRawMaterial\Models\AppStockRawMaterial;
 use app\Providers\Lookup;
 use app\Providers\Common;
 use Illuminate\Pagination\Paginator;
@@ -42,6 +41,84 @@ class AppBudgetProductionController extends Controller
 								->with("json_sales",$json_sales)
 								->with("data_header",$data_header);
     }
+		public function stockOut($app_raw_material_id,$num_of_entri){
+			$data					 = AppStockRawMaterial::where('app_raw_material_id','=',$app_raw_material_id)->first();
+			$current_stock =$data["stock"];
+			//echo $num_of_entri."yyyy".$app_raw_material_id;  die();
+			$new_stock		 =$current_stock - $num_of_entri;//num_of_entri= entri from purchase and other factor
+			/**
+			echo $app_raw_material_id;
+			echo "XXXX";
+			echo $current_stock;
+			echo "XXXX";
+			echo $new_stock;
+			die();
+			**/
+			$new_stock_raw_material=array(
+																"stock"=>$new_stock
+															);
+			AppStockRawMaterial::where("app_raw_material_id","=",$app_raw_material_id)
+																	 ->update($new_stock_raw_material);	
+       //echo $update;	die();																 
+				//return $update;
+			
+		}
+		
+		
+		function temp(Request $request){	
+				//DB::beginTransaction();
+			$array_composition=json_decode($request["data_composition"]);
+				 $array_prediction=json_decode($request["data_sales_item"]);
+				 
+				  $i=0;
+				 foreach($array_composition as $key=>$values){				
+										//echo $values->app_raw_material_id;
+										$app_raw_material_id=$values->app_raw_material_id;
+										$amount							=$values->amount;
+										$qty								=$array_prediction[$i]->qty;
+										//clear total amount
+										$total_amount=0;
+										$total_amount       =$qty * $amount;
+										//echo $total_amount; die();
+										$this->stockOut($app_raw_material_id,$total_amount);
+										$i++;
+									}
+									$message="";
+						$app_sales_id=$request["app_sales_id_in_detail"];
+						return Redirect::to('budget_production?sales_id='.$app_sales_id)
+												->with("message",$message);			
+		}
+		
+		
+		function approve_prediction(Request $request){
+			//$array_composition=json_decode($request["data_composition"]);
+				 $array_prediction=json_decode($request["data_sales_item"]);
+				 echo "<pre>";
+				 print_r($array_prediction);
+				 echo "</pre>";
+				  $i=0;
+				 
+				 foreach($array_prediction as $key=>$values){							
+						$array_composition=json_decode($values->data_composition);
+						  //echo $values->app_raw_material_id;
+							foreach($array_composition as $lv1_key=>$lv1_values){
+								$total_amount=0;
+								$qty         =$values->qty;
+								$amount      =$lv1_values->amount;	
+								$total_amount=$qty * $amount;
+								$app_raw_material_id = $lv1_values->app_raw_material_id;
+								echo $total_amount;
+								echo "</br>";	
+								$this->stockOut($app_raw_material_id,$total_amount);								
+							}
+							//echo "---------------------------"."</br>";
+				 }
+				 //die();
+									$message="Aprrovement Executed successfully...";
+						$app_sales_id=$request["app_sales_id_in_detail"];
+						return Redirect::to('budget_production?sales_id='.$app_sales_id)
+												->with("message",$message);				
+		}
 
     /**
      * Show the form for creating a new resource.

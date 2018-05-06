@@ -18,6 +18,7 @@ Route::group(['module' => 'AppBudgetProduction', 'middleware' => ['web'], 'names
 		Route::get('budget_production/render_lookup_suplier','AppBudgetProductionController@renderLookupSuplier');
 		Route::post('budget_production/update','AppBudgetProductionController@update');
 		Route::post('budget_production/destroy','AppBudgetProductionController@destroy');
+		Route::post('budget_production/approve_prediction','AppBudgetProductionController@approve_prediction');
 });
 
 

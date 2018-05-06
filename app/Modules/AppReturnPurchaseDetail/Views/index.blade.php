@@ -61,8 +61,7 @@
 			<div class="table-header">
 				Results for "@yield('title')"
 			</div>
-			<div>
-				
+			<div>	
 				<div id="sample-table-2_wrapper" class="dataTables_wrapper form-inline" role="grid">
 					<div class="row">
 						<div class="col-xs-6">
@@ -136,8 +135,8 @@
 				</div>
 				</div>
 				</div>
-					</div>
-			</div>
+			</div>			
+		</div>
 		</div>
 		<div class="col-sm-12" style="display:none">
 			<div class="form-group">

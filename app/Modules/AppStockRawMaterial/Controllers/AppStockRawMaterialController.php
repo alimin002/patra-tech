@@ -80,7 +80,16 @@ class AppStockRawMaterialController extends Controller
 				
     }
 		
-		public function stockOut(){
+		public function stockOut($app_raw_material_id,$num_of_entri){
+			$data					 = AppStockRawMaterial::where('app_raw_material_id','=',$app_raw_material_id)->first();
+			$current_stock =$data["stock"];
+			$new_stock		 =$current_stock - $num_of_entri;//num_of_entri= entri from purchase and other factor
+			$new_stock_raw_material=array(
+																"stock"=>$new_stock
+															);
+			$update=AppStockRawMaterial::where("app_raw_material_id","=",$app_raw_material_id)
+																	 ->update($new_stock_raw_material);																		
+				return $update;
 			
 		}
 		

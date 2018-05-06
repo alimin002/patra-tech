@@ -1,5 +1,21 @@
 <script src="{{url('assets/js/jquery.min.js')}}"></script>
 <script>
+		function doApprovePrediction(){
+		    var json_prediction = $("#data_sales_item").val();
+				var object_prediction= JSON.parse(json_prediction);
+				//var data_composition = JSON.parse(object_prediction[0]["data_composition"]);
+				//$("#data_composition").val(JSON.stringify(data_composition));
+				var obj_data_composition   = data_composition;
+				var array_data_composition = [];
+				for(var i=0; i<= object_prediction.length-1; i++){
+					 array_data_composition[i]=JSON.parse(object_prediction[i]["data_composition"]);
+					 //alert(array_data_composition[i]);
+				}
+				$("#data_composition").val(JSON.stringify(array_data_composition));
+				$("#frm-approve-prediction").submit();
+				//alert(JSON.stringify(data_composition));
+				//alert(JSON.stringify(JSON.parse(object_prediction[0]["data_composition"])));
+		}
 
 		 $(function(){
 			 	//alert(1);

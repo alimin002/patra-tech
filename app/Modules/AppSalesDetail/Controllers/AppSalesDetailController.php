@@ -169,7 +169,8 @@ class AppSalesDetailController extends Controller
 								DB::rollback();
 								$message="Input data Item Failed, please try again<br>Developer message:".$e;
 						}
-							return Redirect::to('sales_detail?sales_id='.$app_sales_id)
+						  $app_sales_id=$request["app_sales_id_in_detail"];
+							return Redirect::to('budget_production?sales_id='.$app_sales_id)
 												->with("message",$message);			
 		}
 		

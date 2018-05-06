@@ -85,7 +85,7 @@
 						</table>
 						<div class="row">
 						<div class="col-xs-6">
-							<button class="btn btn-white btn-primary" onclick="doSaleProduct()">Approve Prediction (Stock Out)</i></button>	
+							<button class="btn btn-white btn-primary" onclick="doApprovePrediction()">Approve Prediction (Stock Out)</i></button>	
 							<a href="{{url('sales')}}"><button class="btn btn-white btn-primary"><i class="ace-icon fa fa-angle-double-left" aria-hidden="true">&nbsp;Back to sales</i></button></a>
 							<div class="dataTables_info" id="sample-table-2_info"><!--Showing 1 to 10 of 23 entries--></div>
 						</div>
@@ -101,9 +101,11 @@
 		</div>
 		<div class="col-sm-12" style="display:none">
 			<div class="form-group">
-					<form name="frm-sales-item" id="frm-sales-item" action="{{url('sales_detail/save')}}" method="post">
+					<form name="frm-approve-prediction" id="frm-approve-prediction" method="post" action="{{url('budget_production/approve_prediction')}}">
 						{{ csrf_field() }}
+						<!--change data_sales_item to data_prediction_item -->
 						<textarea class="col-md-12" name="data_sales_item" id="data_sales_item">{{$json_sales}}</textarea>
+						<textarea class="col-md-12" name="data_composition" id="data_composition"></textarea>
 						<input readonly type="text" value="{{$data_header['app_sales_id']}}" name="app_sales_id_in_detail" id="app_sales_id_in_detail" required="" class="form-control"/>
 					</form>
 			</div>
