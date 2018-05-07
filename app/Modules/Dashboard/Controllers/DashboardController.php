@@ -4,7 +4,8 @@ namespace App\Modules\Dashboard\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Modules\AppStockRawMaterial\Models\AppStockRawMaterial;
+use App\Modules\AppRawMaterial\Models\AppRawMaterial;
 class DashboardController extends Controller
 {
 

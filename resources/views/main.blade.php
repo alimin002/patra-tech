@@ -362,7 +362,7 @@
 							<li class="">
 								<a href="{{url('cost_predictor')}}">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Cost Predictor
+									Product Composition
 								</a>
 								<b class="arrow"></b>
 							</li>
