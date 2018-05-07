@@ -23,20 +23,20 @@
 			});
 		
 		function getRawMaterialById(app_raw_material_id){
-		var httpRequest=$.ajax({ 
-    type: 'GET', 
-		async:false,
-    url: '{{url("raw_material/edit")}}'+'/'+app_raw_material_id, 
-    dataType: 'json',
-    success: function (response){
-			//alert(response);
-			//return response;
-			
-    }
-		});	
-		//httpRequest.responseText;
-		//alert(httpRequest.responseText);
-		return JSON.parse(httpRequest.responseText);
+			var httpRequest=$.ajax({ 
+			type: 'GET', 
+			async:false,
+			url: '{{url("raw_material/edit")}}'+'/'+app_raw_material_id, 
+			dataType: 'json',
+			success: function (response){
+				//alert(response);
+				//return response;
+				
+			}
+			});	
+			//httpRequest.responseText;
+			//alert(httpRequest.responseText);
+			return JSON.parse(httpRequest.responseText);
 		}
 				
 		function renderRawMaterialNameObjectComposition(obj_composition,qty){
@@ -62,14 +62,14 @@
 				
 				
 				var raw_material_name = getRawMaterialById(obj_composition[i].app_raw_material_id).raw_name
-				var raw_material_total_amount = qty * parseInt(obj_composition[i].amount);
+				var raw_material_total_amount = qty * parseFloat(obj_composition[i].amount);
 				
 					row_resources=row_resources+"<tr>"+
 																"<td style='margin-left:10px;'>"+
 																	raw_material_name+
 																"</td>"+
 																"<td style='text-align:center;'>"+
-																	raw_material_total_amount+
+																	raw_material_total_amount.toFixed(2)+
 																"</td>"+
 															"</tr>";
 			}
