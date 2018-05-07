@@ -99,7 +99,7 @@
 					</div>
 			</div>
 		</div>
-		<div class="col-sm-12" style="display:">
+		<div class="col-sm-12" style="display:none">
 			<div class="form-group">
 					<form name="frm-approve-prediction" id="frm-approve-prediction" method="post" action="{{url('budget_production/approve_prediction')}}">
 						{{ csrf_field() }}
