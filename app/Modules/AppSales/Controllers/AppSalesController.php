@@ -20,7 +20,7 @@ class AppSalesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-		 	public function __construct(Request $request) 
+		public function __construct(Request $request) 
 		{
 			 if ($request->session()->has('session_login')==false) {
 						return Redirect::to('logout')->send();
@@ -56,8 +56,8 @@ class AppSalesController extends Controller
 								->with("data",$data);
     }
 		
-			//save purchase
-			public function save(Request $request){
+		//save purchase
+		public function save(Request $request){
 			$purchase=	array("invoice_number"		=>$request["invoice_number"],											 
 												"sale_date"					=>date("Y-m-d"),												
 												"customer_name"			=>$request["customer_name"],

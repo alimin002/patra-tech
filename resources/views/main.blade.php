@@ -330,7 +330,7 @@
 						<b class="arrow"></b>
 						<ul class="submenu">
 							<li class="">
-								<a href="tables.html">
+								<a href="{{url('report_sales')}}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Report Sale
 								</a>
@@ -339,7 +339,7 @@
 							</li>
 
 							<li class="">
-								<a href="jqgrid.html">
+								<a href="{{url('report_purchase')}}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Report Purchase
 								</a>

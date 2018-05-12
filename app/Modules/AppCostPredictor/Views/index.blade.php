@@ -1,5 +1,5 @@
 @extends('main')
-@section('title', 'Cost Predictor')
+@section('title', 'Product Composition')
 @section('content')
 <div class="page-content">
 		<div class="col-xs-12">
