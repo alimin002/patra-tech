@@ -46,27 +46,30 @@ class login extends Controller
 				$message  ="";
 				if($data_user !=""){
 					if($username == $request->input('username')){
-						 if($password == $request->input('password')){
+						 if($password == $request->input('password') and $username == $request->input('username')){
 							 $request->session()->put('session_login',array('username'=>$username, 							 
 																												      'occupation'=>$occupation, 
 																															'role'=>$role 
 																											 ));
 								return view('Dashboard::index');
-						 }else{
-							$message ="email or password is incorrect";
-							$request->session()->put('session_message',$message);
-							return Redirect::to('');
+						 }else{	
+							$message ="Email or password is incorrect";
+							return Redirect::to('')->with('message', $message);
 						 }
 					}else{
-							$message ="email or password is incorrect";
-							$request->session()->put('session_message',$message);
-							return Redirect::to('');
+							$message ="Email or password is incorrect, <br/>please try again";
+							
+							return Redirect::to('')->with('message', $message);
 					}
 				}else{
-					 $message ="email or password is incorrect";
-					 $request->session()->put('session_message',$message);
-						return Redirect::to('');
+					 $message ="Email or password is incorrect";					
+						return Redirect::to('')->with('message', $message);
 				}
+				
+				 $request->session()->put('session_login',array('username'=>$username, 							 
+																												      'occupation'=>$occupation, 
+																															'role'=>$role 
+																											 ));
 		}		
 			
 		public function doLogout(Request $request){

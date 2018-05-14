@@ -6,7 +6,14 @@
 		</h4>
 
 		<div class="space-6"></div>
-
+			@if(session()->has('message'))							
+					<div class="alert alert-danger alert-dismissible">
+						<button type="button" class="close" data-dismiss="alert">
+							<i class="ace-icon fa fa-times"></i>
+						</button>
+						{{session()->get('message')}}
+					</div>
+				@endif
 		 <form class="m-t" role="form" action="{{url('do_login')}}" method="POST">
 		 {{ csrf_field() }}
 			<fieldset>
@@ -54,7 +61,7 @@
 			</fieldset>
 		</form>
 	</div><!-- /.widget-main -->
-
+	{{--
 	<div class="toolbar clearfix">
 		<div>
 			<a href="#" data-target="#forgot-box" class="forgot-password-link">
@@ -70,4 +77,5 @@
 			</a>
 		</div>
 	</div>
+	--}}
 </div><!-- /.widget-body -->

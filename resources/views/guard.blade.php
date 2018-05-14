@@ -75,13 +75,13 @@
 		</div><!-- /.main-container -->
 
 		<!-- basic scripts -->
-
+		
 		<!--[if !IE]> -->
 		<script type="text/javascript">
 		var js_url=""
 			window.jQuery || document.write("<script src={{url('assets/js/jquery.min.js')}}>"+"<"+"/script>");
 		</script>
-
+		<script src="{{url('assets/js/bootstrap.min.js')}}"></script>
 		<!-- <![endif]-->
 
 		<!--[if IE]>
