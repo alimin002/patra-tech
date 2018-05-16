@@ -22,13 +22,14 @@
 			<div>
 				<div id="sample-table-2_wrapper" class="dataTables_wrapper form-inline" role="grid">
 					<div class="row">
+					{{--
 						<div class="col-xs-6">
 							<div id="sample-table-2_length" class="dataTables_length">
 								<label>Display <select size="1" name="sample-table-2_length" aria-controls="sample-table-2"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> records</label>
 							</div>
-						</div>
+					</div>--}}
 						<div class="col-xs-6">
-							<div class="dataTables_filter" id="sample-table-2_filter">
+							<div class="dataTables_filter pull-left" id="sample-table-2_filter">
 								<form action="{{url('raw_material')}}" method="post">
 									{{ csrf_field() }}
 								<label>Search: <input placeholder="type keyword" name="keyword" type="text" aria-controls="sample-table-2"></label>
@@ -39,28 +40,29 @@
 					<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
 					<thead>
 						<tr role="row">
+							{{--
 							<th class="center sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="">
 								<label class="position-relative">
 									<input type="checkbox" class="ace">
 									<span class="lbl"></span>
 								</label>
-							</th>
+							</th>--}}
 							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">
 								Product Name
 							</th>
 							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">
 								Unit
 							</th>
-							<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending">
+							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending">
 								Unit Price
 							</th>
-							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="								
+							<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="								
 								Update
 							: activate to sort column ascending">
 								<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
 								Stock
 							</th>
-							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="								
+							<th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="								
 								Update
 							: activate to sort column ascending">
 								<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
@@ -72,12 +74,13 @@
 							<?php $row_style=1; ?>
 							@foreach($data as $key => $values)
 							<tr @if($row_style % 2 ==0) class="odd" @else class="even"  @endif>
+							     {{--
 										<td class="center  sorting_1">
 											<label class="position-relative">
 												<input type="checkbox" class="ace">
 												<span class="lbl"></span>
 											</label>
-										</td>
+									 </td>--}}
 										<td class=" ">{{$values["product_name"]}}</td>
 										<td class=" ">{{$values["unit"]}}</td>
 										<td class="hidden-480 ">{{$values["unit_price"]}}</td>
@@ -96,6 +99,7 @@
 											
 										</td>
 										<td class=" ">
+										<!--dekstop view-->
 											<div class="hidden-sm hidden-xs action-buttons">
 												<a class="green" href="#" onclick="edit('{{$values['app_product_id']}}')">
 													<i class="ace-icon fa fa-pencil bigger-130"></i>
@@ -105,7 +109,7 @@
 													<i class="ace-icon fa fa-trash-o bigger-130"></i>
 												</a>
 											</div>
-
+											<!--mobile view view-->
 											<div class="hidden-md hidden-lg">
 												<div class="inline position-relative">
 													<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
@@ -113,6 +117,13 @@
 													</button>
 
 													<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+													<li>
+														<a href="#" onclick="expandData('{{$values['app_stock_raw_material_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+															<span class="red">											
+																<i class="fa fa-expand" aria-hidden="true"></i>
+															</span>
+														</a>
+													</li>
 														<li>
 															<a href="#" onclick="edit('{{$values['app_product_id']}}')" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
 																<span class="green" >

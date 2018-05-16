@@ -225,6 +225,7 @@
 									Product
 								</a>
 							</li>
+							{{--
 							@if(session('session_login')['role']!= 2)
 							<li class="">
 								<a href="{{url('category_product')}}">
@@ -233,6 +234,7 @@
 								</a>
 							</li>
 							@endif
+							--}}
 							{{--
 							<li class="">
 								<a href="{{url('')}}">

@@ -22,13 +22,15 @@
 			<div>
 				<div id="sample-table-2_wrapper" class="dataTables_wrapper form-inline" role="grid">
 					<div class="row">
+						{{--
 						<div class="col-xs-6">
 							<div id="sample-table-2_length" class="dataTables_length">
 								<label>Display <select size="1" name="sample-table-2_length" aria-controls="sample-table-2"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> records</label>
 							</div>
 						</div>
+						--}}
 						<div class="col-xs-6">
-							<div class="dataTables_filter" id="sample-table-2_filter">
+							<div class="dataTables_filter pull-left" id="sample-table-2_filter">
 								<form action="{{url('cost_predictor')}}" method="post">
 									{{ csrf_field() }}
 								<label>Search: <input placeholder="type keyword" name="keyword" type="text" aria-controls="sample-table-2"></label>
@@ -38,13 +40,7 @@
 					</div>
 					<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
 					<thead>
-						<tr role="row">
-							<th class="center sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="">
-								<label class="position-relative">
-									<input type="checkbox" class="ace">
-									<span class="lbl"></span>
-								</label>
-							</th>
+						<tr role="row">							
 							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">
 								Product Name
 								
@@ -52,21 +48,15 @@
 							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">
 								Composition
 							</th>
-							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">
-								Action
+							<th class=" " role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">
+								&nbsp;
 							</th>									
 						</tr>
 					</thead>			
 						<tbody role="alert" aria-live="polite" aria-relevant="all" id="tbody_composition">
 							<?php $row_style=1; ?>
 							@foreach($composition as $key => $values)
-							<tr @if($row_style % 2 ==0) class="odd" @else class="even"  @endif>
-										<td class="center  sorting_1">
-											<label class="position-relative">
-												<input type="checkbox" class="ace">
-												<span class="lbl"></span>
-											</label>
-										</td>
+							<tr @if($row_style % 2 ==0) class="odd" @else class="even"  @endif>									
 										<td class=" ">{{$values["product_name"]}}</td>
 										<td class="col-composition" ><input type="hidden" value="{{$values['data_composition']}}"/></td>
 										<td class=" " style="width:80px;">

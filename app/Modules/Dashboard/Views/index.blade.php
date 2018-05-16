@@ -2,6 +2,7 @@
 @section('title', 'Dashboards')
 @section('content')
 	<div class="page-content">
+	{{--
 		<div class="col-sm-12">
 			<a href="{{url('sales')}}" class="btn btn-app btn-info btn-sm no-radius">
 				<i class="ace-icon fa fa-shopping-cart bigger-230"></i>
@@ -48,6 +49,91 @@
 				 Log Out
 			</a>
 		</div>
+	--}}
+	<div class="col-sm-7 infobox-container">
+									<!-- #section:pages/dashboard.infobox -->
+									<div class="infobox infobox-green">
+										<div class="infobox-icon">
+											<i class="ace-icon fa fa-shopping-cart"></i>
+										</div>
+
+										<div class="infobox-data">
+											<span class="infobox-data-number">32</span>
+											<div class="infobox-content">Total Data Purchase</div>
+										</div>
+
+										<!-- #section:pages/dashboard.infobox.stat -->
+										{{--<div class="stat stat-success">8%</div>--}}
+
+										<!-- /section:pages/dashboard.infobox.stat -->
+									</div>
+
+									<div class="infobox infobox-blue">
+										<div class="infobox-icon">
+											<i class="ace-icon fa fa-diamond"></i>
+										</div>
+
+										<div class="infobox-data">
+											<span class="infobox-data-number">11</span>
+											<div class="infobox-content">Total Data Product</div>
+										</div>
+										{{--
+										<div class="badge badge-success">
+											+32%
+											<i class="ace-icon fa fa-diamond"></i>
+										</div>
+										--}}
+									</div>
+
+									<div class="infobox infobox-pink">
+									<div class="infobox-icon">
+											<i class="ace-icon fa fa-truck"></i>
+										</div>
+
+										<div class="infobox-data">
+											<span class="infobox-data-number">11</span>
+											<div class="infobox-content">Total Data Rawmaterial</div>
+										</div>
+										<div class="stat stat-important">4 critical stock</div>
+									</div>
+
+									<div class="infobox infobox-red">
+										<div class="infobox-icon">
+											<i class="ace-icon fa fa-shopping-basket"></i>
+										</div>
+
+										<div class="infobox-data">
+											<span class="infobox-data-number">7</span>
+											<div class="infobox-content">Total Data Sales Order</div>
+										</div>
+									</div>
+
+									<div class="infobox infobox-orange2">
+									<div class="infobox-icon">
+											<i class="ace-icon fa fa fa-male"></i>
+										</div>
+
+										<div class="infobox-data">
+											<span class="infobox-data-number">7</span>
+											<div class="infobox-content">Total Data Suplier</div>
+										</div>
+									</div>
+
+									<div class="infobox infobox-blue2">
+										<div class="infobox-icon">
+											<i class="ace-icon fa fa-list-alt"></i>
+										</div>
+
+										<div class="infobox-data">
+											<span class="infobox-data-number">7</span>
+											<div class="infobox-content">Total Data</div>
+										</div>
+									</div>
+
+									<!-- /section:pages/dashboard.infobox -->
+									<div class="space-6"></div>
+									<!-- /section:pages/dashboard.infobox.dark -->
+								</div>
   </div><!-- /.page-content -->
 <script>
 

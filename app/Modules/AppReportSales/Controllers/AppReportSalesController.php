@@ -27,21 +27,37 @@ class AppReportSalesController extends Controller
 		
 		public function print_report(Request $request){
 			//echo $request["date-range-picker"];
-			$from="2018-04-03";
-			$to="2018-04-17";
-			$data=AppSalesDetail::select('app_sales_detail.*','app_sales.*')
-																					->leftJoin('app_sales','app_sales.app_sales_id','=','app_sales_detail.app_sales_id')																				
-																					->whereBetween('sale_date', array($from, $to))
-																					->get();
-																					/***
-																					echo "<pre>";
-																						print_r($data);
-																					echo "</pre>";
-																					die();
-																					***/
+			$from=$request["date_start"];
+			$to  =$request["date_end"];
+			$data=AppSalesDetail::select('app_sales_detail.*','app_sales.*')																						
+																					->leftJoin('app_sales','app_sales.app_sales_id','=','app_sales_detail.app_sales_id')
+																					->selectRaw('SUM(sub_total) total_invoice')																					
+																					->whereBetween('sale_date', array($from, $to))																					
+																					->groupBy("app_sales_detail.app_sales_id")																																										
+																					->get();																																																							
 																					
-								return view("AppReportSales::report_sale")
+								return view("AppReportSales::index")
+								->with("date_start",$from)
+								->with("date_end",$to)
 				        ->with("data",$data);
+		}
+		
+		public function download_pdf($date_start,$date_end){
+			
+			echo $date_start;
+			echo $date_end;	
+			$data_header=array("date_start"=>$date_start,"date_end"=>$date_end);			
+			$data_detail=AppSalesDetail::select('app_sales_detail.*','app_sales.*')																						
+																					->leftJoin('app_sales','app_sales.app_sales_id','=','app_sales_detail.app_sales_id')
+																					->selectRaw('SUM(sub_total) total_invoice')																					
+																					->whereBetween('sale_date', array($date_start,$date_end))																					
+																					->groupBy("app_sales_detail.app_sales_id")																																										
+																					->get();	
+			$data=array("data_header"=>$data_header,"data_detail"=>$data_detail);																	
+			$pdf=PDF::loadView('AppReportSales::report_sales_pdf', compact('data'));
+			return $pdf->download('report_sales_pdf.pdf');
+			
+		
 		}
 
     /**

@@ -13,7 +13,7 @@
 		Route::group(['module' => 'AppReportSales', 'middleware' => ['web'], 'namespace' => 'App\Modules\AppReportSales\Controllers'], function(){
     Route::get('report_sales','AppReportSalesController@index');
 		Route::get('report_sales','AppReportSalesController@index');
-		Route::get('report_sales/download_pdf/{app_sales_id}','AppReportSalesController@download_pdf');
+		Route::get('report_sales/download_pdf/{date_start}/{date_end}','AppReportSalesController@download_pdf');
 		Route::get('report_sales/preview_pdf/{app_sales_id}','AppReportSalesController@preview_pdf');
 		Route::post('report_sales/save','AppReportSalesController@save');
 		Route::post('report_sales/print_report','AppReportSalesController@print_report');

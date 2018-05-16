@@ -46,40 +46,15 @@
 			</div>	
 		<div class="col-xs-12">
 			<h3 class="header smaller lighter blue">Stock Opname Item</h3>
-			<div class="table-header">
-				Results for "@yield('title')"
-			</div>
-			<div>
-				
+			<div>				
 				<div id="sample-table-2_wrapper" class="dataTables_wrapper form-inline" role="grid">
-					<div class="row">
-						<div class="col-xs-6">
-							<div id="sample-table-2_length" class="dataTables_length">
-								<label>Display <select size="1" name="sample-table-2_length" aria-controls="sample-table-2"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> records</label>
-							</div>
-						</div>
-						<div class="col-xs-6">
-							<div class="dataTables_filter" id="sample-table-2_filter">
-								<form action="{{url('stock_opname_raw_material_detail')}}" method="post">
-									{{ csrf_field() }}
-								<label>Search: <input placeholder="type keyword" name="keyword" type="text" aria-controls="sample-table-2"></label>
-								</form>
-							</div>
-						</div>
-					</div>
 					<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
 					<thead>
-						<tr role="row">
-							<th class="center sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="">
-								<label class="position-relative">
-									<input type="checkbox" class="ace">
-									<span class="lbl"></span>
-								</label>
-							</th>
+						<tr role="row">							
 							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">
 								Raw Material Name
 							</th>
-							<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending">
+							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending">
 								Stock 
 							</th>
 							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="								
@@ -106,7 +81,6 @@
 											<button data-toggle="dropdown" class="btn btn-white btn-primary">
 												<span class="ace-icon fa fa-caret-down icon-only"></span>
 											</button>
-
 											<ul class="dropdown-menu dropdown-success">
 												<li>
 													<a href="{{url('stock_opname_raw_material_detail/preview_pdf/'.$app_stock_opname_raw_material_id)}}">Print Stock Opname</a>
@@ -120,7 +94,7 @@
 												<li class="divider"></li>
 											</ul>
 											<a href="{{url('stock_opname_raw_material')}}"><button class="btn btn-white btn-primary"><i class="ace-icon fa fa-angle-double-left" aria-hidden="true">&nbsp;Back to stock opname</i></button></a>
-										</div>
+									</div>
 							<div class="dataTables_info" id="sample-table-2_info"><!--Showing 1 to 10 of 23 entries--></div>
 						</div>
 						<div class="col-xs-6">

@@ -24,13 +24,7 @@
 					var stock								= data_stock_opname_item[i].stock;
 					var stock_opname				= data_stock_opname_item[i].stock_opname;
 					var deviation						= data_stock_opname_item[i].deviation;
-				  var tr="<tr id=tr-"+i+">"+
-									"<td class='center  sorting_1'>"+
-										"<label class='position-relative'>"+
-											"<input type='checkbox' class='ace'>"+
-											"<span class='lbl'></span>"+
-										"</label>"+
-									"</td>"+
+				  var tr="<tr id=tr-"+i+">"+								
 									"<td class='footable-visible footable-first-column'>"+
 										""+raw_material_name+""+
 									"</td>"+
@@ -40,7 +34,7 @@
 									"<td  class='footable-visible footable-first-column'>"+
 										""+stock_opname+""+
 									"</td>"+
-									"<td  class='footable-visible footable-first-column'>"+
+									"<td  class='hidden-480'>"+
 										""+deviation+""+
 									"</td>"+
 									"<td  class=' '>"+
@@ -50,7 +44,7 @@
 												"<i class='ace-icon fa fa-pencil bigger-130' id=row-"+i+" class='btn btn-primary' onclick='editItem(this.id,"+app_raw_material_id+")'></i>"+
 											"</a>"+
 											"<a class='red' href='#'>"+
-												"<i class='ace-icon fa fa-trash-o bigger-130' id=row-"+i+" onclick='deleteItem(this.id)'></i>"+
+												"<i class='ace-icon fa fa-trash-o bigger-130' id=row-"+i+" onclick='deleteItem(this.id,"+app_raw_material_id+")'></i>"+
 											"</a>"+
 										"</div>"+	
 											"<div class='hidden-md hidden-lg'>"+
@@ -59,6 +53,13 @@
 														"<i class='ace-icon fa fa-caret-down icon-only bigger-120'></i>"+
 													"</button>"+
 													"<ul class='dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close'>"+
+													"<li>"+
+															"<a href='#'  class='tooltip-success' data-rel='tooltip' title='' data-original-title='Edit' >"+
+																"<span class='green' >"+
+																	"<i class='fa fa-expand' id=row-"+i+" class='btn btn-primary' onclick='editItem(this.id)'></i>"+
+																"</span>"+
+															"</a>"+
+														"</li>"+
 														"<li>"+
 															"<a href='#'  class='tooltip-success' data-rel='tooltip' title='' data-original-title='Edit' >"+
 																"<span class='green' >"+
@@ -67,9 +68,9 @@
 															"</a>"+
 														"</li>"+
 														"<li>"+
-															"<a href='#' class='tooltip-error' data-rel='tooltip' title='' onclick='deleteData(this.id)' data-original-title='Delete'>"+
+															"<a href='#' class='tooltip-error' id=row-"+i+" data-rel='tooltip' title='' onclick='deleteItem(this.id,"+app_raw_material_id+")' data-original-title='Delete'>"+
 																"<span class='red'>"+
-																	"<i class='ace-icon fa fa-trash-o bigger-120' id=row-"+i+"></i>"+
+																	"<i class='ace-icon fa fa-trash-o bigger-120'></i>"+
 																"</span>"+
 															"</a>"+
 														"</li>"+
@@ -355,13 +356,7 @@
 				row_return_purchase = row_count;
 			}
 			$("#data_stock_opname_item").val(JSON.stringify(obj_data_return_purchase_item));	//variable assign textarea value		
-				 var tr="<tr id=tr-"+row_return_purchase+">"+
-									"<td class='center  sorting_1'>"+
-										"<label class='position-relative'>"+
-											"<input type='checkbox' class='ace'>"+
-											"<span class='lbl'></span>"+
-										"</label>"+
-									"</td>"+
+				 var tr="<tr id=tr-"+row_return_purchase+">"+								
 									"<td class='footable-visible footable-first-column'>"+
 										""+raw_material_name+""+
 									"</td>"+
@@ -371,16 +366,15 @@
 									"<td  class='footable-visible footable-first-column'>"+
 										""+available_stock+""+
 									"</td>"+
-									"<td  class='footable-visible footable-first-column'>"+
+									"<td  class='hidden-480'>"+
 										""+deviation+""+
 									"</td>"+
-									"<td  class=' '>"+
-									
+									"<td  class=' '>"+									
 										"<div class='hidden-sm hidden-xs action-buttons'>"+
 											"<a class='green' href='#'>"+
-												"<i class='ace-icon fa fa-pencil bigger-130' id=row-"+row_return_purchase+" class='btn btn-primary' onclick='editItem(this.id)'></i>"+
+												"<i class='ace-icon fa fa-pencil bigger-130' id=row-"+row_return_purchase+" class='btn btn-primary' onclick='editItem(this.id,"+app_raw_material_id+")'></i>"+
 											"</a>"+
-											"<a class='red' href='#'>"+
+											"<a class='red' href='#' id=row-"+row_return_purchase+" onclick='deleteItem(this.id,"+app_raw_material_id+")'>"+
 												"<i class='ace-icon fa fa-trash-o bigger-130'></i>"+
 											"</a>"+
 										"</div>"+	
@@ -393,12 +387,12 @@
 														"<li>"+
 															"<a href='#'  class='tooltip-success' data-rel='tooltip' title='' data-original-title='Edit' >"+
 																"<span class='green' >"+
-																	"<i class='ace-icon fa fa-pencil-square-o bigger-120' id=row-"+row_return_purchase+" class='btn btn-primary' onclick='editItem(this.id)'></i>"+
+																	"<i class='ace-icon fa fa-pencil-square-o bigger-120' id=row-"+row_return_purchase+" class='btn btn-primary' onclick='editItem(this.id,"+app_raw_material_id+")'></i>"+
 																"</span>"+
 															"</a>"+
 														"</li>"+
 														"<li>"+
-															"<a href='#' class='tooltip-error' data-rel='tooltip' title='' data-original-title='Delete'>"+
+															"<a href='#' class='tooltip-error' data-rel='tooltip' title='' id=row-"+row_return_purchase+" data-original-title='Delete' onclick='deleteItem(this.id,"+app_raw_material_id+")'>"+
 																"<span class='red'>"+
 																	"<i class='ace-icon fa fa-trash-o bigger-120'></i>"+
 																"</span>"+
@@ -419,10 +413,10 @@
 	
 	function editItem(row_id,app_stock_opname_raw_material_id){
 		row_id="tr-"+row_id.replace("row-","");
-		var raw_material_name =$("#"+row_id+" "+"td:eq(1)").text();
-		var stock							=$("#"+row_id+" "+"td:eq(2)").text();
-		var stock_opname			=$("#"+row_id+" "+"td:eq(3)").text();
-		var deviation					=$("#"+row_id+" "+"td:eq(4)").text();
+		var raw_material_name =$("#"+row_id+" "+"td:eq(0)").text();
+		var stock							=$("#"+row_id+" "+"td:eq(1)").text();
+		var stock_opname			=$("#"+row_id+" "+"td:eq(2)").text();
+		var deviation					=$("#"+row_id+" "+"td:eq(3)").text();
 		
 		//delete selected item
 		var data_stock_opname_item=JSON.parse($("#data_stock_opname_item").val());
@@ -448,10 +442,10 @@
 	//display modal delete
   function deleteItem(row_id,app_raw_material_id){
 		row_id="tr-"+row_id.replace("row-","");
-		var raw_material_name	 =$("#"+row_id+" "+"td:eq(1)").text();
-		var stock	 						 =$("#"+row_id+" "+"td:eq(2)").text();
-		var stock_opname			 =$("#"+row_id+" "+"td:eq(3)").text();
-		var deviation					 =$("#"+row_id+" "+"td:eq(4)").text();
+		var raw_material_name	 =$("#"+row_id+" "+"td:eq(0)").text();
+		var stock	 						 =$("#"+row_id+" "+"td:eq(1)").text();
+		var stock_opname			 =$("#"+row_id+" "+"td:eq(2)").text();
+		var deviation					 =$("#"+row_id+" "+"td:eq(3)").text();
 		//delete selected item
 		var data_stock_opname_item=JSON.parse($("#data_stock_opname_item").val());
 		var selected_row=row_id.replace("tr-","");

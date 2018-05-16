@@ -41,8 +41,9 @@
 	$(document).ready(function() {
 		for(var i=0; i<= $(".col-composition").length-1; i++ ){
 			var json_composition=$(".col-composition:eq("+i+") input").val();
+			//$(".col-composition:eq("+i+")").append("please wait..");
 			var composition = productComposition(json_composition);	
-			//alert(composition);
+			//$(".col-composition:eq("+i+")").empty();
 			$(".col-composition:eq("+i+")").append(composition);
 		}
 	
@@ -345,7 +346,7 @@
 		//var json_composition={"app_raw_material_id":}
 		//array_composition[]
 		num_string= "'"+num+"'";
-			 var html="<div class='col-sm-12 main-cover' id='main-cover-"+num+"' style='border:1px solid red;'>"+	
+			 var html="<div class='col-sm-12 main-cover' id='main-cover-"+num+"' style='border:1px solid blue; margin-top:5px;'>"+	
 										"<div class='col-sm-3 col-raw-material'>"+	
 											"<div class='form-group'>"+
 												"<label>Raw Material&nbsp;</label>"+	

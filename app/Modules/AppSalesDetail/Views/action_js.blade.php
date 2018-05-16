@@ -45,13 +45,7 @@
 					var unit_price					= data_sales_item[i].unit_price;
 					var qty									= data_sales_item[i].qty;
 					var sub_total						= data_sales_item[i].sub_total;
-				  var tr="<tr id=tr-"+i+">"+
-									"<td class='center  sorting_1'>"+
-										"<label class='position-relative'>"+
-											"<input type='checkbox' class='ace'>"+
-											"<span class='lbl'></span>"+
-										"</label>"+
-									"</td>"+
+				  var tr="<tr id=tr-"+i+">"+								
 									"<td class='footable-visible footable-first-column'>"+
 										""+product_name+""+
 									"</td>"+
@@ -61,7 +55,7 @@
 									"<td  class='footable-visible footable-first-column'>"+
 										""+qty+""+
 									"</td>"+
-									"<td  class='footable-visible footable-first-column'>"+
+									"<td  class='hidden-480'>"+
 										""+numberWithCommas(sub_total)+""+
 									"</td>"+
 									"<td  class=' '>"+
@@ -81,6 +75,13 @@
 													"</button>"+
 													"<ul class='dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close'>"+
 														"<li>"+
+															"<a href='#'  data-rel='tooltip' title='' data-original-title='Edit' >"+
+																"<span class='green' >"+
+																	"<i class='fa fa-expand' id=row-"+i+"  class='btn btn-primary' onclick='editItem(this.id)'></i>"+
+																"</span>"+
+															"</a>"+
+														"</li>"+
+														"<li>"+
 															"<a href='#'  class='tooltip-success' data-rel='tooltip' title='' data-original-title='Edit' >"+
 																"<span class='green' >"+
 																	"<i class='ace-icon fa fa-pencil-square-o bigger-120' id=row-"+i+" class='btn btn-primary' onclick='editItem(this.id)'></i>"+
@@ -88,9 +89,9 @@
 															"</a>"+
 														"</li>"+
 														"<li>"+
-															"<a href='#' class='tooltip-error' data-rel='tooltip' title='' onclick='deleteitem(this.id,"+app_product_id+")' data-original-title='Delete'>"+
+															"<a href='#' class='tooltip-error' data-rel='tooltip' id=row-"+i+" title='' onclick='deleteitem(this.id,"+app_product_id+")' data-original-title='Delete'>"+
 																"<span class='red'>"+
-																	"<i class='ace-icon fa fa-trash-o bigger-120' id=row-"+i+"></i>"+
+																	"<i class='ace-icon fa fa-trash-o bigger-120'></i>"+
 																"</span>"+
 															"</a>"+
 														"</li>"+
@@ -339,13 +340,7 @@
 				row_sales = row_count;
 			}
 			$("#data_sales_item").val(JSON.stringify(obj_data_sales_item));	//variable assign textarea value		
-				 var tr="<tr id=tr-"+row_sales+">"+
-									"<td class='center  sorting_1'>"+
-										"<label class='position-relative'>"+
-											"<input type='checkbox' class='ace'>"+
-											"<span class='lbl'></span>"+
-										"</label>"+
-									"</td>"+
+				 var tr="<tr id=tr-"+row_sales+">"+								
 									"<td class='footable-visible footable-first-column'>"+
 										""+product_name+""+
 									"</td>"+
@@ -355,7 +350,7 @@
 									"<td  class='footable-visible footable-first-column'>"+
 										""+qty+""+
 									"</td>"+
-									"<td  class='footable-visible footable-first-column'>"+
+									"<td  class='hidden-480'>"+
 										""+sub_total+""+
 									"</td>"+
 									"<td  class=' '>"+
@@ -374,6 +369,13 @@
 														"<i class='ace-icon fa fa-caret-down icon-only bigger-120'></i>"+
 													"</button>"+
 													"<ul class='dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close'>"+
+														"<li>"+
+															"<a href='#'  class='fa fa-expand' data-rel='tooltip' title='' data-original-title='Edit' >"+
+																"<span class='green' >"+
+																	"<i class='ace-icon fa fa-pencil-square-o bigger-120' id=row-"+row_sales+" class='btn btn-primary' onclick='editItem(this.id)'></i>"+
+																"</span>"+
+															"</a>"+
+														"</li>"+
 														"<li>"+
 															"<a href='#'  class='tooltip-success' data-rel='tooltip' title='' data-original-title='Edit' >"+
 																"<span class='green' >"+
@@ -403,11 +405,11 @@
 	
 	function editItem(row_id,app_product_id){
 		row_id="tr-"+row_id.replace("row-","");
-		var product_name =$("#"+row_id+" "+"td:eq(1)").text();
-		var unit_price				=$("#"+row_id+" "+"td:eq(2)").text();
-		var qty								=$("#"+row_id+" "+"td:eq(3)").text();
-		var sub_total					=$("#"+row_id+" "+"td:eq(4)").text();
-		var description				=$("#"+row_id+" "+"td:eq(5)").text();
+		var product_name =$("#"+row_id+" "+"td:eq(0)").text();
+		var unit_price				=$("#"+row_id+" "+"td:eq(1)").text();
+		var qty								=$("#"+row_id+" "+"td:eq(2)").text();
+		var sub_total					=$("#"+row_id+" "+"td:eq(3)").text();
+		var description				=$("#"+row_id+" "+"td:eq(4)").text();
 		
 		//delete selected item
 		var data_sales_item=JSON.parse($("#data_sales_item").val());
@@ -437,11 +439,11 @@
   function deleteItem(row_id,app_product_id){
 		//alert(app_product_id);
 		row_id="tr-"+row_id.replace("row-","");
-		var product_name =$("#"+row_id+" "+"td:eq(1)").text();
-		var unit_price				=$("#"+row_id+" "+"td:eq(2)").text();
-		var qty								=$("#"+row_id+" "+"td:eq(3)").text();
-		var sub_total					=$("#"+row_id+" "+"td:eq(4)").text();
-		var description				=$("#"+row_id+" "+"td:eq(5)").text();
+		var product_name =$("#"+row_id+" "+"td:eq(0)").text();
+		var unit_price				=$("#"+row_id+" "+"td:eq(1)").text();
+		var qty								=$("#"+row_id+" "+"td:eq(2)").text();
+		var sub_total					=$("#"+row_id+" "+"td:eq(3)").text();
+		var description				=$("#"+row_id+" "+"td:eq(4)").text();
 		//delete selected item
 		var data_sales_item=JSON.parse($("#data_sales_item").val());
 		var selected_row=row_id.replace("tr-","");

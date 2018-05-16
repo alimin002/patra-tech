@@ -28,7 +28,7 @@
 							</div>
 						</div>
 						<div class="col-xs-6">
-							<div class="dataTables_filter" id="sample-table-2_filter">
+							<div class="dataTables_filter pull-left" id="sample-table-2_filter">
 								<form action="{{url('raw_material')}}" method="post">
 									{{ csrf_field() }}
 								<label>Search: <input placeholder="type keyword" name="keyword" type="text" aria-controls="sample-table-2"></label>
@@ -39,12 +39,13 @@
 					<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
 					<thead>
 						<tr role="row">
+							{{--
 							<th class="center sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="">
 								<label class="position-relative">
 									<input type="checkbox" class="ace">
 									<span class="lbl"></span>
 								</label>
-							</th>
+							</th>--}}
 							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">
 								Product Name
 							</th>
@@ -54,7 +55,7 @@
 							<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending">
 								Description
 							</th>
-							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="								
+							<th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="								
 								Update
 							: activate to sort column ascending">
 								<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
@@ -66,12 +67,13 @@
 				<?php $row_style=1; ?>
 				@foreach($data as $key => $values)
 				<tr @if($row_style % 2 ==0) class="odd" @else class="even"  @endif>
+							{{--
 							<td class="center  sorting_1">
 								<label class="position-relative">
 									<input type="checkbox" class="ace">
 									<span class="lbl"></span>
 								</label>
-							</td>
+							</td>--}}
 							<td class=" ">{{$values["name"]}}</td>
 							<td class="hidden-480 ">{{$values["stock"]}}</td>
 							<td class=" ">{{$values["description"]}}</td>
@@ -94,6 +96,13 @@
 										</button>
 
 										<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+											<li>
+												<a href="#" onclick="expandData('{{$values['app_stock_raw_material_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+													<span class="red">											
+														<i class="fa fa-expand" aria-hidden="true"></i>
+													</span>
+												</a>
+											</li>
 											<li>
 												<a href="#" onclick="edit('{{$values['app_stock_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete" >
 													<span class="red">

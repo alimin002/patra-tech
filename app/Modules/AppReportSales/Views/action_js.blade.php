@@ -3,8 +3,6 @@
 <script src="{{url('assets/js/date-time/moment.min.js')}}"></script>
 <script src="{{url('assets/js/date-time/daterangepicker.min.js')}}"></script>
 <script src="{{url('assets/js/date-time/bootstrap-datetimepicker.min.js')}}"></script>
-
-
 <script>
 	//to translate the daterange picker, please copy the "examples/daterange-fr.js" contents here before initialization
 				$('input[name=date-range-picker]').daterangepicker({
@@ -21,6 +19,26 @@
 				
 				function printReport(){
 					//alert($("#id-date-range-picker-1").val());
+					var date_start= $("#id-date-range-picker-1").val().split('-')[0];
+					var date_end  = $("#id-date-range-picker-1").val().split('-')[1];
+					//alert(formatDate(date_start));
+					$("#date_start").val(formatDate(date_start));
+					$("#date_end").val(formatDate(date_end));
+					//alert(date_start);
 					$("#frm-filter").submit();
+				}
+				//
+				function downloadPdf(){
+					//alert($("#id-date-range-picker-1").val());
+					var date_start= $("#date_start").val();
+					var date_end  = $("#date_end").val();
+					//alert(date_start);
+					var url="{{url('report_sales/download_pdf')}}"+"/"+date_start+"/"+date_end;
+					window.open(url, '_blank');
+					//alert(formatDate(date_start));
+					//$("#date_start").val(formatDate(date_start));
+					//$("#date_end").val(formatDate(date_end));
+					//alert(date_start);
+					//$("#frm-filter").submit();
 				}
 </script>
