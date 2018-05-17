@@ -22,11 +22,13 @@
 			<div>
 				<div id="sample-table-2_wrapper" class="dataTables_wrapper form-inline" role="grid">
 					<div class="row">
+					{{--
 						<div class="col-xs-6">
 							<div id="sample-table-2_length" class="dataTables_length">
 								<label>Display <select size="1" name="sample-table-2_length" aria-controls="sample-table-2"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> records</label>
 							</div>
 						</div>
+					--}}
 						<div class="col-xs-6">
 							<div class="dataTables_filter pull-left" id="sample-table-2_filter">
 								<form action="{{url('raw_material')}}" method="post">
@@ -52,14 +54,10 @@
 							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">
 								Stock
 							</th>
-							<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending">
+							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending">
 								Description
 							</th>
-							<th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="								
-								Update
-							: activate to sort column ascending">
-								<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
-								Action
+							<th class=" ">								
 							</th>
 						</tr>
 					</thead>			
@@ -75,7 +73,7 @@
 								</label>
 							</td>--}}
 							<td class=" ">{{$values["name"]}}</td>
-							<td class="hidden-480 ">{{$values["stock"]}}</td>
+							<td class=" ">{{$values["stock"]}}</td>
 							<td class=" ">{{$values["description"]}}</td>
 							<td class=" ">
 								<!---dekstop view-->

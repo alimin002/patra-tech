@@ -50,7 +50,7 @@
 							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">
 								Product Name
 							</th>
-							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">
+							<th class="hidden-480" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">
 								Unit
 							</th>
 							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending">
@@ -62,11 +62,8 @@
 								<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
 								Stock
 							</th>
-							<th role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="								
-								Update
-							: activate to sort column ascending">
-								<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
-								Action
+							<th class=" ">
+								
 							</th>
 						</tr>
 					</thead>			
@@ -82,8 +79,8 @@
 											</label>
 									 </td>--}}
 										<td class=" ">{{$values["product_name"]}}</td>
-										<td class=" ">{{$values["unit"]}}</td>
-										<td class="hidden-480 ">{{$values["unit_price"]}}</td>
+										<td class="hidden-480">{{$values["unit"]}}</td>
+										<td class=" ">{{$values["unit_price"]}}</td>
 										<td class=" ">
 											@if ($values["stock"] == "")
 												<p>

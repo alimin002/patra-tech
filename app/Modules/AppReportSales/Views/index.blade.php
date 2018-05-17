@@ -124,4 +124,5 @@
 		</div>
 	</div>
 @include('AppReportSales::action_js')
+@include('AppReportSales::form_email')
 @endsection

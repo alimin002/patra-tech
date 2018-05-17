@@ -106,7 +106,14 @@ return [
     | been provided here, which will work well on most of your systems.
     |
     */
-
+		//fix ssl problem
     'sendmail' => '/usr/sbin/sendmail -bs',
+		'stream' => [
+   'ssl' => [
+      'allow_self_signed' => true,
+      'verify_peer' => false,
+      'verify_peer_name' => false,
+   ]
+	]
 
 ];

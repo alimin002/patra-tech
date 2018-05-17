@@ -370,9 +370,9 @@
 													"</button>"+
 													"<ul class='dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close'>"+
 														"<li>"+
-															"<a href='#'  class='fa fa-expand' data-rel='tooltip' title='' data-original-title='Edit' >"+
+															"<a href='#' data-rel='tooltip' title='' data-original-title='Edit' >"+
 																"<span class='green' >"+
-																	"<i class='ace-icon fa fa-pencil-square-o bigger-120' id=row-"+row_sales+" class='btn btn-primary' onclick='editItem(this.id)'></i>"+
+																	"<i class='fa fa-expand' id=row-"+row_sales+" class='btn btn-primary' onclick='editItem(this.id)'></i>"+
 																"</span>"+
 															"</a>"+
 														"</li>"+

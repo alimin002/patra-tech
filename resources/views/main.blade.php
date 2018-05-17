@@ -278,16 +278,25 @@
 					</li>
 					@endif
 					<li class="">
-						<a href="{{url('stock_opname_raw_material')}}" onclick="goToStockOpname()" class="dropdown-toggle">
+						<a href="" class="dropdown-toggle">
 							<i class="menu-icon fa fa-sticky-note"></i>
 							<span class="menu-text">Stock Opname</span>
+							<b class="arrow fa fa-angle-down"></b>
 						</a>
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">							
+								<a href="{{url('stock_opname_raw_material')}}">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Stock Opname Raw Materials
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+						</ul>
 					</li>
-					<script>
-						function goToStockOpname(){
-							location.href = "{{url('stock_opname_raw_material')}}";
-						}
-					</script>
+					
 					@if(session('session_login')['role']!= 2)
 					<li class="">
 						<a href="#" class="dropdown-toggle">

@@ -41,4 +41,29 @@
 					//alert(date_start);
 					//$("#frm-filter").submit();
 				}
+				
+				//
+				function sendReportViaEmail(){
+					//alert($("#id-date-range-picker-1").val());
+					
+					$("#modal-form-email").modal("toggle");
+					//alert(date_start);
+					//var url="{{url('report_sales/send_report_to_email')}}"+"/"+date_start+"/"+date_end;
+					//window.open(url, '_blank');
+					//alert(formatDate(date_start));
+					//$("#date_start").val(formatDate(date_start));
+					//$("#date_end").val(formatDate(date_end));
+					//alert(date_start);
+					//$("#frm-filter").submit();
+				}
+				
+				function doSendEmail(){
+					var date_start     = $("#date_start").val();
+					var date_end       = $("#date_end").val();
+					var email_address  = $("#email_address").val();
+					$("#modal-form-email").modal("hide");
+					var url="{{url('report_sales/send_report_to_email')}}"+"/"+date_start+"/"+date_end+"/"+email_address;
+					window.open(url, '_blank');
+				}
+				
 </script>

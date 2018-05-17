@@ -77,8 +77,8 @@
 								</label>
 							</td>--}}
 							<td class=" ">{{$values["name"]}}</td>
-							<td class="hidden-480 ">{{$values["stock"]}}</td>
-							<td class=" ">{{$values["description"]}}</td>
+							<td class=" ">{{$values["stock"]}}</td>
+							<td class="hidden-480">{{$values["description"]}}</td>
 							<td class=" ">
 								<!---dekstop view-->
 								<div class="hidden-sm hidden-xs action-buttons">

@@ -44,8 +44,8 @@ class AppReportSalesController extends Controller
 		
 		public function download_pdf($date_start,$date_end){
 			
-			echo $date_start;
-			echo $date_end;	
+			//echo $date_start;
+			//echo $date_end;	
 			$data_header=array("date_start"=>$date_start,"date_end"=>$date_end);			
 			$data_detail=AppSalesDetail::select('app_sales_detail.*','app_sales.*')																						
 																					->leftJoin('app_sales','app_sales.app_sales_id','=','app_sales_detail.app_sales_id')
@@ -56,6 +56,36 @@ class AppReportSalesController extends Controller
 			$data=array("data_header"=>$data_header,"data_detail"=>$data_detail);																	
 			$pdf=PDF::loadView('AppReportSales::report_sales_pdf', compact('data'));
 			return $pdf->download('report_sales_pdf.pdf');
+			
+		
+		}
+		
+		public function sendReportToEmail($date_start,$date_end,$email_address){
+			
+			//echo $date_start;
+			//echo $date_end;	
+			$data_header=array("date_start"=>$date_start,"date_end"=>$date_end);			
+			$data_detail=AppSalesDetail::select('app_sales_detail.*','app_sales.*')																						
+																					->leftJoin('app_sales','app_sales.app_sales_id','=','app_sales_detail.app_sales_id')
+																					->selectRaw('SUM(sub_total) total_invoice')																					
+																					->whereBetween('sale_date', array($date_start,$date_end))																					
+																					->groupBy("app_sales_detail.app_sales_id")																																										
+																					->get();	
+																					
+				$data = array('data'=>array("data_header"=>$data_header,
+									  "data_detail"=>$data_detail)									
+										);																	
+				//echo $suplier_email; die();	
+			$email_data=array("email_to"=>$email_address,
+												"email_from"=>"patradigitalgarage@gmail.com"
+			);
+      Mail::send('AppReportSales::email_report_sales', $data, function($email_message)use($email_data){
+         $email_message->to($email_data["email_to"], 'Report Sales')->subject('Report Sales');
+         $email_message->from($email_data["email_from"],'Alimin');
+      });
+      $message="email has sent...";
+			return Redirect::to('report_sales')
+												->with("message",$message);
 			
 		
 		}
