@@ -1,4 +1,5 @@
 <script>
+ 
 	function add(){
 		$("#frm-create #name").val("");
 		$("#frm-create #addres").val("");
@@ -32,6 +33,23 @@
 	function doUpdate(){
 		$("#modal-edit").modal("hide");
 		$("#frm-edit").submit();
+	}
+	
+	function expandData(id){
+		var app_suplier_id=id;
+		$.ajax({ 
+    type: 'GET', 
+     url: '{{url("suplier/edit")}}'+'/'+app_suplier_id, 
+    dataType: 'json',
+    success: function (response){ 
+				  $("#frm-expand #name").val(response["name"]);
+					$("#frm-expand #addres").val(response["addres"]);
+					$("#frm-expand #telephone_number").val(response["telephone_number"]);
+					$("#frm-expand #app_suplier_id").val(response["app_suplier_id"]);
+					$("#frm-expand #email").val(response["email"]);
+					$("#modal-expand").modal("toggle");
+    }
+		});
 	}
 	
 	function deleteData(id){

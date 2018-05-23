@@ -8,13 +8,10 @@
 						<button type="button" class="close" data-dismiss="alert">
 							<i class="ace-icon fa fa-times"></i>
 						</button>
-
 						<i class="ace-icon fa fa-check green"></i>
-
 						{{session()->get('message')}}
 					</div>
-				@endif
-			
+				@endif			
 			<h3 class="header smaller lighter blue">Data @yield("title")</h3>
 			<div class="table-header">
 				Results for "@yield('title')"
@@ -185,6 +182,7 @@
 			</div>
 		</div>
 	</div>
+@include('AppPurchase::expand')
 @include('AppPurchase::create')
 @include('AppPurchase::action_js')
 @include('AppPurchase::edit')						

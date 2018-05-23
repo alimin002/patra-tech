@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Purchase Order</title>
+<title>Report Purchase</title>
 
 <style type="text/css">
     * {
@@ -51,8 +51,8 @@
   </table>
 	<table width="100%">
     <tr>
-        <td><h1>Report Sales</h1></td>
-    </tr>
+        <td><h1>Report Purchase</h1></td>
+    </td>
 
   </table>
   <br/>
@@ -61,10 +61,10 @@
     <thead style="background-color: lightgray;">
       <tr>
         <th>#</th>
-        <th>Invoice Number</th>
-        <th>Sales Date</th>
-        <th>Customer Name</th>
-        <th>Total Invoice</th>
+        <th>Purchase Number</th>
+        <th>Purchase Date</th>
+        <th>Suplier Name</th>
+        <th>Total Purchase</th>
       </tr>
     </thead>
     <tbody>
@@ -77,19 +77,19 @@
 			<?php $number ++; ?>
       <tr class="">			  
         <th scope="row">{{$number}}</th>
-				<td>{{$values["invoice_number"]}}</td>
-        <td>{{$values["invoice_date"]}}</td>
-        <td align="right">{{$values["customer_name"]}}</td>
-        <td align="right">{{Common::number_with_commas($values["total_invoice"])}}</td>
+				<td>{{$values["purchase_number"]}}</td>
+        <td>{{$values["purchase_date"]}}</td>
+        <td align="right">{{$values["suplier_name"]}}</td>
+        <td align="right">{{Common::number_with_commas($values["total_purchase"])}}</td>
       </tr>
-			<?php $grand_total=$grand_total+$values["total_invoice"]; ?>
+			<?php $grand_total=$grand_total+$values["total_purchase"]; ?>
 			@endforeach
     </tbody>
     <tfoot>
         <tr>
             <td colspan="3"></td>
             <td align="right">Grand Total Rp</td>
-            <td align="right">Rp{{Common::number_with_commas($grand_total)}}</td>
+            <td align="right">Rp&nbsp;{{Common::number_with_commas($grand_total)}}</td>
         </tr>
     </tfoot>
   </table>

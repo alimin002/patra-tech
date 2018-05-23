@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Purchase Order</title>
+<title>Report Sales</title>
 
 <style type="text/css">
     * {
@@ -80,7 +80,7 @@
 				<td>{{$values["invoice_number"]}}</td>
         <td>{{$values["invoice_date"]}}</td>
         <td align="right">{{$values["customer_name"]}}</td>
-        <td align="right">{{$values["total_invoice"]}}</td>
+        <td align="right">{{Common::number_with_commas($values["total_invoice"])}}</td>
       </tr>
 			<?php $grand_total=$grand_total+$values["total_invoice"]; ?>
 			@endforeach
@@ -89,7 +89,7 @@
         <tr>
             <td colspan="3"></td>
             <td align="right">Grand Total Rp</td>
-            <td align="right">Rp{{$grand_total}}</td>
+            <td align="right">Rp&nbsp;{{Common::number_with_commas($grand_total)}}</td>
         </tr>
     </tfoot>
   </table>

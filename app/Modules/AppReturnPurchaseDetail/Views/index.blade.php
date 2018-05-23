@@ -51,15 +51,18 @@
 					</div>
 			</div>
 			<input type="hidden" readonly value="" id="app_return_purchase_id" name="app_return_purchase_id"  placeholder="" class="form-control"/>
+			{{--
 			<div class="col-sm-12">
 				<div class="dataTables_filter" id="sample-table-2_filter">
 					<button class="btn btn-white btn-primary" onclick="addItem()"><i class="fa fa-plus">&nbsp;Add Return Item</i></button>
 				</div>
 			</div>	
+			--}}
 		<div class="col-xs-12">
 			<h3 class="header smaller lighter blue">Return Item</h3>
 			<div>	
-				<div id="sample-table-2_wrapper" class="dataTables_wrapper form-inline" role="grid">				
+				<div id="sample-table-2_wrapper" class="dataTables_wrapper form-inline" role="grid">
+					<button style="margin-bottom:5px;" class="btn btn-white btn-primary" onclick="addItem()"><i class="fa fa-plus">&nbsp;Add Return Item</i></button>				
 					<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
 					<thead>
 						<tr role="row">						
@@ -88,9 +91,9 @@
 				<div class="row">
 					<div class="col-xs-6">
 						<button class="btn btn-white btn-primary" onclick="doReturnRawMaterial()"><i class="fa fa-floppy-o" aria-hidden="true">&nbsp;Save Item @yield("title")</i></button>
-								<div class="btn-group">
+								<div class="btn-group" style="">
 										<button class="btn btn-white btn-primary">others</button>
-										<button data-toggle="dropdown" class="btn btn-white btn-primary">
+										<button data-toggle="dropdown" class="btn btn-white btn-primary" onclick="scrollToLowewst()">
 											<span class="ace-icon fa fa-caret-down icon-only"></span>
 										</button>
 

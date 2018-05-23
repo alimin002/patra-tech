@@ -39,15 +39,18 @@
 					</div>
 			</div>
 			<input type="hidden" readonly value="" id="app_stock_opname_raw_material_id" name="app_stock_opname_raw_material_id"  placeholder="" class="form-control"/>
+			{{--
 			<div class="col-sm-12">
 				<div class="dataTables_filter" id="sample-table-2_filter">
 					<button class="btn btn-white btn-primary" data-toggle="modal" data-target="#modal-add"><i class="fa fa-plus">&nbsp;Add Item Stock Opname</i></button>
 				</div>
-			</div>	
+			</div>
+			--}}			
 		<div class="col-xs-12">
 			<h3 class="header smaller lighter blue">Stock Opname Item</h3>
 			<div>				
 				<div id="sample-table-2_wrapper" class="dataTables_wrapper form-inline" role="grid">
+				<button class="btn btn-white btn-primary" onclick="addItem()" style="margin-bottom:5px;"><i class="fa fa-plus">&nbsp;Add Item Stock Opname</i></button>
 					<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
 					<thead>
 						<tr role="row">							
@@ -78,7 +81,7 @@
 							<button class="btn btn-white btn-primary" onclick="doStockOpname()"><i class="fa fa-floppy-o" aria-hidden="true">&nbsp;Save Item @yield("title")</i></button>
 									<div class="btn-group">
 											<button class="btn btn-white btn-primary">others</button>
-											<button data-toggle="dropdown" class="btn btn-white btn-primary">
+											<button onclick="scrollToLowewst()" data-toggle="dropdown" class="btn btn-white btn-primary">
 												<span class="ace-icon fa fa-caret-down icon-only"></span>
 											</button>
 											<ul class="dropdown-menu dropdown-success">
@@ -117,7 +120,8 @@
 			</div>
 		</div>
 	</div>
-	@include('AppStockOpnameRawMaterialDetail::create') 
+	@include('AppStockOpnameRawMaterialDetail::create')
+	@include('AppStockOpnameRawMaterialDetail::expand') 	
 	@include('AppStockOpnameRawMaterialDetail::edit_header')
 	@include('AppStockOpnameRawMaterialDetail::action_js')
 	@include('AppStockOpnameRawMaterialDetail::edit')						

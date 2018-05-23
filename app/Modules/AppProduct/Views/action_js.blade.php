@@ -56,9 +56,10 @@
 	
 	function edit(id){
 		var app_product_id=id;
+		//alert(app_product_id);
 		$.ajax({ 
     type: 'GET', 
-    url: "{{url('product/edit')}}"+"/"+app_product_id, 
+    url: '{{url("product/edit")}}'+'/'+app_product_id, 
     dataType: 'json',
     success: function (response){ 
         //alert(response["product_name"]);
@@ -104,6 +105,31 @@
 				$("#frm-delete #stock").val(response["stock"]+' '+response["unit"]);					
 				$("#frm-delete #app_product_id").val(response["app_product_id"])		
 				$("#modal-delete").modal("toggle");
+    }
+		});
+	}
+	
+	function expandData(id){
+		var app_product_id=id;
+		$.ajax({ 
+    type: 'GET', 
+    url: '{{url("product/edit")}}'+'/'+app_product_id, 
+    dataType: 'json',
+    success: function (response){ 
+				$("#frm-expand #name").val(response["product_name"]);
+				$("#frm-expand #unit").val(response["unit"]);
+				$("#frm-expand #unit_price").val(response["unit_price"]);
+				
+				var app_category_product_id=response["app_category_id"];
+				var category_name								=response["category_name"];
+				$("#frm-expand #app_category_id").empty();
+				$("#frm-expand #app_category_id").prepend("<option value= "+ app_category_product_id +">"+category_name+"</option>");
+				renderlookupCategory();
+				
+				$("#frm-expand #description").val(response["description"]);
+				$("#frm-expand #stock").val(response["stock"]+' '+response["unit"]);					
+				$("#frm-expand #app_product_id").val(response["app_product_id"])		
+				$("#modal-expand").modal("toggle");
     }
 		});
 

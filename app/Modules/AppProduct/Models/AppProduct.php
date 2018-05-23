@@ -7,8 +7,8 @@ class AppProduct extends Model {
 
     //
 	protected $table 				= "app_products";
-	protected $primaryKey 	= "app_products_id";
-	protected $guarded 			= array('app_products_id');
+	protected $primaryKey 	= "app_product_id";
+	protected $guarded 			= array('app_product_id');
 	public $timestamps 			= false;
 
 

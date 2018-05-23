@@ -151,6 +151,7 @@
 			</div>
 		</div>
 	</div>
+	@include('AppSuplier::expand')
 	@include('AppSuplier::create')
 	@include('AppSuplier::action_js')
 	@include('AppSuplier::edit')

@@ -240,6 +240,11 @@
 		});		
 	}
 	
+	 function scrollToLowewst(){
+		//alert(1);
+		$('html,body').animate({scrollTop: document.body.scrollHeight},"fast");
+	}
+
 	/***
 	function edit(id){
 		var app_purchase_detail_id=id;

@@ -98,7 +98,7 @@
 
 										<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 											<li>
-												<a href="#" onclick="edit('{{$values['app_sales_id']}}')" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
+												<a href="#" onclick="expandData('{{$values['app_sales_id']}}')" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
 													<span class="green" >
 														<i class="fa fa-expand"></i>
 													</span>
@@ -162,6 +162,7 @@
 			</div>
 		</div>
 	</div>
+@include('AppSales::expand')
 @include('AppSales::create')
 @include('AppSales::action_js')
 @include('AppSales::edit')						

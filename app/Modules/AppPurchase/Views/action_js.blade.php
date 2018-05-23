@@ -68,6 +68,26 @@
 		location.href = url;
 	}
 	
+	function expandData(id){
+		var app_purchase_id=id;
+		$.ajax({ 
+    type: 'GET', 
+		url: '{{url("purchase/edit")}}'+'/'+app_purchase_id, 
+    dataType: 'json',
+    success: function (response){ 
+				$("#frm-expand #app_purchase_id").val(response["app_purchase_id"]);
+				$("#frm-expand #purchase_number").val(response["purchase_number"]);
+				$("#frm-expand #description").val(response["description"]);				
+				var app_suplier_id=response["app_suplier_id"];
+				var suplier_name=response["suplier_name"];
+				$("#frm-expand #app_suplier_id").empty();
+				$("#frm-expand #app_suplier_id").prepend("<option value="+app_suplier_id+">"+suplier_name+"</option>");
+				renderLookupSuplier();				
+				$("#modal-expand").modal("toggle");
+    }
+		});		
+	}
+	
 	function deleteData(id){
 		var app_purchase_id=id;
 		$.ajax({ 

@@ -123,7 +123,8 @@
 														<i class="fa fa-expand" aria-hidden="true"></i>
 													</span>
 												</a>
-											</li>										
+											</li>	
+											
 											<li>
 												<a href="#" onclick="edit('{{$values['app_raw_material_id']}}')" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
 													<span class="green" >
@@ -165,6 +166,7 @@
 			</div>
 		</div>
 	</div>
+	@include('AppRawMaterial::expand')
 	@include('AppRawMaterial::create')
 	@include('AppRawMaterial::edit')
 	@include('AppRawMaterial::delete')

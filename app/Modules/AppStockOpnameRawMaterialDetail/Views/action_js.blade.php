@@ -524,5 +524,17 @@
 		$("#modal-delete").modal("hide");
 		location.reload();
 	}
-	
+	function scrollToLowewst(){
+		//alert(1);
+		$('html,body').animate({scrollTop: document.body.scrollHeight},"fast");
+	}
+	 function addItem(){
+	 $("#frm-create #stock").val("");
+	 $("#frm-create #stock_opname").val("");
+	 $("#frm-create #deviation").val("");
+	 $("#frm-create #information").val("");
+	 renderLookupRawMaterial();
+	 $("#modal-add").modal("toggle");
+	 
+ }
 </script>

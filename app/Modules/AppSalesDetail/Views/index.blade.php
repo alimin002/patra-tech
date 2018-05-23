@@ -45,16 +45,18 @@
 					</div>
 			</div>
 			<input type="hidden" readonly value="" id="app_sales_id" name="app_sales_id"  placeholder="" class="form-control"/>
+			{{--
 			<div class="col-sm-12">
 				<div class="dataTables_filter" id="sample-table-2_filter">
 					<button class="btn btn-white btn-primary" onclick="addItem()"><i class="fa fa-plus">&nbsp;Add Item Sales</i></button>
 				</div>
 			</div>	
+			--}}
 		<div class="col-xs-12">
-			<h3 class="header smaller lighter blue">Sales Item</h3>
-			<div>
-				
-				<div id="sample-table-2_wrapper" class="dataTables_wrapper form-inline" role="grid">					
+			<h3 class="header smaller lighter blue">Sales Item</h3>			
+			<div>				
+				<div id="sample-table-2_wrapper" class="dataTables_wrapper form-inline" role="grid">	
+					<button  style="margin-bottom:5px;" class="btn btn-white btn-primary" onclick="addItem()"><i class="fa fa-plus">&nbsp;Add Item Sales</i></button>					
 					<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
 					<thead>
 						<tr role="row">						
@@ -85,10 +87,9 @@
 							<button class="btn btn-white btn-primary" onclick="doSaleProduct()"><i class="fa fa-floppy-o" aria-hidden="true">&nbsp;Save Item @yield("title")</i></button>
 									<div class="btn-group">
 											<button class="btn btn-white btn-primary">others</button>
-											<button data-toggle="dropdown" class="btn btn-white btn-primary">
+											<button data-toggle="dropdown" class="btn btn-white btn-primary" onclick="scrollToLowewst()">
 												<span class="ace-icon fa fa-caret-down icon-only"></span>
 											</button>
-
 											<ul class="dropdown-menu dropdown-success">
 												<li>
 													<a href="{{url('sales_detail/preview_pdf/'.$app_sales_id)}}">Print Invoice</a>

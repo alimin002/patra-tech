@@ -1,11 +1,11 @@
 @extends('main')
-@section('title', 'Report Sales')
+@section('title', 'Report Purchase')
 @section('content')
-<?php use app\Providers\Common; ?>
 <link rel="stylesheet" href="{{url('assets/css/datepicker.css')}}" />
 <link rel="stylesheet" href="{{url('assets/css/bootstrap-timepicker.css')}}" />
 <link rel="stylesheet" href="{{url('assets/css/daterangepicker.css')}}" />
-<link rel="stylesheet" href="{{url('assets/css/bootstrap-datetimepicker.css')}}" />
+<link rel="stylesheet" href="{{url('assets/css/bootstrap-datetimepicker.css')}}"/>
+<?php use app\Providers\Common; ?>
 <div class="page-content">
 		<div class="col-xs-12">
 				@if(session()->has('message'))							
@@ -29,7 +29,7 @@
 								<span class="input-group-addon">
 									<i class="fa fa-calendar bigger-110"></i>
 								</span>
-								<form id="frm-filter" name="frm-filter" action="{{url('report_sales/print_report')}}" method="post">
+								<form id="frm-filter" name="frm-filter" action="{{url('report_purchase/print_report')}}" method="post">
 									{{ csrf_field() }}
 								<input placeholder="Choose Report Period" class="form-control" type="text" name="date-range-picker" id="id-date-range-picker-1" required="" onchange="printReport(this)"/>						
 								<input type="hidden" @if(isset($date_start)) value="{{$date_start}}" @endif name="date_start" id="date_start"/>
@@ -75,10 +75,10 @@
 							?>
 							@foreach($data as $key => $values)
 							<tr @if($row_style % 2 ==0) class="odd" @else class="even"  @endif>							
-									<td class="sorting">{{$values["invoice_number"]}}</td>
-									<td class="sorting">{{$values["sale_date"]}}</td>
-									<td class="sorting">{{$values["customer_name"]}}</td>									
-									<td class="hidden-480">{{Common::number_with_commas($values["total_invoice"])}}</td>
+									<td class="sorting">{{$values["purchase_number"]}}</td>
+									<td class="sorting">{{$values["purchase_date"]}}</td>
+									<td class="sorting">{{$values["suplier_name"]}}</td>									
+									<td class="hidden-480">{{Common::number_with_commas($values["total_purchase"])}}</td>
 									<td class="hidden-md hidden-lg">
 										<div class="inline position-relative">
 										<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
@@ -124,6 +124,6 @@
 			</div>
 		</div>
 	</div>
-@include('AppReportSales::action_js')
-@include('AppReportSales::form_email')
+@include('AppReportPurchase::action_js')
+@include('AppReportPurchase::form_email')
 @endsection

@@ -205,7 +205,7 @@
 									Suplier
 								</a>
 							</li>
-
+							{{--
 							<li class="">
 								<a href="{{url('stock_raw_material')}}">
 									<i class="menu-icon fa fa-caret-right"></i>
@@ -218,7 +218,7 @@
 									Stock Products
 								</a>
 							</li>
-
+							--}}
 							<li class="">
 								<a href="{{url('product')}}">
 									<i class="menu-icon fa fa-caret-right"></i>

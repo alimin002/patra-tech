@@ -1,4 +1,23 @@
 <script>
+
+function expandData(id){
+		var app_sales_id=id;
+		$.ajax({ 
+    type: 'GET', 
+		url: '{{url("sales/edit")}}'+'/'+app_sales_id, 
+    dataType: 'json',
+    success: function (response){ 
+				$("#frm-expand #app_sales_id").val(response["app_sales_id"]);
+				$("#frm-expand #invoice_number").val(response["invoice_number"]);
+				$("#frm-expand #customer_name").val(response["customer_name"]);
+				$("#frm-expand #customer_email").val(response["customer_email"]);
+				$("#frm-expand #description").val(response["description"]);				
+			
+				$("#modal-expand").modal("toggle");
+    }
+		});		
+	}
+	
 	function add()
 	{
 		$("#modal-add").modal("toggle");

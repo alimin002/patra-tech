@@ -101,6 +101,30 @@
     }
 		});	
 	}
+	
+	function expandData(id){
+		var app_return_purchase_id=id;
+		$.ajax({ 
+    type: 'GET', 
+    url: '{{url("return_purchase/edit")}}'+'/'+app_return_purchase_id, 
+    dataType: 'json',
+    success: function (response){ 
+        //alert(JSON.stringify(response));
+				$("#frm-expand #return_purchase_number").val(response["return_purchase_number"]);
+				$("#frm-expand #unit_price").val(response["unit_price"]);			
+				var app_suplier_id=response["app_suplier_id"];
+				var suplier_name=response["suplier_name"];
+				$("#frm-expand #app_suplier_id").empty();
+				$("#frm-expand #app_suplier_id").prepend("<option value="+app_suplier_id+">"+suplier_name+"</option>");
+				renderlookupSuplier();				
+				$("#frm-expand #invoice_number").val(response["invoice_number"]);
+				$("#frm-expand #return_reason").val(response["return_reason"]);					
+				$("#frm-expand #app_return_purchase_id").val(response["app_return_purchase_id"])					
+				$("#modal-expand").modal("toggle");
+    }
+		});	
+	}
+	
 	function detail(id){
 		var app_return_purchase_id=id;
 		var url='{{url("return_purchase_detail")}}?'+'app_return_purchase_id='+app_return_purchase_id;

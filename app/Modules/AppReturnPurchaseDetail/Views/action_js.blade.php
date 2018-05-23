@@ -520,4 +520,8 @@ function addItem(){
 		location.reload();
 	}
 	
+	function scrollToLowewst(){
+		//alert(1);
+		$('html,body').animate({scrollTop: document.body.scrollHeight},"fast");
+	}
 </script>

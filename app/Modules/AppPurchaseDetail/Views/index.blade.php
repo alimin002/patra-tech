@@ -1,6 +1,7 @@
 @extends('main')
 @section('title', 'Purchase Detail')
 @section('content')
+		<script src="{{url('assets/js/common.js')}}"></script>
 		<div class="page-content">
 			<div class="col-sm-12">
 					<h3 class="header smaller lighter blue">@yield("title")</h3>
@@ -50,16 +51,12 @@
 							<textarea disabled id="description" name="description"  placeholder="" class="form-control">{{$data_header['description']}}</textarea>
 					</div>
 			</div>
-			<input type="hidden" readonly value="{{$data_header['app_purchase_id']}}" id="app_purchase_id" name="app_purchase_id"  placeholder="" class="form-control"/>
-			<div class="col-sm-12">
-				<div class="dataTables_filter" id="sample-table-2_filter">
-					<button class="btn btn-white btn-primary" onclick="addItem()"><i class="fa fa-plus">&nbsp;Add Item Purchase</i></button>
-				</div>
-			</div>	
+			<input type="hidden" readonly value="{{$data_header['app_purchase_id']}}" id="app_purchase_id" name="app_purchase_id"  placeholder="" class="form-control"/>		
 		<div class="col-xs-12">
 			<h3 class="header smaller lighter blue">Purchase Item</h3>
 			<div>
 				<div id="sample-table-2_wrapper" class="dataTables_wrapper form-inline" role="grid">
+					<button class="btn btn-white btn-primary" onclick="addItem()" style="margin-bottom:5px;"><i class="fa fa-plus">&nbsp;Add Item Purchase</i></button>
 					<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
 						<thead>
 							<tr role="row">							
@@ -90,7 +87,7 @@
 									<button class="btn btn-white btn-primary" onclick="doPurchaseRawMaterial()"><i class="fa fa-floppy-o" aria-hidden="true">&nbsp;Save Item Purchase</i></button>
 									<div class="btn-group">
 												<button class="btn btn-white btn-primary">others</button>
-												<button data-toggle="dropdown" class="btn btn-white btn-primary">
+												<button data-toggle="dropdown" onclick="scrollToLowewst()" class="btn btn-white btn-primary">
 													<span class="ace-icon fa fa-caret-down icon-only"></span>
 												</button>
 

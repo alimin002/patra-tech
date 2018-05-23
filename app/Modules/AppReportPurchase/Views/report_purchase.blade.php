@@ -1,7 +1,6 @@
 @extends('main')
 @section('title', 'Report Sales')
 @section('content')
-<?php use app\Providers\Common; ?>
 <link rel="stylesheet" href="{{url('assets/css/datepicker.css')}}" />
 <link rel="stylesheet" href="{{url('assets/css/bootstrap-timepicker.css')}}" />
 <link rel="stylesheet" href="{{url('assets/css/daterangepicker.css')}}" />
@@ -24,7 +23,7 @@
 			<div>
 				<div id="sample-table-2_wrapper" class="dataTables_wrapper form-inline" role="grid">
 					<div class="row">
-						<div class="col-xs-12">
+						<div class="col-xs-6">
 							<div class="input-group">
 								<span class="input-group-addon">
 									<i class="fa fa-calendar bigger-110"></i>
@@ -32,12 +31,12 @@
 								<form id="frm-filter" name="frm-filter" action="{{url('report_sales/print_report')}}" method="post">
 									{{ csrf_field() }}
 								<input placeholder="Choose Report Period" class="form-control" type="text" name="date-range-picker" id="id-date-range-picker-1" required="" onchange="printReport(this)"/>						
-								<input type="hidden" @if(isset($date_start)) value="{{$date_start}}" @endif name="date_start" id="date_start"/>
-								<input type="hidden" @if(isset($date_end)) value="{{$date_end}}" @endif name="date_end" id="date_end"/>
+								<input type="hidden" name="date_start" id="date_start"/>
+								<input type="hidden" name="date_end" id="date_end"/>
 							</div>
 								<br/>
 								</form>
-						<button class="btn btn-info" onclick="printReport()">&nbsp;Create Report</button>
+						<button class="btn btn-info" onclick="printReport()"><i class="fa fa-print" aria-hidden="true"></i>&nbsp;Print Report</button>
 						</div>
 						
 						
@@ -66,19 +65,15 @@
 							</th>
 						</tr>
 					</thead>			
-					<tbody role="alert" aria-live="polite" aria-relevant="all">
+				<tbody role="alert" aria-live="polite" aria-relevant="all">
 						<tbody role="alert" aria-live="polite" aria-relevant="all">
-						@if((isset($data)))
-							<?php 							
-								$row_style=1;
-								//if(isset($data)){}
-							?>
+							<?php $row_style=1; ?>
 							@foreach($data as $key => $values)
 							<tr @if($row_style % 2 ==0) class="odd" @else class="even"  @endif>							
 									<td class="sorting">{{$values["invoice_number"]}}</td>
 									<td class="sorting">{{$values["sale_date"]}}</td>
 									<td class="sorting">{{$values["customer_name"]}}</td>									
-									<td class="hidden-480">{{Common::number_with_commas($values["total_invoice"])}}</td>
+									<td class="hidden-480">{{$values["total_invoice"]}}</td>
 									<td class="hidden-md hidden-lg">
 										<div class="inline position-relative">
 										<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
@@ -97,19 +92,16 @@
 									</div>
 									</td>
 							</tr>
-						<?php 
-								$row_style ++; 
-							
-						?>
+						<?php $row_style ++; ?>
 						@endforeach
-						@endif
 				</tbody>
 				</tbody>
 			</table>
 			<div class="row">
 				<div class="col-xs-6">
-					<button onclick="downloadPdf()" @if(isset($data)==false) disabled ="disabled" @endif class="btn btn-white btn-primary"><i class="fa fa-print">&nbsp;Print Report</i></button>				
-					<button onclick="sendReportViaEmail()" @if(isset($data)==false) disabled ="disabled" @endif class="btn btn-white btn-primary"><i class="fa fa-paper-plane">&nbsp;Send Report Via Email</i></button>
+					<button onclick="add()" class="btn btn-white btn-primary"><i class="fa fa-print">&nbsp;Print Report</i></button>
+					<button onclick="add()" class="btn btn-white btn-primary"><i class="fa fa-file-pdf-o">&nbsp;Download Report</i></button>
+					<button onclick="add()" class="btn btn-white btn-primary"><i class="fa fa-paper-planes">&nbsp;Send Report Via Email</i></button>
 					<div class="dataTables_info" id="sample-table-2_info"><!--Showing 1 to 10 of 23 entries--></div>
 				</div>
 				<div class="col-xs-6">
@@ -125,5 +117,4 @@
 		</div>
 	</div>
 @include('AppReportSales::action_js')
-@include('AppReportSales::form_email')
 @endsection

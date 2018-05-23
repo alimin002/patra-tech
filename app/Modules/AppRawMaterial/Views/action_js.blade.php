@@ -11,9 +11,41 @@ function add(){
 		
 	}
 	
+	function expandData(app_raw_material_id){					
+		//$("#modal-expand").modal("toggle");
+		$.ajax({ 
+    type: 'GET', 
+    url: '{{url("raw_material/edit")}}'+'/'+app_raw_material_id, 
+    dataType: 'json',
+    success: function (response){ 
+        //alert(response["raw_name"]);
+				$("#frm-expand #name").val(response["raw_name"]);
+				$("#frm-expand #unit").val(response["unit"]);
+				$("#frm-expand #unit_price").val(numberWithCommas(response["unit_price"]));
+				
+				var app_suplier_id=response["app_suplier_id"];
+				var suplier_name=response["suplier_name"];
+				$("#frm-expand #app_suplier_id").empty();
+				$("#frm-expand #app_suplier_id").prepend("<option value="+app_suplier_id+">"+suplier_name+"</option>");
+				renderlookupSuplier();
+				
+				var app_category_raw_material_id=response["app_category_raw_material_id"];
+				var category_name								=response["category_name"];
+				$("#frm-expand #app_category_raw_material_id").empty();
+				$("#frm-expand #app_category_raw_material_id").prepend("<option "+ app_category_raw_material_id +">"+category_name+"</option>");
+				renderlookupCategory();
+				
+				$("#frm-expand #description").val(response["description"]);
+				$("#frm-expand #stock").val(response["stock"]+' '+response["unit"]);					
+				$("#frm-expand #app_raw_material_id").val(response["app_raw_material_id"])					
+				$("#modal-expand").modal("toggle");
+    }
+		});		
+	}
+	
  function addCommas(){
 	 var unit_price= $("#frm-create #unit_price").val();
-	 $("#frm-create #unit_price").val(numberWithCommas(unit_price))
+	 $("#frm-create #unit_price").val(numberWithCommas(unit_price));
 	 
  }
 	function doSave(){

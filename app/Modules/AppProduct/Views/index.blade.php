@@ -56,7 +56,7 @@
 							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending">
 								Unit Price
 							</th>
-							<th class="hidden-480 sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="								
+							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="								
 								Update
 							: activate to sort column ascending">
 								<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
@@ -115,27 +115,26 @@
 
 													<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 													<li>
-														<a href="#" onclick="expandData('{{$values['app_stock_raw_material_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+														<a href="#" onclick="expandData('{{$values['app_product_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
 															<span class="red">											
 																<i class="fa fa-expand" aria-hidden="true"></i>
 															</span>
 														</a>
 													</li>
-														<li>
-															<a href="#" onclick="edit('{{$values['app_product_id']}}')" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
-																<span class="green" >
-																	<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-																</span>
-															</a>
-														</li>
-
-														<li>
-															<a href="#" onclick="deleteData('{{$values['app_product_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete" onclick="deleteData('{{$values['app_raw_material_id']}}')">
-																<span class="red">
-																	<i class="ace-icon fa fa-trash-o bigger-120"></i>
-																</span>
-															</a>
-														</li>
+													<li>
+														<a href="#" onclick="edit('{{$values['app_product_id']}}')" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
+															<span class="green" >
+																<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+															</span>
+														</a>
+													</li>
+													<li>
+														<a href="#" onclick="deleteData('{{$values['app_product_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete" onclick="deleteData('{{$values['app_raw_material_id']}}')">
+															<span class="red">
+																<i class="ace-icon fa fa-trash-o bigger-120"></i>
+															</span>
+														</a>
+													</li>
 													</ul>
 												</div>
 											</div>
@@ -162,6 +161,7 @@
 			</div>
 		</div>
 	</div>
+	@include('AppProduct::expand')
 	@include('AppProduct::create')
 	@include('AppProduct::edit')
 	@include('AppProduct::delete')

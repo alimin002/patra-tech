@@ -1,11 +1,16 @@
 <script src="{{url('assets/js/jquery.min.js')}}"></script>
-<script src="{{url('assets/js/common.js')}}"></script>
 <script>
 /**
  window.onbeforeunload = function() {
    return "Warning: data purchase item will be lost, are you sure you want to leave? Think of the kittens!";
  }
  **/
+ 
+ function scrollToLowewst(){
+		//alert(1);
+		$('html,body').animate({scrollTop: document.body.scrollHeight},"fast");
+	}
+
  
  function addItem(){
 	 $("#frm-create #unit_price").val("");

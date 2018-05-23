@@ -35,10 +35,13 @@ class AppProductController extends Controller
 		 
 		 
 		  function getProductlAll(){
-			 $data=AppProduct::select("app_products.*","app_products.name as product_name","app_stock.*")
+			 $data=AppProduct::select("app_products.*","app_products.app_product_id as app_product_id","app_products.name as product_name","app_stock.stock")
 													->leftJoin('app_stock', 'app_stock.app_product_id', '=', 'app_products.app_product_id')
 													->orderBy('app_products.app_product_id', 'desc')	
 													->paginate(3);
+			 //echo "<pre>";
+					//print_r($data);
+			 //echo "</pre>";
 			
 			 return $data;
 			
@@ -90,6 +93,10 @@ class AppProductController extends Controller
 					$data=$this->getProductlAll();
 				
 				}
+				//echo "<pre>";
+					//print_r($data);
+				//echo "</pre>";
+				//die();
 				$lookup_category=Lookup::getLookupCategoryProduct();
         return view("AppProduct::index")
 								->with("lookup_category",$lookup_category)

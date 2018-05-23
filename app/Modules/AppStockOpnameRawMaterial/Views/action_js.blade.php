@@ -1,4 +1,20 @@
 <script>
+	
+	function expandData(id){
+		var app_stock_opname_raw_material_id=id;
+		$.ajax({ 
+    type: 'GET', 
+		url: '{{url("stock_opname_raw_material/edit")}}'+'/'+app_stock_opname_raw_material_id, 
+    dataType: 'json',
+    success: function (response){ 
+				$("#frm-expand #app_stock_opname_raw_material_id").val(response["app_stock_opname_raw_material_id"]);
+				$("#frm-expand #number_stock_opname").val(response["number_stock_opname"]);
+				$("#frm-expand #warehouse_supervisor").val(response["warehouse_supervisor"]);	
+				$("#modal-expand").modal("toggle");
+    }
+		});		
+	}
+	
 	function doSave(){
 		$("#modal-add").modal("hide");
 		$("#frm-create").submit();

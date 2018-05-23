@@ -134,6 +134,7 @@
 			</div>
 		</div>
 	</div>
+	@include('AppStockOpnameRawMaterial::expand')
 	@include('AppStockOpnameRawMaterial::create')
 	@include('AppStockOpnameRawMaterial::action_js')
 	@include('AppStockOpnameRawMaterial::edit')
