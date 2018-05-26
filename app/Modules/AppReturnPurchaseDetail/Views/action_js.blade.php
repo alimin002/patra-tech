@@ -65,7 +65,7 @@ function addItem(){
 													"<li>"+
 													"<a href='#'  class='tooltip-success' data-rel='tooltip' title='' data-original-title='Edit' >"+
 														"<span class='green' >"+
-															"<i class='fa fa-expand' id=row-"+i+" class='btn btn-primary' onclick='editItem(this.id,"+app_raw_material_id+")'></i>"+
+															"<i class='fa fa-expand' id=row-"+i+" class='btn btn-primary' onclick='expandData(this.id,"+app_raw_material_id+")'></i>"+
 														"</span>"+
 													"</a>"+
 														"</li>"+
@@ -424,6 +424,36 @@ function addItem(){
 		$("#frm-edit #description").val(description);
 		$("#frm-edit #selected_element").val(row_id.replace("tr-",""));
 		$("#modal-edit").modal("toggle");
+	}
+	
+	 function expandData(row_id,app_raw_material_id){
+			row_id="tr-"+row_id.replace("row-","");
+			var raw_material_name =$("#"+row_id+" "+"td:eq(0)").text();
+			var unit_price				=$("#"+row_id+" "+"td:eq(1)").text();
+			var qty								=$("#"+row_id+" "+"td:eq(2)").text();
+			var sub_total					=$("#"+row_id+" "+"td:eq(3)").text();
+			var description				=$("#"+row_id+" "+"td:eq(4)").text();
+			
+			//delete selected item
+			var data_return_purchase_item=JSON.parse($("#data_return_purchase_item").val());
+			var selected_row=row_id.replace("tr-","");
+			var start_index = selected_row;//target update row
+			var number_of_elements_to_remove = 1;
+			data_return_purchase_item.splice(start_index, number_of_elements_to_remove);
+			$("#data_return_purchase_item").val(JSON.stringify(data_return_purchase_item));
+			bindReturnPurchaseItem();
+			console.log(data_return_purchase_item);
+					//[1,2,3,4];
+			
+			
+			
+			$("#frm-expand #app_raw_material_id").prepend("<option selected value="+app_raw_material_id+">"+raw_material_name+"</option>");
+			$("#frm-expand #unit_price").val(unit_price);
+			$("#frm-expand #qty").val(qty);
+			$("#frm-expand #sub_total").val(sub_total);
+			$("#frm-expand #description").val(description);
+			$("#frm-expand #selected_element").val(row_id.replace("tr-",""));
+			$("#modal-expand").modal("toggle");
 	}
 	
 	//display modal delete

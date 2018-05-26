@@ -76,7 +76,7 @@
 								<div class="hidden-md hidden-lg">
 									<div class="inline position-relative">
 										<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
-											<i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+											<i onclick="scrollToLowewst()" class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
 										</button>
 
 										<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">

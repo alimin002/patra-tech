@@ -88,9 +88,11 @@
 									<a class="red" href="#" onclick="detail('{{$values['app_purchase_id']}}')">
 										<i class="ace-icon fa fa-list bigger-130"></i>
 									</a>
+									{{--
 									<a class="red" href="#" onclick="detail('{{$values['app_purchase_id']}}')">
 										<i class="ace-icon fa fa-lightbulb-o bigger-130"></i>
-									</a>										
+									</a>	
+									--}}									
 								</div>
 								
 										
@@ -146,14 +148,16 @@
 														<i class="ace-icon fa fa-list bigger-120"></i>
 													</span>
 												</a>
-											</li>										
+											</li>	
+											{{--											
 											<li>
 												<a href="#" onclick="edit('{{$values['app_purchase_id']}}')" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
 													<span class="red">
 														<i class="ace-icon fa fa-lightbulb-o bigger-130"></i>
 													</span>
 												</a>
-											</li>											
+											</li>	
+											--}}											
 										</ul>
 										<!--mobile end-->
 										

@@ -7,6 +7,9 @@
    return "Warning: data purchase item will be lost, are you sure you want to leave? Think of the kittens!";
  }
  **/
+  function closeExpand(){
+		$("#modal-expand").modal("hide");
+	}
  
   function addItem(){
 	 $("#frm-create #unit_price").val("");
@@ -35,6 +38,25 @@
 		window.open(url);
 		//window.open(url);
 	}
+	
+	function expandData(id){
+		var app_sales_detail_id=id;
+		$.ajax({ 
+    type: 'GET', 
+		url: '{{url("report_sales/app_sales_detail_id")}}'+'/'+app_sales_detail_id, 
+    dataType: 'json',
+    success: function (response){ 
+				$("#frm-expand #app_sales_id").val(response["app_sales_id"]);
+				$("#frm-expand #invoice_number").val(response["invoice_number"]);
+				$("#frm-expand #customer_name").val(response["customer_name"]);
+				$("#frm-expand #customer_email").val(response["customer_email"]);
+				$("#frm-expand #description").val(response["description"]);				
+			
+				$("#modal-expand").modal("toggle");
+    }
+		});		
+	}
+	
 	function bindSalesItem(){
 			 //clear grid data to prevent double record
 			 $("#tbody_sales").empty();
@@ -58,8 +80,7 @@
 									"<td  class='hidden-480'>"+
 										""+numberWithCommas(sub_total)+""+
 									"</td>"+
-									"<td  class=' '>"+
-									
+									"<td  class=' '>"+									
 										"<div class='hidden-sm hidden-xs action-buttons'>"+
 											"<a class='green' href='#'>"+
 												"<i class='ace-icon fa fa-pencil bigger-130' id=row-"+i+" class='btn btn-primary' onclick='editItem(this.id,"+app_product_id+")'></i>"+
@@ -77,7 +98,7 @@
 														"<li>"+
 															"<a href='#'  data-rel='tooltip' title='' data-original-title='Edit' >"+
 																"<span class='green' >"+
-																	"<i class='fa fa-expand' id=row-"+i+"  class='btn btn-primary' onclick='editItem(this.id)'></i>"+
+																	"<i class='fa fa-expand' id=row-"+i+"  class='btn btn-primary' onclick='expandData(this.id)'></i>"+
 																"</span>"+
 															"</a>"+
 														"</li>"+
@@ -377,7 +398,7 @@
 														"<li>"+
 															"<a href='#' data-rel='tooltip' title='' data-original-title='Edit' >"+
 																"<span class='green' >"+
-																	"<i class='fa fa-expand' id=row-"+row_sales+" class='btn btn-primary' onclick='editItem(this.id)'></i>"+
+																	"<i class='fa fa-expand' id=row-"+row_sales+" class='btn btn-primary' onclick='expandData(this.id)'></i>"+
 																"</span>"+
 															"</a>"+
 														"</li>"+
@@ -440,6 +461,37 @@
 		$("#modal-edit").modal("toggle");
 	}
 	
+	function expandData(row_id,app_product_id){
+		row_id="tr-"+row_id.replace("row-","");
+		var product_name =$("#"+row_id+" "+"td:eq(0)").text();
+		var unit_price				=$("#"+row_id+" "+"td:eq(1)").text();
+		var qty								=$("#"+row_id+" "+"td:eq(2)").text();
+		var sub_total					=$("#"+row_id+" "+"td:eq(3)").text();
+		var description				=$("#"+row_id+" "+"td:eq(4)").text();
+		
+		//delete selected item
+		var data_sales_item=JSON.parse($("#data_sales_item").val());
+		//alert($("#data_sales_item").val());
+		var selected_row=row_id.replace("tr-","");
+		var start_index = selected_row;//target update row
+    var number_of_elements_to_remove = 1;
+    data_sales_item.splice(start_index, number_of_elements_to_remove);
+		$("#data_sales_item").val(JSON.stringify(data_sales_item));
+		bindSalesItem();
+    console.log(data_sales_item);
+        //[1,2,3,4];
+		
+		
+		
+		$("#frm-expand #app_product_id").prepend("<option selected value="+app_product_id+">"+product_name+"</option>");
+		$("#frm-expand #unit_price").val(unit_price);
+		$("#frm-expand #qty").val(qty);
+		$("#frm-expand #sub_total").val(sub_total);
+		$("#frm-expand #description").val(description);
+		$("#frm-expand #selected_element").val(row_id.replace("tr-",""));
+		$("#frm-expand #old_qty").val(qty);
+		$("#modal-expand").modal("toggle");
+	}
 	//display modal delete
   function deleteItem(row_id,app_product_id){
 		//alert(app_product_id);

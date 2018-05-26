@@ -20,6 +20,9 @@
 							</button>
 					</div>
 			</div>
+			<div class="col-sm-12">
+			
+			</div>
 			<div class="col-sm-3">
 					<div class="form-group">
 							<label class="control-label" for="invoice_number">Return Number</label>
@@ -127,6 +130,7 @@
 			</div>
 		</div>
 	</div>
+	@include('AppReturnPurchaseDetail::expand') 
 	@include('AppReturnPurchaseDetail::create') 
 	@include('AppReturnPurchaseDetail::edit_header')
 	@include('AppReturnPurchaseDetail::action_js')

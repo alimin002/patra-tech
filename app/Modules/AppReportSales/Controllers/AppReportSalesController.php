@@ -128,9 +128,37 @@ class AppReportSalesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($app_sales_detail_id,$app_sales_id)
     {
         //
+				$data_detail=AppSalesDetail::select('app_sales_detail.*','app_sales.*','app_products.*',"app_products.name as product_name")
+																					->leftJoin('app_sales','app_sales.app_sales_id','=','app_sales_detail.app_sales_id')
+																					->leftJoin('app_products','app_products.app_product_id','=','app_sales_detail.app_product_id')
+																					->where('app_sales_detail.app_sales_detail_id', '=',$app_sales_detail_id)->first();
+																					
+				$data_sum=AppSalesDetail::select('app_sales_detail.*','app_sales.*','app_products.*',"app_products.name as product_name")
+																					->leftJoin('app_sales','app_sales.app_sales_id','=','app_sales_detail.app_sales_id')
+																					->leftJoin('app_products','app_products.app_product_id','=','app_sales_detail.app_product_id')
+																					->where('app_sales_detail.app_sales_id', '=',$app_sales_id)
+																					->sum('sub_total');
+																					
+																					//echo $data_detail["invoice_number"];
+																					//die();
+																					
+			$data_report=array(
+				"invoice_number" =>$data_detail["invoice_number"],
+				"sale_date"      =>$data_detail["sale_date"],
+				"customer_name"  =>$data_detail["customer_name"],
+				"customer_email" =>$data_detail["customer_email"],
+				"total_invoice"  =>$data_sum
+			);
+		
+			//echo "<pre>";
+				//print_r($data_sum);
+			//echo "<pre>";
+			//die();
+																					
+				return json_encode($data_report);
     }
 
     /**

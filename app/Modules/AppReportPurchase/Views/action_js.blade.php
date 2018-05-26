@@ -66,4 +66,21 @@
 					window.open(url, '_blank');
 				}
 				
+				function expandData(id,app_purchase_id){
+					var app_purchase_detail_id=id;
+					$.ajax({ 
+					type: 'GET', 
+					url: '{{url("report_purchase/edit")}}'+'/'+app_purchase_detail_id +'/'+app_purchase_id, 
+					dataType: 'json',
+					success: function (response){						
+							$("#frm-expand #purchase_number").val(response["purchase_number"]);
+							$("#frm-expand #purchase_date").val(response["purchase_date"]);
+							$("#frm-expand #suplier_name").val(response["suplier_name"]);	
+							$("#frm-expand #total_purchase").val(response["total_purchase"]);		
+							$("#modal-expand").modal("toggle");
+							
+					}
+					});		
+				}
+				
 </script>

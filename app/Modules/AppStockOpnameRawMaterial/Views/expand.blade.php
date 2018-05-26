@@ -7,7 +7,7 @@
 				<h4 class="modal-title">Expand Stock Opname Raw Material Columns</h4>
 			</div>
 			<div class="modal-body">
-					<form name="frm-expand" id="frm-expand" action="{{url('stock_opname_raw_material/destroy')}}" method="post">
+					<form name="frm-expand" id="frm-expand" method="post">
 					{{ csrf_field() }}
 					<div class="row">
 						<div class="col-sm-12">

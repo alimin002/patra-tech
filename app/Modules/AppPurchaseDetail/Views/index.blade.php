@@ -127,6 +127,7 @@
 			</div>
 		</div>
 	</div>
+@include('AppPurchaseDetail::expand') 
 @include('AppPurchaseDetail::create') 
 @include('AppPurchaseDetail::edit_header')
 @include('AppPurchaseDetail::action_js')

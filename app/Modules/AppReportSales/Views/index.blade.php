@@ -87,7 +87,7 @@
 
 										<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 											<li>
-												<a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
+												<a href="#" onclick="expandData('{{$values['app_sales_detail_id']}}','{{$values['app_sales_id']}}')" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
 													<span class="green" >
 														<i class="fa fa-expand"></i>
 													</span>
@@ -126,4 +126,5 @@
 	</div>
 @include('AppReportSales::action_js')
 @include('AppReportSales::form_email')
+@include('AppReportSales::expand')
 @endsection

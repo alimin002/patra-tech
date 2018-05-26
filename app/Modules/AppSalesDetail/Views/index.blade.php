@@ -127,6 +127,7 @@
 			</div>
 		</div>
 	</div>
+	@include('AppSalesDetail::expand') 
 	@include('AppSalesDetail::create') 
 	@include('AppSalesDetail::edit_header')
 	@include('AppSalesDetail::action_js')

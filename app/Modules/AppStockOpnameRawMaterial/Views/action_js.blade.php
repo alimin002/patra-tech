@@ -1,4 +1,8 @@
 <script>
+	function scrollToLowewst(){
+		//alert(1);
+		$('html,body').animate({scrollTop: document.body.scrollHeight},"fast");
+	}
 	
 	function expandData(id){
 		var app_stock_opname_raw_material_id=id;

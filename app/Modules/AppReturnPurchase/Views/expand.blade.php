@@ -7,7 +7,7 @@
 				<h4 class="modal-title">Expand Return Purchase</h4>
 			</div>
 			<div class="modal-body">
-					<form name="frm-expand" id="frm-expand" action="{{url('return_purchase/destroy')}}" method="post">
+					<form name="frm-expand" id="frm-expand">
 					{{ csrf_field() }}
 					<div class="row">
 					<div class="col-sm-12">
@@ -45,7 +45,7 @@
 				 </div>														
 			</div>
 			<div class="modal-footer">
-				<button onclick="doDelete()" type="button" class="btn btn-primary">Close</button>
+				<button type="button" onclick="doDelete()" type="button" class="btn btn-primary">Close</button>
 			</div>										
 		</div>
 	</div>

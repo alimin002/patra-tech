@@ -17,7 +17,7 @@
 		Route::get('report_sales/preview_pdf/{app_sales_id}','AppReportSalesController@preview_pdf');
 		Route::post('report_sales/save','AppReportSalesController@save');
 		Route::post('report_sales/print_report','AppReportSalesController@print_report');
-		Route::get('report_sales/edit/{app_report_sales_id}','AppReportSalesController@edit');
+		Route::get('report_sales/edit/{app_sales_detail_id}/{app_sales_id}','AppReportSalesController@edit');
 		Route::get('report_sales/send_report_to_email/{date_start}/{date_end}/{email_address}','AppReportSalesController@sendReportToEmail');
 		Route::get('report_sales/render_lookup_suplier','AppReportSalesController@renderLookupSuplier');
 		Route::get('report_sales/render_lookup_raw_material','AppReportSalesController@renderLookupRawMaterial');

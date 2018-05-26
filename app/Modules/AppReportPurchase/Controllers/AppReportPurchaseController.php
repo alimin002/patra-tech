@@ -134,9 +134,38 @@ class AppReportPurchaseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($app_purchase_detail_id,$app_purchase_id)
     {
         //
+				$data_detail=AppPurchaseDetail::select('app_purchase_detail.*','app_purchase.*','app_suplier.*','app_suplier.name as suplier_name')																						
+																					->leftJoin('app_purchase','app_purchase.app_purchase_id','=','app_purchase_detail.app_purchase_id')
+																					->leftJoin('app_suplier','app_suplier.app_suplier_id','=','app_suplier.app_suplier_id')																
+																					->where('app_purchase_detail.app_purchase_detail_id',$app_purchase_detail_id)																																																																																	
+																					->first();	
+																					
+				$data_sum=AppPurchaseDetail::select('app_purchase_detail.*','app_purchase.*','app_suplier.*','app_suplier.name as suplier_name')																						
+																					->leftJoin('app_purchase','app_purchase.app_purchase_id','=','app_purchase_detail.app_purchase_id')
+																					->leftJoin('app_suplier','app_suplier.app_suplier_id','=','app_suplier.app_suplier_id')		
+																					->where('app_purchase_detail.app_purchase_id', '=',$app_purchase_id)
+																					->sum('sub_total');
+																					
+																					//echo $data_detail["invoice_number"];
+																					//die();
+																					
+			$data_report=array(
+				"purchase_number"    =>$data_detail["purchase_number"],
+				"purchase_date"      =>$data_detail["purchase_date"],
+				"suplier_name"       =>$data_detail["suplier_name"],
+				"suplier_email"      =>$data_detail["suplier_email"],
+				"total_purchase"     =>$data_sum
+			);
+		
+			//echo "<pre>";
+				//print_r($data_sum);
+			//echo "<pre>";
+			//die();
+																					
+				return json_encode($data_report);
     }
 
     /**

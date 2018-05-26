@@ -288,9 +288,15 @@ class AppSalesDetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($app_sales_detail_id)
     {
-        //
+				$data_detail=AppSalesDetail::select('app_sales_detail.*','app_sales.*','app_products.*',"app_products.name as product_name")
+																					->leftJoin('app_sales','app_sales.app_sales_id','=','app_sales_detail.app_sales_id')
+																					->leftJoin('app_products','app_products.app_product_id','=','app_sales_detail.app_product_id')
+																					->where('app_sales_detail.app_sales_detail_id', '=',$app_sales_detail_id)->first();
+				
+																					
+				return json_encode($data_detail);
     }
 
     /**

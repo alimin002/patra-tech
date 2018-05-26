@@ -47,19 +47,19 @@
 					<thead>
 						<tr role="row">
 							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Domain: activate to sort column ascending">
-								Invoice Number
+								Purchase Number
 							</th>
 							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">
-								Invoice Date
+								Purchase Date
 							</th>
 							<th class="sorting" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="Clicks: activate to sort column ascending">
-								Customer Name
+								Suplier Name
 							</th>
 							<th class="hidden-480" role="columnheader" tabindex="0" aria-controls="sample-table-2" rowspan="1" colspan="1" aria-label="								
 								Update
 							: activate to sort column ascending">
 								<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
-								Total Invoice
+								Total Purchase
 							</th>
 							<th class="hidden-md hidden-lg">
 								
@@ -87,7 +87,7 @@
 
 										<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 											<li>
-												<a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
+												<a href="#" onclick="expandData('{{$values['app_purchase_detail_id']}}','{{$values['app_purchase_id']}}')" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit" >
 													<span class="green" >
 														<i class="fa fa-expand"></i>
 													</span>
@@ -126,4 +126,5 @@
 	</div>
 @include('AppReportPurchase::action_js')
 @include('AppReportPurchase::form_email')
+@include('AppReportPurchase::expand')
 @endsection
